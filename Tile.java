@@ -15,6 +15,8 @@ public class Tile extends Actor
         this.width = width;
         this.height = height;
         GreenfootImage temp = new GreenfootImage(width,height);
+        temp.drawRect(0,0,width,height);
+        setImage(temp);
     }
     public void act() 
     {
