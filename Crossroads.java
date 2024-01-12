@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class MyWorld extends World
+public class Crossroads extends World
 {
     public File map = new File("files/Map.txt");
     public static int height = 3;
@@ -25,14 +25,14 @@ public class MyWorld extends World
      * Constructor for objects of class MyWorld.
      * 
      */
-    public MyWorld()
+    public Crossroads()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1152, 768, 1,false); 
         MapBuilder map = new MapBuilder();
         //addObject(map,0,0);
-        Character fisho = new Character();
-        addObject(fisho,0,0);
+        Player fisho = new Player();
+        addObject(fisho,576,384);
         try{
             loadWorld();
             drawWorld();
@@ -51,6 +51,11 @@ public class MyWorld extends World
         }
         catch(IOException e){
             System.out.println("error");
+        }
+    }
+    public void move(double moveX, double moveY){
+        for(SuperSmoothMover t: getObjects(SuperSmoothMover.class)){
+            t.setLocation(t.getX()+moveX,t.getY()+moveY);
         }
     }
     public void drawWorld(){
