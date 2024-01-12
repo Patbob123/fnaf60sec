@@ -1,4 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 
 /**
  * Write a description of class MyWorld here.
@@ -8,13 +16,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MyWorld extends World
 {
-    int height = 3;
-    int width = 3;
-    public String [][] test = {
-        {"f", "f", "f"},
-        {"f", "w","f"},
-        {"w", "f", "w"}
-    };
+    public File map = new File("files/Map.txt");
+    public static int height = 3;
+    public static int width = 3;
+    public String [][] test = new String [height][width];
     
     /**
      * Constructor for objects of class MyWorld.
@@ -28,22 +33,62 @@ public class MyWorld extends World
         //addObject(map,0,0);
         Character fisho = new Character();
         addObject(fisho,0,0);
-        drawWorld();
+        try{
+            loadWorld();
+            drawWorld();
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Error: "+e);
+        }
         
+    }
+    public void act(){
+        try{
+            if(Greenfoot.isKeyDown("1")){
+                saveWorld();
+                System.out.println("here");
+            }
+        }
+        catch(IOException e){
+            System.out.println("error");
+        }
     }
     public void drawWorld(){
         for(int i = 0; i< height;i++){
             for(int j = 0; j< width; j++){
-                if(test[j][i].equals("w")){
-                    addObject(new Wall(25,25), (100*i), 100*j);
+                if(test[i][j].equals("w")){
+                    addObject(new Wall(25,25), (100*j), 100*i);
                 }
             }
         }
     }
-    public void saveWorld(){
+    public void saveWorld() throws IOException {
+        FileWriter output = new FileWriter(map);
+        PrintWriter printer = new PrintWriter(output);
+        int counter = 0;
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i<height; i++){
+            for(int j = 0; j < width; j++){
+                builder.append(test[i][j]);
+                if(j < width){
+                    builder.append(",");
+                }
+            }
+            builder.append("\n");
+        }
         
+        printer.print(builder.toString());
+        printer.close(); 
     }
-    public void loadWorld(){
-        
+    public void loadWorld() throws NoSuchElementException, FileNotFoundException {
+        Scanner scanner = new Scanner(map);
+        for(int i = 0; i < width; i++){
+            if(scanner.hasNextLine()){
+                String[] line = scanner.nextLine().split(",");
+                for(int j = 0; j < width; j++){
+                    test[i][j] = line[j];
+                }
+            }
+        }
     }
 }
