@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
+import java.util.*; 
 
 /**
  * Write a description of class MyWorld here.
@@ -17,8 +18,8 @@ import java.util.NoSuchElementException;
 public class Crossroads extends World
 {
     public File map = new File("files/Map.txt");
-    public static int height = 3;
-    public static int width = 3;
+    public static int height = 36;  
+    public static int width = 36;  
     public String [][] test = new String [height][width];
     
     /**
@@ -28,7 +29,8 @@ public class Crossroads extends World
     public Crossroads()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(1152, 768, 1,false); 
+        //super(1152, 768, 1,false); // 36 by 24
+        super(1152, 1000, 1,false);
         MapBuilder map = new MapBuilder();
         //addObject(map,0,0);
         Player fisho = new Player();
@@ -59,10 +61,12 @@ public class Crossroads extends World
         }
     }
     public void drawWorld(){
-        for(int i = 0; i< height;i++){
+        for(int i = 0; i< 1;i++){
             for(int j = 0; j< width; j++){
+                //System.out.println(test[i][j]);
+                //System.out.println(Arrays.toString(test[i]));
                 if(test[i][j].equals("w")){
-                    addObject(new Wall(25,25), (100*j), 100*i);
+                    addObject(new Wall(25,25), 32*j, 32*i);
                 }
             }
         }
@@ -95,5 +99,6 @@ public class Crossroads extends World
                 }
             }
         }
+        
     }
 }
