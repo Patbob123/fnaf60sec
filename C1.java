@@ -18,11 +18,12 @@ public class C1 extends Grid
         addObject(fisho,0,0);
         right = new PressurePlate(50,50);
         addObject(right, 1152, 384);
-        System.out.println(map.getX());
+        
     }
     public void act(){
         if(fisho.touchP(right)){
-            exit("right");
+            //exit("right");
+            map.loadWorld("C2");
         }
     }
     public void setCoord(){

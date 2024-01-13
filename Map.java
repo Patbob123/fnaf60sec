@@ -25,15 +25,9 @@ public class Map extends Actor
     public void updatePointer (String direction){
         switch(direction){
             case "left":
-                x--;
-                pointer = findCoordinate(x,y);
-                System.out.println(getX());
                 loadWorld();
                 break;
             case "right":
-                
-                x++;
-                pointer = findCoordinate(x,y);
                 loadWorld();
                 break;
         }
@@ -74,14 +68,32 @@ public class Map extends Actor
     public void loadWorld(){
         switch(pointer){
             case "C1":
-                C1 c1 = new C1();
-                Greenfoot.setWorld(c1);
+                Greenfoot.setWorld(new C1());
             case "C2":
-                C2 c2 = new C2();
-                Greenfoot.setWorld(c2);
+                Greenfoot.setWorld(new C2());
             case "C3":
-                C3 c3 = new C3();
-                Greenfoot.setWorld(c3);
+                Greenfoot.setWorld(new C3());
         }
+    }
+    public void loadWorld(String pointer){
+        if(pointer.equals("C1")){
+            Greenfoot.setWorld(new C1());
+        }
+        else if(pointer.equals("C2")){
+            Greenfoot.setWorld(new C2());
+        }
+        else if(pointer.equals("C3")){
+            Greenfoot.setWorld(new C3());
+        }
+        /*
+        switch(pointer){
+            case "C1":
+                Greenfoot.setWorld(new C1());
+            case "C2":
+                Greenfoot.setWorld(new C2());
+            case "C3":
+                Greenfoot.setWorld(new C3());
+        }
+        */
     }
 }
