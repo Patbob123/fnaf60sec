@@ -21,24 +21,26 @@ public class Player extends Entity
         int pHeight = getImage().getHeight()/2;
         
         if(Greenfoot.isKeyDown("a") && !checkWall(-pWidth - speed,0)){
-            ((Crossroads)getWorld()).move(speed, 0);
             setLocation(getX()-speed,getY());
         }
         if(Greenfoot.isKeyDown("d") && !checkWall(pWidth + speed,0)){
-            ((Crossroads)getWorld()).move(-speed, 0);
             setLocation(getX()+speed,getY());
         }
         if(Greenfoot.isKeyDown("w") && !checkWall(0, -pHeight - speed)){
-            ((Crossroads)getWorld()).move(0, speed);
             setLocation(getX(),getY()-speed);
         }
         if(Greenfoot.isKeyDown("s") && !checkWall(0, pHeight + speed)){
-            ((Crossroads)getWorld()).move(0, -speed);
             setLocation(getX(),getY()+speed);
         }
     }   
     public boolean checkWall(int x, int y){
         return  collider.intersectWall(x,y);
+    }
+    public boolean onPressurePlate(){
+        return isTouching(PressurePlate.class);
+    }
+    public boolean touchP(PressurePlate p){
+        return intersects(p);
     }
     public void act()
     {
