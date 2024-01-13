@@ -54,7 +54,7 @@ public class Crossroads extends World
         }
     }
     public void move(double moveX, double moveY){
-        for(SuperSmoothMover t: getObjects(SuperSmoothMover.class)){
+        for(Tile t: getObjects(Tile.class)){
             t.setLocation(t.getX()+moveX,t.getY()+moveY);
         }
     }
