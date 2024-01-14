@@ -8,9 +8,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Player extends Entity
 {   
-    private Hitbox collider; 
+    private Hitbox collider;
     public Player(){
         collider = new Hitbox(getImage().getWidth(),getImage().getHeight()) ;
+    }
+    public void act()
+    {
+        move();
+        poop();
     }
     protected void addedToWorld(World world){
         world.addObject(collider, getX(), getY());
@@ -32,7 +37,12 @@ public class Player extends Entity
         if(Greenfoot.isKeyDown("s") && !checkWall(0, pHeight + speed)){
             setLocation(getX(),getY()+speed);
         }
-    }   
+    } 
+    public void poop(){
+        if(Greenfoot.isKeyDown("k")){
+            getWorld().addObject(new Wall(20,20), getX(), getY());
+        }
+    }
     public boolean checkWall(int x, int y){
         return  collider.intersectWall(x,y);
     }
@@ -42,8 +52,5 @@ public class Player extends Entity
     public boolean touchP(PressurePlate p){
         return intersects(p);
     }
-    public void act()
-    {
-        move();
-    }
+    
 }

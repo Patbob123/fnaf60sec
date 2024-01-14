@@ -25,11 +25,9 @@ public class C2 extends Grid
     public void act(){
         if(fisho.touchP(right)){
             map.loadWorld("C3");
-            //exit("right");
         }
         else if(fisho.touchP(left)){
             map.loadWorld("C1");
-            //exit("left");
         }
     }
     public void setCoord(){

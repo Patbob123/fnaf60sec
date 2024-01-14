@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.HashMap;
 /**
  * Write a description of class Map here.
  * 
@@ -16,22 +16,20 @@ public class Map extends Actor
             {"B1","B2","B3"},
             {"C1","C2","C3"}
     };
+    HashMap <String, Grid> worlds = new HashMap<String, Grid>();
     
     private int length = 3;
     private int width = 3;
+    private B1 b1;
+    private B2 b2;
+    private B3 b3;
+    private C1 c1;
+    private C2 c2;
+    private C3 c3;
     public Map(){
         
     }
-    public void updatePointer (String direction){
-        switch(direction){
-            case "left":
-                loadWorld();
-                break;
-            case "right":
-                loadWorld();
-                break;
-        }
-    }
+    
     public void setPointer(String coord){
         pointer = coord; 
     }
@@ -65,35 +63,81 @@ public class Map extends Actor
             }
         }
     }
-    public void loadWorld(){
+    public void loadWorld(String pointer){
+        
         switch(pointer){
+            case "B1":
+                if(!searchHashMap(pointer)){
+                    create("B1");
+                }
+                Greenfoot.setWorld(b1);
+                break;
+            case "B2":
+                if(!searchHashMap(pointer)){
+                    create("B2");
+                }
+                Greenfoot.setWorld(b2);
+                break;
+            case "B3":
+                if(!searchHashMap(pointer)){
+                    create("B3");
+                }
+                Greenfoot.setWorld(b3);
+                break;
             case "C1":
-                Greenfoot.setWorld(new C1());
+                if(!searchHashMap(pointer)){
+                    create("C1");
+                }
+                Greenfoot.setWorld(c1);
+                break;
             case "C2":
-                Greenfoot.setWorld(new C2());
+                if(!searchHashMap(pointer)){
+                    create("C2");
+                }
+                Greenfoot.setWorld(c2);
+                break;
             case "C3":
-                Greenfoot.setWorld(new C3());
+                if(!searchHashMap(pointer)){
+                    create("C3");
+                }
+                Greenfoot.setWorld(c3);
+                break;
         }
     }
-    public void loadWorld(String pointer){
-        if(pointer.equals("C1")){
-            Greenfoot.setWorld(new C1());
+    public boolean searchHashMap(String key){
+        for(String i : worlds.keySet()){
+            if(key.equals(i)){
+                return true;
+            }
         }
-        else if(pointer.equals("C2")){
-            Greenfoot.setWorld(new C2());
-        }
-        else if(pointer.equals("C3")){
-            Greenfoot.setWorld(new C3());
-        }
-        /*
-        switch(pointer){
+        return false;
+    }
+    public void create(String location){
+        switch(location){
+            case "B1":
+                b1 = new B1();
+                worlds.put("B1",b1);
+                break;
+            case "B2":
+                b2 = new B2();
+                worlds.put("B2",b2);
+                break;
+            case "B3":
+                b3 = new B3();
+                worlds.put("B3",b3);
+                break;
             case "C1":
-                Greenfoot.setWorld(new C1());
+                c1 = new C1();
+                worlds.put("C1",c1);
+                break;
             case "C2":
-                Greenfoot.setWorld(new C2());
+                c2 = new C2();
+                worlds.put("C2",c2);
+                break;
             case "C3":
-                Greenfoot.setWorld(new C3());
+                c3 = new C3();
+                worlds.put("C3",c3);
+                break;
         }
-        */
     }
 }

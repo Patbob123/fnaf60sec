@@ -8,12 +8,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public abstract class Grid extends World
 {
-    public static Map map = new Map();
+    public Map map = new Map();
     public Grid()
     {    
         super(1152, 768, 1);
-    }
-    public void exit(String direction){
-        map.updatePointer(direction);
     }
 }

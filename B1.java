@@ -1,16 +1,17 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class C1 here.
+ * Write a description of class B1 here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class C1 extends Grid
+public class B1 extends Grid
 {
+
     Player fisho;
     PressurePlate right;
-    public C1()
+    public B1()
     {
         super();
         setCoord();
@@ -18,16 +19,15 @@ public class C1 extends Grid
         addObject(fisho,0,0);
         right = new PressurePlate(50,50);
         addObject(right, 1152, 384);
-        
+    }
+    public void setCoord(){
+        map.setPointer("B1");
+        map.setX(0);
+        map.setY(1);
     }
     public void act(){
         if(fisho.touchP(right)){
-            map.loadWorld("C2");
+            map.loadWorld("B2");
         }
-    }
-    public void setCoord(){
-        map.setPointer("C1");
-        map.setX(0);
-        map.setY(2);
     }
 }
