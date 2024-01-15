@@ -1,10 +1,12 @@
 #BlueJ class context
 comment0.target=C2
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ C2\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=
-comment1.target=C2()
-comment2.params=
-comment2.target=void\ act()
+comment1.params=ram
+comment1.target=C2(Memory)
+comment2.params=world\ ram
+comment2.target=C2(Grid,\ Memory)
 comment3.params=
-comment3.target=void\ setCoord()
-numComments=4
+comment3.target=void\ act()
+comment4.params=
+comment4.target=void\ setCoord()
+numComments=5

@@ -20,9 +20,6 @@ public class Map extends Actor
     
     private int length = 3;
     private int width = 3;
-    private B1 b1;
-    private B2 b2;
-    private B3 b3;
     private C1 c1;
     private C2 c2;
     private C3 c3;
@@ -44,6 +41,9 @@ public class Map extends Actor
         findIndex(pointer);
         return y;
     }
+    public HashMap<String, Grid> getWorlds(){
+        return worlds; 
+    }
     public void setX(int num){
         x = num;
     }
@@ -63,43 +63,24 @@ public class Map extends Actor
             }
         }
     }
-    public void loadWorld(String pointer){
+    public void loadWorld(String pointer, Memory ram){
         
         switch(pointer){
-            case "B1":
-                if(!searchHashMap(pointer)){
-                    
-                    create("B1");
-                }
-                Greenfoot.setWorld(b1);
-                break;
-            case "B2":
-                if(!searchHashMap(pointer)){
-                    create("B2");
-                }
-                Greenfoot.setWorld(b2);
-                break;
-            case "B3":
-                if(!searchHashMap(pointer)){
-                    create("B3");
-                }
-                Greenfoot.setWorld(b3);
-                break;
             case "C1":
                 if(!searchHashMap(pointer)){
-                    create("C1");
+                    create("C1",ram);
                 }
                 Greenfoot.setWorld(c1);
                 break;
             case "C2":
                 if(!searchHashMap(pointer)){
-                    create("C2");
+                    create("C2",ram);
                 }
                 Greenfoot.setWorld(c2);
                 break;
             case "C3":
                 if(!searchHashMap(pointer)){
-                    create("C3");
+                    create("C3",ram);
                 }
                 Greenfoot.setWorld(c3);
                 break;
@@ -113,34 +94,24 @@ public class Map extends Actor
         }
         return false;
     }
-    public void create(String location){
+    public void create(String location, Memory ram){
         switch(location){
-            case "B1":
-                b1 = new B1();
-                worlds.put("B1",b1);
-                break;
-            case "B2":
-                b2 = new B2();
-                worlds.put("B2",b2);
-                
-                break;
-            case "B3":
-                b3 = new B3();
-                worlds.put("B3",b3);
-                break;
             case "C1":
-                c1 = new C1();
+                c1 = new C1(worlds.get(location),ram);
                 worlds.put("C1",c1);
                 break;
             case "C2":
-                c2 = new C2();
+                c2 = new C2(worlds.get(location),ram);
                 worlds.put("C2",c2);
                 break;
             case "C3":
-                c3 = new C3();
+                c3 = new C3(worlds.get(location),ram);
                 worlds.put("C3",c3);
                 break;
         }
         System.out.println(worlds.keySet());
+    }
+    public void storeWorld(String Location,Grid world){
+        worlds.put(Location,world);
     }
 }

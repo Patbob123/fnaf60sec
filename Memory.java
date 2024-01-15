@@ -10,4 +10,7 @@ public class Memory
     public Memory(Map map){
         this.map = map;
     }
+    public Map getMap(){
+        return map;
+    }
 }

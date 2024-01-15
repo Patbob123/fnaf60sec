@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Aaa
+comment1.params=
+comment1.target=Aaa()
+comment2.params=
+comment2.target=java.util.HashMap\ getHashMap()
+comment3.params=name\ world
+comment3.target=void\ store(java.lang.String,\ greenfoot.World)
+comment4.params=name
+comment4.target=boolean\ check(java.lang.String)
+numComments=5

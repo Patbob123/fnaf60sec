@@ -8,19 +8,26 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class C1 extends Grid
 {
-    public C1()
+    private Map map = ram.getMap();
+    World toWorld = null;
+    public C1(Grid world,Memory ram)
     {
-        super();
+        super(world,ram);
         setCoord();
         fisho = new Player();
         addObject(fisho,0,0);
         right = new PressurePlate(50,50);
         addObject(right, 1152, 384);
         
+        toWorld = world; 
     }
     public void act(){
         if(fisho.touchP(right)){
-            map.loadWorld("C2");
+            //ram.getMap().loadWorld("C2",ram);
+            
+            //map.storeWorld("C1",this);
+            
+            Greenfoot.setWorld(toWorld);
         }
     }
     public void setCoord(){
@@ -29,3 +36,4 @@ public class C1 extends Grid
         map.setY(2);
     }
 }
+

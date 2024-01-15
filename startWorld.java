@@ -21,7 +21,7 @@ public class startWorld extends World
     }
     public void act(){
         if(fisho.touchP(middle)){
-            C2 c2 = new C2();
+            C2 c2 = new C2(ram);
             Greenfoot.setWorld(c2);
         }
     }
