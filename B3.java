@@ -8,9 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class B3 extends Grid
 {
-
-    Player fisho;
-    PressurePlate left;
     public B3()
     {
         super();

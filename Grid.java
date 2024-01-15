@@ -8,7 +8,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public abstract class Grid extends World
 {
-    public Map map = new Map();
+    Player fisho;
+    PressurePlate left;
+    PressurePlate right;
+    protected Map map = new Map();
     public Grid()
     {    
         super(1152, 768, 1);

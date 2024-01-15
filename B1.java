@@ -8,9 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class B1 extends Grid
 {
-
-    Player fisho;
-    PressurePlate right;
     public B1()
     {
         super();
@@ -28,6 +25,9 @@ public class B1 extends Grid
     public void act(){
         if(fisho.touchP(right)){
             map.loadWorld("B2");
+        }
+        if(Greenfoot.isKeyDown("n")){
+            System.out.println(map);
         }
     }
 }

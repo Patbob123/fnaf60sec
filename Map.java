@@ -16,7 +16,7 @@ public class Map extends Actor
             {"B1","B2","B3"},
             {"C1","C2","C3"}
     };
-    HashMap <String, Grid> worlds = new HashMap<String, Grid>();
+    private HashMap <String, Grid> worlds = new HashMap<String, Grid>();
     
     private int length = 3;
     private int width = 3;
@@ -68,6 +68,7 @@ public class Map extends Actor
         switch(pointer){
             case "B1":
                 if(!searchHashMap(pointer)){
+                    
                     create("B1");
                 }
                 Greenfoot.setWorld(b1);
@@ -121,6 +122,7 @@ public class Map extends Actor
             case "B2":
                 b2 = new B2();
                 worlds.put("B2",b2);
+                
                 break;
             case "B3":
                 b3 = new B3();
@@ -139,5 +141,6 @@ public class Map extends Actor
                 worlds.put("C3",c3);
                 break;
         }
+        System.out.println(worlds.keySet());
     }
 }
