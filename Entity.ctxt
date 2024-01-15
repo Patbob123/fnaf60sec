@@ -1,7 +1,17 @@
 #BlueJ class context
 comment0.target=Entity
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Entity\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\n\ Write\ a\ description\ of\ class\ Entity\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=
 comment1.target=void\ act()
-comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ Entity\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
-numComments=2
+comment2.params=walk\ stand
+comment2.target=Entity(greenfoot.GreenfootImage[],\ greenfoot.GreenfootImage[])
+comment2.text=\n\ Constructor\ for\ the\ Entity\ class.\n\ @param\ walk\ Array\ of\ walking\ animation\ frames.\n\ @param\ stand\ Array\ of\ standing\ animation\ frames.\n
+comment3.params=imgs\ frameName
+comment3.target=void\ prepareAnimation(greenfoot.GreenfootImage[],\ java.lang.String)
+comment3.text=\n\ Prepares\ animation\ frames\ from\ image\ files\n\ \n\ @param\ imgs\ Array\ to\ store\ the\ animationn\ frames\n\ @param\ frameName\ The\ base\ name\ of\ the\ image\ files\n
+comment4.params=imgs\ frameName\ width\ height
+comment4.target=void\ prepareAnimation(greenfoot.GreenfootImage[],\ java.lang.String,\ int,\ int)
+comment4.text=\n\ Prepares\ the\ scaled\ animation\ frames\ from\ image\ files\n\ \n\ @param\ imgs\ Array\ to\ store\ the\ animationn\ frames\n\ @param\ frameName\ The\ base\ name\ of\ the\ image\ files\n\ @param\ width\ The\ width\ to\ scale\ the\ image\ to\n\ @param\ height\ The\ height\ to\ scale\ the\ image\ to\n
+comment5.params=imgs
+comment5.target=void\ animate(greenfoot.GreenfootImage[])
+numComments=6

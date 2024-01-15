@@ -9,6 +9,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Player extends Entity
 {   
     private Hitbox collider; 
+    private GreenfootImage[] walk;
+    private GreenfootImage[] stand;
     public Player(){
         collider = new Hitbox(getImage().getWidth(),getImage().getHeight()) ;
     }
