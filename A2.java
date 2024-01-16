@@ -27,7 +27,7 @@ public class A2 extends SchoolWorld
     }
     
     public void act(){
-        if(fisho.touchP(left)){
+        if(!justTeleported && fisho.touchP(left)){
             fisho.setLocation(fisho.getX() +100, fisho.getY());
             if(wManager.checkIfCreated("A1")){
                 World nextWorld = worldStorage.get("A1");
@@ -37,7 +37,7 @@ public class A2 extends SchoolWorld
                 Greenfoot.setWorld(new A1(wManager));
             }
         }
-        if(fisho.touchP(right)){
+        if(!justTeleported && fisho.touchP(right)){
             fisho.setLocation(fisho.getX() -100, fisho.getY());
             if(wManager.checkIfCreated("A3")){
                 World nextWorld = worldStorage.get("A3");

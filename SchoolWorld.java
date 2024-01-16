@@ -13,6 +13,7 @@ public abstract class SchoolWorld extends World
     protected HashMap<String, World> worldStorage;
     protected Player fisho;
     protected PressurePlate left, right, up, down;
+    protected boolean justTeleported;
     /**
      * Constructor for objects of class SchoolWorlds.
      * 
@@ -22,6 +23,10 @@ public abstract class SchoolWorld extends World
         super(1152, 768, 1);
         this.wManager = wManager;
         worldStorage = wManager.getHashMap();
+        justTeleported = true;
+        /*
+         * Once fisho leaves the teleport pad, turn off the boolean
+         */
     }
     public boolean isCreated(String worldName){
         if(wManager.checkIfCreated(worldName) == false){
