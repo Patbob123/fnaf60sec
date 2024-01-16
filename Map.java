@@ -20,9 +20,9 @@ public class Map extends Actor
     
     private int length = 3;
     private int width = 3;
-    private C1 c1;
-    private C2 c2;
-    private C3 c3;
+    //private C1 c1;
+    //private C2 c2;
+    //private C3 c3;
     public Map(){
         
     }

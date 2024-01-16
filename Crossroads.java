@@ -30,7 +30,7 @@ public class Crossroads extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1152, 768, 1,false); // 36 by 24
-        MapBuilder map = new MapBuilder();
+        //MapBuilder map = new MapBuilder();
         //addObject(map,0,0);
         Player fisho = new Player();
         addObject(fisho,576,384);
