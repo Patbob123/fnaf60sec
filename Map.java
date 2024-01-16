@@ -16,7 +16,7 @@ public class Map extends Actor
             {"B1","B2","B3"},
             {"C1","C2","C3"}
     };
-    private HashMap <String, Grid> worlds = new HashMap<String, Grid>();
+    private HashMap <String, World> worlds = new HashMap<String, World>();
     
     private int length = 3;
     private int width = 3;
@@ -41,7 +41,7 @@ public class Map extends Actor
         findIndex(pointer);
         return y;
     }
-    public HashMap<String, Grid> getWorlds(){
+    public HashMap<String, World> getWorlds(){
         return worlds; 
     }
     public void setX(int num){
@@ -63,6 +63,7 @@ public class Map extends Actor
             }
         }
     }
+    /*
     public void loadWorld(String pointer, Memory ram){
         
         switch(pointer){
@@ -86,6 +87,7 @@ public class Map extends Actor
                 break;
         }
     }
+    */
     public boolean searchHashMap(String key){
         for(String i : worlds.keySet()){
             if(key.equals(i)){
@@ -94,6 +96,7 @@ public class Map extends Actor
         }
         return false;
     }
+    /*
     public void create(String location, Memory ram){
         switch(location){
             case "C1":
@@ -111,7 +114,8 @@ public class Map extends Actor
         }
         System.out.println(worlds.keySet());
     }
-    public void storeWorld(String Location,Grid world){
+    */
+    public void storeWorld(String Location,World world){
         worlds.put(Location,world);
     }
 }
