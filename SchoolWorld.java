@@ -13,6 +13,8 @@ public abstract class SchoolWorld extends World
     protected HashMap<String, World> worldStorage;
     protected Player fisho;
     protected PressurePlate left, right, up, down;
+    
+    private Button map;
     /**
      * Constructor for objects of class SchoolWorlds.
      * 
@@ -22,6 +24,7 @@ public abstract class SchoolWorld extends World
         super(1152, 768, 1);
         this.wManager = wManager;
         worldStorage = wManager.getHashMap();
+        map();
     }
     public boolean isCreated(String worldName){
         if(wManager.checkIfCreated(worldName) == false){
@@ -29,5 +32,9 @@ public abstract class SchoolWorld extends World
             return false;
         }
         return true;
+    }
+    public void map(){
+        map = new Button("map", 40);
+        addObject(map, 1091, 45);
     }
 }

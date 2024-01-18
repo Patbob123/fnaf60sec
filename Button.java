@@ -74,23 +74,23 @@ public class Button extends Actor
      */
     public void updateMe(String text) {
         buttonText = text;
-        GreenfootImage tempTextImage = new GreenfootImage(text, textSize, new Color(87, 171, 131), Color.WHITE);
+        GreenfootImage tempTextImage = new GreenfootImage(text, textSize, new Color(51, 4, 4), Color.WHITE);
         myImage = new GreenfootImage(tempTextImage.getWidth() + 8, tempTextImage.getHeight() + 8);
         myImage.setColor(Color.WHITE);
         myImage.fill();
         myImage.drawImage(tempTextImage, 4, 4);
 
-        myImage.setColor(Color.BLACK);
+        myImage.setColor(new Color(51, 4, 4));
         myImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 7);
         setImage(myImage);
 
-        tempTextImage = new GreenfootImage(text, textSize, Color.WHITE, Color.RED);
+        tempTextImage = new GreenfootImage(text, textSize, Color.WHITE, Color.BLACK);
         myAltImage = new GreenfootImage(tempTextImage.getWidth() + 8, tempTextImage.getHeight() + 8);
         myAltImage.setColor(Color.WHITE);
         myAltImage.fill();
         myAltImage.drawImage(tempTextImage, 4, 4);
 
-        myAltImage.setColor(Color.BLACK);
+        myAltImage.setColor(new Color(117, 11, 11));
         myAltImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 7);
     }
 }
