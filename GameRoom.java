@@ -14,9 +14,11 @@ public class GameRoom extends World {
         GreenfootImage backgroundImage = new GreenfootImage("businessroom.png");
         backgroundX = (backgroundImage.getWidth() - getWidth()) / 2;
         setBackground(backgroundImage);
+        updateBackgroundPosition();
         
         wall1 = new Wall(20,20);
         wall2 = new Wall(20,20);
+        
 
         backgroundSpeed = 96;
     }
