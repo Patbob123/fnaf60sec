@@ -1,5 +1,6 @@
 #BlueJ class context
 comment0.target=SchoolWorld
+=======
 comment0.text=\n\ Write\ a\ description\ of\ class\ SchoolWorlds\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=wManager
 comment1.target=SchoolWorld(WorldManager)
@@ -7,7 +8,13 @@ comment1.text=\n\ Constructor\ for\ objects\ of\ class\ SchoolWorlds.\n\ \n
 comment2.params=worldName
 comment2.target=boolean\ isCreated(java.lang.String)
 comment3.params=
+<<<<<<< HEAD
 comment3.target=void\ act()
 comment4.params=
 comment4.target=void\ generateCamMap()
 numComments=5
+=======
+comment3.target=void\ map()
+numComments=4
+>>>>>>> 7861137b644187cc6ad7b1799ea1a5b05702d7ff
+>>>>>>> 17ce65b17951922eeba3ba207a2c562f9b9c1628

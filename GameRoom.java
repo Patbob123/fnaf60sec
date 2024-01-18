@@ -12,14 +12,20 @@ public class GameRoom extends World {
         super(1152, 768, 1);
         inCameras = false;
         GreenfootImage backgroundImage = new GreenfootImage("businessroom.png");
-        backgroundX = (backgroundImage.getWidth() - getWidth()) / 2;
+        backgroundX = 100; //to set at middle
         setBackground(backgroundImage);
         updateBackgroundPosition();
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 17ce65b17951922eeba3ba207a2c562f9b9c1628
         wall1 = new Wall(20,20);
         wall2 = new Wall(20,20);
+        
 
         backgroundSpeed = 96;
+        backgroundX = (backgroundImage.getWidth() - getWidth()) / 2; 
     }
     
     
@@ -47,13 +53,24 @@ public class GameRoom extends World {
             
             updateBackgroundPosition();
             System.out.println(backgroundX);
-            
             if (mouseXPos > getWidth() / 2) {
-                addObject(wall2, getWidth() + 100 , getHeight() / 2);
-                removeObject(wall1);
-            } else {
-                addObject(wall1, getWidth() - 1252, getHeight() / 2);
-                removeObject(wall2);
+                if(backgroundX > 30) {
+                    if(backgroundX > 101){
+                    addObject(wall2, getWidth() - 100 , getHeight() / 2);
+                    removeObject(wall1);
+                }
+                    else wall1.setLocation(wall1.getX() - 5, wall1.getY());
+                }
+                
+            } else if (mouseXPos < getWidth() / 2) {
+                if(backgroundX < 169) {
+                    if(backgroundX < 98){
+                    addObject(wall1, getWidth() - 1052, getHeight() / 2);
+                    removeObject(wall2);
+                    }
+                    else wall2.setLocation(wall2.getX() + 5, wall2.getY());
+                }
+                
             }
         }
         
