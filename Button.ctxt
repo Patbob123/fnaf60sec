@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Button
+comment0.text=\n\ Write\ a\ description\ of\ class\ Buttons\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=text\ textSize\ buttonType
+comment1.target=Button(java.lang.String,\ int,\ java.lang.String)
+comment1.text=\n\ Construct\ a\ TextButton\ given\ only\ a\ String.\n\ \n\ @param\ text\ \ \ \ \ \ \ String\ to\ be\ displayed\ on\ the\ button.\n\ @param\ textSize\ \ \ Size\ of\ the\ text.\n\ @param\ buttonType\ Type\ of\ the\ button,\ e.g.,\ "plus"\ or\ "minus".\n
+comment2.params=text\ textSize
+comment2.target=Button(java.lang.String,\ int)
+comment2.text=\n\ Construct\ a\ TextButton\ given\ a\ String\ and\ a\ text\ size.\n\ \n\ @param\ text\ \ \ \ \ String\ to\ be\ displayed\ on\ the\ button.\n\ @param\ textSize\ Size\ of\ the\ text.\n
+comment3.params=
+comment3.target=void\ act()
+comment3.text=\n\ Act\ -\ do\ whatever\ the\ TextButton\ wants\ to\ do.\n\ This\ method\ is\ called\ whenever\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\n
+comment4.params=text
+comment4.target=void\ updateMe(java.lang.String)
+comment4.text=\n\ Update\ current\ TextButton\ text.\n\ \n\ @param\ text\ New\ text\ to\ be\ displayed\ on\ the\ button.\n
+numComments=5
