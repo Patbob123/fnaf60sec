@@ -65,7 +65,7 @@ public class Crossroads extends World
                 //System.out.println(test[i][j]);
                 //System.out.println(Arrays.toString(test[i]));
                 if(test[i][j].equals("w")){
-                    addObject(new Wall(25,25), 32*j, 32*i);
+                   // addObject(new Wall(25,25), 32*j, 32*i);
                 }
             }
         }

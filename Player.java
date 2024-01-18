@@ -49,7 +49,7 @@ public class Player extends Entity
     } 
     public void poop(){
         if(Greenfoot.isKeyDown("k")){
-            getWorld().addObject(new Wall(20,20), getX(), getY());
+           // getWorld().addObject(new Wall(20,20), getX(), getY());
         }
     }
     public double getDistance(Actor actor){

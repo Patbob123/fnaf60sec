@@ -20,11 +20,11 @@ public class A2 extends SchoolWorld
         
         fisho = new Player();
         addObject(fisho,0,0);
-        left = new PressurePlate(50,50);
+        //$left = new PressurePlate(50,50);
         addObject(left,0,384);
-        right = new PressurePlate(50,50);
+        //$right = new PressurePlate(50,50);
         addObject(right,1152,384);
-        bunker = new ResourceScramble(100,50);
+        //$bunker = new ResourceScramble(100,50);
         addObject(bunker,556,192);
     }
     

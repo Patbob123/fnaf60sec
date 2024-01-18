@@ -9,8 +9,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class ResourceScramble extends Tile
 {
     private Inventory bunker;
-    public ResourceScramble(int x, int y){
-        super(x,y);
+    public ResourceScramble(){
+        super();
         bunker = new Inventory();
     }
     public Inventory getInventory(){
