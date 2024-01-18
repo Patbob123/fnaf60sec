@@ -48,11 +48,15 @@ public class GameRoom extends World {
             System.out.println(backgroundX);
             
             if (mouseXPos > getWidth() / 2) {
-                addObject(wall2, getWidth() + 100 , getHeight() / 2);
-                removeObject(wall1);
+                if(backgroundX > 100){
+                    addObject(wall2, getWidth() + 100 , getHeight() / 2);
+                    removeObject(wall1);
+                }
             } else {
-                addObject(wall1, getWidth() - 1252, getHeight() / 2);
-                removeObject(wall2);
+                if(backgroundX < 96){
+                    addObject(wall1, getWidth() - 1252, getHeight() / 2);
+                    removeObject(wall2);
+                }
             }
         }
         
