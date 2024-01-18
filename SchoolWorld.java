@@ -22,6 +22,7 @@ public abstract class SchoolWorld extends World
         super(1152, 768, 1);
         this.wManager = wManager;
         worldStorage = wManager.getHashMap();
+        spawnItems();
     }
     public boolean isCreated(String worldName){
         if(wManager.checkIfCreated(worldName) == false){
@@ -29,5 +30,12 @@ public abstract class SchoolWorld extends World
             return false;
         }
         return true;
+    }
+    public void spawnItems(){
+        for(int i = 0; i< 10; i++){
+            int x = Greenfoot.getRandomNumber(1152);
+            int y = Greenfoot.getRandomNumber(768);
+            addObject(new Item(),x,y);
+        }
     }
 }

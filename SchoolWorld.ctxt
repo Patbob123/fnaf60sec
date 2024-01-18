@@ -6,4 +6,6 @@ comment1.target=SchoolWorld(WorldManager)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ SchoolWorlds.\r\n\ \r\n
 comment2.params=worldName
 comment2.target=boolean\ isCreated(java.lang.String)
-numComments=3
+comment3.params=
+comment3.target=void\ spawnItems()
+numComments=4
