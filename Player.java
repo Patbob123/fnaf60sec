@@ -21,6 +21,7 @@ public class Player extends Entity
     {
         move();
         poop();
+        dropOff();
         if(timer.millisElapsed() >= Constants.PICKUP_COOLDOWN){
             pickUp();
         }
@@ -72,10 +73,20 @@ public class Player extends Entity
                         nearestDistance = currentDistance;
                     }
                 }
-                nearbyObjects.add(currentItem);
+                handSlots.getStorage().add(currentItem);
                 timer.mark();
                 getWorld().removeObject(currentItem);
             }
+        }
+    }
+    public void dropOff(){
+        if(isTouching(ResourceScramble.class) && Greenfoot.isKeyDown("e")){
+            ResourceScramble bunker = (ResourceScramble)getOneIntersectingObject(ResourceScramble.class);
+            Inventory bunkerInventory = bunker.getInventory();
+            for(Item i: handSlots.getStorage()){
+                bunkerInventory.getStorage().add(i);
+            }
+            handSlots.getStorage().clear();
         }
     }
     public boolean checkWall(int x, int y){
