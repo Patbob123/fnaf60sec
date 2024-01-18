@@ -20,7 +20,7 @@ public class A3 extends SchoolWorld
         
         fisho = new Player();
         addObject(fisho,0,0);
-        left = new PressurePlate(50,50);
+        //$left = new PressurePlate(50,50);
         addObject(left,0,384);
     }
     

@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Stair extends Tile
 {   
-    public Stair(int x, int y){
-        super(x,y);
+    public Stair(){
+        super();
     }
 }

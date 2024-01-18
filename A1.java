@@ -19,7 +19,7 @@ public class A1 extends SchoolWorld
         
         fisho = new Player();
         addObject(fisho,0,0);
-        right = new PressurePlate(50,50);
+        //right = new PressurePlate(50,50);
         addObject(right,1152,384);
     }
     

@@ -15,14 +15,14 @@ public class startWorld extends World
         super(1152, 768, 1);
         wManager = new WorldManager();
         fisho = new Player();
-        addObject(fisho,0,0);
-        middle = new PressurePlate(50,50);
-        addObject(middle, 576, 384);
+        //$addObject(fisho,0,0);
+        //$middle = new PressurePlate(50,50);
+        //$addObject(middle, 576, 384);
     }
     public void act(){
-        if(fisho.touchP(middle)){
-            A1 a1 = new A1(wManager);
-            Greenfoot.setWorld(a1);
-        }
+        //$if(fisho.touchP(middle)){
+        //    A1 a1 = new A1(wManager);
+        //    Greenfoot.setWorld(a1);
+        //}
     }
 }
