@@ -15,8 +15,11 @@ public class CameraMap extends Actor
      * Background image
      * Once touched the map button, display the bg and add all the other buttons
      */
+    private static GreenfootImage camMap;
     public void act()
     {
-        
+        camMap = new GreenfootImage("cameraMap.png");
+        camMap.scale((int)(camMap.getWidth()/4), (int)(camMap.getHeight()/4));
+        setImage(camMap);
     }
 }
