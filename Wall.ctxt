@@ -1,12 +1,6 @@
 #BlueJ class context
 comment0.target=Wall
-<<<<<<< HEAD
 comment0.text=\n\ Write\ a\ description\ of\ class\ Wall\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
-comment1.params=x\ y
-comment1.target=Wall(int,\ int)
-=======
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Wall\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
 comment1.target=Wall()
->>>>>>> 97b242b494bf86d9c8f307a43312b07a541d74cc
 numComments=2

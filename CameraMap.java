@@ -18,7 +18,7 @@ public class CameraMap extends Actor
     private static GreenfootImage camMap;
     public void act()
     {
-        camMap = new GreenfootImage("cameraMap.png");
+        camMap = new GreenfootImage("translucentCamMap.png");
         camMap.scale((int)(camMap.getWidth()/4), (int)(camMap.getHeight()/4));
         setImage(camMap);
     }

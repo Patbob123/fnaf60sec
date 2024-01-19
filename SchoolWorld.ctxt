@@ -1,13 +1,9 @@
 #BlueJ class context
 comment0.target=SchoolWorld
-<<<<<<< HEAD
 comment0.text=\n\ Write\ a\ description\ of\ class\ SchoolWorlds\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
-=======
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ SchoolWorlds\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
->>>>>>> 97b242b494bf86d9c8f307a43312b07a541d74cc
 comment1.params=wManager
 comment1.target=SchoolWorld(WorldManager)
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ SchoolWorlds.\r\n\ \r\n
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ SchoolWorlds.\n\ \n
 comment2.params=worldName
 comment2.target=boolean\ isCreated(java.lang.String)
 comment3.params=
