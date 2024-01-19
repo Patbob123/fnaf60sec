@@ -10,6 +10,7 @@ public class tempWorld extends World
 {
     private Viewport vp;
     private MapArray ma;
+    private Player p;
     
     public tempWorld()
     {    
@@ -18,23 +19,33 @@ public class tempWorld extends World
         vp = new Viewport(Constants.WW,Constants.WH);
         ma = new MapArray();
         addObject(vp, 0, 0);
+        
+        p = new Player();
+        addObject(p, Constants.WW/2, Constants.WH/2);
+        
+        setPaintOrder(Player.class);
     }
     public void act(){
+        
         if(Greenfoot.isKeyDown("a")){
-            vp.move(-10, 0);
+            if(!p.checkWall(-10, 0)) vp.move(-10, 0);
         }
         if(Greenfoot.isKeyDown("w")){
-            vp.move(0, -10);
+            if(!p.checkWall(0, -10)) vp.move(0, -10);
         } 
         if(Greenfoot.isKeyDown("s")){
-            vp.move(0, 10);
+            if(!p.checkWall(0, 10)) vp.move(0, 10);
         } 
         if(Greenfoot.isKeyDown("d")){
-            vp.move(10, 0);
+            if(!p.checkWall(10, 0)) vp.move(10, 0);
         }
+        
     }
     public MapArray getMap(){
         return ma;
+    }
+    public boolean checkPlayer(int x, int y){
+        return getObjectsAt(x, y, Player.class).size()>0;
     }
 }
 

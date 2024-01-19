@@ -13,9 +13,16 @@ public class Player extends Entity
     private Inventory handSlots;
     private SimpleTimer timer;
     public Player(){
-        collider = new Hitbox(getImage().getWidth(),getImage().getHeight()) ;
+        collider = new Hitbox(getImage().getWidth(),getImage().getHeight());
         handSlots = new Inventory();
         timer = new SimpleTimer();
+        setIcon("tempson.png");
+    }
+    public void setIcon(String imageUrl){
+        GreenfootImage icon = new GreenfootImage(imageUrl);
+        icon.scale(32, 32);
+        Util.scale(icon);
+        setImage(icon);
     }
     public void act()
     {
@@ -34,18 +41,18 @@ public class Player extends Entity
         int pWidth = getImage().getWidth()/2;
         int pHeight = getImage().getHeight()/2;
         
-        if(Greenfoot.isKeyDown("a") && !checkWall(-pWidth - speed,0)){
-            setLocation(getX()-speed,getY());
-        }
-        if(Greenfoot.isKeyDown("d") && !checkWall(pWidth + speed,0)){
-            setLocation(getX()+speed,getY());
-        }
-        if(Greenfoot.isKeyDown("w") && !checkWall(0, -pHeight - speed)){
-            setLocation(getX(),getY()-speed);
-        }
-        if(Greenfoot.isKeyDown("s") && !checkWall(0, pHeight + speed)){
-            setLocation(getX(),getY()+speed);
-        }
+        // if(Greenfoot.isKeyDown("a") && !checkWall(-pWidth - speed,0)){
+            // setLocation(getX()-speed,getY());
+        // }
+        // if(Greenfoot.isKeyDown("d") && !checkWall(pWidth + speed,0)){
+            // setLocation(getX()+speed,getY());
+        // }
+        // if(Greenfoot.isKeyDown("w") && !checkWall(0, -pHeight - speed)){
+            // setLocation(getX(),getY()-speed);
+        // }
+        // if(Greenfoot.isKeyDown("s") && !checkWall(0, pHeight + speed)){
+            // setLocation(getX(),getY()+speed);
+        // }
     } 
     public void poop(){
         if(Greenfoot.isKeyDown("k")){
@@ -91,7 +98,7 @@ public class Player extends Entity
     }
     public boolean checkWall(int x, int y){
         return  collider.intersectWall(x,y);
-    }
+    }   
     public boolean onPressurePlate(){
         return isTouching(PressurePlate.class);
     }

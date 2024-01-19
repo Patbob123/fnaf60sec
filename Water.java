@@ -1,18 +1,15 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Items here.
+ * Write a description of class Water here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Item extends Tile
+public class Water extends Item
 {
-    public Item(){
-        
-    }
     /**
-     * Act - do whatever the Items wants to do. This method is called whenever
+     * Act - do whatever the Water wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()

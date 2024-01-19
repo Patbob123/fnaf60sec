@@ -8,12 +8,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Entity extends SuperSmoothMover
 {
-    /**
-     * Act - do whatever the Entity wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    protected Hitbox collider;
+    public Entity(){
+        
+    }
+
+    
     public void act() 
     {
         // Add your action code here.
     }    
+     
 }
