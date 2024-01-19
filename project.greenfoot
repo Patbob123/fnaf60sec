@@ -1,4 +1,10 @@
 #Greenfoot project file
+<<<<<<< Updated upstream
+=======
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=97b242b494bf86d9c8f307a43312b07a541d74cc
+>>>>>>> Stashed changes
 class.CameraMap.image=cameraMap.png
 class.Item.image=apple2.png
 class.Player.image=fish2.png
@@ -8,6 +14,7 @@ class.Wall.image=tree.png
 dependency1.from=SchoolWorld
 dependency1.to=WorldManager
 dependency1.type=UsesDependency
+<<<<<<< Updated upstream
 dependency10.from=A2
 dependency10.to=WorldManager
 dependency10.type=UsesDependency
@@ -37,11 +44,43 @@ dependency18.to=Tile
 dependency18.type=UsesDependency
 dependency19.from=startWorld
 dependency19.to=Player
+=======
+dependency10.from=A1
+dependency10.to=Player
+dependency10.type=UsesDependency
+dependency11.from=A1
+dependency11.to=A2
+dependency11.type=UsesDependency
+dependency12.from=A2
+dependency12.to=ResourceScramble
+dependency12.type=UsesDependency
+dependency13.from=A2
+dependency13.to=WorldManager
+dependency13.type=UsesDependency
+dependency14.from=A2
+dependency14.to=Player
+dependency14.type=UsesDependency
+dependency15.from=A2
+dependency15.to=A1
+dependency15.type=UsesDependency
+dependency16.from=A2
+dependency16.to=A3
+dependency16.type=UsesDependency
+dependency17.from=A3
+dependency17.to=WorldManager
+dependency17.type=UsesDependency
+dependency18.from=A3
+dependency18.to=Player
+dependency18.type=UsesDependency
+dependency19.from=A3
+dependency19.to=A2
+>>>>>>> Stashed changes
 dependency19.type=UsesDependency
 dependency2.from=SchoolWorld
 dependency2.to=Player
 dependency2.type=UsesDependency
 dependency20.from=startWorld
+<<<<<<< Updated upstream
 dependency20.to=PressurePlate
 dependency20.type=UsesDependency
 dependency21.from=startWorld
@@ -55,6 +94,21 @@ dependency23.to=MapArray
 dependency23.type=UsesDependency
 dependency24.from=tempWorld
 dependency24.to=Constants
+=======
+dependency20.to=Player
+dependency20.type=UsesDependency
+dependency21.from=startWorld
+dependency21.to=PressurePlate
+dependency21.type=UsesDependency
+dependency22.from=startWorld
+dependency22.to=WorldManager
+dependency22.type=UsesDependency
+dependency23.from=ResourceScramble
+dependency23.to=Inventory
+dependency23.type=UsesDependency
+dependency24.from=Hitbox
+dependency24.to=Wall
+>>>>>>> Stashed changes
 dependency24.type=UsesDependency
 dependency25.from=GameRoom
 dependency25.to=Wall
@@ -80,6 +134,7 @@ dependency30.type=UsesDependency
 dependency31.from=Player
 dependency31.to=ResourceScramble
 dependency31.type=UsesDependency
+<<<<<<< Updated upstream
 dependency32.from=Player
 dependency32.to=PressurePlate
 dependency32.type=UsesDependency
@@ -102,11 +157,36 @@ dependency38.from=Viewport
 dependency38.to=Constants
 dependency38.type=UsesDependency
 dependency39.from=Util
+=======
+dependency32.from=MapArray
+dependency32.to=Tile
+dependency32.type=UsesDependency
+dependency33.from=MapArray
+dependency33.to=Wall
+dependency33.type=UsesDependency
+dependency34.from=MapArray
+dependency34.to=Floor
+dependency34.type=UsesDependency
+dependency35.from=tempWorld
+dependency35.to=Viewport
+dependency35.type=UsesDependency
+dependency36.from=tempWorld
+dependency36.to=MapArray
+dependency36.type=UsesDependency
+dependency37.from=tempWorld
+dependency37.to=Constants
+dependency37.type=UsesDependency
+dependency38.from=Viewport
+dependency38.to=tempWorld
+dependency38.type=UsesDependency
+dependency39.from=Viewport
+>>>>>>> Stashed changes
 dependency39.to=Constants
 dependency39.type=UsesDependency
 dependency4.from=SchoolWorld
 dependency4.to=Button
 dependency4.type=UsesDependency
+<<<<<<< Updated upstream
 dependency40.from=MapArray
 dependency40.to=Tile
 dependency40.type=UsesDependency
@@ -141,6 +221,39 @@ editor.fx.0.y=25
 height=807
 package.numDependencies=43
 package.numTargets=36
+=======
+dependency40.from=Tile
+dependency40.to=Constants
+dependency40.type=UsesDependency
+dependency41.from=GameRoom
+dependency41.to=Wall
+dependency41.type=UsesDependency
+dependency42.from=Inventory
+dependency42.to=Item
+dependency42.type=UsesDependency
+dependency5.from=SchoolWorld
+dependency5.to=CameraMap
+dependency5.type=UsesDependency
+dependency6.from=Util
+dependency6.to=Constants
+dependency6.type=UsesDependency
+dependency7.from=Crossroads
+dependency7.to=Player
+dependency7.type=UsesDependency
+dependency8.from=Crossroads
+dependency8.to=Tile
+dependency8.type=UsesDependency
+dependency9.from=A1
+dependency9.to=WorldManager
+dependency9.type=UsesDependency
+editor.fx.0.height=737
+editor.fx.0.width=814
+editor.fx.0.x=232
+editor.fx.0.y=-6
+height=734
+package.numDependencies=42
+package.numTargets=35
+>>>>>>> Stashed changes
 project.charset=UTF-8
 publish.hasSource=false
 publish.locked=true
@@ -408,7 +521,14 @@ target9.width=120
 target9.x=0
 target9.y=0
 version=3.1.0
+<<<<<<< Updated upstream
 width=1173
 world.lastInstantiated=startWorld
 xPosition=102
 yPosition=359
+=======
+width=1294
+world.lastInstantiated=tempWorld
+xPosition=0
+yPosition=0
+>>>>>>> Stashed changes

@@ -49,12 +49,12 @@ public abstract class SchoolWorld extends World
 
     public void act(){
         if (Greenfoot.mousePressed(map)){
-            System.out.println(numClicks);
+            //System.out.println(numClicks);
             if(numClicks == 2){
                 map.updateMe("-");
                 generateCamMap();
                 numClicks--;
-                System.out.println("expanded" + numClicks);
+                //System.out.println("expanded" + numClicks);
             }else{
                 map.updateMe("+");
                 numClicks++;
@@ -65,7 +65,7 @@ public abstract class SchoolWorld extends World
                 removeObject(cam5);
                 removeObject(cam6);
                 removeObject(camMap);
-                System.out.println("collapsed" + numClicks);
+                //System.out.println("collapsed" + numClicks);
             }
         }
     }

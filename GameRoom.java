@@ -32,6 +32,7 @@ public class GameRoom extends World {
         backgroundX = 100; //to set at middle
         setBackground(backgroundImage);
         updateBackgroundPosition();
+<<<<<<< Updated upstream
 
         wall1 = new Wall();
         wall2 = new Wall();
@@ -42,6 +43,12 @@ public class GameRoom extends World {
         batteryBar = new BatteryBar(battery);
         addObject(batteryBar, 1101, 27);
         
+=======
+        
+        wall1 = new Wall();
+        wall2 = new Wall();
+
+>>>>>>> Stashed changes
         backgroundSpeed = 96;
         backgroundX = (backgroundImage.getWidth() - getWidth()) / 2;
         
