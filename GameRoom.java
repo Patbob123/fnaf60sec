@@ -15,8 +15,13 @@ public class GameRoom extends World {
         backgroundX = 100; //to set at middle
         setBackground(backgroundImage);
         updateBackgroundPosition();
+<<<<<<< HEAD
         wall1 = new Wall(20,20);
         wall2 = new Wall(20,20);
+=======
+        wall1 = new Wall();
+        wall2 = new Wall();
+>>>>>>> 97b242b494bf86d9c8f307a43312b07a541d74cc
         
 
         backgroundSpeed = 96;

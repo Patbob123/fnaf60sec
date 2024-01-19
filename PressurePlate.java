@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class PressurePlate extends Tile
 {
-    public PressurePlate(int x, int y){
-        super(x,y);
+    public PressurePlate(){
+        super();
     }
 }

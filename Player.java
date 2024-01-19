@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.ArrayList;
 
 /**
  * Write a description of class Character here.
@@ -9,13 +10,21 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Player extends Entity
 {   
     private Hitbox collider;
+    private Inventory handSlots;
+    private SimpleTimer timer;
     public Player(){
         collider = new Hitbox(getImage().getWidth(),getImage().getHeight()) ;
+        handSlots = new Inventory();
+        timer = new SimpleTimer();
     }
     public void act()
     {
         move();
         poop();
+        dropOff();
+        if(timer.millisElapsed() >= Constants.PICKUP_COOLDOWN){
+            pickUp();
+        }
     }
     protected void addedToWorld(World world){
         world.addObject(collider, getX(), getY());
@@ -40,7 +49,44 @@ public class Player extends Entity
     } 
     public void poop(){
         if(Greenfoot.isKeyDown("k")){
-            getWorld().addObject(new Wall(20,20), getX(), getY());
+           // getWorld().addObject(new Wall(20,20), getX(), getY());
+        }
+    }
+    public double getDistance(Actor actor){
+        return Math.hypot(Math.abs(actor.getX() - getX()), Math.abs(actor.getY() - getY()));
+    }
+    public void pickUp(){
+        if(Greenfoot.isKeyDown("e")){
+            if(handSlots.isEmpty()){
+                ArrayList<Item> nearbyObjects = (ArrayList<Item>)getObjectsInRange(100, Item.class);
+    
+                Item nearestItem = null;
+                Item currentItem = null;
+                double nearestDistance = 0;
+                double currentDistance;
+                
+                for(int i = 0; i< nearbyObjects.size(); i++){
+                    currentItem = nearbyObjects.get(i);
+                    currentDistance = getDistance(currentItem);
+                    if(currentDistance < nearestDistance){
+                        nearestItem = currentItem;
+                        nearestDistance = currentDistance;
+                    }
+                }
+                handSlots.getStorage().add(currentItem);
+                timer.mark();
+                getWorld().removeObject(currentItem);
+            }
+        }
+    }
+    public void dropOff(){
+        if(isTouching(ResourceScramble.class) && Greenfoot.isKeyDown("e")){
+            ResourceScramble bunker = (ResourceScramble)getOneIntersectingObject(ResourceScramble.class);
+            Inventory bunkerInventory = bunker.getInventory();
+            for(Item i: handSlots.getStorage()){
+                bunkerInventory.getStorage().add(i);
+            }
+            handSlots.getStorage().clear();
         }
     }
     public boolean checkWall(int x, int y){

@@ -8,7 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Floor extends Tile
 {
-    public Floor(int x, int y){
-        super(x,y);
+    public Floor(){
+        super();
+        symbol = "-"; 
     }
 }

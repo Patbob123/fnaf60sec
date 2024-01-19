@@ -1,6 +1,10 @@
 #BlueJ class context
 comment0.target=CameraMap
-comment0.text=\n\ Write\ a\ description\ of\ class\ CameraMap\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ CameraMap\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
 comment1.target=void\ act()
+<<<<<<< HEAD
+=======
+comment1.text=\r\n\ Display\ the\ map\ of\ the\ cameras\r\n\ Collapsable\r\n\ Set\ of\ buttons\r\n\ Background\ image\r\n\ Once\ touched\ the\ map\ button,\ display\ the\ bg\ and\ add\ all\ the\ other\ buttons\r\n
+>>>>>>> 97b242b494bf86d9c8f307a43312b07a541d74cc
 numComments=2

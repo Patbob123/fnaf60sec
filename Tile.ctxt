@@ -1,8 +1,14 @@
 #BlueJ class context
 comment0.target=Tile
+<<<<<<< HEAD
 comment0.text=\n\ Write\ a\ description\ of\ class\ Tile\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=width\ height
 comment1.target=Tile(int,\ int)
+=======
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Tile\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=Tile()
+>>>>>>> 97b242b494bf86d9c8f307a43312b07a541d74cc
 comment2.params=
-comment2.target=void\ act()
+comment2.target=java.lang.String\ toString()
 numComments=3
