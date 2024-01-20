@@ -48,7 +48,7 @@ public class Enemy extends Entity
             
             for (Player o : players){
                 distanceToActor = getDistance(this, o);
-                if (distanceToActor < closestTargetDistance){
+                if (distanceToActor < closestTargetDis){
                     targetPlayer = o;
                     closestTargetDis = distanceToActor;
                 }
