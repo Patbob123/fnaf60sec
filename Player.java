@@ -13,10 +13,11 @@ public class Player extends Entity
     private Inventory handSlots;
     private SimpleTimer timer;
     public Player(){
-        collider = new Hitbox(getImage().getWidth(),getImage().getHeight());
+        
         handSlots = new Inventory();
         timer = new SimpleTimer();
         setIcon("tempson.png");
+        collider = new Hitbox(getImage().getWidth(),getImage().getHeight()/2);
     }
     public void setIcon(String imageUrl){
         GreenfootImage icon = new GreenfootImage(imageUrl);
@@ -99,7 +100,10 @@ public class Player extends Entity
         
     }
     public boolean checkWall(int x, int y){
-        return  collider.intersectWall(x,y);
+        if(!collider.intersectWall(x,y)){
+            return false;
+        }
+        return collider.intersectWall(10,0)||collider.intersectWall(0,10)||collider.intersectWall(-10,0)||collider.intersectWall(0,-10);
     }   
     public boolean onPressurePlate(){
         return isTouching(PressurePlate.class);
