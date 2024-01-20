@@ -1,62 +1,52 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.HashMap;
 
 /**
- * Write a description of class SchoolWorlds here.
+ * Write a description of class theWorld here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public abstract class SchoolWorld extends World
+public class theWorld extends World
 {
-    protected WorldManager wManager;
-    protected HashMap<String, World> worldStorage;
-    protected Player fisho;
-    protected PressurePlate left, right, up, down;
-
-    private Button map;
+    private Button camButton;
     private Button cam1;
     private Button cam2;
     private Button cam3;
     private Button cam4;
     private Button cam5;
     private Button cam6;
+    private Button cam7;
     Actor camMap= new CameraMap();
 
     private int numClicks = 2;
+    
+    private int CMXOffset = 1015;
+    private int CMYOffset = 156;
+    
     /**
-     * Constructor for objects of class SchoolWorlds.
+     * Constructor for objects of class theWorld.
      * 
      */
-    public SchoolWorld(WorldManager wManager)
-    {
+    public theWorld()
+    {    
+        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1152, 768, 1);
-        //Greenfoot.setWorld(this);
-        this.wManager = wManager;
-        worldStorage = wManager.getHashMap();
-        map = new Button("+", 40);
-        addObject(map, 1057, 36);
+        
+        camButton = new Button("+", 40);
+        addObject(camButton, 1045, 30);
         setPaintOrder(Button.class, CameraMap.class);
     }
 
-    public boolean isCreated(String worldName){
-        if(wManager.checkIfCreated(worldName) == false){
-            wManager.storeWorld(worldName, this);
-            return false;
-        }
-        return true;
-    }
-
     public void act(){
-        if (Greenfoot.mousePressed(map)){
+        if (Greenfoot.mousePressed(camButton)){
             //System.out.println(numClicks);
             if(numClicks == 2){
-                map.updateMe("-");
+                camButton.updateMe("-");
                 generateCamMap();
                 numClicks--;
                 //System.out.println("expanded" + numClicks);
             }else{
-                map.updateMe("+");
+                camButton.updateMe("+");
                 numClicks++;
                 removeObject(cam1);
                 removeObject(cam2);
@@ -64,6 +54,7 @@ public abstract class SchoolWorld extends World
                 removeObject(cam4);
                 removeObject(cam5);
                 removeObject(cam6);
+                removeObject(cam7);
                 removeObject(camMap);
                 //System.out.println("collapsed" + numClicks);
             }
@@ -77,16 +68,19 @@ public abstract class SchoolWorld extends World
         cam4 = new Button("CAM4", 20);
         cam5 = new Button("CAM5", 20);
         cam6 = new Button("CAM6", 20);
+        cam7 = new Button("CAM7", 20);
 
-        addObject(camMap, 995, 79);
+        addObject(camMap, CMXOffset, CMYOffset);
 
-        addObject(cam1, 995, 79);
-        addObject(cam2, 1057, 79);
-        addObject(cam3, 1119, 79);
+        addObject(cam1, CMXOffset - 63, CMYOffset - 10);
+        addObject(cam2, CMXOffset - 41, CMYOffset + 24);
+        addObject(cam3, CMXOffset + 62, CMYOffset - 11);
 
-        addObject(cam4, 995, 114);
-        addObject(cam5, 1057, 114);
-        addObject(cam6, 1119, 114);
+        addObject(cam4, CMXOffset + 23, CMYOffset + 20);
+        addObject(cam5, CMXOffset - 95, CMYOffset + 54);
+        addObject(cam6, CMXOffset + 5, CMYOffset + 66);
+        
+        addObject(cam7, CMXOffset + 94, CMYOffset + 40);
 
     }
 }

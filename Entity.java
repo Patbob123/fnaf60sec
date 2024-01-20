@@ -17,6 +17,10 @@ public class Entity extends SuperSmoothMover
     public void act() 
     {
         // Add your action code here.
-    }    
-     
+    }
+    
+    public static double getDistance (Actor a, Actor b){
+        double distanceBetween = Math.hypot (Math.abs(a.getX() - b.getX()), Math.abs(a.getY() - b.getY()));
+        return distanceBetween;
+    }
 }

@@ -12,9 +12,13 @@ import java.util.ArrayList;
  */
 public class Enemy extends Entity
 {
+    private ArrayList<Player> players;
+    private Player targetPlayer;
     /**
-     * Act - do whatever the Enemy wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * Three enemies
+     * 1. Z path
+     * 2. smoothly & silently follow the player, then suddennly teleport too the front of the player
+     * 3. go towards the player by teleporting intermittently
      */
     private PriorityQueue<Coordinate> nextMoves;
 
@@ -26,45 +30,31 @@ public class Enemy extends Entity
     }
     public void act() 
     {
-            bfsTowards();
-        
         
     }    
     
-    public boolean checkWall(int x, int y){
-        return collider.intersectWall(x,y);
-    }
-    public void bfsTowards(){
-        ArrayList<Coordinate> checked = new ArrayList<>();
-        nextMoves = new PriorityQueue<Coordinate>();
-        nextMoves.add(new Coordinate(0, 0));
-        while(!nextMoves.isEmpty()){
-            Coordinate c = nextMoves.poll();
-            if(getX()+c.seeX()<0||getX()+c.seeX()>Constants.WW) continue;
-            if(getY()+c.seeY()<0||getY()+c.seeY()>Constants.WH) continue;
-            if(checkWall(c.seeX(), c.seeY())){
-                System.out.println(checked);
-                System.out.println(getX()+c.seeX()+" "+ getY()+c.seeY());
-                continue;
-            }
-            if(((tempWorld)getWorld()).checkPlayer(getX()+c.seeX(), getY()+c.seeY())){
-                System.out.println("ASDASD");
-                setLocation(getX()+checked.get(1).seeX(), getY()+checked.get(1).seeY());
-                break;
-            }
-            if(!containCoord(checked, c)){
-                checked.add(c);
-                nextMoves.add(new Coordinate(c.seeX()+10, c.seeY()));
-                nextMoves.add(new Coordinate(c.seeX(), c.seeY()+10));
-                nextMoves.add(new Coordinate(c.seeX()-10, c.seeY()));
-                nextMoves.add(new Coordinate(c.seeX(), c.seeY()-10));
-            }
+    private void targetClosestPlayer(){
+        double closestTargetDis = 0;
+        double distanceToActor;
+        players = (ArrayList<Player>)getObjectsInRange (70, Player.class);
+        
+        if (players.size() == 0){
+            players = (ArrayList<Player>)getObjectsInRange(170, Player.class);
         }
-    }
-    public boolean containCoord(ArrayList<Coordinate> checked, Coordinate c){
-        for(Coordinate cur:checked){
-            if(c.seeX()==cur.seeX()&&c.seeY()==cur.seeY()) return true;
+        
+        if (players.size() > 0){
+            targetPlayer = players.get(0);
+            closestTargetDis = getDistance(this, targetPlayer);
+            
+            for (Player o : players){
+                distanceToActor = getDistance(this, o);
+                if (distanceToActor < closestTargetDistance){
+                    targetPlayer = o;
+                    closestTargetDis = distanceToActor;
+                }
+            }
+            setLocation(targetPlayer.getX(), targetPlayer.getY());
+            
         }
-        return false;
     }
 }

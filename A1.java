@@ -24,6 +24,7 @@ public class A1 extends SchoolWorld
     }
     
     public void act(){
+        super.act();
         if(fisho.touchP(right)){
             fisho.setLocation(fisho.getX() -100, fisho.getY());
             if(wManager.checkIfCreated("A2")){
