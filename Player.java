@@ -27,7 +27,7 @@ public class Player extends Entity
     public void act()
     {
         move();
-        poop();
+        clear();
         dropOff();
         if(timer.millisElapsed() >= Constants.PICKUP_COOLDOWN){
             pickUp();
@@ -40,24 +40,18 @@ public class Player extends Entity
     private void move(){
         int pWidth = getImage().getWidth()/2;
         int pHeight = getImage().getHeight()/2;
-        
-        // if(Greenfoot.isKeyDown("a") && !checkWall(-pWidth - speed,0)){
-            // setLocation(getX()-speed,getY());
-        // }
-        // if(Greenfoot.isKeyDown("d") && !checkWall(pWidth + speed,0)){
-            // setLocation(getX()+speed,getY());
-        // }
-        // if(Greenfoot.isKeyDown("w") && !checkWall(0, -pHeight - speed)){
-            // setLocation(getX(),getY()-speed);
-        // }
-        // if(Greenfoot.isKeyDown("s") && !checkWall(0, pHeight + speed)){
-            // setLocation(getX(),getY()+speed);
-        // }
     } 
-    public void poop(){
-        if(Greenfoot.isKeyDown("k")){
-           // getWorld().addObject(new Wall(20,20), getX(), getY());
-        }
+    public void clear(){
+         if(Greenfoot.isKeyDown("k")){
+            tempWorld world = (tempWorld)getWorld();
+            Inventory bunkerInventory = world.getShelter().getInventory();
+            System.out.println(bunkerInventory);
+            for(Item i: handSlots.getStorage()){
+                bunkerInventory.getStorage().add(i);
+            }
+            handSlots.getStorage().clear();
+            handSlots.clearWeight();
+         }
     }
     public double getDistance(Actor actor){
         return Math.hypot(Math.abs(actor.getX() - getX()), Math.abs(actor.getY() - getY()));
@@ -81,19 +75,24 @@ public class Player extends Entity
                     }
                 }
                 handSlots.getStorage().add(currentItem);
+                handSlots.addWeight(currentItem.getWeight());
+                
+                tempWorld world = (tempWorld)getWorld();
+                world.getShelter().getInventory().getStorage().add(currentItem);
                 timer.mark();
                 getWorld().removeObject(currentItem);
             }
         }
     }
     public void dropOff(){
-        if(isTouching(ResourceScramble.class) && Greenfoot.isKeyDown("e")){
-            ResourceScramble bunker = (ResourceScramble)getOneIntersectingObject(ResourceScramble.class);
+        if(isTouching(Shelter.class) && Greenfoot.isKeyDown("e")){
+            Shelter bunker = (Shelter)getOneIntersectingObject(Shelter.class);
             Inventory bunkerInventory = bunker.getInventory();
             for(Item i: handSlots.getStorage()){
                 bunkerInventory.getStorage().add(i);
             }
             handSlots.getStorage().clear();
+            handSlots.clearWeight();
         }
     }
     public boolean checkWall(int x, int y){

@@ -6,10 +6,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class ResourceScramble extends Tile
+public class Shelter extends Tile
 {
     private Inventory bunker;
-    public ResourceScramble(){
+    public Shelter(){
         super();
         bunker = new Inventory();
     }

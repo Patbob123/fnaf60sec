@@ -11,7 +11,8 @@ public class tempWorld extends World
     private Viewport vp;
     private MapArray ma;
     private Player p;
-    
+    private Timer gameTimer;
+    private Shelter bunker;
     public tempWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -23,7 +24,13 @@ public class tempWorld extends World
         p = new Player();
         addObject(p, Constants.WW/2, Constants.WH/2);
         
-        setPaintOrder(Player.class);
+        
+        setPaintOrder(Player.class, Timer.class, Inventory.class);
+        gameTimer = new Timer(60);
+        addObject(gameTimer,100,100);
+        
+        bunker = new Shelter();
+        addObject(bunker, 500,300);
     }
     public void act(){
         
@@ -40,12 +47,18 @@ public class tempWorld extends World
             if(!p.checkWall(10, 0)) vp.move(10, 0);
         }
         
+        if(gameTimer.getTime() > 0){
+            Greenfoot.setWorld(new Crossroads());
+        }
     }
     public MapArray getMap(){
         return ma;
     }
     public boolean checkPlayer(int x, int y){
         return getObjectsAt(x, y, Player.class).size()>0;
+    }
+    public Shelter getShelter(){
+        return bunker;
     }
 }
 
