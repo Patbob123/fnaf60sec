@@ -11,6 +11,7 @@ public class Shelter extends Tile
     private Inventory bunker;
     public Shelter(){
         super();
+        symbol = "#"; 
         bunker = new Inventory();
     }
     public Inventory getInventory(){

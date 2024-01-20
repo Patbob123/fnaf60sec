@@ -39,7 +39,7 @@ public class Inventory
         return storage;
     }
     public String toString(){
-        Item[] array = storage.toArray(new Item[storage.size()]);
-        return Arrays.toString(array);
+        //Item[] array = storage.toArray(new Item[storage.size()]);
+        return storage.toString();
     }
 }

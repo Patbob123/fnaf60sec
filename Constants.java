@@ -21,6 +21,16 @@ public class Constants
             e.printStackTrace(); // Handle the exception according to your needs
         }
     }};
+    public static final HashMap<String, Class> tileHash = new HashMap<>(){{
+        try {
+            put("#", Class.forName("Shelter"));
+            put("W", Class.forName("Wall"));
+            put("-", Class.forName("Floor"));
+            
+        }catch (ClassNotFoundException e) {
+            e.printStackTrace(); // Handle the exception according to your needs
+        }
+    }};
     public Constants()
     {
     }

@@ -28,9 +28,14 @@ public class Player extends Entity
     {
         move();
         clear();
-        dropOff();
         if(timer.millisElapsed() >= Constants.PICKUP_COOLDOWN){
-            pickUp();
+            if(Greenfoot.isKeyDown("e")){
+                if(isTouching(Shelter.class)){
+                    dropOff();
+                }else{
+                    pickUp();
+                }
+            }
         }
     }
     protected void addedToWorld(World world){
@@ -57,7 +62,6 @@ public class Player extends Entity
         return Math.hypot(Math.abs(actor.getX() - getX()), Math.abs(actor.getY() - getY()));
     }
     public void pickUp(){
-        if(Greenfoot.isKeyDown("e")){
             if(handSlots.isEmpty()){
                 ArrayList<Item> nearbyObjects = (ArrayList<Item>)getObjectsInRange(100, Item.class);
     
@@ -82,10 +86,9 @@ public class Player extends Entity
                 timer.mark();
                 getWorld().removeObject(currentItem);
             }
-        }
+        
     }
     public void dropOff(){
-        if(isTouching(Shelter.class) && Greenfoot.isKeyDown("e")){
             Shelter bunker = (Shelter)getOneIntersectingObject(Shelter.class);
             Inventory bunkerInventory = bunker.getInventory();
             for(Item i: handSlots.getStorage()){
@@ -93,7 +96,7 @@ public class Player extends Entity
             }
             handSlots.getStorage().clear();
             handSlots.clearWeight();
-        }
+        
     }
     public boolean checkWall(int x, int y){
         return  collider.intersectWall(x,y);

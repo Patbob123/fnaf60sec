@@ -24,6 +24,9 @@ public class MapArray
                 if(Greenfoot.getRandomNumber(10)==0&&i!=0&&j!=0){
                     type = "W";
                 }
+                if(Greenfoot.getRandomNumber(10)==0){
+                    type = "#";
+                }
                 map[i][j] = createTile(type);
             }
         }
@@ -123,13 +126,15 @@ public class MapArray
         }
     }
      public Tile createTile(String type){
-        switch(type){
-            case "W":
-                return new Wall();
-            default:
-                return new Floor();
-                
+         try{
+             System.out.println((Tile)Constants.tileHash.get(type).newInstance());
+            return (Tile)Constants.tileHash.get(type).newInstance();
+        }catch(InstantiationException e){
+            
+        }catch(IllegalAccessException e){
+            
         }
+        return new Floor();
     }
     public Tile[][] getTiles(){
         return map;
