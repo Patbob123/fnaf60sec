@@ -27,7 +27,7 @@ public class Player extends Entity
     public void act()
     {
         move();
-        poop();
+        clear();
         dropOff();
         if(timer.millisElapsed() >= Constants.PICKUP_COOLDOWN){
             pickUp();
@@ -40,23 +40,10 @@ public class Player extends Entity
     private void move(){
         int pWidth = getImage().getWidth()/2;
         int pHeight = getImage().getHeight()/2;
-        
-        // if(Greenfoot.isKeyDown("a") && !checkWall(-pWidth - speed,0)){
-            // setLocation(getX()-speed,getY());
-        // }
-        // if(Greenfoot.isKeyDown("d") && !checkWall(pWidth + speed,0)){
-            // setLocation(getX()+speed,getY());
-        // }
-        // if(Greenfoot.isKeyDown("w") && !checkWall(0, -pHeight - speed)){
-            // setLocation(getX(),getY()-speed);
-        // }
-        // if(Greenfoot.isKeyDown("s") && !checkWall(0, pHeight + speed)){
-            // setLocation(getX(),getY()+speed);
-        // }
     } 
-    public void poop(){
+    public void clear(){
         if(Greenfoot.isKeyDown("k")){
-           // getWorld().addObject(new Wall(20,20), getX(), getY());
+           handSlots.clearWeight();
         }
     }
     public double getDistance(Actor actor){
@@ -81,6 +68,7 @@ public class Player extends Entity
                     }
                 }
                 handSlots.getStorage().add(currentItem);
+                handSlots.addWeight(currentItem.getWeight());
                 timer.mark();
                 getWorld().removeObject(currentItem);
             }
@@ -94,6 +82,7 @@ public class Player extends Entity
                 bunkerInventory.getStorage().add(i);
             }
             handSlots.getStorage().clear();
+            handSlots.clearWeight();
         }
     }
     public boolean checkWall(int x, int y){
