@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 /**
  * Write a description of class Character here.
@@ -27,7 +28,7 @@ public class Player extends Entity
     }
     public void act()
     {
-        move();
+        z_sortAround();
         clear();
         if(timer.millisElapsed() >= Constants.PICKUP_COOLDOWN){
             if(Greenfoot.isKeyDown("e")){
@@ -43,10 +44,30 @@ public class Player extends Entity
         world.addObject(collider, getX(), getY());
     }
     int speed = 10;
-    private void move(){
-        int pWidth = getImage().getWidth()/2;
-        int pHeight = getImage().getHeight()/2;
-    } 
+    private void z_sortAround(){
+        World w = getWorld();
+        int curX = getX();
+        int curY = getY();
+        PriorityQueue <Actor> pq = new PriorityQueue <>((a,b)->b.getY()+b.getImage().getHeight()/2-a.getY()+a.getImage().getHeight()/2);
+        for(Actor a: getIntersectingObjects(SuperSmoothMover.class)){
+            if(a==(null)) continue;
+            if(a.toString().equals("W"))pq.add(a);
+        }
+        System.out.println(pq);
+        for(Actor a: pq){
+            int x = a.getX();
+            int y = a.getY();
+            System.out.println((curY+getImage().getHeight()/2)+" "+y);
+            System.out.println(y<(curY+getImage().getHeight()/2));
+            if(y>(curY+getImage().getHeight()/2)){
+                System.out.println("AS"+" "+(curY+getImage().getHeight()/2));
+                w.removeObject(this);
+                //w.addObject(this, curX, curY);
+            }
+            w.removeObject(a);
+            w.addObject(a, x, y);
+        }
+    }
     public void clear(){
          if(Greenfoot.isKeyDown("k")){
             tempWorld world = (tempWorld)getWorld();
