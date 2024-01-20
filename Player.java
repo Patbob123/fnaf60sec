@@ -42,9 +42,16 @@ public class Player extends Entity
         int pHeight = getImage().getHeight()/2;
     } 
     public void clear(){
-        if(Greenfoot.isKeyDown("k")){
-           handSlots.clearWeight();
-        }
+         if(Greenfoot.isKeyDown("k")){
+            tempWorld world = (tempWorld)getWorld();
+            Inventory bunkerInventory = world.getShelter().getInventory();
+            System.out.println(bunkerInventory);
+            for(Item i: handSlots.getStorage()){
+                bunkerInventory.getStorage().add(i);
+            }
+            handSlots.getStorage().clear();
+            handSlots.clearWeight();
+         }
     }
     public double getDistance(Actor actor){
         return Math.hypot(Math.abs(actor.getX() - getX()), Math.abs(actor.getY() - getY()));
@@ -69,14 +76,17 @@ public class Player extends Entity
                 }
                 handSlots.getStorage().add(currentItem);
                 handSlots.addWeight(currentItem.getWeight());
+                
+                tempWorld world = (tempWorld)getWorld();
+                world.getShelter().getInventory().getStorage().add(currentItem);
                 timer.mark();
                 getWorld().removeObject(currentItem);
             }
         }
     }
     public void dropOff(){
-        if(isTouching(ResourceScramble.class) && Greenfoot.isKeyDown("e")){
-            ResourceScramble bunker = (ResourceScramble)getOneIntersectingObject(ResourceScramble.class);
+        if(isTouching(Shelter.class) && Greenfoot.isKeyDown("e")){
+            Shelter bunker = (Shelter)getOneIntersectingObject(Shelter.class);
             Inventory bunkerInventory = bunker.getInventory();
             for(Item i: handSlots.getStorage()){
                 bunkerInventory.getStorage().add(i);

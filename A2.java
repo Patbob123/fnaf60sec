@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class A2 extends SchoolWorld
 {
-    private ResourceScramble bunker;
+    private Shelter bunker;
     /**
      * Constructor for objects of class A2.
      * 

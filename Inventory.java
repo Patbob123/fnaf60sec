@@ -17,11 +17,7 @@ public class Inventory
         storage = new ArrayList<>(); 
         totalWeight = 0;
     }
-    
-    public void pickUp(){
-        
-    }
-    public void dropOff(){
+    public void act(){
         
     }
     public boolean isEmpty(){
