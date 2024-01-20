@@ -10,7 +10,7 @@ public class Item extends Tile
 {
     int weight;
     public Item(){
-        
+        symbol = "$";
     }
     public void act()
     {

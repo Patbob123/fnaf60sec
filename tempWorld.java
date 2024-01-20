@@ -25,7 +25,7 @@ public class tempWorld extends World
         addObject(p, Constants.WW/2, Constants.WH/2);
         
         
-        setPaintOrder(Player.class, Timer.class, Inventory.class);
+        setPaintOrder(SuperSmoothMover.class, Floor.class, Timer.class, Inventory.class);
         gameTimer = new Timer(60);
         addObject(gameTimer,100,100);
         

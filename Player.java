@@ -48,24 +48,33 @@ public class Player extends Entity
         World w = getWorld();
         int curX = getX();
         int curY = getY();
-        PriorityQueue <Actor> pq = new PriorityQueue <>((a,b)->b.getY()+b.getImage().getHeight()/2-a.getY()+a.getImage().getHeight()/2);
+        int colY = getCollider().getY();
+        boolean k = false;
+        PriorityQueue <Actor> pq = new PriorityQueue <>((a,b) -> a.getY()-b.getY());
         for(Actor a: getIntersectingObjects(SuperSmoothMover.class)){
             if(a==(null)) continue;
             if(a.toString().equals("W"))pq.add(a);
         }
-        System.out.println(pq);
-        for(Actor a: pq){
+        System.out.println();
+        while(!pq.isEmpty()){
+              
+            Actor a = pq.poll();
+            
             int x = a.getX();
             int y = a.getY();
-            System.out.println((curY+getImage().getHeight()/2)+" "+y);
-            System.out.println(y<(curY+getImage().getHeight()/2));
-            if(y>(curY+getImage().getHeight()/2)){
-                System.out.println("AS"+" "+(curY+getImage().getHeight()/2));
+
+            if(y>colY&&!k){
+                k = true;
                 w.removeObject(this);
-                //w.addObject(this, curX, curY);
+                w.addObject(this, curX, curY);
             }
+            
             w.removeObject(a);
             w.addObject(a, x, y);
+        }
+        if(!k){
+            w.removeObject(this);
+            w.addObject(this, curX, curY);
         }
     }
     public void clear(){
@@ -131,6 +140,9 @@ public class Player extends Entity
     }
     public boolean touchP(PressurePlate p){
         return intersects(p);
+    }
+    public Hitbox getCollider(){
+        return collider;
     }
     
 }
