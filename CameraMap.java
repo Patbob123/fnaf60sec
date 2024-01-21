@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class CameraMap extends Actor
 {
-    private static GreenfootImage camMap;
-    
+    private GreenfootImage camMap;
+    private GreenfootImage cam;
     /**
      * Constructor for only the background of the main camera system
      * 
@@ -21,11 +21,6 @@ public class CameraMap extends Actor
         setImage(camMap);
     }
     
-    /**
-     * Constructor for the singular cameras
-     */
-    public CameraMap(int stage, boolean enemyExists) {
-        
-    }
+    
 }
     

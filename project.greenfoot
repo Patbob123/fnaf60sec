@@ -213,6 +213,7 @@ dependency8.type=UsesDependency
 dependency9.from=A2
 dependency9.to=Shelter
 dependency9.type=UsesDependency
+<<<<<<< Updated upstream
 editor.fx.0.height=1096
 editor.fx.0.width=1936
 editor.fx.0.x=-1928
@@ -220,6 +221,22 @@ editor.fx.0.y=-8
 height=1096
 package.numDependencies=71
 package.numTargets=44
+=======
+editor.fx.0.height=739
+editor.fx.0.width=892
+<<<<<<< Updated upstream
+editor.fx.0.x=312
+editor.fx.0.y=54
+height=916
+package.numDependencies=68
+=======
+editor.fx.0.x=882
+editor.fx.0.y=118
+height=1048
+package.numDependencies=65
+>>>>>>> Stashed changes
+package.numTargets=43
+>>>>>>> Stashed changes
 project.charset=windows-1252
 publish.hasSource=false
 publish.locked=true
@@ -305,7 +322,15 @@ target18.width=120
 target18.x=0
 target18.y=0
 target19.height=70
+<<<<<<< Updated upstream
 target19.name=Battery
+=======
+<<<<<<< Updated upstream
+target19.name=PressurePlate
+=======
+target19.name=Battery
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 target19.showInterface=false
 target19.type=ClassTarget
 target19.width=120
@@ -319,42 +344,90 @@ target2.width=120
 target2.x=0
 target2.y=0
 target20.height=70
+<<<<<<< Updated upstream
 target20.name=Enemy
+=======
+<<<<<<< Updated upstream
+target20.name=Battery
+=======
+target20.name=Enemy
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 target20.showInterface=false
 target20.type=ClassTarget
 target20.width=120
 target20.x=0
 target20.y=0
 target21.height=70
+<<<<<<< Updated upstream
 target21.name=CameraMap
+=======
+<<<<<<< Updated upstream
+target21.name=Enemy
+=======
+target21.name=CameraMap
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 target21.showInterface=false
 target21.type=ClassTarget
 target21.width=120
 target21.x=0
 target21.y=0
 target22.height=70
+<<<<<<< Updated upstream
 target22.name=startWorld
+=======
+<<<<<<< Updated upstream
+target22.name=CameraMap
+=======
+target22.name=startWorld
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 target22.showInterface=false
 target22.type=ClassTarget
 target22.width=120
 target22.x=0
 target22.y=0
 target23.height=70
+<<<<<<< Updated upstream
 target23.name=Shelter
+=======
+<<<<<<< Updated upstream
+target23.name=startWorld
+=======
+target23.name=Shelter
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 target23.showInterface=false
 target23.type=ClassTarget
 target23.width=120
 target23.x=0
 target23.y=0
 target24.height=70
+<<<<<<< Updated upstream
 target24.name=Camera
+=======
+<<<<<<< Updated upstream
+target24.name=Shelter
+=======
+target24.name=Camera
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 target24.showInterface=false
 target24.type=ClassTarget
 target24.width=120
 target24.x=0
 target24.y=0
 target25.height=70
+<<<<<<< Updated upstream
 target25.name=Food
+=======
+<<<<<<< Updated upstream
+target25.name=Camera
+=======
+target25.name=ResourceScramble
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 target25.showInterface=false
 target25.type=ClassTarget
 target25.width=120
@@ -542,8 +615,18 @@ target9.type=ClassTarget
 target9.width=120
 target9.x=0
 target9.y=0
+<<<<<<< Updated upstream
 version=3.1.0
+<<<<<<< Updated upstream
 width=1936
 world.lastInstantiated=GameRoom
+=======
+width=1456
+=======
+version=3.0.0
+width=2576
+>>>>>>> Stashed changes
+world.lastInstantiated=tempWorld
+>>>>>>> Stashed changes
 xPosition=0
 yPosition=0

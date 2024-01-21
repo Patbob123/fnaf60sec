@@ -50,7 +50,28 @@ public class EnemyManager extends Actor
     public int getBgLocant() {
         return bgLocantCounter;
     }
-    
+    public boolean getBgStage(int stageNum){
+        if(stageNum == 1) {
+            return bgStageOne;
+        }
+        else if(stageNum == 2) {
+            return bgStageTwo;
+        }
+        else {
+            return bgStageThree;
+        }
+    }
+    public boolean getDStage(int stageNum){
+        if(stageNum == 4) {
+            return dStageOne;
+        }
+        else if(stageNum == 5) {
+            return dStageTwo;
+        }
+        else {
+            return dStageThree;
+        }
+    }
     /**
      * Act - do whatever the EnemyManager wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -93,6 +114,8 @@ public class EnemyManager extends Actor
             dLocantThreeTimer--;
             if(dLocantThreeTimer == 0 && ((GameRoom)getWorld()).getRightDoor()) {
                 dLocantCounter = 1;
+                dStageThree = false;
+                dStageOne = true;
             }
             else {
                 ((GameRoom)getWorld()).setAlive(false);
@@ -102,6 +125,8 @@ public class EnemyManager extends Actor
             bgLocantThreeTimer--;
             if(bgLocantThreeTimer == 0 && ((GameRoom)getWorld()).getLeftDoor()) {
                 bgLocantCounter = 1;
+                bgStageThree = false;
+                bgStageOne = true;
             }
             else {
                 ((GameRoom)getWorld()).setAlive(false);

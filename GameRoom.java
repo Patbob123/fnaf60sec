@@ -30,6 +30,7 @@ public class GameRoom extends World {
     private Button cam7;
     private int numClicks = 2;
     private CameraMap camMap;
+    private Camera c1, c1Empty, c2, c2Empty, c3, c3Empty, c4, c4Empty, c5, c5Empty, c6, c6Empty, c7, c7Empty;
     private Tile tiles[][];
     private BatteryBar batteryBar;
     private EnemyManager em;
@@ -43,8 +44,24 @@ public class GameRoom extends World {
         inCameras = false;
         leftDoorClosed = false;
         rightDoorClosed = false;
+        
         GreenfootImage backgroundImage = new GreenfootImage("businessroom.png");
         camMap = new CameraMap("translucentCamMap.PNG");
+        c1 = new Camera(1, true, "baby2.png");
+        c1Empty = new Camera(1, false, "baby2.png");
+        c2 = new Camera(1, true, "baby2.png");
+        c2Empty = new Camera(1, false, "baby2.png");
+        c3 = new Camera(1, true, "baby2.png");
+        c3Empty = new Camera(1, false, "baby2.png");
+        c4 = new Camera(1, true, "baby2.png");
+        c4Empty = new Camera(1, false, "baby2.png");
+        c5 = new Camera(1, true, "baby2.png");
+        c5Empty = new Camera(1, false, "baby2.png");
+        c6 = new Camera(1, true, "baby2.png");
+        c6Empty = new Camera(1, false, "baby2.png");
+        c7 = new Camera(1, true, "baby2.png");
+        c7Empty = new Camera(1, false, "baby2.png");
+        
         backgroundX = 100; //to set at middle
         setBackground(backgroundImage);
         updateBackgroundPosition();
@@ -59,7 +76,7 @@ public class GameRoom extends World {
         addObject(batteryBar, 1101, 27);
     
         map = new Button("+", 40);
-        addObject(map, 1057, 36);
+        addObject(map, 915, 734);
         
         backgroundSpeed = 96;
         backgroundX = (backgroundImage.getWidth() - getWidth()) / 2;
@@ -83,6 +100,7 @@ public class GameRoom extends World {
                 map.updateMe("-");
                 generateCamMap();
                 numClicks--;
+                inCameras = true;
             }else{
                 map.updateMe("+");
                 numClicks++;
@@ -94,11 +112,86 @@ public class GameRoom extends World {
                 removeObject(cam6);
                 removeObject(cam7);
                 removeObject(camMap);
+                inCameras = false;
             }
         }
         
-        
+        //black guy cameras
+        if(Greenfoot.mousePressed(cam1)) {
+            if(em.getBgLocant() == 1) {
+                if(em.getBgStage(1)){
+                    addObject(c1, getWidth()/2, getHeight()/2);
+                }
+                else if(!em.getBgStage(1)){
+                    addObject(c1Empty, getWidth()/2, getHeight()/2);
+                }
+            }
+        }
+        if(Greenfoot.mousePressed(cam2)) {
+            if(em.getBgLocant() == 2) {
+                if(em.getBgStage(1)){
+                    addObject(c2, getWidth()/2, getHeight()/2);
+                }
+                else if(!em.getBgStage(2)){
+                    addObject(c2Empty, getWidth()/2, getHeight()/2);
+                }
+            }
+        }
+        if(Greenfoot.mousePressed(cam3)) {
+            if(em.getBgLocant() == 3) {
+                if(em.getBgStage(3)){
+                    addObject(c3, getWidth()/2, getHeight()/2);
+                }
+                else if(!em.getBgStage(3)){
+                    addObject(c3Empty, getWidth()/2, getHeight()/2);
+                }
+            }
+        }
 
+        //for daniel cameras
+        if(Greenfoot.mousePressed(cam4)) {
+            if(em.getDLocant() == 4) {
+                if(em.getDStage(1)){
+                    addObject(c4, getWidth()/2, getHeight()/2);
+                }
+                else if(!em.getDStage(1)){
+                    addObject(c4Empty, getWidth()/2, getHeight()/2);
+                }
+            }
+        }
+        if(Greenfoot.mousePressed(cam5)) {
+            if(em.getDLocant() == 5) {
+                if(em.getDStage(5)){
+                    addObject(c5, getWidth()/2, getHeight()/2);
+                }
+                else if(!em.getDStage(5)){
+                    addObject(c5Empty, getWidth()/2, getHeight()/2);
+                }
+            }
+        }
+        if(Greenfoot.mousePressed(cam6)) {
+            if(em.getDLocant() == 6) {
+                if(em.getDStage(6)){
+                    addObject(c3, getWidth()/2, getHeight()/2);
+                }
+                else if(!em.getDStage(6)){
+                    addObject(c6Empty, getWidth()/2, getHeight()/2);
+                }
+            }
+        }
+        
+        //for daniel??
+        if(Greenfoot.mousePressed(cam7)) {
+            if(em.getDLocant() == 7) {
+                if(em.getDStage(7)){
+                    addObject(c7, getWidth()/2, getHeight()/2);
+                }
+                else if(!em.getDStage(7)){
+                    addObject(c7Empty, getWidth()/2, getHeight()/2);
+                }
+            }
+        }
+        
         if(timer % 300 == 0) {
             battery-=10; //temporary. is supposed to be 1
             batteryBar.updateBar(battery);
