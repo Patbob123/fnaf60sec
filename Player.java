@@ -12,10 +12,11 @@ public class Player extends Entity
 {   
     private Hitbox collider;
     private Inventory handSlots;
+    private ArrayList<String> itemChest;
     private SimpleTimer timer;
     public Player(){
-        
         handSlots = new Inventory();
+        itemChest = new ArrayList<>();
         timer = new SimpleTimer();
         setIcon("tempson.png");
         collider = new Hitbox(getImage().getWidth(),getImage().getHeight()/2);
@@ -29,7 +30,7 @@ public class Player extends Entity
     public void act()
     {
         z_sortAround();
-        clear();
+
         if(timer.millisElapsed() >= Constants.PICKUP_COOLDOWN){
             if(Greenfoot.isKeyDown("e")){
                 if(isTouching(Shelter.class)){
@@ -37,6 +38,9 @@ public class Player extends Entity
                 }else{
                     pickUp();
                 }
+            }
+            if(Greenfoot.isKeyDown("i")){
+                System.out.println(itemChest.toString());
             }
         }
     }
@@ -77,64 +81,66 @@ public class Player extends Entity
             w.addObject(this, curX, curY);
         }
     }
-    public void clear(){
-         if(Greenfoot.isKeyDown("k")){
-            tempWorld world = (tempWorld)getWorld();
-            Inventory bunkerInventory = world.getShelter().getInventory();
-            System.out.println(bunkerInventory);
-            for(Item i: handSlots.getStorage()){
-                bunkerInventory.getStorage().add(i);
-            }
-            handSlots.getStorage().clear();
-            handSlots.clearWeight();
-         }
-    }
     public double getDistance(Actor actor){
         return Math.hypot(Math.abs(actor.getX() - getX()), Math.abs(actor.getY() - getY()));
     }
     public void pickUp(){
             if(handSlots.isEmpty()){
                 ArrayList<Item> nearbyObjects = (ArrayList<Item>)getObjectsInRange(100, Item.class);
+                if(nearbyObjects.size() > 0){
     
-                Item nearestItem = null;
-                Item currentItem = null;
-                double nearestDistance = 0;
-                double currentDistance;
-                
-                for(int i = 0; i< nearbyObjects.size(); i++){
-                    currentItem = nearbyObjects.get(i);
-                    currentDistance = getDistance(currentItem);
-                    if(currentDistance < nearestDistance){
-                        nearestItem = currentItem;
-                        nearestDistance = currentDistance;
+                    Item nearestItem = null;
+                    Item currentItem = null;
+                    double nearestDistance = 0;
+                    double currentDistance;
+                    
+                    for(int i = 0; i< nearbyObjects.size(); i++){
+                        currentItem = nearbyObjects.get(i);
+                        currentDistance = getDistance(currentItem);
+                        if(currentDistance < nearestDistance){
+                            nearestItem = currentItem;
+                            nearestDistance = currentDistance;
+                        }
                     }
+                    
+                    String item = stringConverter(currentItem);
+                    
+                    handSlots.addWeight(currentItem.getWeight());
+                    handSlots.getStorage().add(item);
+                                    
+                    timer.mark();
+                    getWorld().removeObject(currentItem);
                 }
-                handSlots.getStorage().add(currentItem);
-                handSlots.addWeight(currentItem.getWeight());
-                
-                tempWorld world = (tempWorld)getWorld();
-                world.getShelter().getInventory().getStorage().add(currentItem);
-                timer.mark();
-                getWorld().removeObject(currentItem);
             }
-        
     }
     public void dropOff(){
-            Shelter bunker = (Shelter)getOneIntersectingObject(Shelter.class);
-            Inventory bunkerInventory = bunker.getInventory();
-            for(Item i: handSlots.getStorage()){
-                bunkerInventory.getStorage().add(i);
+            for(String item: handSlots.getStorage()){
+                itemChest.add(item);
             }
             handSlots.getStorage().clear();
             handSlots.clearWeight();
-        
     }
+
     public boolean checkWall(int x, int y){
         if(!collider.intersectWall(x,y)){
             return false;
         }
         return collider.intersectWall(10,0)||collider.intersectWall(0,10)||collider.intersectWall(-10,0)||collider.intersectWall(0,-10);
-    }   
+    }
+    public String stringConverter(Item item){
+        if(item instanceof Food){
+            return "Food";
+        }
+        else if(item instanceof Water){
+            return "Water";
+        }
+        else if(item instanceof Battery){
+            return "Battery";
+        }
+        else{
+            return "None";
+        }
+    }
     public boolean onPressurePlate(){
         return isTouching(PressurePlate.class);
     }

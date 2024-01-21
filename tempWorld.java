@@ -25,12 +25,14 @@ public class tempWorld extends World
         addObject(p, Constants.WW/2, Constants.WH/2);
         
         
-        setPaintOrder(SuperSmoothMover.class, Floor.class, Timer.class, Inventory.class);
+        setPaintOrder(SuperSmoothMover.class,Timer.class, Floor.class, Inventory.class);
         gameTimer = new Timer(60);
         addObject(gameTimer,100,100);
         
         bunker = new Shelter();
         addObject(bunker, 500,300);
+        
+        vp.move(0,0);
     }
     public void act(){
         

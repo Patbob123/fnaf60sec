@@ -10,7 +10,7 @@ import java.util.Arrays;
  */
 public class Inventory  
 {
-    private ArrayList<Item> storage; 
+    private ArrayList<String> storage; 
     private int totalWeight;
     public Inventory()
     {
@@ -35,7 +35,7 @@ public class Inventory
     public int getTotalWeight(){
         return totalWeight;
     }
-    public ArrayList<Item> getStorage(){
+    public ArrayList<String> getStorage(){
         return storage;
     }
     public String toString(){
