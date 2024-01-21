@@ -15,6 +15,8 @@ public class tempWorld extends World
     private Timer gameTimer;
     private Shelter bunker;
     private Shadow shadow;
+    private Bar timerBar;
+    
     public tempWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -27,7 +29,7 @@ public class tempWorld extends World
         addObject(p, Constants.WW/2, Constants.WH/2);
         
         
-        setPaintOrder(Timer.class, Display.class, Effect.class, SuperSmoothMover.class,Floor.class, Inventory.class);
+        setPaintOrder(Timer.class, Bar.class, Display.class, Effect.class, SuperSmoothMover.class,Floor.class, Inventory.class);
         gameTimer = new Timer(60);
         addObject(gameTimer,100,100);
         
@@ -37,9 +39,63 @@ public class tempWorld extends World
         shadow = new Shadow();
         addObject(shadow, Constants.WW/2,Constants.WH/2);
         
+        timerBar = new Bar(3600, "clockIcon.png", new Color(55,55,255));
+        addObject(timerBar, 200, 70);
         //vp.move(0,0);
     }
     public void act(){
+        inputMove();
+        if(gameTimer.getTime() > 0){
+            Greenfoot.setWorld(new Crossroads());
+        }
+        timerBar.refresh(-gameTimer.getAct());
+    }
+    public MapArray getMap(){
+        return ma;
+    }
+    public Viewport getVP(){
+        return vp;
+    }
+    public Shadow getShadow(){
+        return shadow;
+    }
+    public boolean checkPlayer(int x, int y){
+        return getObjectsAt(x, y, Player.class).size()>0;
+    }
+    public Shelter getShelter(){
+        return bunker;
+    }
+    
+    public void displayHandSlots(){
+        ArrayList<Item> handInventory = p.getHandSlots().getStorage();
+        for(Display d: getObjects(Display.class)){
+            removeObject(d);
+        }
+        int curIndex = 0;
+        for(int i = 0; i < handInventory.size(); i++){
+            Item item = handInventory.get(i);
+            for(int j = 0; j < item.getWeight(); j++){
+                GreenfootImage image = new GreenfootImage(item+".png");
+                if(j!=0) image.setTransparency(80);
+                addObject(new Display(image), 200*curIndex + 100, 500);
+                curIndex++;
+            }
+
+        }
+        for(int i = curIndex; i < 4; i++){
+            GreenfootImage image = new GreenfootImage("hand.png");
+            addObject(new Display(image),200*i + 100,500);
+        }
+    }
+    public String [] arrayListToArray(ArrayList<String> array){
+        Object[] tempArray = array.toArray();
+        String [] newArray = new String [tempArray.length];
+        for(int i = 0; i < tempArray.length; i++){
+            newArray[i] = (String)tempArray[i];
+        }
+        return newArray;
+    }
+    public void inputMove(){
         double moveX = 0;
         double moveY = 0;
         if(Greenfoot.isKeyDown("a")){
@@ -91,54 +147,6 @@ public class tempWorld extends World
         }else if(moveX == 0 && moveY == 0){
             p.setCurFrame(1, 0);
         }
-        if(gameTimer.getTime() > 0){
-            Greenfoot.setWorld(new Crossroads());
-        }
-    }
-    public MapArray getMap(){
-        return ma;
-    }
-    public Viewport getVP(){
-        return vp;
-    }
-    public Shadow getShadow(){
-        return shadow;
-    }
-    public boolean checkPlayer(int x, int y){
-        return getObjectsAt(x, y, Player.class).size()>0;
-    }
-    public Shelter getShelter(){
-        return bunker;
-    }
-    
-    public void displayHandSlots(){
-        ArrayList<Item> handInventory = p.getHandSlots().getStorage();
-        for(Display d: getObjects(Display.class)){
-            removeObject(d);
-        }
-        int curIndex = 0;
-        for(int i = 0; i < handInventory.size(); i++){
-            Item item = handInventory.get(i);
-            for(int j = 0; j < item.getWeight(); j++){
-                GreenfootImage image = new GreenfootImage(item+".png");
-                if(j!=0) image.setTransparency(80);
-                addObject(new Display(image), 200*curIndex + 100, 500);
-                curIndex++;
-            }
-
-        }
-        for(int i = curIndex; i < 4; i++){
-            GreenfootImage image = new GreenfootImage("hand.png");
-            addObject(new Display(image),200*i + 100,500);
-        }
-    }
-    public String [] arrayListToArray(ArrayList<String> array){
-        Object[] tempArray = array.toArray();
-        String [] newArray = new String [tempArray.length];
-        for(int i = 0; i < tempArray.length; i++){
-            newArray[i] = (String)tempArray[i];
-        }
-        return newArray;
     }
 }
 

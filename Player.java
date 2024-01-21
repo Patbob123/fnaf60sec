@@ -96,10 +96,10 @@ public class Player extends Entity
         animate();
         if(timer.millisElapsed() >= Constants.PICKUP_COOLDOWN){
             if(Greenfoot.isKeyDown("e")){
-                if(isTouching(Shelter.class)){
-                    dropOff();
-                }else{
+                if(!isTouching(Shelter.class)){
                     pickUp();
+                }else{
+                    dropOff();
                 }
             }
             if(Greenfoot.isKeyDown("i")){
