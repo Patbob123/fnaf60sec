@@ -11,15 +11,28 @@ public class GameRoom extends World {
     private Wall wall2;
     private boolean inCameras;
     private boolean isAlive;
-    
+    private boolean leftDoorClosed;
+    private boolean rightDoorClosed;
     private int battery;
     private int maxBattery;
     
     private int actCounter;
     private int timer; 
     
-    private BatteryBar batteryBar;
+    //For cameras
+    private Button map;
+    private Button cam1;
+    private Button cam2;
+    private Button cam3;
+    private Button cam4;
+    private Button cam5;
+    private Button cam6;
+    private int numClicks = 2;
+    CameraMap camMap = new CameraMap();
     
+    private Tile tiles[][];
+    private BatteryBar batteryBar;
+    private EnemyManager em;
     /**
      * Constructor for GameRoom
      */
@@ -28,6 +41,8 @@ public class GameRoom extends World {
         actCounter = 0;
         timer = 21600; // 6 minutes
         inCameras = false;
+        leftDoorClosed = false;
+        rightDoorClosed = false;
         GreenfootImage backgroundImage = new GreenfootImage("businessroom.png");
         backgroundX = 100; //to set at middle
         setBackground(backgroundImage);
@@ -42,15 +57,48 @@ public class GameRoom extends World {
         batteryBar = new BatteryBar(battery);
         addObject(batteryBar, 1101, 27);
     
+        map = new Button("+", 40);
+        addObject(map, 1057, 36);
+        
         backgroundSpeed = 96;
         backgroundX = (backgroundImage.getWidth() - getWidth()) / 2;
         
-        setPaintOrder(BatteryBar.class);
+        em = new EnemyManager();
+        
+        setPaintOrder(Button.class, BatteryBar.class);
     }
     
     
     public void act() {
         timer--;
+        if(timer < 21300) { //spawn them after 30 seconds
+            em.spawnBg();
+            em.spawnDaniel();
+        }
+        
+        //to open and reopen the cameras
+        if (Greenfoot.mousePressed(map)){
+            //System.out.println(numClicks);
+            if(numClicks == 2){
+                map.updateMe("-");
+                generateCamMap();
+                numClicks--;
+                //System.out.println("expanded" + numClicks);
+            }else{
+                map.updateMe("+");
+                numClicks++;
+                removeObject(cam1);
+                removeObject(cam2);
+                removeObject(cam3);
+                removeObject(cam4);
+                removeObject(cam5);
+                removeObject(cam6);
+                removeObject(camMap);
+                //System.out.println("collapsed" + numClicks);
+            }
+        }
+        
+
         if(timer % 300 == 0) {
             battery-=10; //temporary. is supposed to be 1
             batteryBar.updateBar(battery);
@@ -112,7 +160,29 @@ public class GameRoom extends World {
         }
         
     }
+    /**
+     * Method to generate layout of cameras
+     */
+    public void generateCamMap(){
+        cam1 = new Button("CAM1", 20);
+        cam2 = new Button("CAM2", 20);
+        cam3 = new Button("CAM3", 20); 
+        cam4 = new Button("CAM4", 20);
+        cam5 = new Button("CAM5", 20);
+        cam6 = new Button("CAM6", 20);
 
+        addObject(camMap, 995, 79);
+
+        addObject(cam1, 995, 79);
+        addObject(cam2, 1057, 79);
+        addObject(cam3, 1119, 79);
+
+        addObject(cam4, 995, 114);
+        addObject(cam5, 1057, 114);
+        addObject(cam6, 1119, 114);
+
+    }
+    
     /**
      * Method to update the background 
      */
@@ -126,19 +196,23 @@ public class GameRoom extends World {
         setBackground(background);
     }
     
-    /**
-     * Get method for battery
-     */
-    public int getBattery() {
-        return battery;
-    }
+    
     /**
      * Set method for battery
      */
     public void setBattery(int battery) {
         this.battery = Math.max(0, Math.min(maxBattery, battery));
     }
+    public void setAlive(boolean alive) {
+        this.isAlive = alive;
+    }
     
+    public boolean getRightDoor() {
+        return rightDoorClosed;
+    }
+    public boolean getLeftDoor() {
+        return leftDoorClosed;
+    }
     /**
      * Gets if player is in cameras
      */
