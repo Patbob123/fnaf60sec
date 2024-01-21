@@ -13,12 +13,13 @@ public class Player extends Entity
     private Hitbox collider;
     private Inventory handSlots;
     private SimpleTimer timer;
+    private int speed;
     public Player(){
-        
+        speed = 10;
         handSlots = new Inventory();
         timer = new SimpleTimer();
         setIcon("tempson.png");
-        collider = new Hitbox(getImage().getWidth(),getImage().getHeight()/2);
+        collider = new Hitbox(getImage().getWidth()-speed,1);
     }
     public void setIcon(String imageUrl){
         GreenfootImage icon = new GreenfootImage(imageUrl);
@@ -43,7 +44,6 @@ public class Player extends Entity
     protected void addedToWorld(World world){
         world.addObject(collider, getX(), getY());
     }
-    int speed = 10;
     private void z_sortAround(){
         World w = getWorld();
         int curX = getX();
@@ -130,10 +130,7 @@ public class Player extends Entity
         
     }
     public boolean checkWall(int x, int y){
-        if(!collider.intersectWall(x,y)){
-            return false;
-        }
-        return collider.intersectWall(10,0)||collider.intersectWall(0,10)||collider.intersectWall(-10,0)||collider.intersectWall(0,-10);
+        return collider.intersectWall(x,y);
     }   
     public boolean onPressurePlate(){
         return isTouching(PressurePlate.class);
@@ -143,6 +140,9 @@ public class Player extends Entity
     }
     public Hitbox getCollider(){
         return collider;
+    }
+    public int getSpeed(){
+        return speed;
     }
     
 }

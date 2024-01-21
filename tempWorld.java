@@ -35,16 +35,16 @@ public class tempWorld extends World
     public void act(){
         
         if(Greenfoot.isKeyDown("a")){
-            if(!p.checkWall(-10, 0)) vp.move(-10, 0);
+            if(!p.checkWall(-p.getSpeed(), 0)) vp.move(-10, 0);
         }
         if(Greenfoot.isKeyDown("w")){
-            if(!p.checkWall(0, -10)) vp.move(0, -10);
+            if(!p.checkWall(0, -p.getSpeed())) vp.move(0, -10);
         } 
         if(Greenfoot.isKeyDown("s")){
-            if(!p.checkWall(0, 10)) vp.move(0, 10);
+            if(!p.checkWall(0, p.getSpeed())) vp.move(0, 10);
         } 
         if(Greenfoot.isKeyDown("d")){
-            if(!p.checkWall(10, 0)) vp.move(10, 0);
+            if(!p.checkWall(p.getSpeed(), 0)) vp.move(10, 0);
         }
         
         if(gameTimer.getTime() > 0){

@@ -25,10 +25,19 @@ public class Hitbox extends SuperSmoothMover
     
     }
     public boolean intersectWall(int x, int y){
-        if(getObjectsAtOffset((int)Math.signum(x)*width/2+x,(int)Math.signum(y)*height/2+y,Wall.class).size() > 0){
-            return true;
-        }
-        return false;
+        int curX = getX();
+        int curY = getY();
+        boolean touchingWall = false;
+        
+        setLocation(getX()+x, getY()+y);
+        if(isTouching(Wall.class)) touchingWall = true;
+        setLocation(getX()+width*Math.signum(x), getY()+10);
+        if(!isTouching(Wall.class)) touchingWall = false;
+        setLocation(getX()+width*Math.signum(x), getY()-20);
+        if(!isTouching(Wall.class)) touchingWall = false;
+        
+        setLocation(curX, curY);
+        return touchingWall;
     }
     public boolean intersect(Class c){
         return isTouching(c);
