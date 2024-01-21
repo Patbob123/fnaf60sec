@@ -9,7 +9,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Entity extends SuperSmoothMover
 {
     protected Hitbox collider;
+    private SimpleTimer timer;
+    protected boolean p2;
+    
     public Entity(){
+        
         
     }
 

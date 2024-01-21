@@ -15,10 +15,9 @@ public class Enemy extends Entity
     private ArrayList<Player> players;
     private Player targetPlayer;
     /**
-     * Three enemies
-     * 1. Z path
-     * 2. smoothly & silently follow the player, then suddennly teleport too the front of the player
-     * 3. go towards the player by teleporting intermittently
+     * Two enemies:
+     * A: Cam6, 2, 3
+     * B: Cam7, 4, 5, 1
      */
     private PriorityQueue<Coordinate> nextMoves;
 
