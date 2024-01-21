@@ -1,17 +1,18 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Food here.
+ * Write a description of class Display here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Food extends Item
+public class Display extends Actor
 {
-    public Food(){
-        weight = 1;
-        icon = new GreenfootImage("grapes.png");
-        setImage(icon);
+    GreenfootImage image;
+    public Display(GreenfootImage image){
+        this.image = image;
+        image.scale(100,100);
+        setImage(image);
     }
     public void act()
     {

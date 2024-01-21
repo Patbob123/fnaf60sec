@@ -8,7 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Item extends Tile
 {
-    int weight;
+    protected int weight;
+    protected GreenfootImage icon;
     public Item(){
         symbol = "$";
     }

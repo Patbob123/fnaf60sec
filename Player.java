@@ -111,21 +111,28 @@ public class Player extends Entity
                                     
                     timer.mark();
                     getWorld().removeObject(currentItem);
+                    
+                    updateHandDisplay();
                 }
             }
     }
+    
     public void dropOff(){
             for(String item: handSlots.getStorage()){
                 itemChest.add(item);
             }
             handSlots.getStorage().clear();
             handSlots.clearWeight();
+            updateHandDisplay();
     }
-
+    public void updateHandDisplay(){
+        tempWorld world = (tempWorld)getWorld();
+        world.displayHandSlots();
+    }
     public boolean checkWall(int x, int y){
         return collider.intersectWall(x,y);
     }   
-
+    
     public String stringConverter(Item item){
         if(item instanceof Food){
             return "Food";
@@ -152,5 +159,7 @@ public class Player extends Entity
     public int getSpeed(){
         return speed;
     }
-    
+    public Inventory getHandSlots(){
+        return handSlots;
+    }
 }
