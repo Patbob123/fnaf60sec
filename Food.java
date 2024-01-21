@@ -10,9 +10,14 @@ public class Food extends Item
 {
     public Food(){
         weight = 1;
+        icon = new GreenfootImage("grapes.png");
+        setImage(icon);
     }
     public void act()
     {
         // Add your action code here.
+    }
+    public String toString(){
+        return "Food";
     }
 }

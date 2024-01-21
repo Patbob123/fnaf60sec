@@ -1,5 +1,4 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.List;
 
 /**
  * Write a description of class Buttons here.
@@ -16,12 +15,6 @@ public class Button extends Actor
     private Button plusButton;
     private Button minusButton;
     private String buttonType;
-    private int r;
-    private int b;
-    private int g;
-    private double a;
-    private boolean expanded = false;
-
     /**
      * Construct a TextButton given only a String.
      * 
@@ -62,7 +55,7 @@ public class Button extends Actor
     public void act() {
         if (Greenfoot.mousePressed(this)) {
             // Handle click events for TextButton
-            //setImage(myAltImage);
+            setImage(myAltImage);
         } else if ("plus".equals(buttonType) && Greenfoot.mousePressed(plusButton)) {
             // Handle click events for the plus button
             // Execute corresponding operations
@@ -70,7 +63,7 @@ public class Button extends Actor
             // Handle click events for the minus button
             // Execute corresponding operations
         } else {
-            //setImage(myImage);
+            setImage(myImage);
         }
     }
 
@@ -96,87 +89,16 @@ public class Button extends Actor
         myAltImage.setColor(Color.WHITE);
         myAltImage.fill();
         myAltImage.drawImage(tempTextImage, 4, 4);
-
+        
         myAltImage.setColor(new Color(117, 11, 11));
         myAltImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 7);
     }
-
-    public void switchExpansion(int r, int g, int b, double a){
-        this.r = r;
-        this.g = g;
-        this.b = b;
-        this.a = a;
-        if (!expanded){
-            collapseAllOtherCameras();
-        }
-        expanded = !expanded;
-        updateImage(r, g, b, a);
-    }
-
-    private void collapseAllOtherCameras(){
-        World world = getWorld();
-        if (world != null){
-            List<Button> camButtons = world.getObjects(Button.class);
-            for (Button otherCam : camButtons){
-                if (otherCam != this && otherCam.isExpanded()){
-                    otherCam.switchExpansion(51, 4, 4, 0.0);
-                }
-            }
-        }
-    }
-
-    public void updateImage(int r, int g, int b, double a) {
+    
+    /**
+     * Method to display what camera sees
+     */
+    public void displayImage(boolean enemyHere, String noEnemy, String yesEnemy) {
         
         
-
-        // myImage = new GreenfootImage(tempTextImage.getWidth() + 8, tempTextImage.getHeight() + 8);
-        // //myImage.setColor(new Color(r, g, b, 10));
-        // myImage.setColor(new Color(r, g, b, 140));
-        // myImage.fill();
-        // myImage.drawImage(tempTextImage, 4, 4);
-        // myImage.setColor(new Color(51, 4, 4));
-        // myImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 7);
-        // //setImage(myImage);
-
-        // //tempTextImage = new GreenfootImage(buttonText, textSize, Color.WHITE, Color.BLACK);
-
-        // myAltImage = new GreenfootImage(tempTextImage.getWidth() + 8, tempTextImage.getHeight() + 8);
-        // myAltImage.setColor(new Color(r, g, b, 140));
-        // myAltImage.fill();
-        // myAltImage.drawImage(tempTextImage, 4, 4);
-        // //setImage(myImage);
-
-        if (!expanded){
-            GreenfootImage tempTextImage = new GreenfootImage (buttonText, textSize, new Color(51, 4, 4), Color.WHITE);
-            myImage = new GreenfootImage(tempTextImage.getWidth() + 8, tempTextImage.getHeight() + 8);
-            
-            myImage.setColor(Color.WHITE);
-            myImage.fill(); 
-            myImage.drawImage(tempTextImage, 4, 4);
-            
-            myImage.setColor(new Color(51, 4, 4));
-            myImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 7);
-            setImage(myImage);
-        }else{
-            GreenfootImage tempAltImage = new GreenfootImage(buttonText, textSize, new Color(51, 4, 4), new Color(r, g, b, 60));
-            myAltImage = new GreenfootImage(tempAltImage.getWidth() + 8, tempAltImage.getHeight() + 8);
-            
-            myAltImage.setColor(new Color(r, g, b, 160));
-            myAltImage.fill();
-            myAltImage.drawImage(tempAltImage, 4, 4);
-            
-            myAltImage.setColor(new Color(51, 4, 4));
-            myAltImage.drawRect(0, 0, tempAltImage.getWidth() + 7, tempAltImage.getHeight() + 7);
-            setImage(myAltImage);
-        }
-        //setImage(expanded ? myAltImage : myImage);
-    }
-
-    public boolean isExpanded(){
-        return expanded;
-    }
-
-    public String getCameraName(){
-        return buttonText;
     }
 }
