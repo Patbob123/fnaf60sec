@@ -32,6 +32,7 @@ public class PopupFader extends Effect
         }
         getImage().setTransparency(255-(int)(((double)fadeDuration/maxDuration)*255));
         
+        setLocation(getX(),getY() -2);
     }  
     public int getMaxDuration(){
         return maxDuration;
