@@ -16,7 +16,7 @@ public class theWorld extends World
     private Button cam5;
     private Button cam6;
     private Button cam7;
-    Actor camMap= new CameraMap();
+    Actor camMap= new CameraMap("translucentCamMap.PNG");
 
     private String cameraName;
 
