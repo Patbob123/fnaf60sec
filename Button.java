@@ -89,8 +89,16 @@ public class Button extends Actor
         myAltImage.setColor(Color.WHITE);
         myAltImage.fill();
         myAltImage.drawImage(tempTextImage, 4, 4);
-
+        
         myAltImage.setColor(new Color(117, 11, 11));
         myAltImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 7);
+    }
+    
+    /**
+     * Method to display what camera sees
+     */
+    public void displayImage(boolean enemyHere, String noEnemy, String yesEnemy) {
+        
+        
     }
 }
