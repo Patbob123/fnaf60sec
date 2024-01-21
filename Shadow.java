@@ -22,7 +22,4 @@ public class Shadow extends Effect
     public tempWorld getW(){
         return (tempWorld)getWorld();
     }
-
- 
-
 }

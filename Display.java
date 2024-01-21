@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Display extends Actor
 {
-    GreenfootImage image;
+    private GreenfootImage image;
     public Display(GreenfootImage image){
         this.image = image;
         image.scale(100,100);
