@@ -6,16 +6,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class theWorld extends World
+public class secondFloor extends World
 {
     private Button camButton;
-    private Button cam1;
-    private Button cam2;
-    private Button cam3;
-    private Button cam4;
-    private Button cam5;
-    private Button cam6;
-    private Button cam7;
     Actor camMap= new CameraMap("translucentCamMap.PNG");
 
     private String cameraName;
@@ -25,7 +18,12 @@ public class theWorld extends World
 
     private int CMXOffset = 1015;
     private int CMYOffset = 156;
+    
+    private int[] camX = {CMXOffset - 63,CMXOffset - 41, CMXOffset + 62, CMXOffset + 23, CMXOffset - 95, CMXOffset + 5, CMXOffset + 94};
+    private int[] camY = {CMYOffset - 10, CMYOffset + 24, CMYOffset - 11, CMYOffset + 20, CMYOffset + 54, CMYOffset + 66, CMYOffset + 40};
 
+    Button[] cams = new Button[7];
+    
     private Player p;
     private SimpleTimer timer;
 
@@ -41,7 +39,7 @@ public class theWorld extends World
      * Constructor for objects of class theWorld.
      * 
      */
-    public theWorld()
+    public secondFloor()
     {    
         super(Constants.WW, Constants.WH, 1);
 
@@ -72,13 +70,7 @@ public class theWorld extends World
                 }else{
                     camButton.updateMe("+");
                     numClicks++;
-                    removeObject(cam1);
-                    removeObject(cam2);
-                    removeObject(cam3);
-                    removeObject(cam4);
-                    removeObject(cam5);
-                    removeObject(cam6);
-                    removeObject(cam7);
+                    removeCamera();
                     removeObject(camMap);
                     //System.out.println("collapsed" + numClicks);
                     openedCamMap = false;
@@ -112,37 +104,24 @@ public class theWorld extends World
             }
         }
     }
+    
+    private void removeCamera(){
+        for (int i = 0; i < cams.length; i++){
+            removeObject(cams[i]);
+        }
+    }
 
     private void cameras(){
-        updateCamera(cam1);
-        updateCamera(cam2);
-        updateCamera(cam3);
-        updateCamera(cam4);
-        updateCamera(cam5);
-        updateCamera(cam6);
-        updateCamera(cam7);
+        for (int i = 0; i < cams.length; i++){
+            updateCamera(cams[i]);
+        }
     }
 
     private void generateCamMap(){
-        cam1 = new Button("CAM1", 20);
-        cam2 = new Button("CAM2", 20);
-        cam3 = new Button("CAM3", 20); 
-        cam4 = new Button("CAM4", 20);
-        cam5 = new Button("CAM5", 20);
-        cam6 = new Button("CAM6", 20);
-        cam7 = new Button("CAM7", 20);
-
         addObject(camMap, CMXOffset, CMYOffset);
-
-        addObject(cam1, CMXOffset - 63, CMYOffset - 10);
-        addObject(cam2, CMXOffset - 41, CMYOffset + 24);
-        addObject(cam3, CMXOffset + 62, CMYOffset - 11);
-
-        addObject(cam4, CMXOffset + 23, CMYOffset + 20);
-        addObject(cam5, CMXOffset - 95, CMYOffset + 54);
-        addObject(cam6, CMXOffset + 5, CMYOffset + 66);
-
-        addObject(cam7, CMXOffset + 94, CMYOffset + 40);
-
+        for (int i = 0; i < cams.length; i++){
+            cams[i] = new Button ("CAM" + (i+1), 20);
+            addObject(cams[i], camX[i], camY[i]);
+        }
     }
 }
