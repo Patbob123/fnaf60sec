@@ -30,7 +30,7 @@ public class Viewport extends Actor
         endY = y+height;
         
         moveObjects(-addX, -addY);
-        renderMap(getW().getMap().getTiles());
+        renderMap(getW().getMap().getTiles(), getW().getMap().getItems());
     }
     public void moveObjects(double addX, double addY){
         for(Tile t: getW().getObjects(Tile.class)){
@@ -40,10 +40,10 @@ public class Viewport extends Actor
             e.setLocation(e.getX()+addX, e.getY()+addY);
         }
     }
-    public void renderMap(Tile[][] map){ //Its FAST SO NO ONE CARES IF IT LOOPS THROUGH IT EVERYTIME YEA?
+    public void renderMap(Tile[][] map, Tile[][] itemLayer){ //Its FAST SO NO ONE CARES IF IT LOOPS THROUGH IT EVERYTIME YEA?
         tempWorld w = getW();
         //w.removeObjects(w.getObjects(Tile.class));
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
+        //$System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
         for(int i = 1; i <= map.length; i++){
             for(int j = 1; j <= map[0].length; j++){
                 int tileX = j*Constants.TILE_LEN;
@@ -52,19 +52,34 @@ public class Viewport extends Actor
                 if((x<tileX-xOffset&&tileX-xOffset<endX)&&(y<tileY-yOffset&&tileY-yOffset<endY)){
                     if(!w.getObjects(Tile.class).contains(map[i-1][j-1])){
                         w.addObject(map[i-1][j-1], tileX-x-xOffset, tileY-y-yOffset);
+                        
+                        if(itemLayer[i-1][j-1]!=null) w.addObject(itemLayer[i-1][j-1], tileX-x-xOffset, tileY-y-yOffset);
                     }
                     
                     //System.out.print("o");
                 }else{
                     
-                    getWorld().removeObject(map[i-1][j-1]);
+                    w.removeObject(map[i-1][j-1]);
+                    if(itemLayer[i-1][j-1]!=null) w.removeObject(itemLayer[i-1][j-1]);
                     //map[i-1][j-1] = 0;
                 }
                 
             }
-            System.out.println();
         }
         
+    }
+    public void removeItem(Item item){
+        System.out.println("ASD");
+        Tile[][] items = getW().getMap().getItems();
+        for(int i = 0; i < items.length; i++){
+            for(int j = 0; j < items[0].length; j++){
+                if(items[i][j]==item){
+                    getW().removeObject(items[i][j]);
+                    items[i][j] = null;
+                } 
+            }
+            
+        }
     }
     public tempWorld getW(){
         return ((tempWorld)getWorld());

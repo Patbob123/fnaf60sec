@@ -56,6 +56,9 @@ public class tempWorld extends World
     public MapArray getMap(){
         return ma;
     }
+    public Viewport getVP(){
+        return vp;
+    }
     public boolean checkPlayer(int x, int y){
         return getObjectsAt(x, y, Player.class).size()>0;
     }

@@ -42,7 +42,7 @@ public class Player extends Entity
                 }
             }
             if(Greenfoot.isKeyDown("i")){
-                System.out.println(itemChest.toString());
+                //System.out.println(itemChest.toString());
             }
         }
     }
@@ -60,7 +60,6 @@ public class Player extends Entity
             if(a==(null)) continue;
             if(a.toString().equals("W"))pq.add(a);
         }
-        System.out.println();
         while(!pq.isEmpty()){
               
             Actor a = pq.poll();
@@ -110,7 +109,7 @@ public class Player extends Entity
                     handSlots.getStorage().add(item);
                                     
                     timer.mark();
-                    getWorld().removeObject(currentItem);
+                    ((tempWorld)getWorld()).getVP().removeItem(currentItem);
                 }
             }
     }

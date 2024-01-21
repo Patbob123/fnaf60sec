@@ -11,13 +11,15 @@ public class MapArray
 {
     private int x;
     private Tile[][] map;
-    
-            
+    private Tile[][] itemLayer;
+    private String[] itemList;
     
     public MapArray()
     {
-
+        itemList = new String[]{"Food", "Water"};
         map = new Tile[50][50];
+        itemLayer = new Tile[50][50];
+        
         for(int i = 0; i < map.length; i++){
             for(int j = 0; j < map[0].length; j++){
                 String type = "-";
@@ -28,14 +30,51 @@ public class MapArray
                     type = "#";
                 }
                 map[i][j] = createTile(type);
+                itemLayer[i][j] = generateItem(type);
             }
         }
         
         fillWalls(map);
-        printMap();
-        
         setWalls(map);
         
+    }
+    
+     public Tile createTile(String type){
+         try{
+            return (Tile)Constants.tileHash.get(type).newInstance();
+        }catch(InstantiationException e){
+            
+        }catch(IllegalAccessException e){
+            
+        }
+        return new Floor();
+    }
+    public Tile[][] getTiles(){
+        return map;
+    }
+    public Tile generateItem(String type){
+        if(type.equals("-")){
+            try{
+                String itemName = itemList[Greenfoot.getRandomNumber(itemList.length)];
+                return (Tile)Constants.itemHash.get(itemName).newInstance();
+            }catch(InstantiationException e){
+                
+            }catch(IllegalAccessException e){
+                
+            }
+        }
+        return null;
+    }
+    public Tile[][] getItems(){
+        return itemLayer;
+    }
+    public void printMap(){
+        for(int i = 0; i < map.length; i++){
+            for(int j = 0; j < map[0].length; j++){
+                System.out.print(map[i][j]+" ");
+            }
+            //System.out.println();
+        }
     }
     public void fillWalls(Tile[][] map){
         for(int i = 0; i < map.length; i++){
@@ -123,28 +162,6 @@ public class MapArray
             map[i][j].setIcon("WallIcon/"+modifier+"Wall.png");
     
             }
-        }
-    }
-     public Tile createTile(String type){
-         try{
-             System.out.println((Tile)Constants.tileHash.get(type).newInstance());
-            return (Tile)Constants.tileHash.get(type).newInstance();
-        }catch(InstantiationException e){
-            
-        }catch(IllegalAccessException e){
-            
-        }
-        return new Floor();
-    }
-    public Tile[][] getTiles(){
-        return map;
-    }
-    public void printMap(){
-        for(int i = 0; i < map.length; i++){
-            for(int j = 0; j < map[0].length; j++){
-                System.out.print(map[i][j]+" ");
-            }
-            System.out.println();
         }
     }
 }

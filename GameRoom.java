@@ -51,7 +51,6 @@ public class GameRoom extends World {
     
     public void act() {
         timer--;
-        System.out.println(battery);
         if(timer % 300 == 0) {
             battery-=10; //temporary. is supposed to be 1
             batteryBar.updateBar(battery);
