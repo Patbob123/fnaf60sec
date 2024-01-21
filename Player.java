@@ -173,7 +173,7 @@ public class Player extends Entity
                         
                         updateHandDisplay();
                         
-                        getWorld().addObject(new PopupFader(currentItem.getImage(),100,false), getX(),getY()-60);
+                        getWorld().addObject(new PopupFader(currentItem.getImage(),80,false), getX(),getY()-60);
                         
                         GreenfootImage textImage = new GreenfootImage(" + ", 40, Color.RED, new Color(0, 0, 0, 0));
                         getWorld().addObject(new PopupFader(textImage,100,false), getX()-20, getY()-60);
