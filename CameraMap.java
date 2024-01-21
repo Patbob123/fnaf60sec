@@ -8,19 +8,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class CameraMap extends Actor
 {
-    private GreenfootImage camMap;
-    private GreenfootImage cam;
+    private static GreenfootImage camMap;
     /**
      * Constructor for only the background of the main camera system
      * 
      * @param schoolMap     File name of school map
      */
     public CameraMap (String schoolMap) {
-        camMap = new GreenfootImage(schoolMap);
+        camMap = new GreenfootImage("translucentCamMap.PNG");
         camMap.scale((int)(camMap.getWidth()/2), (int)(camMap.getHeight()/2));
         setImage(camMap);
     }
-    
-    
 }
-    
+
