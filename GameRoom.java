@@ -27,9 +27,9 @@ public class GameRoom extends World {
     private Button cam4;
     private Button cam5;
     private Button cam6;
+    private Button cam7;
     private int numClicks = 2;
-    CameraMap camMap = new CameraMap();
-    
+    private CameraMap camMap;
     private Tile tiles[][];
     private BatteryBar batteryBar;
     private EnemyManager em;
@@ -44,6 +44,7 @@ public class GameRoom extends World {
         leftDoorClosed = false;
         rightDoorClosed = false;
         GreenfootImage backgroundImage = new GreenfootImage("businessroom.png");
+        camMap = new CameraMap("translucentCamMap.PNG");
         backgroundX = 100; //to set at middle
         setBackground(backgroundImage);
         updateBackgroundPosition();
@@ -78,12 +79,10 @@ public class GameRoom extends World {
         
         //to open and reopen the cameras
         if (Greenfoot.mousePressed(map)){
-            //System.out.println(numClicks);
             if(numClicks == 2){
                 map.updateMe("-");
                 generateCamMap();
                 numClicks--;
-                //System.out.println("expanded" + numClicks);
             }else{
                 map.updateMe("+");
                 numClicks++;
@@ -93,10 +92,11 @@ public class GameRoom extends World {
                 removeObject(cam4);
                 removeObject(cam5);
                 removeObject(cam6);
+                removeObject(cam7);
                 removeObject(camMap);
-                //System.out.println("collapsed" + numClicks);
             }
         }
+        
         
 
         if(timer % 300 == 0) {
@@ -170,16 +170,18 @@ public class GameRoom extends World {
         cam4 = new Button("CAM4", 20);
         cam5 = new Button("CAM5", 20);
         cam6 = new Button("CAM6", 20);
+        cam7 = new Button("CAM7", 20);
 
-        addObject(camMap, 995, 79);
+        addObject(camMap, 913, 625);
 
-        addObject(cam1, 995, 79);
-        addObject(cam2, 1057, 79);
-        addObject(cam3, 1119, 79);
+        addObject(cam1, 808, 572);
+        addObject(cam2, 870, 597);
+        addObject(cam3, 869, 644);
 
-        addObject(cam4, 995, 114);
-        addObject(cam5, 1057, 114);
-        addObject(cam6, 1119, 114);
+        addObject(cam4, 1022, 572);
+        addObject(cam5, 966, 596);
+        addObject(cam6, 966, 644);
+        addObject(cam7, 900, 549);
 
     }
     

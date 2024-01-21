@@ -10,14 +10,19 @@ public class EnemyManager extends Actor
 {
     private Enemy blackGuy, daniel;
     private int bgTick, dTick;
-    private int bgCamCount, danielCamCount;
-    private int spawnLocant;
-    private int bgCameraLocant;
-    private int dCameraLocant;
+    
+    private boolean dStageOne;
+    private boolean dStageTwo;
+    private boolean dStageThree;
+    private boolean bgStageOne;
+    private boolean bgStageTwo;
+    private boolean bgStageThree;  
+    
+    private int dLocantCounter;
+    private int bgLocantCounter;
+    
     private int dLocantThreeTimer;
     private int bgLocantThreeTimer;
-    private boolean bgIsSpawned;
-    private boolean dIsSpawned;
     
     public EnemyManager() {
         //Enemies have different movement times 
@@ -25,24 +30,25 @@ public class EnemyManager extends Actor
         dTick = 600;
         dLocantThreeTimer = 240;
         bgLocantThreeTimer = 240;
-        dIsSpawned = false;
-        bgIsSpawned = false;
+        bgLocantCounter = 0;
+        dLocantCounter = 0;
+        
     }
     
     public void spawnBg() {
-        bgIsSpawned = true;
-        bgCameraLocant = 1;
+        dStageOne = true;
+        bgLocantCounter = 1;
     }
     public void spawnDaniel() {
-        bgIsSpawned = true;
-        dCameraLocant = 1;
+        bgStageOne = true;
+        dLocantCounter = 1;
     }
     
     public int getDLocant() {
-        return dCameraLocant;
+        return dLocantCounter;
     }
     public int getBgLocant() {
-        return dCameraLocant;
+        return bgLocantCounter;
     }
     
     /**
@@ -57,29 +63,45 @@ public class EnemyManager extends Actor
         if(bgTick == 0) {
             int chance = Greenfoot.getRandomNumber(2);
             if(chance == 1){
-                bgCameraLocant++;
+                bgLocantCounter++;
+                if(bgLocantCounter == 2) {
+                    bgStageOne = false;
+                    bgStageTwo = true;
+                }
+                else if(bgLocantCounter == 3) {
+                    bgStageTwo = false;
+                    bgStageThree = true;
+                }
             }
             bgTick = 360;
         }
         if(dTick == 0) {
-            dCameraLocant++;
+            dLocantCounter++;
+            if(dLocantCounter == 2) {
+                bgStageOne = false;
+                bgStageTwo = true;
+            }
+            else if(dLocantCounter == 3) {
+                bgStageTwo = false;
+                bgStageThree = true;
+            }
             dTick = 600;
         }
         
         //If any of the enemies are on stage 3
-        if(dCameraLocant == 3) {
+        if(dLocantCounter == 3) {
             dLocantThreeTimer--;
             if(dLocantThreeTimer == 0 && ((GameRoom)getWorld()).getRightDoor()) {
-                dCameraLocant = 1;
+                dLocantCounter = 1;
             }
             else {
                 ((GameRoom)getWorld()).setAlive(false);
             }
         }    
-        if(bgCameraLocant == 3) {
+        if(bgLocantCounter == 3) {
             bgLocantThreeTimer--;
             if(bgLocantThreeTimer == 0 && ((GameRoom)getWorld()).getLeftDoor()) {
-                dCameraLocant = 1;
+                bgLocantCounter = 1;
             }
             else {
                 ((GameRoom)getWorld()).setAlive(false);
