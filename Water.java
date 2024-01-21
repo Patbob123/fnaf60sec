@@ -15,4 +15,7 @@ public class Water extends Item
     {
         // Add your action code here.
     }
+    public String toString(){
+        return "Water";
+    }
 }

@@ -17,4 +17,7 @@ public class Food extends Item
     {
         // Add your action code here.
     }
+    public String toString(){
+        return "Food";
+    }
 }

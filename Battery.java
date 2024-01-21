@@ -19,4 +19,7 @@ public class Battery extends Item
     {
         // Add your action code here.
     }
+    public String toString(){
+        return "Battery";
+    }
 }

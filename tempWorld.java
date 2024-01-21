@@ -68,19 +68,24 @@ public class tempWorld extends World
     }
     
     public void displayHandSlots(){
-        ArrayList<String> handInventory = p.getHandSlots().getStorage();
-        if(handInventory.size() == 0){
-            addObject(new Display(new GreenfootImage("hand.png")),100,500);
-            addObject(new Display(new GreenfootImage("hand.png")),300,500);  
-            addObject(new Display(new GreenfootImage("hand.png")),500,500); 
-            addObject(new Display(new GreenfootImage("hand.png")),700,500); 
+        ArrayList<Item> handInventory = p.getHandSlots().getStorage();
+        for(Display d: getObjects(Display.class)){
+            removeObject(d);
         }
-        String [] hands = arrayListToArray(handInventory);
-        
-        for(int i = 0; i< hands.length; i++){
-            String item = hands[i];
-            GreenfootImage image = new GreenfootImage(item+".png");
-            addObject(new Display(image), 200*i + 100, 500);
+        int curIndex = 0;
+        for(int i = 0; i < handInventory.size(); i++){
+            Item item = handInventory.get(i);
+            for(int j = 0; j < item.getWeight(); j++){
+                GreenfootImage image = new GreenfootImage(item+".png");
+                if(j!=0) image.setTransparency(80);
+                addObject(new Display(image), 200*curIndex + 100, 500);
+                curIndex++;
+            }
+
+        }
+        for(int i = curIndex; i < 4; i++){
+            GreenfootImage image = new GreenfootImage("hand.png");
+            addObject(new Display(image),200*i + 100,500);
         }
     }
     public String [] arrayListToArray(ArrayList<String> array){

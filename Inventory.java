@@ -10,7 +10,7 @@ import java.util.Arrays;
  */
 public class Inventory  
 {
-    private ArrayList<String> storage; 
+    private ArrayList<Item> storage; 
     private int totalWeight;
     public Inventory()
     {
@@ -20,8 +20,8 @@ public class Inventory
     public void act(){
         
     }
-    public boolean isEmpty(){
-        if(totalWeight < 4){
+    public boolean canPickup(int addedWeight){
+        if(totalWeight + addedWeight <= 4){
             return true;
         }
         return false;
@@ -35,7 +35,7 @@ public class Inventory
     public int getTotalWeight(){
         return totalWeight;
     }
-    public ArrayList<String> getStorage(){
+    public ArrayList<Item> getStorage(){
         return storage;
     }
     public String toString(){

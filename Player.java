@@ -12,7 +12,7 @@ public class Player extends Entity
 {   
     private Hitbox collider;
     private Inventory handSlots;
-    private ArrayList<String> itemChest;
+    private ArrayList<Item> itemChest;
     private SimpleTimer timer;
     private int speed;
     public Player(){
@@ -85,7 +85,7 @@ public class Player extends Entity
         return Math.hypot(Math.abs(actor.getX() - getX()), Math.abs(actor.getY() - getY()));
     }
     public void pickUp(){
-            if(handSlots.isEmpty()){
+            
                 ArrayList<Item> nearbyObjects = (ArrayList<Item>)getObjectsInRange(100, Item.class);
                 if(nearbyObjects.size() > 0){
     
@@ -103,21 +103,21 @@ public class Player extends Entity
                         }
                     }
                     
-                    String item = stringConverter(currentItem);
-                    
-                    handSlots.addWeight(currentItem.getWeight());
-                    handSlots.getStorage().add(item);
-                                    
-                    timer.mark();
-                    ((tempWorld)getWorld()).getVP().removeItem(currentItem);
-                    
-                    updateHandDisplay();
+                    if(handSlots.canPickup(currentItem.getWeight())){
+                        handSlots.addWeight(currentItem.getWeight());
+                        handSlots.getStorage().add(currentItem);
+                                        
+                        timer.mark();
+                        getW().getVP().removeItem(currentItem);
+                        
+                        updateHandDisplay();
+                    }
                 }
-            }
+            
     }
     
     public void dropOff(){
-            for(String item: handSlots.getStorage()){
+            for(Item item: handSlots.getStorage()){
                 itemChest.add(item);
             }
             handSlots.getStorage().clear();
@@ -125,27 +125,13 @@ public class Player extends Entity
             updateHandDisplay();
     }
     public void updateHandDisplay(){
-        tempWorld world = (tempWorld)getWorld();
-        world.displayHandSlots();
+        getW().displayHandSlots();
     }
     public boolean checkWall(int x, int y){
         return collider.intersectWall(x,y);
     }   
     
-    public String stringConverter(Item item){
-        if(item instanceof Food){
-            return "Food";
-        }
-        else if(item instanceof Water){
-            return "Water";
-        }
-        else if(item instanceof Battery){
-            return "Battery";
-        }
-        else{
-            return "None";
-        }
-    }
+
     public boolean onPressurePlate(){
         return isTouching(PressurePlate.class);
     }
@@ -160,5 +146,8 @@ public class Player extends Entity
     }
     public Inventory getHandSlots(){
         return handSlots;
+    }
+    public tempWorld getW(){
+        return (tempWorld)getWorld();
     }
 }

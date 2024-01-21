@@ -20,4 +20,7 @@ public class Item extends Tile
     public int getWeight(){
         return weight;
     }
+    public String toString(){
+        return "SOME ITEM";
+    }
 }
