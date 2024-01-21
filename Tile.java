@@ -9,8 +9,8 @@ import java.util.HashMap;
  */
 public abstract class Tile extends SuperSmoothMover
 {
-    private int width;
-    private int height;
+    protected int width;
+    protected int height;
     protected String symbol;
     
     public Tile(){

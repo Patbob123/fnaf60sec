@@ -104,7 +104,7 @@ public class MapArray
             }
         }
     }
-    //public void 
+    
     public void setWalls(Tile[][] map){
 
         for(int i = 0; i < map.length; i++){

@@ -63,6 +63,7 @@ public class Timer extends Actor
  
     public void act()
     {
+        System.out.println(count);
         if (running)
         {
             count++;
