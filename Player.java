@@ -1,6 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
 import java.util.PriorityQueue;
+import java.awt.image.BufferedImage;
 
 /**
  * Write a description of class Character here.
@@ -15,24 +16,84 @@ public class Player extends Entity
     private ArrayList<Item> itemChest;
     private SimpleTimer timer;
     private int speed;
+    private GreenfootImage[][] idleFrames;
+    private GreenfootImage[][] walkingFrames;
+    private GreenfootImage[] curFrames;
+    private int curFrame;
+    private int curIdle;
+    private SimpleTimer animTimer; 
+    
     public Player(){
         speed = 10;
         handSlots = new Inventory();
         itemChest = new ArrayList<>();
         timer = new SimpleTimer();
-        setIcon("tempson.png");
+        animTimer = new SimpleTimer();
+        
+        idleFrames = new GreenfootImage[6][4];
+        walkingFrames = new GreenfootImage[6][6];
+        //setIcon("tempson.png");
+        loadSprites(idleFrames, 0);
+        loadSprites(walkingFrames, 128);
+        curFrames = idleFrames[0];
+        setImage(idleFrames[0][0]);
         collider = new Hitbox(getImage().getWidth()-speed,1);
     }
-    public void setIcon(String imageUrl){
-        GreenfootImage icon = new GreenfootImage(imageUrl);
-        icon.scale(32, 32);
+    public void scaleIcon(GreenfootImage icon){
+        //GreenfootImage icon = new GreenfootImage(imageUrl);
+        icon.scale(32, 52);
         Util.scale(icon);
-        setImage(icon);
+
     }
+    public void loadSprites(GreenfootImage[][] frames, int startY){
+        for(int i = 0; i < frames.length-2; i++){
+            for(int j = 0; j < frames[0].length; j++){
+                GreenfootImage image = new GreenfootImage("timmysprites.png");
+                GreenfootImage cropimage = new GreenfootImage(16, 26);
+                cropimage.drawImage(image, -j*16, -i*32-startY);
+                scaleIcon(cropimage);
+                frames[i][j] = cropimage;
+            }
+        }
+        for(int i = frames.length-2; i < frames.length; i++){
+            for(int j = 0; j < frames[0].length; j++){
+                GreenfootImage image = new GreenfootImage("timmysprites.png");
+                GreenfootImage cropimage = new GreenfootImage(16, 26);
+                cropimage.drawImage(image, -j*16, -(32+(i-(frames.length-2))*32*2)-startY);
+                cropimage.mirrorHorizontally();
+                scaleIcon(cropimage);
+                frames[i][j] = cropimage;
+            }
+        }
+    }
+    public void animate(){
+        if(animTimer.millisElapsed() >= Constants.ANIM_SPEED){
+            curFrame++;
+            if(curFrames.length <= curFrame){
+                curFrame = 0;
+            }
+            setImage(curFrames[curFrame]);
+            animTimer.mark();
+        }
+    }
+    public void setCurFrame(int frameType, int frameDir){
+        switch(frameType){
+            case 1:
+                curFrames = idleFrames[curIdle];
+            break;
+            case 2:
+                curFrames = walkingFrames[frameDir];
+            break;
+        }
+    }
+    public void setIdle(int frameDir){
+        curIdle = frameDir;
+    }
+    
     public void act()
     {
         z_sortAround();
-
+        animate();
         if(timer.millisElapsed() >= Constants.PICKUP_COOLDOWN){
             if(Greenfoot.isKeyDown("e")){
                 if(isTouching(Shelter.class)){
@@ -91,7 +152,7 @@ public class Player extends Entity
     
                     Item nearestItem = null;
                     Item currentItem = null;
-                    double nearestDistance = 0;
+                    double nearestDistance = 100;
                     double currentDistance;
                     
                     for(int i = 0; i< nearbyObjects.size(); i++){
