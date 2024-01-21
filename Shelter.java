@@ -13,6 +13,7 @@ public class Shelter extends Tile
         super();
         symbol = "#"; 
         bunker = new Inventory();
+        setIcon("tent.png");
     }
     public Inventory getInventory(){
         return bunker;

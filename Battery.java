@@ -12,6 +12,8 @@ public class Battery extends Item
     public Battery(){
         weight = 1;
         power = 10;
+        icon = new GreenfootImage("batteryIcon.png");
+        setImage(icon);
     }
     public void act()
     {
