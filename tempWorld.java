@@ -54,14 +54,22 @@ public class tempWorld extends World
         if(Greenfoot.isKeyDown("d")){
             moveX+=p.getSpeed();
         }
+        double ogMoveX = moveX;
+        double ogMoveY = moveY;
         if(Math.abs(moveX)>=p.getSpeed()&&Math.abs(moveY)>=p.getSpeed()){
-            moveX = Math.sqrt(Math.pow(moveX, 2)/2) * Math.signum(moveX);
-            moveY = Math.sqrt(Math.pow(moveX, 2)/2) * Math.signum(moveY);
-            System.out.println(moveX);
+            moveX = (int)(Math.sqrt(Math.pow(moveX, 2)/2)+1) * Math.signum(moveX);
+            moveY = (int)(Math.sqrt(Math.pow(moveX, 2)/2)+1) * Math.signum(moveY);
         }
         if(!p.checkWall((int)moveX, (int)moveY)) {
             vp.move(moveX, moveY);
+        }else if(!p.checkWall((int)ogMoveX, 0)) {
+            moveX = ogMoveX;
+            vp.move(moveX, 0);
+        }else if(!p.checkWall(0, (int)ogMoveY)) {
+            moveY = ogMoveY;
+            vp.move(0, moveY);
         }
+        
         if(moveX > 0 && moveY < 0){
             p.setCurFrame(2, 3);
             p.setIdle(3);

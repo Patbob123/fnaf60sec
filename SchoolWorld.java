@@ -21,7 +21,7 @@ public abstract class SchoolWorld extends World
     private Button cam4;
     private Button cam5;
     private Button cam6;
-    CameraMap camMap = new CameraMap();
+    private CameraMap camMap = new CameraMap("cameraMap.png");
 
     private int numClicks = 2;
     /**
