@@ -1,4 +1,5 @@
 #Greenfoot project file
+class.A1.image=wet-blue.jpg
 dependency1.from=SchoolWorld
 dependency1.to=WorldManager
 dependency1.type=UsesDependency
@@ -69,147 +70,173 @@ dependency3.from=SchoolWorld
 dependency3.to=PressurePlate
 dependency3.type=UsesDependency
 dependency30.from=tempWorld
-dependency30.to=Constants
+dependency30.to=Item
 dependency30.type=UsesDependency
 dependency31.from=tempWorld
-dependency31.to=SuperSmoothMover
+dependency31.to=Display
 dependency31.type=UsesDependency
 dependency32.from=tempWorld
-dependency32.to=Floor
+dependency32.to=Constants
 dependency32.type=UsesDependency
 dependency33.from=tempWorld
-dependency33.to=Inventory
+dependency33.to=SuperSmoothMover
 dependency33.type=UsesDependency
-dependency34.from=GameRoom
-dependency34.to=Wall
+dependency34.from=tempWorld
+dependency34.to=Floor
 dependency34.type=UsesDependency
-dependency35.from=GameRoom
-dependency35.to=BatteryBar
+dependency35.from=tempWorld
+dependency35.to=Inventory
 dependency35.type=UsesDependency
-dependency36.from=Entity
-dependency36.to=Hitbox
+dependency36.from=GameRoom
+dependency36.to=Wall
 dependency36.type=UsesDependency
-dependency37.from=Enemy
-dependency37.to=Player
+dependency37.from=GameRoom
+dependency37.to=Button
 dependency37.type=UsesDependency
-dependency38.from=Enemy
-dependency38.to=Coordinate
+dependency38.from=GameRoom
+dependency38.to=CameraMap
 dependency38.type=UsesDependency
-dependency39.from=Enemy
-dependency39.to=Hitbox
+dependency39.from=GameRoom
+dependency39.to=Tile
 dependency39.type=UsesDependency
 dependency4.from=SchoolWorld
 dependency4.to=Button
 dependency4.type=UsesDependency
-dependency40.from=Player
-dependency40.to=Hitbox
+dependency40.from=GameRoom
+dependency40.to=BatteryBar
 dependency40.type=UsesDependency
-dependency41.from=Player
-dependency41.to=Inventory
+dependency41.from=GameRoom
+dependency41.to=EnemyManager
 dependency41.type=UsesDependency
-dependency42.from=Player
-dependency42.to=SimpleTimer
+dependency42.from=Entity
+dependency42.to=Hitbox
 dependency42.type=UsesDependency
-dependency43.from=Player
-dependency43.to=Item
+dependency43.from=Enemy
+dependency43.to=Player
 dependency43.type=UsesDependency
-dependency44.from=Player
-dependency44.to=tempWorld
+dependency44.from=Enemy
+dependency44.to=Coordinate
 dependency44.type=UsesDependency
-dependency45.from=Player
-dependency45.to=Food
+dependency45.from=Enemy
+dependency45.to=Hitbox
 dependency45.type=UsesDependency
 dependency46.from=Player
-dependency46.to=Water
+dependency46.to=Hitbox
 dependency46.type=UsesDependency
 dependency47.from=Player
-dependency47.to=Battery
+dependency47.to=Inventory
 dependency47.type=UsesDependency
 dependency48.from=Player
-dependency48.to=PressurePlate
+dependency48.to=Item
 dependency48.type=UsesDependency
 dependency49.from=Player
-dependency49.to=Util
+dependency49.to=SimpleTimer
 dependency49.type=UsesDependency
 dependency5.from=SchoolWorld
 dependency5.to=CameraMap
 dependency5.type=UsesDependency
 dependency50.from=Player
-dependency50.to=Constants
+dependency50.to=PressurePlate
 dependency50.type=UsesDependency
 dependency51.from=Player
-dependency51.to=Shelter
+dependency51.to=tempWorld
 dependency51.type=UsesDependency
 dependency52.from=Player
-dependency52.to=SuperSmoothMover
+dependency52.to=Util
 dependency52.type=UsesDependency
-dependency53.from=Hitbox
-dependency53.to=Wall
+dependency53.from=Player
+dependency53.to=Constants
 dependency53.type=UsesDependency
-dependency54.from=Tile
-dependency54.to=Constants
+dependency54.from=Player
+dependency54.to=Shelter
 dependency54.type=UsesDependency
-dependency55.from=Tile
-dependency55.to=Util
+dependency55.from=Player
+dependency55.to=SuperSmoothMover
 dependency55.type=UsesDependency
-dependency56.from=Shelter
-dependency56.to=Inventory
+dependency56.from=Hitbox
+dependency56.to=Wall
 dependency56.type=UsesDependency
-dependency57.from=Floor
-dependency57.to=Item
+dependency57.from=Tile
+dependency57.to=Constants
 dependency57.type=UsesDependency
-dependency58.from=Floor
-dependency58.to=Constants
+dependency58.from=Tile
+dependency58.to=Util
 dependency58.type=UsesDependency
-dependency59.from=Viewport
-dependency59.to=Tile
+dependency59.from=Shelter
+dependency59.to=Inventory
 dependency59.type=UsesDependency
 dependency6.from=A1
 dependency6.to=WorldManager
 dependency6.type=UsesDependency
-dependency60.from=Viewport
-dependency60.to=Enemy
+dependency60.from=Floor
+dependency60.to=Item
 dependency60.type=UsesDependency
-dependency61.from=Viewport
-dependency61.to=tempWorld
+dependency61.from=Floor
+dependency61.to=Constants
 dependency61.type=UsesDependency
 dependency62.from=Viewport
-dependency62.to=Item
+dependency62.to=Tile
 dependency62.type=UsesDependency
 dependency63.from=Viewport
-dependency63.to=Constants
+dependency63.to=Enemy
 dependency63.type=UsesDependency
-dependency64.from=Util
-dependency64.to=Constants
+dependency64.from=Viewport
+dependency64.to=tempWorld
 dependency64.type=UsesDependency
-dependency65.from=MapArray
-dependency65.to=Tile
+dependency65.from=Viewport
+dependency65.to=Constants
 dependency65.type=UsesDependency
-dependency66.from=MapArray
-dependency66.to=Floor
+dependency66.from=Util
+dependency66.to=Constants
 dependency66.type=UsesDependency
 dependency67.from=MapArray
-dependency67.to=Wall
+dependency67.to=Tile
 dependency67.type=UsesDependency
 dependency68.from=MapArray
-dependency68.to=Constants
+dependency68.to=Floor
 dependency68.type=UsesDependency
+dependency69.from=MapArray
+dependency69.to=Wall
+dependency69.type=UsesDependency
 dependency7.from=A1
 dependency7.to=Player
 dependency7.type=UsesDependency
+dependency70.from=MapArray
+dependency70.to=Constants
+dependency70.type=UsesDependency
+dependency71.from=Inventory
+dependency71.to=Item
+dependency71.type=UsesDependency
 dependency8.from=A1
 dependency8.to=A2
 dependency8.type=UsesDependency
 dependency9.from=A2
 dependency9.to=Shelter
 dependency9.type=UsesDependency
+<<<<<<< Updated upstream
+editor.fx.0.height=1096
+editor.fx.0.width=1936
+editor.fx.0.x=-1928
+editor.fx.0.y=-8
+height=1096
+package.numDependencies=71
+package.numTargets=44
+=======
 editor.fx.0.height=739
 editor.fx.0.width=892
+<<<<<<< Updated upstream
 editor.fx.0.x=312
 editor.fx.0.y=54
 height=916
 package.numDependencies=68
+=======
+editor.fx.0.x=882
+editor.fx.0.y=118
+height=1048
+package.numDependencies=65
+>>>>>>> Stashed changes
 package.numTargets=43
+>>>>>>> Stashed changes
 project.charset=windows-1252
 publish.hasSource=false
 publish.locked=true
@@ -220,7 +247,7 @@ publish.title=
 publish.url=
 readme.height=60
 readme.name=@README
-readme.width=49
+readme.width=48
 readme.x=10
 readme.y=10
 simulation.speed=50
@@ -274,28 +301,36 @@ target15.width=120
 target15.x=0
 target15.y=0
 target16.height=70
-target16.name=HandDisplay
+target16.name=Button
 target16.showInterface=false
 target16.type=ClassTarget
 target16.width=120
 target16.x=0
 target16.y=0
 target17.height=70
-target17.name=Button
+target17.name=EnemyManager
 target17.showInterface=false
 target17.type=ClassTarget
 target17.width=120
 target17.x=0
 target17.y=0
 target18.height=70
-target18.name=EnemyManager
+target18.name=PressurePlate
 target18.showInterface=false
 target18.type=ClassTarget
 target18.width=120
 target18.x=0
 target18.y=0
 target19.height=70
+<<<<<<< Updated upstream
+target19.name=Battery
+=======
+<<<<<<< Updated upstream
 target19.name=PressurePlate
+=======
+target19.name=Battery
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 target19.showInterface=false
 target19.type=ClassTarget
 target19.width=120
@@ -309,49 +344,97 @@ target2.width=120
 target2.x=0
 target2.y=0
 target20.height=70
+<<<<<<< Updated upstream
+target20.name=Enemy
+=======
+<<<<<<< Updated upstream
 target20.name=Battery
+=======
+target20.name=Enemy
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 target20.showInterface=false
 target20.type=ClassTarget
 target20.width=120
 target20.x=0
 target20.y=0
 target21.height=70
+<<<<<<< Updated upstream
+target21.name=CameraMap
+=======
+<<<<<<< Updated upstream
 target21.name=Enemy
+=======
+target21.name=CameraMap
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 target21.showInterface=false
 target21.type=ClassTarget
 target21.width=120
 target21.x=0
 target21.y=0
 target22.height=70
+<<<<<<< Updated upstream
+target22.name=startWorld
+=======
+<<<<<<< Updated upstream
 target22.name=CameraMap
+=======
+target22.name=startWorld
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 target22.showInterface=false
 target22.type=ClassTarget
 target22.width=120
 target22.x=0
 target22.y=0
 target23.height=70
+<<<<<<< Updated upstream
+target23.name=Shelter
+=======
+<<<<<<< Updated upstream
 target23.name=startWorld
+=======
+target23.name=Shelter
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 target23.showInterface=false
 target23.type=ClassTarget
 target23.width=120
 target23.x=0
 target23.y=0
 target24.height=70
+<<<<<<< Updated upstream
+target24.name=Camera
+=======
+<<<<<<< Updated upstream
 target24.name=Shelter
+=======
+target24.name=Camera
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 target24.showInterface=false
 target24.type=ClassTarget
 target24.width=120
 target24.x=0
 target24.y=0
 target25.height=70
+<<<<<<< Updated upstream
+target25.name=Food
+=======
+<<<<<<< Updated upstream
 target25.name=Camera
+=======
+target25.name=ResourceScramble
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 target25.showInterface=false
 target25.type=ClassTarget
 target25.width=120
 target25.x=0
 target25.y=0
 target26.height=70
-target26.name=Food
+target26.name=PopupDisplay
 target26.showInterface=false
 target26.type=ClassTarget
 target26.width=120
@@ -490,6 +573,13 @@ target43.type=ClassTarget
 target43.width=120
 target43.x=0
 target43.y=0
+target44.height=70
+target44.name=Display
+target44.showInterface=false
+target44.type=ClassTarget
+target44.width=120
+target44.x=0
+target44.y=0
 target5.height=70
 target5.name=SchoolWorld
 target5.showInterface=false
@@ -525,8 +615,18 @@ target9.type=ClassTarget
 target9.width=120
 target9.x=0
 target9.y=0
+<<<<<<< Updated upstream
 version=3.1.0
+<<<<<<< Updated upstream
+width=1936
+world.lastInstantiated=GameRoom
+=======
 width=1456
+=======
+version=3.0.0
+width=2576
+>>>>>>> Stashed changes
 world.lastInstantiated=tempWorld
+>>>>>>> Stashed changes
 xPosition=0
 yPosition=0

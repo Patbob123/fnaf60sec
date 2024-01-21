@@ -14,6 +14,11 @@ public class Display extends Actor
         image.scale(100,100);
         setImage(image);
     }
+    public Display(GreenfootImage image, int x, int y){
+        this.image = image;
+        image.scale(x,y);
+        setImage(image);
+    }
     public void act()
     {
         // Add your action code here.

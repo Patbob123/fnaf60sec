@@ -8,18 +8,19 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class CameraMap extends Actor
 {
+    private GreenfootImage camMap;
+    private GreenfootImage cam;
     /**
-     * Display the map of the cameras
-     * Collapsable
-     * Set of buttons
-     * Background image
-     * Once touched the map button, display the bg and add all the other buttons
+     * Constructor for only the background of the main camera system
+     * 
+     * @param schoolMap     File name of school map
      */
-    private static GreenfootImage camMap;
-    public void act()
-    {
-        camMap = new GreenfootImage("translucentCamMap.PNG");
+    public CameraMap (String schoolMap) {
+        camMap = new GreenfootImage(schoolMap);
         camMap.scale((int)(camMap.getWidth()/2), (int)(camMap.getHeight()/2));
         setImage(camMap);
     }
+    
+    
 }
+    
