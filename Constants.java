@@ -17,6 +17,7 @@ public class Constants
         try {
             put("Food", Class.forName("Food"));
             put("Water", Class.forName("Water"));
+            put("Battery", Class.forName("Battery"));
         }catch (ClassNotFoundException e) {
             e.printStackTrace(); // Handle the exception according to your needs
         }
