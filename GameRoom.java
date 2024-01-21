@@ -1,4 +1,5 @@
 import greenfoot.*;
+import java.util.List;
 /**
  * Notes:
  * Make each night 1 minute, from 12am-6am (6mins per night)
@@ -112,6 +113,8 @@ public class GameRoom extends World {
                 removeObject(cam6);
                 removeObject(cam7);
                 removeObject(camMap);
+                List objects = getObjects(Camera.class);
+                if (objects != null) { removeObjects(objects); }
                 inCameras = false;
             }
         }
