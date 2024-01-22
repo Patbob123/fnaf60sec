@@ -46,7 +46,7 @@ public class tempWorld extends SuperWorld
     public void act(){
         inputMove();
         if(gameTimer.getTime() > 0){
-            Greenfoot.setWorld(new Crossroads());
+            Greenfoot.setWorld(new GameRoom());
         }
         timerBar.refresh(-gameTimer.getAct());
     }

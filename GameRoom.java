@@ -342,11 +342,4 @@ public class GameRoom extends World {
         }
     }
 
-    private void generateCamMap(){
-        addObject(camMap, CMXOffset, CMYOffset);
-        for (int i = 0; i < cams.length; i++){
-            cams[i] = new Button ("CAM" + (i+1), 20);
-            addObject(cams[i], camX[i], camY[i]);
-        }
-    }
 }

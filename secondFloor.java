@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class secondFloor extends World
 {
     private Button camButton;
-    Actor camMap= new CameraMap("translucentCamMap.PNG");
+    private Actor camMap= new CameraMap("translucentCamMap.PNG");
 
     private String cameraName;
 
