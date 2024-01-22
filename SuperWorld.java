@@ -37,7 +37,7 @@ public class SuperWorld extends World
         //init arraylist for file info
         fileInfo = new HashMap<String, String>();
         readFile("files/data.txt");
-        writeFile("TimSprite","goldtimmysprites.png");
+        writeFile("TimSprite","purpletimmysprites.png");
         saveFile("files/data.txt");
         //setting initial values for variables
         currActs = 0;
