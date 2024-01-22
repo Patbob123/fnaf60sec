@@ -16,8 +16,10 @@ public class PopupFader extends Effect
         this.maxDuration = maxDuration;
         this.reverse = reverse;
         fadeDuration = reverse ? maxDuration: 0;
-        popupImage = image;
-        popupImage.scale(20,20);
+        
+        popupImage = new GreenfootImage(image.getWidth(), image.getHeight());
+        popupImage.drawImage(image, 0, 0);
+        popupImage.scale(40,40);
         popupImage.setTransparency(255-(int)(((double)fadeDuration/maxDuration)*255));
         setImage(popupImage);
     }

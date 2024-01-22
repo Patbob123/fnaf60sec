@@ -23,6 +23,12 @@ public class Player extends Entity
     private int curIdle;
     private SimpleTimer animTimer; 
     
+    private GreenfootImage plusImage = new GreenfootImage("plus.png");
+    private GreenfootImage minusImage = new GreenfootImage("minus.png");
+    private GreenfootImage noImage = new GreenfootImage("no.png");
+    private Popup ePopup = new Popup(new GreenfootImage("E.png"));
+    private boolean showPopup;
+    
     public Player(){
         speed = 10;
         handSlots = new Inventory();
@@ -38,6 +44,8 @@ public class Player extends Entity
         curFrames = idleFrames[0];
         setImage(idleFrames[0][0]);
         collider = new Hitbox(getImage().getWidth()-speed,1);
+        
+        showPopup = false;
     }
     public void scaleIcon(GreenfootImage icon){
         //GreenfootImage icon = new GreenfootImage(imageUrl);
@@ -95,16 +103,28 @@ public class Player extends Entity
         z_sortAround();
         animate();
         if(timer.millisElapsed() >= Constants.PICKUP_COOLDOWN){
-            if(Greenfoot.isKeyDown("e")){
-                if(!isTouching(Shelter.class)){
-                    pickUp();
-                }else{
+            if(isTouching(Shelter.class)){
+                showPopup = true;
+                if(Greenfoot.isKeyDown("e")){
                     dropOff();
                 }
+            }else if(isTouching(Item.class)){
+                showPopup = true;
+                if(Greenfoot.isKeyDown("e")){
+                    pickUp();
+                }
+            }else{
+                showPopup = false;
             }
+            
             if(Greenfoot.isKeyDown("i")){
                 //System.out.println(itemChest.toString());
             }
+        }
+        if(showPopup){
+            getW().addObject(ePopup, getX(),getY()-120);
+        }else if(getW().getObjects(Popup.class).contains(ePopup)){
+            getW().removeObject(ePopup);
         }
     }
     protected void addedToWorld(World world){
@@ -173,22 +193,28 @@ public class Player extends Entity
                         
                         updateHandDisplay();
                         
-                        getWorld().addObject(new PopupFader(currentItem.getImage(),80,false), getX(),getY()-60);
-                        
-                        GreenfootImage textImage = new GreenfootImage(" + ", 40, Color.RED, new Color(0, 0, 0, 0));
-                        getWorld().addObject(new PopupFader(textImage,100,false), getX()-20, getY()-60);
+                        getW().addObject(new PopupFader(currentItem.getImage(),80,false), getX(),getY()-60);
+                        getW().addObject(new PopupFader(plusImage,100,false), getX()-50, getY()-60);
+                    }else{
+                        timer.mark();
+                        getW().addObject(new PopupFader(noImage,100,false), getX(), getY()-60);
                     }
                 }
             
     }
     
     public void dropOff(){
-            for(Item item: handSlots.getStorage()){
+            for(int i = 0; i < handSlots.getStorage().size(); i++){
+                Item item = handSlots.getStorage().get(i);
                 itemChest.add(item);
+                getW().addObject(new PopupFader(item.getImage(),80,false), getX(),getY()-60*(i+1));
+                getW().addObject(new PopupFader(minusImage,100,false), getX()-50, getY()-60*(i+1));
             }
             handSlots.getStorage().clear();
             handSlots.clearWeight();
             updateHandDisplay();
+            
+
     }
     public void updateHandDisplay(){
         getW().displayHandSlots();
