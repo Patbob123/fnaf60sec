@@ -17,20 +17,25 @@ public class GameRoom extends SuperWorld {
     private boolean rightDoorClosed;
     private int battery;
     private int maxBattery;
-
     private int actCounter;
     private int time; 
+    
+    private GreenfootImage[] bgFrames;  //images for background
+    private int currentIndex;
 
     //For cameras
-    private int CMXOffset = 1015;
-    private int CMYOffset = 156;
-
+    private int CMXOffset = 910;
+    private int CMYOffset = 603;
+    
     private int[] camX = {CMXOffset - 63,CMXOffset - 41, CMXOffset + 62, CMXOffset + 23, CMXOffset - 95, CMXOffset + 5, CMXOffset + 94};
     private int[] camY = {CMYOffset - 10, CMYOffset + 24, CMYOffset - 11, CMYOffset + 20, CMYOffset + 54, CMYOffset + 66, CMYOffset + 40};
 
     Button[] cams = new Button[7];
     private boolean inCameras;
+    Camera[] camWithEnemy;
+    Camera[] camWithNoEnemy;
 
+    
     private Button camButton;
 
     private int numClicks = 2;
@@ -61,9 +66,28 @@ public class GameRoom extends SuperWorld {
         leftDoorClosed = false;
         rightDoorClosed = false;
 
+        bgFrames = new GreenfootImage[7]; //7 bc idk how many images we have
+        for (int i = 0; i < 7; i++) {
+            bgFrames[i] = new GreenfootImage("bgFrames/frame" + i + ".png");  
+        }
+        
+        camWithEnemy = new Camera[7];
+        for (int i = 0; i < 7; i++) {
+            camWithEnemy[i] = new Camera(1, true, "Cameras/camera" + (i+1) + ".png");  
+        }
+        
+        camWithNoEnemy = new Camera[7]; 
+        for (int i = 0; i < 7; i++) {
+            camWithNoEnemy[i] = new Camera(1, false, "Cameras/camera" + (i+1) + "Empty" + ".png"); 
+        }
+        
+        currentIndex = 3;  //the middle
+        setBackground(bgFrames[currentIndex]);
+        
         GreenfootImage backgroundImage = new GreenfootImage("businessroom.png");
         camMap = new CameraMap("translucentCamMap.PNG");
 
+        /**
         c1 = new Camera(1, true, "Cameras/camera1.png");
         c1Empty = new Camera(1, false, "Cameras/camera1Empty.png");
         c2 = new Camera(1, true, "Cameras/camera2.png");
@@ -78,11 +102,12 @@ public class GameRoom extends SuperWorld {
         c6Empty = new Camera(1, false, "baby2.png");
         c7 = new Camera(1, true, "baby2.png");
         c7Empty = new Camera(1, false, "baby2.png");
+        */
+        
 
-        backgroundX = 100; //to set at middle
-        setBackground(backgroundImage);
-        updateBackgroundPosition();
-
+        //Presser leftButton = new Presser();
+        //Presser rightButton = new Presser();
+        
         wall1 = new Wall();
         wall2 = new Wall();
 
@@ -97,9 +122,6 @@ public class GameRoom extends SuperWorld {
 
         camButton = new Button("+", 40);
         addObject(camButton, 915, 734);
-
-        backgroundSpeed = 96;
-        backgroundX = (backgroundImage.getWidth() - getWidth()) / 2;
 
         em = new EnemyManager();
         addObject(em, getWidth() /2, getHeight()/2);
@@ -128,19 +150,18 @@ public class GameRoom extends SuperWorld {
                     generateCamMap();
                     //System.out.println("expanded" + numClicks);
                     numClicks--;
-                    openedCamMap = true;
+                    inCameras = true;
                 }else{
                     camButton.updateMe("+");
                     numClicks++;
                     removeCamera();
                     removeObject(camMap);
                     //System.out.println("collapsed" + numClicks);
-                    openedCamMap = false;
                     inCameras = false;
                 }
             }
-            if(openedCamMap){
-                cameras();
+            if(inCameras){
+                updateCam();
             }
             if(hM < 8 && hM > 6){
                 //System.out.println("Stage 1");
@@ -187,40 +208,16 @@ public class GameRoom extends SuperWorld {
     /**
      * Method to check if the mouse is moving 
      */
-    private void checkMouseMovement() {
-        MouseInfo mouse = Greenfoot.getMouseInfo();
-        if(mouse != null) {
-            int mouseXPos = mouse.getX();
-            int deltaX = mouseXPos - getWidth() / 2; 
+    public void checkMouseMovement() {
+        if (Greenfoot.mouseMoved(null)) {
+            int mouseX = Greenfoot.getMouseInfo().getX();
 
-            //move speed
-            backgroundX += deltaX * backgroundSpeed / getWidth(); 
+            int newIndex = (mouseX * bgFrames.length) / getWidth(); //calc for new index
 
-            //so that movement doesn't go past image size
-            int maxOffset = getBackground().getWidth() - getWidth();
-            backgroundX = Math.max(0, Math.min(maxOffset, backgroundX));
-
-            updateBackgroundPosition();
-            if (mouseXPos > getWidth() / 2) {
-                if(backgroundX > 30) {
-                    if(backgroundX > 101){
-                        addObject(wall2, getWidth() - 100 , getHeight() / 2);
-                        removeObject(wall1);
-                    }
-                    else wall1.setLocation(wall1.getX() - 5, wall1.getY());
-                }
-
-            } else if (mouseXPos < getWidth() / 2) {
-                if(backgroundX < 169) {
-                    if(backgroundX < 98){
-                        addObject(wall1, getWidth() - 1052, getHeight() / 2);
-                        removeObject(wall2);
-                    }
-                    else {
-                        wall2.setLocation(wall2.getX() + 5, wall2.getY());
-                    }
-                }
-
+            //set new background and index
+            if (newIndex != currentIndex) {
+                setBackground(bgFrames[newIndex]);
+                currentIndex = newIndex;
             }
         }
 
@@ -256,15 +253,23 @@ public class GameRoom extends SuperWorld {
     public void setBattery(int battery) {
         this.battery = Math.max(0, Math.min(maxBattery, battery));
     }
-
+    /**
+     * Set method for characters life status
+     */
     public void setAlive(boolean alive) {
         this.isAlive = alive;
     }
 
+    /**
+     * Get method for right door
+    */
     public boolean getRightDoor() {
         return rightDoorClosed;
     }
 
+    /**
+     * Get method for left door
+    */
     public boolean getLeftDoor() {
         return leftDoorClosed;
     }
@@ -276,19 +281,23 @@ public class GameRoom extends SuperWorld {
         return inCameras;
     }
 
-    private void updateCamera(Button camera){
+    public void updateCamera(Button camera, int stage, Camera cam, Camera empty){
         if (Greenfoot.mousePressed(camera)){
             camera.switchExpansion(241, 245, 39, 150);
+            clearCams();
             if (camera.isExpanded()){
-                System.out.println("cam" + camera + " is expanded");
-                if(em.getBgStage(1)){
-                    addObject(c1, getWidth()/2, getHeight()/2);
+                if(em.getBgStage(stage)){
+                    addObject(cam, getWidth()/2, getHeight()/2);
                 }
-                if(!em.getBgStage(1)) {
-                    addObject(c1Empty, getWidth()/2, getHeight()/2);
+                if(!em.getBgStage(stage)) {
+                    addObject(empty, getWidth()/2, getHeight()/2);
                 }
-            }else{
-                System.out.println("cam" + camera + " is collapsed");
+                if(em.getDStage(stage)){
+                    addObject(cam, getWidth()/2, getHeight()/2);
+                }
+                if(!em.getDStage(stage)) {
+                    addObject(empty, getWidth()/2, getHeight()/2);
+                }
             }
         }
     }
@@ -299,9 +308,9 @@ public class GameRoom extends SuperWorld {
         }
     }
 
-    private void cameras(){
+    private void updateCam(){
         for (int i = 0; i < cams.length; i++){
-            updateCamera(cams[i]);
+            updateCamera(cams[i], i+1, camWithEnemy[i], camWithNoEnemy[i]);
         }
     }
 
