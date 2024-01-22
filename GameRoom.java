@@ -2,18 +2,13 @@ import greenfoot.*;
 import java.util.List;
 import greenfoot.GreenfootImage;
 import greenfoot.Color;
+import java.util.Arrays;
 /**
  * Notes:
  * Make each night 1 minute, from 12am-6am (6mins per night)
  * Have battery percentage drain 1 every 5 seconds
  */
 public class GameRoom extends World {
-    private int backgroundX;
-    private int backgroundSpeed;
-    private Wall wall1;
-    private Wall wall2;
-    private Door Door1;
-    private Door Door2;
     private boolean isAlive;
     private boolean leftDoorClosed;
     private boolean rightDoorClosed;
@@ -22,12 +17,12 @@ public class GameRoom extends World {
     private int maxBattery;
 
     private GreenfootImage[] bgFrames;  //images for background
-    private int currentIndex;
+    private GreenfootImage[] doorFrames;
+    private int currentFrameIndex;
     
     Camera[] camWithEnemy;
     Camera[] camWithNoEnemy;
     
-    private int actCounter;
     private int time; 
 
     //For cameras
@@ -58,11 +53,10 @@ public class GameRoom extends World {
     private SimpleTimer timer;
 
     private CameraMap camMap;
-    private Camera c1, c1Empty, c2, c2Empty, c3, c3Empty, c4, c4Empty, c5, c5Empty, c6, c6Empty, c7, c7Empty;
     private Tile tiles[][];
     private Bar batteryBar;
     private EnemyManager em;
-
+    private Presser nextButton;
     private int visionTime;
     
     private VisionBlock fading;
@@ -72,7 +66,6 @@ public class GameRoom extends World {
      */
     public GameRoom() {
         super(Constants.WW, Constants.WH, 1);
-        actCounter = 0;
         time = 21600; // 6 minutes
         inCameras = false;
         leftDoorClosed = false;
@@ -81,6 +74,11 @@ public class GameRoom extends World {
         bgFrames = new GreenfootImage[7]; //7 bc idk how many images we have
         for (int i = 0; i < 7; i++) {
             bgFrames[i] = new GreenfootImage("bgFrames/frame" + i + ".png");  
+        }
+        
+        doorFrames = new GreenfootImage[2];
+        for (int i = 0; i < 2; i++) {
+            doorFrames[i] = new GreenfootImage("doorFrames/frame" + i + ".png");  
         }
         
         camWithEnemy = new Camera[7];
@@ -93,19 +91,15 @@ public class GameRoom extends World {
             camWithNoEnemy[i] = new Camera(1, false, "Cameras/camera" + (i+1) + "Empty" + ".png"); 
         }
         
-        currentIndex = 3;  //the middle
-        setBackground(bgFrames[currentIndex]);
+        currentFrameIndex = 3;  //the middle
+        setBackground(bgFrames[currentFrameIndex]);
         
         GreenfootImage backgroundImage = new GreenfootImage("businessroom.png");
         camMap = new CameraMap("translucentCamMapV2.PNG");
 
-
-        wall1 = new Wall();
-        wall2 = new Wall();
-
-        Door1 = new Door();
-        Door2 = new Door();
-
+        GreenfootImage startBut = new GreenfootImage("startButton.png");
+        nextButton = new Presser(leftDoor, startBut);
+        
         maxBattery = 100;
         battery = 50;
 
@@ -238,9 +232,9 @@ public class GameRoom extends World {
             int newIndex = (mouseX * bgFrames.length) / getWidth(); //calc for new index
             
             //set new background and index
-            if (newIndex != currentIndex) {
+            if (newIndex != currentFrameIndex) {
                 setBackground(bgFrames[newIndex]);
-                currentIndex = newIndex;
+                currentFrameIndex = newIndex;
             }
         }
     }   
@@ -333,4 +327,17 @@ public class GameRoom extends World {
         }
     }
 
+    public Function leftDoor = () -> {
+        leftDoorClosed = !leftDoorClosed;
+        GreenfootImage temp = bgFrames[0]; 
+        bgFrames[0] = doorFrames[0];
+        doorFrames[0] = temp;
+    };
+    
+    public Function rightDoor = () -> {
+        rightDoorClosed = !rightDoorClosed;
+        GreenfootImage temp = bgFrames[bgFrames.length]; 
+        bgFrames[bgFrames.length] = doorFrames[doorFrames.length];
+        doorFrames[doorFrames.length] = temp;
+    };
 }
