@@ -94,17 +94,15 @@ public class Player extends Entity
     {
         z_sortAround();
         animate();
-        if(timer.millisElapsed() >= Constants.PICKUP_COOLDOWN){
-            if(Greenfoot.isKeyDown("e")){
-                if(isTouching(Shelter.class)){
-                    dropOff();
-                }else{
-                    pickUp();
-                }
+        if("e".equals(Greenfoot.getKey())){
+            if(isTouching(Shelter.class)){
+                dropOff();
+            }else{
+                pickUp();
             }
-            if(Greenfoot.isKeyDown("i")){
-                //System.out.println(itemChest.toString());
-            }
+        }
+        if(Greenfoot.isKeyDown("i")){
+            //System.out.println(itemChest.toString());
         }
     }
     protected void addedToWorld(World world){
