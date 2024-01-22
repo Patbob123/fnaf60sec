@@ -29,13 +29,13 @@ public class Button extends Actor
      */
     public Button(String text, int textSize, String buttonType) {
         this(text, 20);
-        if ("plus".equals(buttonType)) {
-            plusButton = new Button("+", textSize);
-            getWorld().addObject(plusButton, getX() + getImage().getWidth() + 20, getY());
-        } else if ("minus".equals(buttonType)) {
-            minusButton = new Button("-", textSize);
-            getWorld().addObject(minusButton, getX() - minusButton.getImage().getWidth() - 20, getY());
-        }
+        // if ("plus".equals(buttonType)) {
+            // plusButton = new Button("+", textSize);
+            // getWorld().addObject(plusButton, getX() + getImage().getWidth() + 20, getY());
+        // } else if ("minus".equals(buttonType)) {
+            // minusButton = new Button("-", textSize);
+            // getWorld().addObject(minusButton, getX() - minusButton.getImage().getWidth() - 20, getY());
+        // }
     }
 
     /**
@@ -50,7 +50,19 @@ public class Button extends Actor
         this.textSize = textSize;
 
         // Draw a button with centered text:
-        updateMe(text);
+        //updateMe(text);
+        updateImage(12, 12, 12, 12);
+    }
+    
+    public Button(String text, int textSize, boolean bottomButton) {
+        // Assign value to my internal String
+        buttonText = text;
+        this.textSize = textSize;
+
+        // Draw a button with centered text:
+        if (bottomButton){
+            updateMe(text);
+        } 
     }
 
     /**
@@ -68,24 +80,24 @@ public class Button extends Actor
      */
     public void updateMe(String text) {
         buttonText = text;
-        GreenfootImage tempTextImage = new GreenfootImage(text, textSize, new Color(51, 4, 4), Color.WHITE);
-        myImage = new GreenfootImage(tempTextImage.getWidth() + 8, tempTextImage.getHeight() + 8);
-        myImage.setColor(Color.WHITE);
+        GreenfootImage tempTextImage = new GreenfootImage(text, textSize, Color.WHITE, new Color(0,0,0,0));
+        myImage = new GreenfootImage(tempTextImage.getWidth() + 238, tempTextImage.getHeight() + 2); //8
+        myImage.setColor(new Color(0,0,0,0));
+        myImage.setFont(new Font (text, true, false, 20));
         myImage.fill();
-        myImage.drawImage(tempTextImage, 4, 4);
-
-        myImage.setColor(new Color(51, 4, 4));
-        myImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 7);
+        myImage.drawImage(tempTextImage, 4,4); //4
+        myImage.setColor(Color.WHITE);
+        myImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 1); //7
         setImage(myImage);
 
-        tempTextImage = new GreenfootImage(text, textSize, Color.WHITE, Color.BLACK);
-        myAltImage = new GreenfootImage(tempTextImage.getWidth() + 8, tempTextImage.getHeight() + 8);
-        myAltImage.setColor(Color.WHITE);
+        tempTextImage = new GreenfootImage(text, textSize, Color.WHITE, Color.WHITE);
+        myAltImage = new GreenfootImage(tempTextImage.getWidth() + 238, tempTextImage.getHeight() + 2);
+        myAltImage.setFont(new Font (text, true, false, 20));
+        myAltImage.setColor(new Color(0,0,0,0));
         myAltImage.fill();
-        myAltImage.drawImage(tempTextImage, 4, 4);
-
+        myAltImage.drawImage(tempTextImage,4, 4);
         myAltImage.setColor(new Color(117, 11, 11));
-        myAltImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 7);
+        myAltImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 1); //8
     }
 
     public void switchExpansion(int r, int g, int b, double a){
@@ -130,27 +142,41 @@ public class Button extends Actor
         // myAltImage.fill();
         // myAltImage.drawImage(tempTextImage, 4, 4);
         // //setImage(myImage);
+        
+        // GreenfootImage tempTextImage = new GreenfootImage (buttonText, textSize, Color.WHITE, new Color(0,0,0,0));
+            // myImage = new GreenfootImage(tempTextImage.getWidth() + 8, tempTextImage.getHeight() + 8);
+
+            // myImage.setFont(new Font (buttonText, true, false, 20));
+            // myImage.setColor(new Color(0,0,0,0));
+            // myImage.fill(); 
+            // myImage.drawImage(tempTextImage, 4, 4);
+
+            // myImage.setColor(Color.WHITE);
+            // myImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 7);
+            // setImage(myImage);
 
         if (!expanded){
-            GreenfootImage tempTextImage = new GreenfootImage (buttonText, textSize, new Color(51, 4, 4), Color.WHITE);
+            GreenfootImage tempTextImage = new GreenfootImage (buttonText, textSize, Color.WHITE, new Color(0,0,0,0));
             myImage = new GreenfootImage(tempTextImage.getWidth() + 8, tempTextImage.getHeight() + 8);
 
-            myImage.setColor(Color.WHITE);
+            myImage.setFont(new Font (buttonText, true, false, 20));
+            myImage.setColor(new Color(0,0,0,0));
             myImage.fill(); 
             myImage.drawImage(tempTextImage, 4, 4);
 
-            myImage.setColor(new Color(51, 4, 4));
+            myImage.setColor(Color.WHITE);
             myImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 7);
             setImage(myImage);
         }else{
-            GreenfootImage tempAltImage = new GreenfootImage(buttonText, textSize, new Color(51, 4, 4), new Color(r, g, b, 60));
+            GreenfootImage tempAltImage = new GreenfootImage(buttonText, textSize, Color.WHITE, new Color(r, g, b, 60));
             myAltImage = new GreenfootImage(tempAltImage.getWidth() + 8, tempAltImage.getHeight() + 8);
 
+            myAltImage.setFont(new Font (buttonText, true, false, 20));
             myAltImage.setColor(new Color(r, g, b, 160));
             myAltImage.fill();
             myAltImage.drawImage(tempAltImage, 4, 4);
 
-            myAltImage.setColor(new Color(51, 4, 4));
+            myAltImage.setColor(Color.WHITE);
             myAltImage.drawRect(0, 0, tempAltImage.getWidth() + 7, tempAltImage.getHeight() + 7);
             setImage(myAltImage);
         }

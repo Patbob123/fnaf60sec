@@ -25,8 +25,8 @@ public class GameRoom extends World {
     private int CMXOffset = 910;
     private int CMYOffset = 603;
 
-    private int[] camX = {CMXOffset - 63,CMXOffset - 41, CMXOffset + 62, CMXOffset + 23, CMXOffset - 95, CMXOffset + 5, CMXOffset + 94};
-    private int[] camY = {CMYOffset - 10, CMYOffset + 24, CMYOffset - 11, CMYOffset + 20, CMYOffset + 54, CMYOffset + 66, CMYOffset + 40};
+    private int[] camX = {CMXOffset - 63,CMXOffset - 41, CMXOffset - 95, CMXOffset + 62, CMXOffset + 23, CMXOffset + 94, CMXOffset + 5};
+    private int[] camY = {CMYOffset - 10, CMYOffset + 24, CMYOffset + 54, CMYOffset - 11, CMYOffset + 20, CMYOffset + 40, CMYOffset + 66};
 
     Button[] cams = new Button[7];
     private boolean inCameras;
@@ -62,7 +62,7 @@ public class GameRoom extends World {
         rightDoorClosed = false;
 
         GreenfootImage backgroundImage = new GreenfootImage("businessroom.png");
-        camMap = new CameraMap("translucentCamMap.PNG");
+        camMap = new CameraMap("translucentCamMapV2.PNG");
 
         c1 = new Camera(1, true, "Cameras/camera1.png");
         c1Empty = new Camera(1, false, "Cameras/camera1Empty.png");
@@ -95,7 +95,7 @@ public class GameRoom extends World {
         batteryBar = new Bar(maxBattery, "energyIcon.png", new Color(0, 255, 255));
         addObject(batteryBar, 1101, 27);
 
-        camButton = new Button("+", 40);
+        camButton = new Button("AAAAAAAAAAAAAAAAAAAAAAA", 20, true);
         addObject(camButton, 915, 734);
 
         backgroundSpeed = 96;
@@ -124,13 +124,13 @@ public class GameRoom extends World {
             if (Greenfoot.mousePressed(camButton)){
                 //System.out.println(numClicks);
                 if(numClicks == 2){
-                    camButton.updateMe("-");
+                    camButton.updateMe("VVVVVVVVVVVVVVVVVVVVVVV");
                     generateCamMap();
                     //System.out.println("expanded" + numClicks);
                     numClicks--;
                     openedCamMap = true;
                 }else{
-                    camButton.updateMe("+");
+                    camButton.updateMe("AAAAAAAAAAAAAAAAAAAAAAA");
                     numClicks++;
                     removeCamera();
                     removeObject(camMap);
