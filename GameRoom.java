@@ -22,8 +22,8 @@ public class GameRoom extends World {
     private int time; 
 
     //For cameras
-    private int CMXOffset = 910;
-    private int CMYOffset = 603;
+    private int CMXOffset = 1015;
+    private int CMYOffset = 622;
 
     private int[] camX = {CMXOffset - 63,CMXOffset - 41, CMXOffset - 95, CMXOffset + 62, CMXOffset + 23, CMXOffset + 94, CMXOffset + 5};
     private int[] camY = {CMYOffset - 10, CMYOffset + 24, CMYOffset + 54, CMYOffset - 11, CMYOffset + 20, CMYOffset + 40, CMYOffset + 66};
@@ -95,8 +95,8 @@ public class GameRoom extends World {
         batteryBar = new Bar(maxBattery, "energyIcon.png", new Color(0, 255, 255));
         addObject(batteryBar, 1101, 27);
 
-        camButton = new Button("AAAAAAAAAAAAAAAAAAAAAAA", 20, true);
-        addObject(camButton, 915, 734);
+        camButton = new Button("AAAAAAAAAAAAAAAAAAAAA", 20, true);
+        addObject(camButton, 1129, 741);
 
         backgroundSpeed = 96;
         backgroundX = (backgroundImage.getWidth() - getWidth()) / 2;
@@ -130,7 +130,7 @@ public class GameRoom extends World {
                     numClicks--;
                     openedCamMap = true;
                 }else{
-                    camButton.updateMe("AAAAAAAAAAAAAAAAAAAAAAA");
+                    camButton.updateMe("AAAAAAAAAAAAAAAAAAAAA");
                     numClicks++;
                     removeCamera();
                     removeObject(camMap);

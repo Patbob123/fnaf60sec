@@ -15,7 +15,7 @@ public class CameraMap extends Actor
      * @param schoolMap     File name of school map
      */
     public CameraMap (String schoolMap) {
-        camMap = new GreenfootImage("translucentCamMap.PNG");
+        camMap = new GreenfootImage("translucentCamMapV2.PNG");
         camMap.scale((int)(camMap.getWidth()/2), (int)(camMap.getHeight()/2));
         setImage(camMap);
     }
