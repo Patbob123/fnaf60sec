@@ -23,10 +23,10 @@ public class GameRoom extends World {
 
     private GreenfootImage[] bgFrames;  //images for background
     private int currentIndex;
-    
+
     Camera[] camWithEnemy;
     Camera[] camWithNoEnemy;
-    
+
     private int actCounter;
     private int time; 
 
@@ -34,9 +34,9 @@ public class GameRoom extends World {
     private int CMXOffset = 1015;
     private int CMYOffset = 622;
 
-    private int[] camX = {CMXOffset - 63,CMXOffset - 41, CMXOffset - 95, CMXOffset + 62, CMXOffset + 23, CMXOffset + 94, CMXOffset + 5};
-    private int[] camY = {CMYOffset - 10, CMYOffset + 24, CMYOffset + 54, CMYOffset - 11, CMYOffset + 20, CMYOffset + 40, CMYOffset + 66};
-
+    private int[] camX = {CMXOffset - 95,CMXOffset - 41, CMXOffset - 63, CMXOffset + 94, CMXOffset + 23, CMXOffset + 62, CMXOffset + 5};
+    private int[] camY = {CMYOffset + 54, CMYOffset + 24, CMYOffset - 10, CMYOffset + 40, CMYOffset + 20, CMYOffset - 11, CMYOffset + 66};
+    
     Button[] cams = new Button[7];
     private boolean inCameras;
 
@@ -66,7 +66,7 @@ public class GameRoom extends World {
     private EnemyManager em;
 
     private VisionBlock fading;
-    
+
     /**
      * Constructor for GameRoom
      */
@@ -80,25 +80,24 @@ public class GameRoom extends World {
 
         bgFrames = new GreenfootImage[7]; //7 bc idk how many images we have
         for (int i = 0; i < 7; i++) {
-            bgFrames[i] = new GreenfootImage("bgFrames/frame" + i + ".png");  
+            bgFrames[i] = new GreenfootImage("bgFrames/frame" + i + ".jpg");  
         }
-        
+
         camWithEnemy = new Camera[7];
         for (int i = 0; i < 7; i++) {
             camWithEnemy[i] = new Camera(1, true, "Cameras/camera" + (i+1) + ".png");  
         }
-        
+
         camWithNoEnemy = new Camera[7]; 
         for (int i = 0; i < 7; i++) {
             camWithNoEnemy[i] = new Camera(1, false, "Cameras/camera" + (i+1) + "Empty" + ".png"); 
         }
-        
+
         currentIndex = 3;  //the middle
         setBackground(bgFrames[currentIndex]);
-        
+
         GreenfootImage backgroundImage = new GreenfootImage("businessroom.png");
         camMap = new CameraMap("translucentCamMapV2.PNG");
-
 
         wall1 = new Wall();
         wall2 = new Wall();
@@ -115,7 +114,6 @@ public class GameRoom extends World {
         camButton = new Button("AAAAAAAAAAAAAAAAAAAAA", 20, true);
         addObject(camButton, 1129, 741);
 
-
         em = new EnemyManager();
         addObject(em, getWidth() /2, getHeight()/2);
 
@@ -123,7 +121,6 @@ public class GameRoom extends World {
 
         setPaintOrder(Button.class, Bar.class, VisionBlock.class);
     }
-    
 
     public void act() {
         time--;
@@ -180,9 +177,9 @@ public class GameRoom extends World {
         if (wB != 0){
             fading = new VisionBlock (Constants.WW, Constants.WH,  100-(int)((wB/maxWB)*100));
             addObject(fading, Constants.WW/2, Constants.WH/2);
-            
+
             //The entire screen darkens gradually as time elaspses
-            
+
             //add if statements when the player drinks water => visionTime += 100;
             // if (wB < 8 && wB >6){
             // //
@@ -230,7 +227,7 @@ public class GameRoom extends World {
         if (Greenfoot.mouseMoved(null)) {
             int mouseX = Greenfoot.getMouseInfo().getX();
             int newIndex = (mouseX * bgFrames.length) / getWidth(); //calc for new index
-            
+
             //set new background and index
             if (newIndex != currentIndex) {
                 setBackground(bgFrames[newIndex]);
@@ -238,6 +235,7 @@ public class GameRoom extends World {
             }
         }
     }   
+
     /**
      * Method to generate layout of cameras
      */
@@ -268,21 +266,24 @@ public class GameRoom extends World {
     public void setBattery(int battery) {
         this.battery = Math.max(0, Math.min(maxBattery, battery));
     }
+
     /**
      * Set method for characters life status
      */
     public void setAlive(boolean alive) {
         this.isAlive = alive;
     }
+
     /**
      * Get method for right door
-    */
+     */
     public boolean getRightDoor() {
         return rightDoorClosed;
     }
+
     /**
      * Get method for left door
-    */
+     */
     public boolean getLeftDoor() {
         return leftDoorClosed;
     }
@@ -313,8 +314,8 @@ public class GameRoom extends World {
                 }
             }
         }
-        }
-    
+    }
+
     private void removeCamera(){
         for (int i = 0; i < cams.length; i++){
             removeObject(cams[i]);
