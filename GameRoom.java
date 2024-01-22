@@ -48,10 +48,10 @@ public class GameRoom extends World {
         
         GreenfootImage backgroundImage = new GreenfootImage("businessroom.png");
         camMap = new CameraMap("translucentCamMap.PNG");
-        c1 = new Camera(1, true, "baby2.png");
-        c1Empty = new Camera(1, false, "baby2.png");
-        c2 = new Camera(1, true, "baby2.png");
-        c2Empty = new Camera(1, false, "baby2.png");
+        c1 = new Camera(1, true, "Cameras/camera1.png");
+        c1Empty = new Camera(1, false, "Cameras/camera1Empty.png");
+        c2 = new Camera(1, true, "Cameras/camera2.png");
+        c2Empty = new Camera(1, false, "Cameras/camera2Empty.png");
         c3 = new Camera(1, true, "baby2.png");
         c3Empty = new Camera(1, false, "baby2.png");
         c4 = new Camera(1, true, "baby2.png");
@@ -83,16 +83,17 @@ public class GameRoom extends World {
         backgroundX = (backgroundImage.getWidth() - getWidth()) / 2;
         
         em = new EnemyManager();
-        
+        addObject(em, getWidth() /2, getHeight()/2);
         setPaintOrder(Button.class, BatteryBar.class);
     }
     
     
     public void act() {
         timer--;
-        if(timer < 21300) { //spawn them after 30 seconds
-            em.spawnBg();
-            em.spawnDaniel();
+        
+        if(timer == 21300) { //spawn them after 30 seconds
+            em.setDStageOne(true);
+            em.setBgStageOne(true);
         }
         
         //to open and reopen the cameras
@@ -121,78 +122,72 @@ public class GameRoom extends World {
         
         //black guy cameras
         if(Greenfoot.mousePressed(cam1)) {
-            if(em.getBgLocant() == 1) {
-                if(em.getBgStage(1)){
-                    addObject(c1, getWidth()/2, getHeight()/2);
-                }
-                else if(!em.getBgStage(1)){
-                    addObject(c1Empty, getWidth()/2, getHeight()/2);
-                }
+            clearCams();
+            if(em.getBgStage(1)){
+                addObject(c1, getWidth()/2, getHeight()/2);
+            }
+            if(!em.getBgStage(1)) {
+                addObject(c1Empty, getWidth()/2, getHeight()/2);
             }
         }
         if(Greenfoot.mousePressed(cam2)) {
-            if(em.getBgLocant() == 2) {
-                if(em.getBgStage(1)){
-                    addObject(c2, getWidth()/2, getHeight()/2);
-                }
-                else if(!em.getBgStage(2)){
-                    addObject(c2Empty, getWidth()/2, getHeight()/2);
-                }
+            clearCams();
+            if(em.getBgStage(2)){
+                addObject(c2, getWidth()/2, getHeight()/2);
+            }
+            if(!em.getBgStage(2)){
+                addObject(c2Empty, getWidth()/2, getHeight()/2);
             }
         }
         if(Greenfoot.mousePressed(cam3)) {
-            if(em.getBgLocant() == 3) {
-                if(em.getBgStage(3)){
-                    addObject(c3, getWidth()/2, getHeight()/2);
-                }
-                else if(!em.getBgStage(3)){
-                    addObject(c3Empty, getWidth()/2, getHeight()/2);
-                }
+            clearCams();
+            if(em.getBgStage(3)){
+                addObject(c3, getWidth()/2, getHeight()/2);
+            }
+            if(!em.getBgStage(3)){
+                addObject(c3Empty, getWidth()/2, getHeight()/2);
             }
         }
 
         //for daniel cameras
         if(Greenfoot.mousePressed(cam4)) {
-            if(em.getDLocant() == 4) {
-                if(em.getDStage(1)){
-                    addObject(c4, getWidth()/2, getHeight()/2);
-                }
-                else if(!em.getDStage(1)){
-                    addObject(c4Empty, getWidth()/2, getHeight()/2);
-                }
+            clearCams();
+            if(em.getDStage(4)){
+                addObject(c4, getWidth()/2, getHeight()/2);
+            }
+            if(!em.getDStage(4)){
+                addObject(c4Empty, getWidth()/2, getHeight()/2);
             }
         }
         if(Greenfoot.mousePressed(cam5)) {
-            if(em.getDLocant() == 5) {
-                if(em.getDStage(5)){
-                    addObject(c5, getWidth()/2, getHeight()/2);
-                }
-                else if(!em.getDStage(5)){
-                    addObject(c5Empty, getWidth()/2, getHeight()/2);
-                }
+            clearCams();
+            if(em.getDStage(5)){
+                addObject(c5, getWidth()/2, getHeight()/2);
+            }
+            if(!em.getDStage(5)){
+                addObject(c5Empty, getWidth()/2, getHeight()/2);
             }
         }
         if(Greenfoot.mousePressed(cam6)) {
-            if(em.getDLocant() == 6) {
-                if(em.getDStage(6)){
-                    addObject(c3, getWidth()/2, getHeight()/2);
-                }
-                else if(!em.getDStage(6)){
-                    addObject(c6Empty, getWidth()/2, getHeight()/2);
-                }
+            clearCams();
+            if(em.getDStage(6)){
+                addObject(c3, getWidth()/2, getHeight()/2);
             }
+            if(!em.getDStage(6)){
+                addObject(c6Empty, getWidth()/2, getHeight()/2);
+            }
+            
         }
         
         //for daniel??
         if(Greenfoot.mousePressed(cam7)) {
-            if(em.getDLocant() == 7) {
-                if(em.getDStage(7)){
-                    addObject(c7, getWidth()/2, getHeight()/2);
-                }
-                else if(!em.getDStage(7)){
-                    addObject(c7Empty, getWidth()/2, getHeight()/2);
-                }
+            clearCams();
+            if(em.getDStage(7)){
+                addObject(c7, getWidth()/2, getHeight()/2);
             }
+            if(!em.getDStage(7)){
+                addObject(c7Empty, getWidth()/2, getHeight()/2);
+            }           
         }
         
         if(timer % 300 == 0) {
@@ -215,6 +210,11 @@ public class GameRoom extends World {
         
         
         
+    }
+    
+    public void clearCams() {
+        List objects = getObjects(Camera.class);
+        if (objects != null) { removeObjects(objects); }
     }
     
     /**
