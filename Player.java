@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.awt.image.BufferedImage;
 
+
 /**
  * Write a description of class Character here.
  * 
@@ -27,7 +28,7 @@ public class Player extends Entity
     private GreenfootImage noImage = new GreenfootImage("no.png");
     private Popup ePopup = new Popup(new GreenfootImage("E.png"));
     private boolean showPopup;
-    private String spriteSheetUrl = "goldtimmysprites.png";
+    private String spriteSheetUrl = "timmysprites.png";
     
     public Player(){
         speed = 10;
@@ -38,11 +39,9 @@ public class Player extends Entity
         idleFrames = new GreenfootImage[6][4];
         walkingFrames = new GreenfootImage[6][6];
         //setIcon("tempson.png");
-        loadSprites(idleFrames, 0);
-        loadSprites(walkingFrames, 128);
-        curFrames = idleFrames[0];
-        setImage(idleFrames[0][0]);
-        collider = new Hitbox(getImage().getWidth()-speed,1);
+        
+        
+       
         
         showPopup = false;
     }
@@ -104,6 +103,11 @@ public class Player extends Entity
         interact();
     }
     protected void addedToWorld(World world){
+        spriteSheetUrl = getW().getFile("TimSprite");
+        loadSprites(idleFrames, 0);
+        loadSprites(walkingFrames, 128);
+        
+        collider = new Hitbox(getImage().getWidth()-speed,1);
         world.addObject(collider, getX(), getY());
     }
     private void z_sortAround(){
