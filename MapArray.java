@@ -20,6 +20,35 @@ public class MapArray
         map = new Tile[50][50];
         itemLayer = new Tile[50][50];
         
+        
+        map = convertMap(createMap(), map);
+        //fillWalls(map);
+        setWalls(map);
+        
+    }
+    public String[][] createMap(){
+        String[][] mapString = new String[][]{
+            {"-", "-", "-", "-" }, 
+            {"-", "W", "W", "-" }, 
+            {"-", "W", "W", "-" }, 
+            {"-", "-", "-", "-" }, 
+            {"-", "-", "-", "-" }, 
+            
+        };
+        return mapString;
+    }
+    public Tile[][] convertMap(String[][] mapString, Tile[][] map){
+        map = new Tile[mapString.length][mapString[0].length];
+        for(int i = 0; i < map.length; i++){
+            for(int j = 0; j < map[0].length; j++){
+                String type = mapString[i][j];
+                map[i][j] = createTile(type);
+                itemLayer[i][j] = generateItem(type);
+            }
+        }
+        return map;
+    }
+    public Tile[][] randomMap(Tile[][] map){
         for(int i = 0; i < map.length; i++){
             for(int j = 0; j < map[0].length; j++){
                 String type = "-";
@@ -33,12 +62,8 @@ public class MapArray
                 itemLayer[i][j] = generateItem(type);
             }
         }
-        
-        fillWalls(map);
-        setWalls(map);
-        
+        return map;
     }
-    
      public Tile createTile(String type){
          try{
             return (Tile)Constants.tileHash.get(type).newInstance();

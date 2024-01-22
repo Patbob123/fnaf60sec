@@ -163,7 +163,7 @@ public class GameRoom extends World {
             batteryBar.refresh(battery);
         }
         if(!inCameras) {
-            checkMouseMovement();
+            //checkMouseMovement();
         }
         if(time % 3600 == 0) {
             //switch to next hour on clock
