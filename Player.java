@@ -14,7 +14,6 @@ public class Player extends Entity
     private Hitbox collider;
     private Inventory handSlots;
     private ArrayList<Item> itemChest;
-    private SimpleTimer timer;
     private int speed;
     private GreenfootImage[][] idleFrames;
     private GreenfootImage[][] walkingFrames;
@@ -33,7 +32,6 @@ public class Player extends Entity
         speed = 10;
         handSlots = new Inventory();
         itemChest = new ArrayList<>();
-        timer = new SimpleTimer();
         animTimer = new SimpleTimer();
         
         idleFrames = new GreenfootImage[6][4];
@@ -102,30 +100,7 @@ public class Player extends Entity
     {
         z_sortAround();
         animate();
-        if(timer.millisElapsed() >= Constants.PICKUP_COOLDOWN){
-            if(isTouching(Shelter.class)){
-                showPopup = true;
-                if(Greenfoot.isKeyDown("e")){
-                    dropOff();
-                }
-            }else if(isTouching(Item.class)){
-                showPopup = true;
-                if(Greenfoot.isKeyDown("e")){
-                    pickUp();
-                }
-            }else{
-                showPopup = false;
-            }
-            
-            if(Greenfoot.isKeyDown("i")){
-                //System.out.println(itemChest.toString());
-            }
-        }
-        if(showPopup){
-            getW().addObject(ePopup, getX(),getY()-120);
-        }else if(getW().getObjects(Popup.class).contains(ePopup)){
-            getW().removeObject(ePopup);
-        }
+        interact();
     }
     protected void addedToWorld(World world){
         world.addObject(collider, getX(), getY());
@@ -167,39 +142,37 @@ public class Player extends Entity
     }
     public void pickUp(){
             
-                ArrayList<Item> nearbyObjects = (ArrayList<Item>)getObjectsInRange(100, Item.class);
-                if(nearbyObjects.size() > 0){
-    
-                    Item nearestItem = null;
-                    Item currentItem = null;
-                    double nearestDistance = 100;
-                    double currentDistance;
-                    
-                    for(int i = 0; i< nearbyObjects.size(); i++){
-                        currentItem = nearbyObjects.get(i);
-                        currentDistance = getDistance(currentItem);
-                        if(currentDistance < nearestDistance){
-                            nearestItem = currentItem;
-                            nearestDistance = currentDistance;
-                        }
-                    }
-                    
-                    if(handSlots.canPickup(currentItem.getWeight())){
-                        handSlots.addWeight(currentItem.getWeight());
-                        handSlots.getStorage().add(currentItem);
-                                        
-                        timer.mark();
-                        getW().getVP().removeItem(currentItem);
-                        
-                        updateHandDisplay();
-                        
-                        getW().addObject(new PopupFader(currentItem.getImage(),80,false), getX(),getY()-60);
-                        getW().addObject(new PopupFader(plusImage,100,false), getX()-50, getY()-60);
-                    }else{
-                        timer.mark();
-                        getW().addObject(new PopupFader(noImage,100,false), getX(), getY()-60);
-                    }
+        ArrayList<Item> nearbyObjects = (ArrayList<Item>)getObjectsInRange(100, Item.class);
+        if(nearbyObjects.size() > 0){
+
+            Item nearestItem = null;
+            Item currentItem = null;
+            double nearestDistance = 100;
+            double currentDistance;
+            
+            for(int i = 0; i< nearbyObjects.size(); i++){
+                currentItem = nearbyObjects.get(i);
+                currentDistance = getDistance(currentItem);
+                if(currentDistance < nearestDistance){
+                    nearestItem = currentItem;
+                    nearestDistance = currentDistance;
                 }
+            }
+            
+            if(handSlots.canPickup(currentItem.getWeight())){
+                handSlots.addWeight(currentItem.getWeight());
+                handSlots.getStorage().add(currentItem);
+                                
+                getW().getVP().removeItem(currentItem);
+                
+                updateHandDisplay();
+                
+                getW().addObject(new PopupFader(currentItem.getImage(),80,false), getX(),getY()-60);
+                getW().addObject(new PopupFader(plusImage,100,false), getX()-50, getY()-60);
+            }else{
+                getW().addObject(new PopupFader(noImage,100,false), getX(), getY()-60);
+            }
+        }
             
     }
     
@@ -215,6 +188,37 @@ public class Player extends Entity
             updateHandDisplay();
             
 
+    }
+    public void interact(){
+
+        String key = Greenfoot.getKey();
+        if(isTouching(Shelter.class)){
+            showPopup = true;
+            if(key != null){
+                if(key.toLowerCase().equals("e")){
+                    dropOff();
+                }
+            }
+        }else if(isTouching(Item.class)){
+            showPopup = true;
+            if(key != null){
+                if(key.toLowerCase().equals("e")){
+                    pickUp();
+                }
+            }
+        }else{
+            showPopup = false;
+        }
+        
+        if(Greenfoot.isKeyDown("i")){
+            //System.out.println(itemChest.toString());
+        }
+        
+        if(showPopup){
+            getW().addObject(ePopup, getX(),getY()-120);
+        }else if(getW().getObjects(Popup.class).contains(ePopup)){
+            getW().removeObject(ePopup);
+        }
     }
     public void updateHandDisplay(){
         getW().displayHandSlots();
