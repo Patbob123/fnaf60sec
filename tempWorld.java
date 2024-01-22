@@ -77,14 +77,14 @@ public class tempWorld extends World
             for(int j = 0; j < item.getWeight(); j++){
                 GreenfootImage image = new GreenfootImage(item+".png");
                 if(j!=0) image.setTransparency(80);
-                addObject(new Display(image), 200*curIndex + 100, 500);
+                addObject(new Display(image), 200*curIndex + 275, 650);
                 curIndex++;
             }
 
         }
         for(int i = curIndex; i < 4; i++){
             GreenfootImage image = new GreenfootImage("hand.png");
-            addObject(new Display(image),200*i + 100,500);
+            addObject(new Display(image),200*i + 275,650);
         }
     }
     public String [] arrayListToArray(ArrayList<String> array){
