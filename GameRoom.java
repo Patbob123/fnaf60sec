@@ -22,8 +22,8 @@ public class GameRoom extends World {
     private int time; 
 
     //For cameras
-    private int CMXOffset = 1015;
-    private int CMYOffset = 156;
+    private int CMXOffset = 910;
+    private int CMYOffset = 603;
 
     private int[] camX = {CMXOffset - 63,CMXOffset - 41, CMXOffset + 62, CMXOffset + 23, CMXOffset - 95, CMXOffset + 5, CMXOffset + 94};
     private int[] camY = {CMYOffset - 10, CMYOffset + 24, CMYOffset - 11, CMYOffset + 20, CMYOffset + 54, CMYOffset + 66, CMYOffset + 40};
