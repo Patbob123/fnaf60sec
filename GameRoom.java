@@ -48,7 +48,7 @@ public class GameRoom extends World {
     private CameraMap camMap;
     private Camera c1, c1Empty, c2, c2Empty, c3, c3Empty, c4, c4Empty, c5, c5Empty, c6, c6Empty, c7, c7Empty;
     private Tile tiles[][];
-    private BatteryBar batteryBar;
+    private Bar batteryBar;
     private EnemyManager em;
     /**
      * Constructor for GameRoom
@@ -92,7 +92,7 @@ public class GameRoom extends World {
         maxBattery = 100;
         battery = 50;
 
-        batteryBar = new BatteryBar(battery);
+        batteryBar = new Bar(maxBattery, "energyIcon.png", new Color(0, 255, 255));
         addObject(batteryBar, 1101, 27);
 
         camButton = new Button("+", 40);
@@ -106,7 +106,7 @@ public class GameRoom extends World {
 
         timer = new SimpleTimer();
 
-        setPaintOrder(Button.class, BatteryBar.class);
+        setPaintOrder(Button.class, Bar.class);
     }
 
     public void act() {
@@ -160,7 +160,7 @@ public class GameRoom extends World {
 
         if(time % 300 == 0) {
             battery-=10; //temporary. is supposed to be 1
-            batteryBar.updateBar(battery);
+            batteryBar.refresh(battery);
         }
         if(!inCameras) {
             checkMouseMovement();

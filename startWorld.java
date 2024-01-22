@@ -7,13 +7,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class startWorld extends SuperWorld
 {   
-    WorldManager wManager;
     private GreenfootImage startBg = new GreenfootImage("start.png");
     
     public startWorld()
     {    
         super(1152, 768, 1);
-        wManager = new WorldManager();
         
         setBackground(startBg);
         //$addObject(fisho,0,0);
