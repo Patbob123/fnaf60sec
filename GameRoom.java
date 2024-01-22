@@ -34,8 +34,8 @@ public class GameRoom extends World {
     private int CMXOffset = 1015;
     private int CMYOffset = 622;
 
-    private int[] camX = {CMXOffset - 95,CMXOffset - 41, CMXOffset - 63, CMXOffset + 94, CMXOffset + 23, CMXOffset + 62, CMXOffset + 5};
-    private int[] camY = {CMYOffset + 54, CMYOffset + 24, CMYOffset - 10, CMYOffset + 40, CMYOffset + 20, CMYOffset - 11, CMYOffset + 66};
+    private int[] camX = {CMXOffset - 63,CMXOffset - 41, CMXOffset - 95, CMXOffset + 62, CMXOffset + 23, CMXOffset + 94, CMXOffset + 5};
+    private int[] camY = {CMYOffset - 10, CMYOffset + 24, CMYOffset + 54, CMYOffset - 11, CMYOffset + 20, CMYOffset + 40, CMYOffset + 66};
 
     Button[] cams = new Button[7];
     private boolean inCameras;
