@@ -8,6 +8,7 @@ import java.util.HashMap;
 public class Constants  
 {
     public static final int SCALE = 4;
+    public static final int EYE_SWITCH = 5000;
     public static final int PICKUP_COOLDOWN = 100; 
     public static final int ANIM_SPEED = 100; 
     public static final int TILE_LEN = 32*SCALE;

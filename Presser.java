@@ -18,9 +18,7 @@ public class Presser extends Actor
     
     private boolean hovering;
     
-    private int increment;
-    private String augment;
-    private Enemy enemy;
+
     
     /**
      * Constructor for Presser
@@ -32,7 +30,7 @@ public class Presser extends Actor
         buttonImage = new GreenfootImage(buttonFile);
         hoverButtonImage = new GreenfootImage(hoverButtonFile);
         Util.scale(buttonImage);
-        Util.scale(hoverButtonImage);
+        Util.scale(hoverButtonImage);   
         setImage(buttonImage);
         action = buttonAction;
     }
@@ -43,7 +41,6 @@ public class Presser extends Actor
      * @param buttonFile         The image of the button
      */
     public Presser(Function buttonAction, GreenfootImage buttonImage){
-        Util.scale(buttonImage);
         setImage(buttonImage);
         action = buttonAction;
     }

@@ -69,7 +69,6 @@ public class Viewport extends Actor
         
     }
     public void removeItem(Item item){
-        System.out.println("ASD");
         Tile[][] items = getW().getMap().getItems();
         for(int i = 0; i < items.length; i++){
             for(int j = 0; j < items[0].length; j++){

@@ -1,4 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.File;
+import java.util.ArrayList;
+import java.io.FileWriter;
+import java.util.HashMap;
+import java.util.Map;
+import java.io.IOException;
 
 /**
  * Superworld is a wrapper class of all the worlds, does not need to be abstract
@@ -14,6 +22,9 @@ public class SuperWorld extends World
     protected int currActs;
     protected boolean goingToWorld;
     private World world;
+    
+    private HashMap<String, String> fileInfo;
+    
     /**
      * Constructor for SuperWorld
      * 
@@ -23,6 +34,11 @@ public class SuperWorld extends World
     {    
         super(width, height, pixel); 
         
+        //init arraylist for file info
+        fileInfo = new HashMap<String, String>();
+        readFile("files/data.txt");
+        writeFile("TimSprite","goldtimmysprites.png");
+        saveFile("files/data.txt");
         //setting initial values for variables
         currActs = 0;
         goingToWorld = false;
@@ -31,12 +47,7 @@ public class SuperWorld extends World
         addObject(sm, 0, 0);
         
         setPaintOrder(  
-            Popup.class,
             Presser.class,
-            
-            
-            
-            
             Effect.class,
             SuperSmoothMover.class,
             Enemy.class
@@ -48,6 +59,89 @@ public class SuperWorld extends World
         
         //add fader object to fade in on creation
         addObject(fade, Constants.WW/2, Constants.WH/2);
+    }
+    
+    /**
+     * Loads from Greenfoot Database
+     * 
+     * @param index
+     */
+    public String getGreenfootUser(int index){
+        if (UserInfo.isStorageAvailable()) {
+             UserInfo info = UserInfo.getMyInfo();
+             return info.getString(index);
+            
+         }
+         return"";
+    }
+    
+    /**
+     * Saves to Greenfoot Database
+     * 
+     * @param index
+     * @param s
+     */
+    public void writeGreenfootUser(int index, String s){
+        if (UserInfo.isStorageAvailable()) {
+             UserInfo info = UserInfo.getMyInfo();
+             info.setString(index, s);
+             info.store();
+         }
+    }
+    
+    /**
+     * Reads from file
+     * 
+     * @param index
+     */
+    public void readFile(String fileName){
+        try{
+            Scanner fileInp = new Scanner(new File(fileName));
+            while(fileInp.hasNextLine()){
+                String[] line = fileInp.nextLine().split("=");
+                fileInfo.put(line[0], line[1]);
+            }
+            fileInp.close();
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+    /**
+     * Gets from file
+     * 
+     * @param index
+     */
+    public String getFile(String key){
+        return fileInfo.get(key);
+    }
+    
+    /**
+     * Writes to file
+     * 
+     * @param index
+     * @param s
+     */
+    public void writeFile(String key, String s){
+        fileInfo.put(key, s);
+    }
+    /**
+     * Saves to file
+     * 
+     * @param index
+     * @param s
+     */
+    public void saveFile(String fileName){
+        try{
+            FileWriter writer = new FileWriter(new File(fileName));
+            for (Map.Entry<String, String> set : fileInfo.entrySet()) {
+
+                 writer.write(set.getKey() + "=" + set.getValue()+"\n");
+                // Printing all elements of a Map
+            }
+            writer.close();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
     
     /**
