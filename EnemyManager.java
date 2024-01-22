@@ -46,19 +46,36 @@ public class EnemyManager extends Actor
         setImage(new GreenfootImage(1,1));
     }
     
-    
+    /**
+     * Get Daniel's location counter
+     */
     public int getDLocant() {
         return dLocantCounter;
     }
+    /**
+     * Get Black Guy's location counter
+     */
     public int getBgLocant() {
         return bgLocantCounter;
     }
+    /**
+     * Set Daniel's stage number
+     * @param stage     Set to this number
+     */
     public void setDStageOne(boolean stage) {
         this.dStageOne = stage;
     }
+    /**
+     * Set Black Guy's stage number
+     * @param stage     Set to this number
+     */
     public void setBgStageOne(boolean stage) {
         this.bgStageOne = stage;
     }
+    /**
+     * Set Special stage number
+     * @param stage     Set to this number
+     */
     public void setSpecialStage(boolean stage) {
         this.specialStage = stage;
     }
@@ -143,10 +160,8 @@ public class EnemyManager extends Actor
         }
         if(bgTick == 0 && bgLocantCounter != 3) {
             int chance = Greenfoot.getRandomNumber(2);
-            System.out.println("Chance: " + chance);
             if(chance == 1){
                 bgLocantCounter++;
-                System.out.println("bgLocantCounter: " + bgLocantCounter);
                 if(bgLocantCounter == 2) {
                     bgStageOne = false;
                     bgStageTwo = true;

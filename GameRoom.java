@@ -17,7 +17,8 @@ public class GameRoom extends World {
     private int maxBattery;
 
     private GreenfootImage[] bgFrames;  //images for background
-    private GreenfootImage[] doorFrames;
+    private GreenfootImage[] leftDoorFrames;
+    private GreenfootImage[] rightDoorFrames;
     private int currentFrameIndex;
     
     Camera[] camWithEnemy;
@@ -56,7 +57,10 @@ public class GameRoom extends World {
     private Tile tiles[][];
     private Bar batteryBar;
     private EnemyManager em;
-    private Presser nextButton;
+    private Presser leftButton;
+    private Presser rightButton;
+    private Presser foodButton;
+    private Presser waterButton;
     private int visionTime;
     
     private VisionBlock fading;
@@ -70,15 +74,19 @@ public class GameRoom extends World {
         inCameras = false;
         leftDoorClosed = false;
         rightDoorClosed = false;
-
-        bgFrames = new GreenfootImage[7]; //7 bc idk how many images we have
-        for (int i = 0; i < 7; i++) {
-            bgFrames[i] = new GreenfootImage("bgFrames/frame" + i + ".png");  
+        bgFrames = new GreenfootImage[16]; 
+        for (int i = 0; i < 16; i++) {
+            bgFrames[i] = new GreenfootImage("bgFrames/frame" + i + ".jpg");  
         }
         
-        doorFrames = new GreenfootImage[2];
-        for (int i = 0; i < 2; i++) {
-            doorFrames[i] = new GreenfootImage("doorFrames/frame" + i + ".png");  
+        leftDoorFrames = new GreenfootImage[5];
+        for (int i = 0; i < 5; i++) {
+            leftDoorFrames[i] = new GreenfootImage("leftDoorFrames/frame" + i + ".jpg");  
+        }
+        
+        rightDoorFrames = new GreenfootImage[5];
+        for (int i = 0; i < 5; i++) {
+            rightDoorFrames[i] = new GreenfootImage("rightDoorFrames/frame" + i + ".jpg");  
         }
         
         camWithEnemy = new Camera[7];
@@ -91,15 +99,19 @@ public class GameRoom extends World {
             camWithNoEnemy[i] = new Camera(1, false, "Cameras/camera" + (i+1) + "Empty" + ".png"); 
         }
         
-        currentFrameIndex = 3;  //the middle
+        currentFrameIndex = 8;  //the middle
         setBackground(bgFrames[currentFrameIndex]);
         
         GreenfootImage backgroundImage = new GreenfootImage("businessroom.png");
         camMap = new CameraMap("translucentCamMapV2.PNG");
 
         GreenfootImage startBut = new GreenfootImage("startButton.png");
-        nextButton = new Presser(leftDoor, startBut);
-        
+        leftButton = new Presser(leftDoor, startBut);
+        rightButton = new Presser(rightDoor, startBut);
+        foodButton = new Presser(feed, startBut);
+        waterButton = new Presser(drink, startBut);
+        addObject(foodButton, 461, 665);
+        addObject(waterButton, 731, 665);
         maxBattery = 100;
         battery = 50;
 
@@ -109,12 +121,11 @@ public class GameRoom extends World {
         camButton = new Button("AAAAAAAAAAAAAAAAAAAAA", 20, true);
         addObject(camButton, 1129, 741);
 
-
         em = new EnemyManager();
         addObject(em, getWidth() /2, getHeight()/2);
 
         timer = new SimpleTimer();
-
+        
         setPaintOrder(Button.class, CameraMap.class, Bar.class, VisionBlock.class);
 
     }
@@ -136,17 +147,17 @@ public class GameRoom extends World {
         //System.out.println("hunger meter: " + hM);
         if(hB != 0.0 && time > 0 || isAlive){
             if (Greenfoot.mousePressed(camButton)){
-                //System.out.println(numClicks);
                 if(numClicks == 2){
                     generateCamMap();
+                    battery -=1;
                     camButton.updateMe("VVVVVVVVVVVVVVVVVVVVVVV");
-                    //System.out.println("expanded" + numClicks);
                     numClicks--;
                     inCameras = true;
                 }else{
                     camButton.updateMe("AAAAAAAAAAAAAAAAAAAAA");
                     numClicks++;
                     removeCamera();
+                    clearCams();
                     removeObject(camMap);
                     //System.out.println("collapsed" + numClicks);
                     inCameras = false;
@@ -197,13 +208,20 @@ public class GameRoom extends World {
 
             // }
         }
-
+        
+        if(currentFrameIndex == 0) {
+            addObject(leftButton, 119, 387);
+        }
+        if(currentFrameIndex == bgFrames.length-1) {
+            addObject(rightButton, 1048, 421);
+        }
+        
         if(time % 300 == 0) {
             battery-=10; //temporary. is supposed to be 1
             batteryBar.refresh(battery);
         }
         if(!inCameras) {
-            //checkMouseMovement();
+            checkMouseMovement();
         }
         if(time % 3600 == 0) {
             //switch to next hour on clock
@@ -217,12 +235,33 @@ public class GameRoom extends World {
         }
 
     }
-
+    
+    /**
+     * Method to clear the camera images
+     */
     public void clearCams() {
         List objects = getObjects(Camera.class);
         if (objects != null) { removeObjects(objects); }
     }
-
+    
+    /**
+     * Method to remove camera buttons
+     */
+    public void removeCamera(){
+        for (int i = 0; i < cams.length; i++){
+            removeObject(cams[i]);
+        }
+    }
+    
+    /**
+     * Method to update the cameras
+     */
+    public void updateCam(){
+        for (int i = 0; i < cams.length; i++){
+            updateCamera(cams[i], i+1, camWithEnemy[i], camWithNoEnemy[i]);
+        }
+    }
+    
     /**
      * Method to check if the mouse is moving 
      */
@@ -247,19 +286,6 @@ public class GameRoom extends World {
             cams[i] = new Button ("CAM" + (i+1), 20);
             addObject(cams[i], camX[i], camY[i]);
         }
-    }
-
-    /**
-     * Method to update the background 
-     */
-    private void updateBackgroundPosition() {
-        GreenfootImage background = getBackground();
-        background.clear(); 
-
-        GreenfootImage newBackground = new GreenfootImage("businessroom.png");
-        background.drawImage(newBackground, -backgroundX, 0); 
-
-        setBackground(background);
     }
 
     /**
@@ -293,9 +319,18 @@ public class GameRoom extends World {
     public boolean getIsInCameras() {
         return inCameras;
     }
-
+    
+    /**
+     * Method that switches what a specific camera sees
+     * 
+     * @param camera                    The camera
+     * @param stage                     The which stage number enemy is on
+     * @param cam                       The image with the enemy present
+     * @param empty                     The image with no enemy
+     */
     public void updateCamera(Button camera, int stage, Camera cam, Camera empty){
         if (Greenfoot.mousePressed(camera)){
+            battery -=1;
             camera.switchExpansion(241, 245, 39, 150);
             clearCams();
             if (camera.isExpanded()){
@@ -314,30 +349,39 @@ public class GameRoom extends World {
             }
         }
     }
-    
-    private void removeCamera(){
-        for (int i = 0; i < cams.length; i++){
-            removeObject(cams[i]);
-        }
-    }
 
-    private void updateCam(){
-        for (int i = 0; i < cams.length; i++){
-            updateCamera(cams[i], i+1, camWithEnemy[i], camWithNoEnemy[i]);
-        }
-    }
-
+    /**
+     * Action for left door being pressed
+     */
     public Function leftDoor = () -> {
         leftDoorClosed = !leftDoorClosed;
-        GreenfootImage temp = bgFrames[0]; 
-        bgFrames[0] = doorFrames[0];
-        doorFrames[0] = temp;
+        battery -=1;
+        for(int i = 0; i < 5; i++ ){
+            GreenfootImage temp = bgFrames[i];
+            bgFrames[0 + i] = leftDoorFrames[i];
+            leftDoorFrames[i] = temp;
+        }
     };
     
+    /**
+     * Action for right door being pressed
+     */
     public Function rightDoor = () -> {
         rightDoorClosed = !rightDoorClosed;
-        GreenfootImage temp = bgFrames[bgFrames.length]; 
-        bgFrames[bgFrames.length] = doorFrames[doorFrames.length];
-        doorFrames[doorFrames.length] = temp;
+        battery -=1;
+        for(int i = 0; i < 5; i++ ){
+            GreenfootImage temp = bgFrames[15];
+            bgFrames[11 + i] = rightDoorFrames[i];
+            rightDoorFrames[i] = temp;
+        }
+       
+    };
+    
+    public Function feed = () -> {
+        
+    };
+    
+    public Function drink = () -> {
+        
     };
 }
