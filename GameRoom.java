@@ -44,6 +44,8 @@ public class GameRoom extends World {
 
     private int numClicks = 2;
 
+    private double maxWB = 10.0;
+    private double maxHB = 10.0;
     private double hB = 10.0;
     private double wB = 10.0;
     //private double wood = 
@@ -63,8 +65,6 @@ public class GameRoom extends World {
     private Bar batteryBar;
     private EnemyManager em;
 
-    private int visionTime;
-    
     private VisionBlock fading;
     
     /**
@@ -178,13 +178,8 @@ public class GameRoom extends World {
         //black guy cameras
 
         if (wB != 0){
-            //visionTime = timer.millisElapsed()/10;
-            //fading = new VisionBlock (Constants.WW, Constants.WH, visionTime);
-            
-            fading = new VisionBlock (500, 500, 100);
-            addObject(fading, 0, 500);
-            
-            
+            fading = new VisionBlock (Constants.WW, Constants.WH,  100-(int)((wB/maxWB)*100));
+            addObject(fading, Constants.WW/2, Constants.WH/2);
             
             //The entire screen darkens gradually as time elaspses
             
