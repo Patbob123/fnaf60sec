@@ -1,5 +1,7 @@
 import greenfoot.*;
 import java.util.List;
+import greenfoot.GreenfootImage;
+import greenfoot.Color;
 /**
  * Notes:
  * Make each night 1 minute, from 12am-6am (6mins per night)
@@ -15,6 +17,7 @@ public class GameRoom extends World {
     private boolean isAlive;
     private boolean leftDoorClosed;
     private boolean rightDoorClosed;
+
     private int battery;
     private int maxBattery;
 
@@ -41,7 +44,10 @@ public class GameRoom extends World {
 
     private int numClicks = 2;
 
-    private double hM = 10.0;
+    private double hB = 10.0;
+    private double wB = 10.0;
+    //private double wood = 
+
     private boolean stage1;
     private boolean stage2;
     private boolean stage3;
@@ -56,6 +62,11 @@ public class GameRoom extends World {
     private Tile tiles[][];
     private Bar batteryBar;
     private EnemyManager em;
+
+    private int visionTime;
+    
+    private VisionBlock fading;
+    
     /**
      * Constructor for GameRoom
      */
@@ -110,8 +121,10 @@ public class GameRoom extends World {
 
         timer = new SimpleTimer();
 
-        setPaintOrder(Button.class, CameraMap.class, Bar.class);
+        setPaintOrder(Button.class, CameraMap.class, Bar.class, VisionBlock.class);
+
     }
+    
 
     public void act() {
         time--;
@@ -121,10 +134,13 @@ public class GameRoom extends World {
             em.setBgStageOne(true);
         }
 
-        hM = -1*Math.pow((1/1.002), -1*(timer.millisElapsed()/1000))+11;
+        hB = -1*Math.pow((1/1.002), -1*(timer.millisElapsed()/1000))+11;
+        wB = -1*(1/2)*(timer.millisElapsed()/1000);
+        //bB = -1*(1/3)*(timer.millisElapsed()/1000);
+
         //System.out.println("time elapsed: " + timer.millisElapsed()/1000);
         //System.out.println("hunger meter: " + hM);
-        if(hM != 0.0){
+        if(hB != 0.0 && time > 0 || isAlive){
             if (Greenfoot.mousePressed(camButton)){
                 //System.out.println(numClicks);
                 if(numClicks == 2){
@@ -145,21 +161,48 @@ public class GameRoom extends World {
             if(inCameras){
                 updateCam();
             }
-            if(hM < 8 && hM > 6){
+            if(hB < 8 && hB > 6){
                 //System.out.println("Stage 1");
+                //add the image of the enemy that is here
             }
-            if(hM < 6 && hM > 4){
+            if(hB < 6 && hB > 4){
                 //System.out.println("Stage 2");
             }
-            if(hM < 4 && hM > 2){
+            if(hB < 4 && hB > 2){
                 //System.out.println("Stage 3");
             }
-            if(hM < 2 && hM > 0){
+            if(hB < 2 && hB > 0){
                 System.out.println("Stage 4");
             }
         } else Greenfoot.setWorld(new endWorld()); //add parameter later on if needed
 
         //black guy cameras
+
+        if (wB != 0){
+            //visionTime = timer.millisElapsed()/10;
+            //fading = new VisionBlock (Constants.WW, Constants.WH, visionTime);
+            
+            fading = new VisionBlock (500, 500, 100);
+            addObject(fading, 0, 500);
+            
+            
+            
+            //The entire screen darkens gradually as time elaspses
+            
+            //add if statements when the player drinks water => visionTime += 100;
+            // if (wB < 8 && wB >6){
+            // //
+            // }
+            // if (wB < 6 && wB >4){
+
+            // }
+            // if (wB < 4 && wB >2){
+
+            // }
+            // if (wB < 2 && wB >0){
+
+            // }
+        }
 
         if(time % 300 == 0) {
             battery-=10; //temporary. is supposed to be 1
@@ -179,7 +222,6 @@ public class GameRoom extends World {
             //play game win
         }
 
-        
     }
 
     public void clearCams() {
