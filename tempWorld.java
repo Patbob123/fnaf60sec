@@ -7,7 +7,7 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class tempWorld extends World
+public class tempWorld extends SuperWorld
 {
     private Viewport vp;
     private MapArray ma;

@@ -5,16 +5,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class startWorld extends World
+public class startWorld extends SuperWorld
 {   
-    Player fisho;
-    PressurePlate middle;
     WorldManager wManager;
+    private GreenfootImage startBg = new GreenfootImage("start.png");
+    
     public startWorld()
     {    
         super(1152, 768, 1);
         wManager = new WorldManager();
-        fisho = new Player();
+        
+        setBackground(startBg);
         //$addObject(fisho,0,0);
         //$middle = new PressurePlate(50,50);
         //$addObject(middle, 576, 384);

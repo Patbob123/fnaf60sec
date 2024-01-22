@@ -27,6 +27,7 @@ public class Player extends Entity
     private GreenfootImage noImage = new GreenfootImage("no.png");
     private Popup ePopup = new Popup(new GreenfootImage("E.png"));
     private boolean showPopup;
+    private String spriteSheetUrl = "goldtimmysprites.png";
     
     public Player(){
         speed = 10;
@@ -54,7 +55,7 @@ public class Player extends Entity
     public void loadSprites(GreenfootImage[][] frames, int startY){
         for(int i = 0; i < frames.length-2; i++){
             for(int j = 0; j < frames[0].length; j++){
-                GreenfootImage image = new GreenfootImage("timmysprites.png");
+                GreenfootImage image = new GreenfootImage(spriteSheetUrl);
                 GreenfootImage cropimage = new GreenfootImage(16, 26);
                 cropimage.drawImage(image, -j*16, -i*32-startY);
                 scaleIcon(cropimage);
@@ -63,7 +64,7 @@ public class Player extends Entity
         }
         for(int i = frames.length-2; i < frames.length; i++){
             for(int j = 0; j < frames[0].length; j++){
-                GreenfootImage image = new GreenfootImage("timmysprites.png");
+                GreenfootImage image = new GreenfootImage(spriteSheetUrl);
                 GreenfootImage cropimage = new GreenfootImage(16, 26);
                 cropimage.drawImage(image, -j*16, -(32+(i-(frames.length-2))*32*2)-startY);
                 cropimage.mirrorHorizontally();
