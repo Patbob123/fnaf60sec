@@ -110,7 +110,7 @@ public class GameRoom extends World {
 
         timer = new SimpleTimer();
 
-        setPaintOrder(Button.class, Bar.class);
+        setPaintOrder(Button.class, CameraMap.class, Bar.class);
     }
 
     public void act() {
@@ -277,7 +277,7 @@ public class GameRoom extends World {
                 }
             }
         }
-        }
+    }
     
     private void removeCamera(){
         for (int i = 0; i < cams.length; i++){
