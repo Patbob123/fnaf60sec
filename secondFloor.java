@@ -93,35 +93,6 @@ public class secondFloor extends World
             }
         } else Greenfoot.setWorld(new endWorld()); //add parameter later on if needed
     }
-
-    private void updateCamera(Button camera){
-        if (Greenfoot.mousePressed(camera)){
-            camera.switchExpansion(241, 245, 39, 150);
-            if (camera.isExpanded()){
-                System.out.println("cam" + camera + " is expanded");
-            }else{
-                System.out.println("cam" + camera + " is collapsed");
-            }
-        }
-    }
     
-    private void removeCamera(){
-        for (int i = 0; i < cams.length; i++){
-            removeObject(cams[i]);
-        }
-    }
-
-    private void cameras(){
-        for (int i = 0; i < cams.length; i++){
-            updateCamera(cams[i]);
-        }
-    }
-
-    private void generateCamMap(){
-        addObject(camMap, CMXOffset, CMYOffset);
-        for (int i = 0; i < cams.length; i++){
-            cams[i] = new Button ("CAM" + (i+1), 20);
-            addObject(cams[i], camX[i], camY[i]);
-        }
-    }
+    
 }
