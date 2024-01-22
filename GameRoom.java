@@ -10,7 +10,8 @@ public class GameRoom extends World {
     private int backgroundSpeed;
     private Wall wall1;
     private Wall wall2;
-    private boolean inCameras;
+    private Door Door1;
+    private Door Door2;
     private boolean isAlive;
     private boolean leftDoorClosed;
     private boolean rightDoorClosed;
@@ -21,6 +22,16 @@ public class GameRoom extends World {
     private int timer; 
     
     //For cameras
+    private int CMXOffset = 1015;
+    private int CMYOffset = 156;
+    
+    private int[] camX = {CMXOffset - 63,CMXOffset - 41, CMXOffset + 62, CMXOffset + 23, CMXOffset - 95, CMXOffset + 5, CMXOffset + 94};
+    private int[] camY = {CMYOffset - 10, CMYOffset + 24, CMYOffset - 11, CMYOffset + 20, CMYOffset + 54, CMYOffset + 66, CMYOffset + 40};
+    
+    Button[] cams = new Button[7];
+    private boolean inCameras;
+    private boolean expanded = false;
+    
     private Button map;
     private Button cam1;
     private Button cam2;
@@ -69,6 +80,9 @@ public class GameRoom extends World {
 
         wall1 = new Wall();
         wall2 = new Wall();
+        
+        Door1 = new Door();
+        Door2 = new Door();
         
         maxBattery = 100;
         battery = 50;
@@ -176,7 +190,6 @@ public class GameRoom extends World {
             if(!em.getDStage(6)){
                 addObject(c6Empty, getWidth()/2, getHeight()/2);
             }
-            
         }
         
         //for daniel??
@@ -246,10 +259,12 @@ public class GameRoom extends World {
             } else if (mouseXPos < getWidth() / 2) {
                 if(backgroundX < 169) {
                     if(backgroundX < 98){
-                    addObject(wall1, getWidth() - 1052, getHeight() / 2);
-                    removeObject(wall2);
+                        addObject(wall1, getWidth() - 1052, getHeight() / 2);
+                        removeObject(wall2);
                     }
-                    else wall2.setLocation(wall2.getX() + 5, wall2.getY());
+                    else {
+                        wall2.setLocation(wall2.getX() + 5, wall2.getY());
+                    }
                 }
                 
             }
@@ -260,25 +275,11 @@ public class GameRoom extends World {
      * Method to generate layout of cameras
      */
     public void generateCamMap(){
-        cam1 = new Button("CAM1", 20);
-        cam2 = new Button("CAM2", 20);
-        cam3 = new Button("CAM3", 20); 
-        cam4 = new Button("CAM4", 20);
-        cam5 = new Button("CAM5", 20);
-        cam6 = new Button("CAM6", 20);
-        cam7 = new Button("CAM7", 20);
-
-        addObject(camMap, 913, 625);
-
-        addObject(cam1, 808, 572);
-        addObject(cam2, 870, 597);
-        addObject(cam3, 869, 644);
-
-        addObject(cam4, 1022, 572);
-        addObject(cam5, 966, 596);
-        addObject(cam6, 966, 644);
-        addObject(cam7, 900, 549);
-
+        addObject(camMap, CMXOffset, CMYOffset);
+        for (int i = 0; i < cams.length; i++){
+            cams[i] = new Button ("CAM" + (i+1), 20);
+            addObject(cams[i], camX[i], camY[i]);
+        }
     }
     
     /**
@@ -316,5 +317,36 @@ public class GameRoom extends World {
      */
     public boolean getIsInCameras() {
         return inCameras;
+    }
+    
+    private void updateCamera(Button camera){
+        if (Greenfoot.mousePressed(camera)){
+            camera.switchExpansion(241, 245, 39, 150);
+            if (camera.isExpanded()){
+                System.out.println("cam" + camera + " is expanded");
+            }else{
+                System.out.println("cam" + camera + " is collapsed");
+            }
+        }
+    }
+    
+    private void removeCamera(){
+        for (int i = 0; i < cams.length; i++){
+            removeObject(cams[i]);
+        }
+    }
+    
+    private void cameras(){
+        for (int i = 0; i < cams.length; i++){
+            updateCamera(cams[i]);
+        }
+    }
+
+    private void generateCamMap(){
+        addObject(camMap, CMXOffset, CMYOffset);
+        for (int i = 0; i < cams.length; i++){
+            cams[i] = new Button ("CAM" + (i+1), 20);
+            addObject(cams[i], camX[i], camY[i]);
+        }
     }
 }
