@@ -17,9 +17,11 @@ public class GameRoom extends World {
     private boolean rightDoorClosed;
     private int battery;
     private int maxBattery;
-
     private int actCounter;
     private int time; 
+    
+    private GreenfootImage[] bgFrames;  //images for background
+    private int currentIndex;
 
     //For cameras
     private int CMXOffset = 910;
@@ -61,6 +63,14 @@ public class GameRoom extends World {
         leftDoorClosed = false;
         rightDoorClosed = false;
 
+        bgFrames = new GreenfootImage[7]; //7 bc idk how many images we have
+        for (int i = 0; i < 7; i++) {
+            bgFrames[i] = new GreenfootImage("bgFrames/frame" + i + ".png");  
+        }
+        
+        currentIndex = 3;  //the middle
+        setBackground(bgFrames[currentIndex]);
+        
         GreenfootImage backgroundImage = new GreenfootImage("businessroom.png");
         camMap = new CameraMap("translucentCamMap.PNG");
 
@@ -79,10 +89,10 @@ public class GameRoom extends World {
         c7 = new Camera(1, true, "baby2.png");
         c7Empty = new Camera(1, false, "baby2.png");
 
-        backgroundX = 100; //to set at middle
-        setBackground(backgroundImage);
-        updateBackgroundPosition();
 
+        //Presser leftButton = new Presser();
+        //Presser rightButton = new Presser();
+        
         wall1 = new Wall();
         wall2 = new Wall();
 
@@ -97,9 +107,6 @@ public class GameRoom extends World {
 
         camButton = new Button("+", 40);
         addObject(camButton, 915, 734);
-
-        backgroundSpeed = 96;
-        backgroundX = (backgroundImage.getWidth() - getWidth()) / 2;
 
         em = new EnemyManager();
         addObject(em, getWidth() /2, getHeight()/2);
@@ -187,40 +194,16 @@ public class GameRoom extends World {
     /**
      * Method to check if the mouse is moving 
      */
-    private void checkMouseMovement() {
-        MouseInfo mouse = Greenfoot.getMouseInfo();
-        if(mouse != null) {
-            int mouseXPos = mouse.getX();
-            int deltaX = mouseXPos - getWidth() / 2; 
+    public void checkMouseMovement() {
+        if (Greenfoot.mouseMoved(null)) {
+            int mouseX = Greenfoot.getMouseInfo().getX();
 
-            //move speed
-            backgroundX += deltaX * backgroundSpeed / getWidth(); 
+            int newIndex = (mouseX * bgFrames.length) / getWidth(); //calc for new index
 
-            //so that movement doesn't go past image size
-            int maxOffset = getBackground().getWidth() - getWidth();
-            backgroundX = Math.max(0, Math.min(maxOffset, backgroundX));
-
-            updateBackgroundPosition();
-            if (mouseXPos > getWidth() / 2) {
-                if(backgroundX > 30) {
-                    if(backgroundX > 101){
-                        addObject(wall2, getWidth() - 100 , getHeight() / 2);
-                        removeObject(wall1);
-                    }
-                    else wall1.setLocation(wall1.getX() - 5, wall1.getY());
-                }
-
-            } else if (mouseXPos < getWidth() / 2) {
-                if(backgroundX < 169) {
-                    if(backgroundX < 98){
-                        addObject(wall1, getWidth() - 1052, getHeight() / 2);
-                        removeObject(wall2);
-                    }
-                    else {
-                        wall2.setLocation(wall2.getX() + 5, wall2.getY());
-                    }
-                }
-
+            //set new background and index
+            if (newIndex != currentIndex) {
+                setBackground(bgFrames[newIndex]);
+                currentIndex = newIndex;
             }
         }
 
@@ -256,15 +239,23 @@ public class GameRoom extends World {
     public void setBattery(int battery) {
         this.battery = Math.max(0, Math.min(maxBattery, battery));
     }
-
+    /**
+     * Set method for characters life status
+     */
     public void setAlive(boolean alive) {
         this.isAlive = alive;
     }
 
+    /**
+     * Get method for right door
+    */
     public boolean getRightDoor() {
         return rightDoorClosed;
     }
 
+    /**
+     * Get method for left door
+    */
     public boolean getLeftDoor() {
         return leftDoorClosed;
     }
@@ -276,19 +267,18 @@ public class GameRoom extends World {
         return inCameras;
     }
 
-    private void updateCamera(Button camera){
+    private void updateCamera(Button camera, int stage){
         if (Greenfoot.mousePressed(camera)){
             camera.switchExpansion(241, 245, 39, 150);
             if (camera.isExpanded()){
-                System.out.println("cam" + camera + " is expanded");
-                if(em.getBgStage(1)){
+                if(em.getBgStage(stage)){
                     addObject(c1, getWidth()/2, getHeight()/2);
                 }
                 if(!em.getBgStage(1)) {
                     addObject(c1Empty, getWidth()/2, getHeight()/2);
                 }
             }else{
-                System.out.println("cam" + camera + " is collapsed");
+                //System.out.println("cam" + camera + " is collapsed");
             }
         }
     }
@@ -301,7 +291,7 @@ public class GameRoom extends World {
 
     private void cameras(){
         for (int i = 0; i < cams.length; i++){
-            updateCamera(cams[i]);
+            updateCamera(cams[i], i+1);
         }
     }
 

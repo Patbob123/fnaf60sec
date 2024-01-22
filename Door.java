@@ -8,6 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Door extends Actor
 {
+    private boolean isOpen;
+    
     public Door() {
         
     }
