@@ -209,12 +209,7 @@ public class GameRoom extends World {
             // }
         }
         
-        if(currentFrameIndex == 0) {
-            addObject(leftButton, 119, 387);
-        }
-        if(currentFrameIndex == bgFrames.length-1) {
-            addObject(rightButton, 1048, 421);
-        }
+        addDoorButtons();
         
         if(time % 300 == 0) {
             battery-=10; //temporary. is supposed to be 1
@@ -234,6 +229,28 @@ public class GameRoom extends World {
             //play game win
         }
 
+    }
+    
+    /**
+     * Method to add the door buttons only when screen is on 
+     * first/second index or last/second last index
+     */
+    public void addDoorButtons() {
+        if(currentFrameIndex == 0 || currentFrameIndex == 1) {
+            addObject(leftButton, 119, 387);
+        } else {
+            if(leftButton != null) {
+                removeObject(leftButton);
+            }
+        }
+        
+        if(currentFrameIndex == bgFrames.length-1 || currentFrameIndex == bgFrames.length-2) {
+            addObject(rightButton, 1048, 421);
+        } else {
+            if(rightButton != null) {
+                removeObject(rightButton);
+            }
+        }
     }
     
     /**
