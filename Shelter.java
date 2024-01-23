@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Shelter class to store items for the second floor world
  * 
- * @author Dawson
+ * @author Edmond
  * @version January 2024
  */
 public class Shelter extends Tile

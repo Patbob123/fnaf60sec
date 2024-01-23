@@ -1,12 +1,11 @@
 /**
- * Write a description of class Coordiniate here.
+ * Helper Class to return Coordinates 
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Dawson
+ * @version January 2024
  */
 public class Coordinate
 {
-    // instance variables - replace the example below with your own
     private int x;
     private int y;
     /**
@@ -17,12 +16,21 @@ public class Coordinate
         this.x = x; 
         this.y = y;
     }
+    /**
+     * Getter method for x-coordinate
+     */
     public int seeX(){
         return x;
     }
+    /**
+     * Getter method for y-coordinate
+     */
     public int seeY(){
         return y;
     }
+    /**
+     * toString method to return the (x,y) coordinate 
+     */
     public String toString(){
         return "X: "+x+" Y:"+y;
     }

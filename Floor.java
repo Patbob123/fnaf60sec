@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Floor Tile
  * 
- * @author Dawson
+ * @author Edmond
  * @version January 2024
  */
 public class Floor extends Tile

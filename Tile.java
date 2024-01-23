@@ -4,7 +4,7 @@ import java.util.HashMap;
 /**
  * Super class to create behaviours for all the tiles to be placed on the map and world
  * 
- * @author Dawson
+ * @author Edmond
  * @version January 2024
  */
 public abstract class Tile extends SuperSmoothMover
