@@ -125,7 +125,7 @@ public class GameRoom extends SuperWorld {
         batteryBar = new Bar(maxBattery, "energyIcon.png", new Color(0, 255, 255));
         addObject(batteryBar, 150, 100);
 
-        soundBar = new Bar(maxBattery, "energyIcon.png", new Color(0, 255, 0));
+        soundBar = new Bar(10, "energyIcon.png", new Color(0, 255, 0));
         addObject(soundBar, 150, 200);
         
         camButton = new Button("AAAAAAAAAAAAAAAAAAAAA", 20, true);
@@ -402,28 +402,32 @@ public class GameRoom extends SuperWorld {
      * Action for left door being pressed
      */
     public Function leftDoor = () -> {
-        leftDoorClosed = !leftDoorClosed;
-        battery -=1;
-        for(int i = 0; i < 5; i++ ){
-            GreenfootImage temp = bgFrames[i];
-            bgFrames[0 + i] = leftDoorFrames[i];
-            leftDoorFrames[i] = temp;
+        if(battery > 0) {
+            leftDoorClosed = !leftDoorClosed;
+            battery -=1;
+            for(int i = 0; i < 5; i++ ){
+                GreenfootImage temp = bgFrames[i];
+                bgFrames[0 + i] = leftDoorFrames[i];
+                leftDoorFrames[i] = temp;
+            }
+            setBackground(bgFrames[0]);
         }
-        setBackground(bgFrames[0]);
     };
     
     /**
      * Action for right door being pressed
      */
     public Function rightDoor = () -> {
-        rightDoorClosed = !rightDoorClosed;
-        battery -=1;
-        for(int i = 0; i < 5; i++ ){
-            GreenfootImage temp = bgFrames[15];
-            bgFrames[11 + i] = rightDoorFrames[i];
-            rightDoorFrames[i] = temp;
+        if(battery > 0) {
+            rightDoorClosed = !rightDoorClosed;
+            battery -=1;
+            for(int i = 0; i < 5; i++ ){
+                GreenfootImage temp = bgFrames[15];
+                bgFrames[11 + i] = rightDoorFrames[i];
+                rightDoorFrames[i] = temp;
+            }
+            setBackground(bgFrames[bgFrames.length - 1]);
         }
-        setBackground(bgFrames[bgFrames.length - 1]);
     };
     
     public Function feed = () -> {

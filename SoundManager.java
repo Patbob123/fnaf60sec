@@ -32,13 +32,6 @@ public class SoundManager extends Actor
         soundFiles.put("Jaded", new Sound("Jaded.mp3",50 ));
         soundFiles.put("blast", new Sound("blaster.mp3",40 ));
         soundFiles.put("boom", new Sound("boom.mp3",60 ));
-        soundFiles.put("bodySlam", new Sound("attacks/bodyslam.wav",75 ));
-        soundFiles.put("deathRay", new Sound("attacks/deathray.wav",85 ));
-        soundFiles.put("pincer", new Sound("attacks/pincer.wav",75 ));
-        soundFiles.put("plasmaBeam", new Sound("attacks/plasmabeam.wav",85));
-        soundFiles.put("boxJab", new Sound("attacks/boxjab.wav",75 ));
-        soundFiles.put("shotgun", new Sound("attacks/shotgun.wav",75 ));
-        soundFiles.put("heal", new Sound("attacks/heal.wav",75 ));
         soundFiles.put("transition", new Sound("transition.wav",100 ));
         soundFiles.put("click", new Sound("buttonclick.wav",100 ));
         soundFiles.put("hover", new Sound("buttonhover.wav",100 ));
