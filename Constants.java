@@ -1,9 +1,9 @@
 import java.util.HashMap;
 /**
- * Write a description of class Constants here.
+ * Class to hold all static/ constant variables
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Dawson
+ * @version January 2024
  */
 public class Constants  
 {
@@ -34,7 +34,4 @@ public class Constants
             e.printStackTrace(); // Handle the exception according to your needs
         }
     }};
-    public Constants()
-    {
-    }
 }

@@ -8,7 +8,7 @@ import java.util.Arrays;
  * Make each night 1 minute, from 12am-6am (6mins per night)
  * Have battery percentage drain 1 every 5 seconds
  */
-public class GameRoom extends SuperWorld {
+public class GameRoom extends World {
     private boolean isAlive;
     private boolean leftDoorClosed;
     private boolean rightDoorClosed;
@@ -40,10 +40,8 @@ public class GameRoom extends SuperWorld {
 
     private int numClicks = 2;
 
-    private double maxHB = 100.0;
-    private double maxWB = 100.0;
     private double hB = 10.0;
-    private double wB = 100.0;
+    private double wB = 10.0;
     //private double wood = 
 
     private boolean stage1;
@@ -64,9 +62,10 @@ public class GameRoom extends SuperWorld {
     private Presser rightButton;
     private Presser foodButton;
     private Presser waterButton;
-
-    private DynamicLightning dynamicLightning;
-
+    private int visionTime;
+    
+    private VisionBlock fading;
+    
     /**
      * Constructor for GameRoom
      */
@@ -107,19 +106,19 @@ public class GameRoom extends SuperWorld {
         GreenfootImage backgroundImage = new GreenfootImage("businessroom.png");
         camMap = new CameraMap("translucentCamMapV2.PNG");
 
-        GreenfootImage startBut = new GreenfootImage("startButton.png");
-        leftButton = new Presser(leftDoor, startBut);
-        rightButton = new Presser(rightDoor, startBut);
-        foodButton = new Presser(feed, startBut);
-        waterButton = new Presser(drink, startBut);
+        GreenfootImage doorLeft = new GreenfootImage("buttons/doorButton1.png");
+        GreenfootImage doorRight = new GreenfootImage("buttons/doorButton2.png");
+        GreenfootImage food = new GreenfootImage("buttons/foodButton.png");
+        GreenfootImage water = new GreenfootImage("buttons/waterButton.png");
+        leftButton = new Presser(leftDoor, doorLeft);
+        rightButton = new Presser(rightDoor, doorRight);
+        foodButton = new Presser(feed, food);
+        waterButton = new Presser(drink, water);
         addObject(foodButton, 461, 665);
         addObject(waterButton, 731, 665);
         maxBattery = 100;
         battery = 50;
-        
-        dynamicLightning = new DynamicLightning (Constants.WW, Constants.WH);
-        addObject(dynamicLightning, Constants.WW/2, Constants.WH/2);
-        
+
         batteryBar = new Bar(maxBattery, "energyIcon.png", new Color(0, 255, 255));
         addObject(batteryBar, 150, 100);
 
@@ -134,8 +133,8 @@ public class GameRoom extends SuperWorld {
 
         timer = new SimpleTimer();
         
+        setPaintOrder(Button.class, CameraMap.class, Bar.class, VisionBlock.class);
 
-        setPaintOrder(Button.class, Bar.class, CameraMap.class, DynamicLightning.class);
     }
     
 
@@ -148,8 +147,7 @@ public class GameRoom extends SuperWorld {
         }
 
         hB = -1*Math.pow((1/1.002), -1*(timer.millisElapsed()/1000))+11;
-        wB = -1*(1.0/60)*(timer.millisElapsed()/1000) + 10;
-        //System.out.println("water bar: " + wB);
+        wB = -1*(1/2)*(timer.millisElapsed()/1000);
         //bB = -1*(1/3)*(timer.millisElapsed()/1000);
 
         //System.out.println("time elapsed: " + timer.millisElapsed()/1000);
@@ -193,10 +191,29 @@ public class GameRoom extends SuperWorld {
         //black guy cameras
 
         if (wB != 0){
+            //visionTime = timer.millisElapsed()/10;
+            //fading = new VisionBlock (Constants.WW, Constants.WH, visionTime);
             
-            dynamicLightning.refresh(100-(int)(((double)wB/maxWB)*100));
+            fading = new VisionBlock (500, 500, 100);
+            addObject(fading, 0, 500);
+            
+            
+            
+            //The entire screen darkens gradually as time elaspses
+            
+            //add if statements when the player drinks water => visionTime += 100;
+            // if (wB < 8 && wB >6){
+            // //
+            // }
+            // if (wB < 6 && wB >4){
 
+            // }
+            // if (wB < 4 && wB >2){
 
+            // }
+            // if (wB < 2 && wB >0){
+
+            // }
         }
         
         addDoorButtons();
@@ -224,19 +241,19 @@ public class GameRoom extends SuperWorld {
     
     /**
      * Method to add the door buttons only when screen is on 
-     * first/second index or last/second last index
+     * first or last index
      */
     public void addDoorButtons() {
-        if(currentFrameIndex == 0 || currentFrameIndex == 1) {
-            addObject(leftButton, 119, 387);
+        if(currentFrameIndex == 0) {
+            addObject(leftButton, 69, 387);
         } else {
             if(leftButton != null) {
                 removeObject(leftButton);
             }
         }
         
-        if(currentFrameIndex == bgFrames.length-1 || currentFrameIndex == bgFrames.length-2) {
-            addObject(rightButton, 1048, 421);
+        if(currentFrameIndex == bgFrames.length-1) {
+            addObject(rightButton, 1092, 421);
         } else {
             if(rightButton != null) {
                 removeObject(rightButton);
@@ -369,6 +386,7 @@ public class GameRoom extends SuperWorld {
             bgFrames[0 + i] = leftDoorFrames[i];
             leftDoorFrames[i] = temp;
         }
+        setBackground(bgFrames[0]);
     };
     
     /**
@@ -382,7 +400,7 @@ public class GameRoom extends SuperWorld {
             bgFrames[11 + i] = rightDoorFrames[i];
             rightDoorFrames[i] = temp;
         }
-       
+        setBackground(bgFrames[bgFrames.length - 1]);
     };
     
     public Function feed = () -> {

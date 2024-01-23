@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class PopupFader here.
+ * A helper class to make icons fade away for visual effects 
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Vincent  
+ * @version January 2024
  */
 public class PopupFader extends Effect
 {
@@ -12,6 +12,13 @@ public class PopupFader extends Effect
     private int maxDuration;
     private boolean reverse;
     private GreenfootImage popupImage;
+    /**
+     * Constructor for PopupFader
+     * 
+     * @param image         The image of the icon
+     * @param maxDuration   The duration of the fade out
+     * @param reverse       Variable to indicate if it is fade in
+     */
     public PopupFader(GreenfootImage image,int maxDuration, boolean reverse){
         this.maxDuration = maxDuration;
         this.reverse = reverse;
@@ -35,7 +42,10 @@ public class PopupFader extends Effect
         getImage().setTransparency(255-(int)(((double)fadeDuration/maxDuration)*255));
         
         setLocation(getX(),getY() -2);
-    }  
+    }
+    /**
+     * Getter method for Max Duration of the Fader
+     */
     public int getMaxDuration(){
         return maxDuration;
     }

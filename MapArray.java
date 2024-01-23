@@ -1,11 +1,10 @@
 import greenfoot.*;
-
-
 /**
  * Write a description of class MapArray here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Dawson
+ * <p> Modified and edited by Jaiden and Edmond </p>
+ * @version January 2024
  */
 public class MapArray  
 {
@@ -14,6 +13,9 @@ public class MapArray
     private Tile[][] itemLayer;
     private String[] itemList;
     
+    /**
+     * Constructor for the MapArray
+     */
     public MapArray()
     {
         itemList = new String[]{"Food", "Water"};
@@ -26,6 +28,9 @@ public class MapArray
         setWalls(map);
         
     }
+    /** 
+     * Method to generate String map
+     */
     public String[][] createMap(){
         String[][] mapString = new String[][]{
             {"-", "-", "-", "-" }, 
@@ -37,6 +42,12 @@ public class MapArray
         };
         return mapString;
     }
+    /**
+     * Method to convert String map into a Tile map
+     * 
+     * @mapString       String map
+     * @map             Tile map
+     */
     public Tile[][] convertMap(String[][] mapString, Tile[][] map){
         map = new Tile[mapString.length][mapString[0].length];
         for(int i = 0; i < map.length; i++){
@@ -48,6 +59,11 @@ public class MapArray
         }
         return map;
     }
+    /**
+     * Functionality tester, creates a randomly generated map
+     * 
+     * @param map             Tile map
+     */
     public Tile[][] randomMap(Tile[][] map){
         for(int i = 0; i < map.length; i++){
             for(int j = 0; j < map[0].length; j++){
@@ -64,6 +80,9 @@ public class MapArray
         }
         return map;
     }
+    /**
+     * Helper method to convert String into a Tile using Constant's hashmap
+     */
      public Tile createTile(String type){
          try{
             return (Tile)Constants.tileHash.get(type).newInstance();
@@ -74,9 +93,7 @@ public class MapArray
         }
         return new Floor();
     }
-    public Tile[][] getTiles(){
-        return map;
-    }
+    
     public Tile generateItem(String type){
         if(type.equals("-")){
             try{
@@ -90,17 +107,12 @@ public class MapArray
         }
         return null;
     }
-    public Tile[][] getItems(){
-        return itemLayer;
-    }
-    public void printMap(){
-        for(int i = 0; i < map.length; i++){
-            for(int j = 0; j < map[0].length; j++){
-                System.out.print(map[i][j]+" ");
-            }
-            //System.out.println();
-        }
-    }
+        
+    /** 
+     * Method to fill all the walls
+     * 
+     * @map             Tile map
+     */
     public void fillWalls(Tile[][] map){
         for(int i = 0; i < map.length; i++){
             for(int j = 0; j < map[0].length; j++){
@@ -130,6 +142,10 @@ public class MapArray
         }
     }
     
+    /** 
+     * Wall generator method to determine which type of wall to set
+     * Checks nearby walls to determine if the current wall is a corner, edge or filler wall
+     */
     public void setWalls(Tile[][] map){
 
         for(int i = 0; i < map.length; i++){
@@ -141,21 +157,21 @@ public class MapArray
                 // System.out.println(!map[i-1][j]+"]");
                     modifier += "T";
                 }
-                } catch (ArrayIndexOutOfBoundsException e){}
+            } catch (ArrayIndexOutOfBoundsException e){}
             try {
-                    if(!map[i+1][j].toString().equals("W")){
-                        modifier += "B";
-                    }
-                } catch (ArrayIndexOutOfBoundsException e){}
+                if(!map[i+1][j].toString().equals("W")){
+                    modifier += "B";
+                }
+            } catch (ArrayIndexOutOfBoundsException e){}
             try {
-                    if(!map[i][j+1].toString().equals("W")){
-                        modifier += "R";
-                    }
-                } catch (ArrayIndexOutOfBoundsException e){}
+                if(!map[i][j+1].toString().equals("W")){
+                    modifier += "R";
+                }
+            } catch (ArrayIndexOutOfBoundsException e){}
             try {
-                    if(!map[i][j-1].toString().equals("W")){
-                        modifier += "L";
-                    }
+                if(!map[i][j-1].toString().equals("W")){
+                    modifier += "L";
+                }
             } catch (ArrayIndexOutOfBoundsException e){}
             if(modifier.equals("")){
                 try {
@@ -187,6 +203,32 @@ public class MapArray
             map[i][j].setIcon("WallIcon/"+modifier+"Wall.png");
     
             }
+        }
+    }
+    
+    /** 
+     * Getter method for tile map
+     */
+    public Tile[][] getTiles(){
+        return map;
+    }
+    
+    /**
+     * Getter method for items
+     */
+    public Tile[][] getItems(){
+        return itemLayer;
+    }
+    
+    /**
+     * Method to print out the map
+     */
+    public void printMap(){
+        for(int i = 0; i < map.length; i++){
+            for(int j = 0; j < map[0].length; j++){
+                System.out.print(map[i][j]+" ");
+            }
+            //System.out.println();
         }
     }
 }

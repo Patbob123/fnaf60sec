@@ -2,15 +2,18 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
 
 /**
- * Write a description of class Shadow here.
+ * Dark Overlay for the First Floor Gameplay to imitate a dark surrounding
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Dawson 
+ * @version January 2024
  */
 public class Shadow extends Effect
 {
     private Hitbox lightRay;
     private GreenfootImage lightRayDetect;
+    /**
+     * Constructor for Shadow Class
+     */
     public Shadow()
     {
         GreenfootImage shadowImage = new GreenfootImage("shadow.png");
@@ -18,7 +21,10 @@ public class Shadow extends Effect
         setImage(shadowImage);
         
     }
-
+    
+    /**
+     * Method to Reference the First Floor World
+     */
     public tempWorld getW(){
         return (tempWorld)getWorld();
     }

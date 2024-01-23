@@ -4,7 +4,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Creates animation display for cursor clicks
  * 
  * @author Jaiden
- * @version November 2023
+ * @version January 2024
  */
 public class Cursor extends Effect
 {
