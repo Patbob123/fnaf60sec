@@ -120,7 +120,7 @@ public class GameRoom extends World {
 
         timer = new SimpleTimer();
 
-        setPaintOrder(Button.class, Bar.class, DynamicLightning.class);
+        setPaintOrder(Button.class, Bar.class, CameraMap.class, DynamicLightning.class);
     }
 
     public void act() {
