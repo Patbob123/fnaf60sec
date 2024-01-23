@@ -18,9 +18,9 @@ public class EnemyManager extends Actor
     private boolean bgStageTwo;
     private boolean bgStageThree;  
     private boolean specialStage;
-    private int dLocantCounter;
-    private int bgLocantCounter;
     
+    private int dLocation;
+    private int bgLocation;
     private int specialStageTimer;
     private int specialRunningTimer;
     private int dLocantThreeTimer;
@@ -30,12 +30,12 @@ public class EnemyManager extends Actor
         //Enemies have different movement times 
         bgTick = 360;
         dTick = 600;
+        dLocation = 0;
+        bgLocation = 0;
         dLocantThreeTimer = 240;
         bgLocantThreeTimer = 240;
         specialStageTimer = 1800;
         specialRunningTimer = 300;
-        bgLocantCounter = 1;
-        dLocantCounter = 1;
         dStageOne = false;
         dStageTwo = false;
         dStageThree = false;
@@ -47,23 +47,60 @@ public class EnemyManager extends Actor
     }
     
     /**
-     * Get Daniel's location counter
-     */
-    public int getDLocant() {
-        return dLocantCounter;
-    }
-    /**
-     * Get Black Guy's location counter
-     */
-    public int getBgLocant() {
-        return bgLocantCounter;
-    }
-    /**
      * Set Daniel's stage number
      * @param stage     Set to this number
      */
     public void setDStageOne(boolean stage) {
         this.dStageOne = stage;
+        dLocation = 1;
+    }
+    /**
+     * Set Daniel's stage number
+     * @param stage     Set to this number
+     */
+    public void setDStageTwo(boolean stage) {
+        this.dStageTwo = stage;
+        dLocation = 2;
+    }
+    /**
+     * Set Daniel's stage number
+     * @param stage     Set to this number
+     */
+    public void setDStageThree(boolean stage) {
+        this.dStageThree = stage;
+        dLocation = 3;
+    }
+    /**
+     * Set Black's stage number
+     * @param stage     Set to this number
+     */
+    public void setBgStageFour(boolean stage) {
+        this.dStageOne = stage;
+        dLocation = 4;
+    }
+    /**
+     * Set Black's stage number
+     * @param stage     Set to this number
+     */
+    public void setBgStageFive(boolean stage) {
+        this.dStageTwo = stage;
+        dLocation = 5;
+    }
+    /**
+     * Set Black's stage number
+     * @param stage     Set to this number
+     */
+    public void setBgStageSix(boolean stage) {
+        this.dStageThree = stage;
+        dLocation = 6;
+    }
+    /**
+     * Set Daniel's stage number
+     * @param stage     Set to this number
+     */
+    public void setDStageSeven(boolean stage) {
+        this.dStageThree = stage;
+        dLocation = 7;
     }
     /**
      * Set Black Guy's stage number
@@ -71,6 +108,7 @@ public class EnemyManager extends Actor
      */
     public void setBgStageOne(boolean stage) {
         this.bgStageOne = stage;
+        bgLocation = 4;
     }
     /**
      * Set Special stage number
@@ -79,24 +117,32 @@ public class EnemyManager extends Actor
     public void setSpecialStage(boolean stage) {
         this.specialStage = stage;
     }
-    
-    public boolean getBgStage(int stageNum){
-        if(stageNum == 1) {
+    public int getDLocation() {
+        return dLocation;
+    }
+    public int getBgLocation() {
+        return bgLocation;
+    }
+    public boolean getBgStage(int stage){
+        if(stage == 1) {
             return bgStageOne;
         }
-        else if(stageNum == 2) {
+        else if(stage == 2) {
             return bgStageTwo;
         }
         else {
             return bgStageThree;
         }
     }
-    public boolean getDStage(int stageNum){
-        if(stageNum == 4) {
+    public boolean getDStage(int stage){
+        if(stage == 4) {
             return dStageOne;
         }
-        else if(stageNum == 5) {
+        else if(stage == 5) {
             return dStageTwo;
+        }
+        else if(stage == 6){
+            return dStageThree;
         }
         else {
             return dStageThree;
@@ -110,19 +156,19 @@ public class EnemyManager extends Actor
     {
         bgTick--;
         dTick--;
-        
         //If any of the enemies are on stage 3
-        if(dLocantCounter == 3) {
+        if(dStageThree == true) {
             dLocantThreeTimer--;
             if(dLocantThreeTimer == 0 && ((GameRoom)getWorld()).getRightDoor()) {
                 int specialSpawn = Greenfoot.getRandomNumber(10);
                 if(specialSpawn == 3) {
+                    dLocation = 7;
                     specialStage = true;
                     specialRunningTimer = 300;
                     specialStageTimer = 1800;
                 }
                 else {
-                    dLocantCounter = 1;
+                    dLocation = 1;
                     dStageThree = false;
                     dStageOne = true; 
                     specialStage = false;
@@ -132,10 +178,10 @@ public class EnemyManager extends Actor
                 ((GameRoom)getWorld()).setAlive(false);
             }
         }    
-        if(bgLocantCounter == 3) {
+        if(bgStageThree == true) {
             bgLocantThreeTimer--;
             if(bgLocantThreeTimer == 0 && ((GameRoom)getWorld()).getLeftDoor()) {
-                bgLocantCounter = 1;
+                bgLocation = 4;
                 bgStageThree = false;
                 bgStageOne = true;
             }
@@ -158,30 +204,38 @@ public class EnemyManager extends Actor
             ((GameRoom)getWorld()).setAlive(false);
             //play daniel jumpscare
         }
-        if(bgTick == 0 && bgLocantCounter != 3) {
+        
+        
+        if(bgTick == 0 && bgStageThree == false) {
             int chance = Greenfoot.getRandomNumber(2);
             if(chance == 1){
-                bgLocantCounter++;
-                if(bgLocantCounter == 2) {
+                
+                if(bgStageOne == true) {
+                    bgLocation = 5;
                     bgStageOne = false;
                     bgStageTwo = true;
                 }
-                else if(bgLocantCounter == 3) {
+                
+                else if(bgStageTwo == true) {
+                    bgLocation = 6;
                     bgStageTwo = false;
                     bgStageThree = true;
                 }
             }
             bgTick = 360;
         }
-        if(dTick == 0 && dLocantCounter != 3) {
-            dLocantCounter++;
-            if(dLocantCounter == 2) {
-                bgStageOne = false;
-                bgStageTwo = true;
+        
+        if(dTick == 0 && dStageThree == false) {
+            if(dStageOne == true) {
+                dLocation = 2;
+                dStageOne = false;
+                dStageTwo = true;
             }
-            else if(dLocantCounter == 3) {
-                bgStageTwo = false;
-                bgStageThree = true;
+            
+            else if(dStageTwo == true) {
+                dLocation = 3;
+                dStageTwo = false;
+                dStageThree = true;
             }
             dTick = 600;
         }

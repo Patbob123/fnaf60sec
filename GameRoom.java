@@ -13,6 +13,7 @@ public class GameRoom extends SuperWorld {
     private boolean leftDoorClosed;
     private boolean rightDoorClosed;
 
+    private int currCam;
     private int battery;
     private int maxBattery;
 
@@ -34,6 +35,7 @@ public class GameRoom extends SuperWorld {
     private int[] camY = {CMYOffset + 54, CMYOffset + 24, CMYOffset - 10, CMYOffset + 40, CMYOffset + 20, CMYOffset - 11, CMYOffset + 66};
 
     Button[] cams = new Button[7];
+    
     private boolean inCameras;
 
     private Button camButton;
@@ -75,6 +77,7 @@ public class GameRoom extends SuperWorld {
         inCameras = false;
         leftDoorClosed = false;
         rightDoorClosed = false;
+        currCam = 0;
         bgFrames = new GreenfootImage[16]; 
         for (int i = 0; i < 16; i++) {
             bgFrames[i] = new GreenfootImage("bgFrames/frame" + i + ".jpg");  
@@ -140,12 +143,33 @@ public class GameRoom extends SuperWorld {
 
     public void act() {
         time--;
-
-        if(time == 21300) { //spawn them after 30 seconds
+        if(Greenfoot.isKeyDown("f")) {
             em.setDStageOne(true);
             em.setBgStageOne(true);
         }
+        if(Greenfoot.isKeyDown("g")) {
+            em.setDStageOne(false);
+            em.setDStageTwo(true);
+        }
+        if(Greenfoot.isKeyDown("h")) {
+            em.setDStageTwo(false);
+            em.setDStageThree(true);
+        }
 
+        if(time == 21000) { //spawn them after 30 seconds
+            em.setDStageOne(true);
+            em.setBgStageOne(true);
+        }
+        
+        if(leftDoorClosed) {
+            battery-=1; //temporary. is supposed to be 1
+            batteryBar.refresh(battery);
+        }
+        if(rightDoorClosed) {
+            battery-=1; //temporary. is supposed to be 1
+            batteryBar.refresh(battery);
+        }
+        
         hB = -1*Math.pow((1/1.002), -1*(timer.millisElapsed()/1000))+11;
         wB = -1*(1/2)*(timer.millisElapsed()/1000);
         //bB = -1*(1/3)*(timer.millisElapsed()/1000);
@@ -156,37 +180,64 @@ public class GameRoom extends SuperWorld {
             if (Greenfoot.mousePressed(camButton)){
                 if(numClicks == 2){
                     generateCamMap();
-                    battery -=1;
                     camButton.updateMe("VVVVVVVVVVVVVVVVVVVVVVV");
                     numClicks--;
                     inCameras = true;
                 }else{
                     camButton.updateMe("AAAAAAAAAAAAAAAAAAAAA");
                     numClicks++;
-                    removeCamera();
+                    removeButtons();
                     clearCams();
                     removeObject(camMap);
                     //System.out.println("collapsed" + numClicks);
                     inCameras = false;
                 }
             }
+            
             if(inCameras){
-                updateCam();
+                battery-=1; //temporary. is supposed to be 1
+                batteryBar.refresh(battery);
+                if(Greenfoot.mousePressed(cams[0])) {
+                    clearCams();
+                    currCam = 1;
+                    checkCam(currCam, em.getDLocation());
+                }
+                if(Greenfoot.mousePressed(cams[1])) {
+                    clearCams();
+                    currCam = 2;
+                    checkCam(currCam, em.getDLocation());
+                }if(Greenfoot.mousePressed(cams[2])) {
+                    clearCams();
+                    currCam = 3;
+                    checkCam(currCam, em.getDLocation());
+                }
+                if(Greenfoot.mousePressed(cams[3])) {
+                    clearCams();
+                    currCam = 4;
+                    checkCam(currCam, em.getBgLocation());
+                }
+                if(Greenfoot.mousePressed(cams[4])) {
+                    clearCams();
+                    currCam = 5;
+                    checkCam(currCam, em.getBgLocation());
+                }if(Greenfoot.mousePressed(cams[5])) {
+                    clearCams();
+                    currCam = 6;
+                    checkCam(currCam, em.getBgLocation());
+                }
+                if(Greenfoot.mousePressed(cams[6])) {
+                    clearCams();
+                    currCam = 7;
+                    checkCam(currCam, em.getDLocation());
+                }
+                
             }
-            if(hB < 8 && hB > 6){
-                //System.out.println("Stage 1");
-                //add the image of the enemy that is here
+            if(hB < 2){
+                //em.setBgStageSix(true);
             }
-            if(hB < 6 && hB > 4){
-                //System.out.println("Stage 2");
-            }
-            if(hB < 4 && hB > 2){
-                //System.out.println("Stage 3");
-            }
-            if(hB < 2 && hB > 0){
-                System.out.println("Stage 4");
-            }
-        } else Greenfoot.setWorld(new endWorld()); //add parameter later on if needed
+            
+            
+        } else goToWorld(new endWorld()); //add parameter later on if needed
 
         //black guy cameras
 
@@ -218,10 +269,6 @@ public class GameRoom extends SuperWorld {
         
         addDoorButtons();
         
-        if(time % 300 == 0) {
-            battery-=10; //temporary. is supposed to be 1
-            batteryBar.refresh(battery);
-        }
         if(!inCameras) {
             checkMouseMovement();
         }
@@ -272,21 +319,27 @@ public class GameRoom extends SuperWorld {
     /**
      * Method to remove camera buttons
      */
-    public void removeCamera(){
+    public void removeButtons(){
         for (int i = 0; i < cams.length; i++){
             removeObject(cams[i]);
         }
     }
     
-    /**
-     * Method to update the cameras
-     */
-    public void updateCam(){
-        for (int i = 0; i < cams.length; i++){
-            updateCamera(cams[i], i+1, camWithEnemy[i], camWithNoEnemy[i]);
+    public void checkCam(int currCam, int enemyLocation) {
+        if(currCam == enemyLocation) {
+            displayCam(currCam, true);
+        } else {
+            displayCam(currCam, false);
         }
     }
     
+    public void displayCam(int camNum, boolean isThere) {
+        if(isThere) {
+            addObject(camWithEnemy[camNum - 1], getWidth()/2, getHeight()/2);
+        } else {
+            addObject(camWithNoEnemy[camNum - 1], getWidth()/2, getHeight()/2);
+        }
+    }
     /**
      * Method to check if the mouse is moving 
      */
@@ -308,7 +361,7 @@ public class GameRoom extends SuperWorld {
     public void generateCamMap(){
         addObject(camMap, CMXOffset, CMYOffset);
         for (int i = 0; i < cams.length; i++){
-            cams[i] = new Button ("CAM" + (i+1), 20);
+            cams[i] = new Button ("CAM" + (i+1), 20, true, i + 1);
             addObject(cams[i], camX[i], camY[i]);
         }
     }
@@ -343,36 +396,6 @@ public class GameRoom extends SuperWorld {
      */
     public boolean getIsInCameras() {
         return inCameras;
-    }
-    
-    /**
-     * Method that switches what a specific camera sees
-     * 
-     * @param camera                    The camera
-     * @param stage                     The which stage number enemy is on
-     * @param cam                       The image with the enemy present
-     * @param empty                     The image with no enemy
-     */
-    public void updateCamera(Button camera, int stage, Camera cam, Camera empty){
-        if (Greenfoot.mousePressed(camera)){
-            battery -=1;
-            camera.switchExpansion(241, 245, 39, 150);
-            clearCams();
-            if (camera.isExpanded()){
-                if(em.getBgStage(stage)){
-                    addObject(cam, getWidth()/2, getHeight()/2);
-                }
-                if(!em.getBgStage(stage)) {
-                    addObject(empty, getWidth()/2, getHeight()/2);
-                }
-                if(em.getDStage(stage)){
-                    addObject(cam, getWidth()/2, getHeight()/2);
-                }
-                if(!em.getDStage(stage)){
-                    addObject(empty, getWidth()/2, getHeight()/2);
-                }
-            }
-        }
     }
 
     /**

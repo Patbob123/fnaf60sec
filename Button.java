@@ -14,6 +14,7 @@ public class Button extends Actor
     private Button minusButton;
     private String buttonType;
     private String buttonText;
+    private int buttonNumber;
     private int textSize;
     private int r;
     private int b;
@@ -57,7 +58,26 @@ public class Button extends Actor
             updateMe(text);
         } 
     }
+    
+    public Button(String text, int textSize, boolean bottomButton, int buttonNumber) {
+        // Assign value to my internal String
+        buttonText = text;
+        this.textSize = textSize;
+        this.buttonNumber = buttonNumber;
 
+        // Draw a button with centered text:
+        if (bottomButton){
+            updateMe(text);
+        } 
+    }
+    
+    /**
+     * Get button number
+     */
+    public int getButNum() {
+        return buttonNumber;
+    }
+    
     /**
      * Act - do whatever the TextButton wants to do.
      * This method is called whenever the 'Act' or 'Run' button gets pressed in the environment.
@@ -184,10 +204,5 @@ public class Button extends Actor
         return buttonText;
     }
 
-    /**
-     * Method to display what camera sees
-     */
-    public void displayImage(boolean enemyHere, String noEnemy, String yesEnemy) {
 
-    }
 }
