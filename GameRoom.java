@@ -132,7 +132,7 @@ public class GameRoom extends World {
         }
 
         hB = -1*Math.pow((1/1.002), -1*(timer.millisElapsed()/1000))+11;
-        wB = -1*(1/2)*(timer.millisElapsed()/1000);
+        wB = -1*(1.0/2)*(timer.millisElapsed()/1000);
         //bB = -1*(1/3)*(timer.millisElapsed()/1000);
 
         //System.out.println("time elapsed: " + timer.millisElapsed()/1000);
