@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class VisionBlock extends Effect
+public class DynamicLightning extends Effect
 {
     /**
      * Act - do whatever the VisionBlock wants to do. This method is called whenever
@@ -15,18 +15,20 @@ public class VisionBlock extends Effect
     private int width;
     private int height;
     private Color fading;
-    public VisionBlock(int width, int height, int visionTime)
+    private GreenfootImage dynamicLighting;
+    
+    public DynamicLightning(int width, int height)
     {
         this.width = width;
         this.height = height;
-        //fading = new Color(34, 24, 59, visionTime);
-        fading = new Color(244, 228, 12);
         
-        GreenfootImage visionBlock = new GreenfootImage(width, height);
-        visionBlock.setColor(fading);
-        visionBlock.fill();
-        visionBlock.setTransparency(10000);
-        setImage(visionBlock);
+        dynamicLighting = new GreenfootImage(width, height);
+    }
     
+    public void refresh(int visionTime){
+        fading = new Color(34, 24, 59, visionTime);
+        dynamicLighting.setColor(fading);
+        dynamicLighting.fill();
+        setImage(dynamicLighting);
     }
 }

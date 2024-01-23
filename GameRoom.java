@@ -66,7 +66,7 @@ public class GameRoom extends World {
     private Bar batteryBar;
     private EnemyManager em;
 
-    private VisionBlock fading;
+    private DynamicLightning dynamicLightning;
 
     /**
      * Constructor for GameRoom
@@ -120,7 +120,7 @@ public class GameRoom extends World {
 
         timer = new SimpleTimer();
 
-        setPaintOrder(Button.class, Bar.class, VisionBlock.class);
+        setPaintOrder(Button.class, Bar.class, DynamicLightning.class);
     }
 
     public void act() {
@@ -132,7 +132,8 @@ public class GameRoom extends World {
         }
 
         hB = -1*Math.pow((1/1.002), -1*(timer.millisElapsed()/1000))+11;
-        wB = -1*(1.0/2)*(timer.millisElapsed()/1000);
+        wB = -1*(1.0/60)*(timer.millisElapsed()/1000) + 10;
+        //System.out.println("water bar: " + wB);
         //bB = -1*(1/3)*(timer.millisElapsed()/1000);
 
         //System.out.println("time elapsed: " + timer.millisElapsed()/1000);
@@ -176,8 +177,9 @@ public class GameRoom extends World {
         //black guy cameras
 
         if (wB != 0){
-            fading = new VisionBlock (Constants.WW, Constants.WH,  100-(int)((wB/maxWB)*100));
-            addObject(fading, Constants.WW/2, Constants.WH/2);
+            dynamicLightning = new DynamicLightning (Constants.WW, Constants.WH);
+            addObject(dynamicLightning, Constants.WW/2, Constants.WH/2);
+            dynamicLightning.refresh(100-(int)((wB/maxWB)*100));
 
             //The entire screen darkens gradually as time elaspses
 
