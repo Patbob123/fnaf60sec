@@ -39,7 +39,7 @@ public class tempWorld extends SuperWorld
         shadow = new Shadow();
         addObject(shadow, Constants.WW/2,Constants.WH/2);
 
-        DynamicLightning dynamicLight = new DynamicLightning(Constants.WW,Constants.WH);
+        DynamicLighting dynamicLight = new DynamicLighting(Constants.WW,Constants.WH);
         addObject(dynamicLight, Constants.WW/2,Constants.WH/2);
         dynamicLight.refresh(50);
         

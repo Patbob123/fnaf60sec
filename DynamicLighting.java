@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Jennifer
  * @version January 2024
  */
-public class DynamicLightning extends Effect
+public class DynamicLighting extends Effect
 {
     private int width;
     private int height;
@@ -19,7 +19,7 @@ public class DynamicLightning extends Effect
      * @param width     height of the world
      * @param height    width of the world
      */
-    public DynamicLightning(int width, int height)
+    public DynamicLighting(int width, int height)
     {
         this.width = width;
         this.height = height;

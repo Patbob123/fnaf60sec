@@ -21,10 +21,10 @@ public class GameRoom extends SuperWorld {
     private GreenfootImage[] leftDoorFrames;
     private GreenfootImage[] rightDoorFrames;
     private int currentFrameIndex;
-    
+
     Camera[] camWithEnemy;
     Camera[] camWithNoEnemy;
-    
+
     private int time; 
 
     //For cameras
@@ -35,7 +35,7 @@ public class GameRoom extends SuperWorld {
     private int[] camY = {CMYOffset + 54, CMYOffset + 24, CMYOffset - 10, CMYOffset + 40, CMYOffset + 20, CMYOffset - 11, CMYOffset + 66};
 
     Button[] cams = new Button[7];
-    
+
     private boolean inCameras;
 
     private Button camButton;
@@ -65,9 +65,9 @@ public class GameRoom extends SuperWorld {
     private Presser foodButton;
     private Presser waterButton;
     private int visionTime;
-    
-    private VisionBlock fading;
-    
+
+    private DynamicLighting fading;
+
     /**
      * Constructor for GameRoom
      */
@@ -82,30 +82,30 @@ public class GameRoom extends SuperWorld {
         for (int i = 0; i < 16; i++) {
             bgFrames[i] = new GreenfootImage("bgFrames/frame" + i + ".jpg");  
         }
-        
+
         leftDoorFrames = new GreenfootImage[5];
         for (int i = 0; i < 5; i++) {
             leftDoorFrames[i] = new GreenfootImage("leftDoorFrames/frame" + i + ".jpg");  
         }
-        
+
         rightDoorFrames = new GreenfootImage[5];
         for (int i = 0; i < 5; i++) {
             rightDoorFrames[i] = new GreenfootImage("rightDoorFrames/frame" + i + ".jpg");  
         }
-        
+
         camWithEnemy = new Camera[7];
         for (int i = 0; i < 7; i++) {
             camWithEnemy[i] = new Camera(1, true, "Cameras/camera" + (i+1) + ".png");  
         }
-        
+
         camWithNoEnemy = new Camera[7]; 
         for (int i = 0; i < 7; i++) {
             camWithNoEnemy[i] = new Camera(1, false, "Cameras/camera" + (i+1) + "Empty" + ".png"); 
         }
-        
+
         currentFrameIndex = 8;  //the middle
         setBackground(bgFrames[currentFrameIndex]);
-        
+
         GreenfootImage backgroundImage = new GreenfootImage("businessroom.png");
         camMap = new CameraMap("translucentCamMapV2.PNG");
 
@@ -127,7 +127,7 @@ public class GameRoom extends SuperWorld {
 
         soundBar = new Bar(10, "energyIcon.png", new Color(0, 255, 0));
         addObject(soundBar, 150, 200);
-        
+
         camButton = new Button("AAAAAAAAAAAAAAAAAAAAA", 20, true);
         addObject(camButton, 1129, 741);
 
@@ -135,11 +135,10 @@ public class GameRoom extends SuperWorld {
         addObject(em, getWidth() /2, getHeight()/2);
 
         timer = new SimpleTimer();
-        
-        setPaintOrder(Button.class, CameraMap.class, Bar.class, VisionBlock.class);
+
+        setPaintOrder(Button.class, CameraMap.class, Bar.class, DynamicLighting.class);
 
     }
-    
 
     public void act() {
         time--;
@@ -160,7 +159,7 @@ public class GameRoom extends SuperWorld {
             em.setDStageOne(true);
             em.setBgStageOne(true);
         }
-        
+
         if(leftDoorClosed) {
             battery-=1; //temporary. is supposed to be 1
             batteryBar.refresh(battery);
@@ -169,7 +168,7 @@ public class GameRoom extends SuperWorld {
             battery-=1; //temporary. is supposed to be 1
             batteryBar.refresh(battery);
         }
-        
+
         hB = -1*Math.pow((1/1.002), -1*(timer.millisElapsed()/1000))+11;
         wB = -1*(1/2)*(timer.millisElapsed()/1000);
         //bB = -1*(1/3)*(timer.millisElapsed()/1000);
@@ -193,7 +192,7 @@ public class GameRoom extends SuperWorld {
                     inCameras = false;
                 }
             }
-            
+
             if(inCameras){
                 battery-=1; //temporary. is supposed to be 1
                 batteryBar.refresh(battery);
@@ -230,28 +229,24 @@ public class GameRoom extends SuperWorld {
                     currCam = 7;
                     checkCam(currCam, em.getDLocation());
                 }
-                
+
             }
             if(hB < 2){
                 //em.setBgStageSix(true);
             }
-            
-            
+
         } else goToWorld(new endWorld()); //add parameter later on if needed
-
         //black guy cameras
-
         if (wB != 0){
             //visionTime = timer.millisElapsed()/10;
             //fading = new VisionBlock (Constants.WW, Constants.WH, visionTime);
-            
-            fading = new VisionBlock (500, 500, 100);
+
+            fading = new DynamicLighting (500, 500);
             addObject(fading, 0, 500);
-            
-            
+
             
             //The entire screen darkens gradually as time elaspses
-            
+
             //add if statements when the player drinks water => visionTime += 100;
             // if (wB < 8 && wB >6){
             // //
@@ -266,9 +261,9 @@ public class GameRoom extends SuperWorld {
 
             // }
         }
-        
+
         addDoorButtons();
-        
+
         if(!inCameras) {
             checkMouseMovement();
         }
@@ -283,9 +278,9 @@ public class GameRoom extends SuperWorld {
             //play game win
         }
         soundBar.refresh(Greenfoot.getMicLevel());
-        
+
     }
-    
+
     /**
      * Method to add the door buttons only when screen is on 
      * first or last index
@@ -298,7 +293,7 @@ public class GameRoom extends SuperWorld {
                 removeObject(leftButton);
             }
         }
-        
+
         if(currentFrameIndex == bgFrames.length-1) {
             addObject(rightButton, 1092, 421);
         } else {
@@ -307,7 +302,7 @@ public class GameRoom extends SuperWorld {
             }
         }
     }
-    
+
     /**
      * Method to clear the camera images
      */
@@ -315,7 +310,7 @@ public class GameRoom extends SuperWorld {
         List objects = getObjects(Camera.class);
         if (objects != null) { removeObjects(objects); }
     }
-    
+
     /**
      * Method to remove camera buttons
      */
@@ -324,7 +319,7 @@ public class GameRoom extends SuperWorld {
             removeObject(cams[i]);
         }
     }
-    
+
     public void checkCam(int currCam, int enemyLocation) {
         if(currCam == enemyLocation) {
             displayCam(currCam, true);
@@ -332,7 +327,7 @@ public class GameRoom extends SuperWorld {
             displayCam(currCam, false);
         }
     }
-    
+
     public void displayCam(int camNum, boolean isThere) {
         if(isThere) {
             addObject(camWithEnemy[camNum - 1], getWidth()/2, getHeight()/2);
@@ -340,6 +335,7 @@ public class GameRoom extends SuperWorld {
             addObject(camWithNoEnemy[camNum - 1], getWidth()/2, getHeight()/2);
         }
     }
+
     /**
      * Method to check if the mouse is moving 
      */
@@ -347,7 +343,7 @@ public class GameRoom extends SuperWorld {
         if (Greenfoot.mouseMoved(null)) {
             int mouseX = Greenfoot.getMouseInfo().getX();
             int newIndex = (mouseX * bgFrames.length) / getWidth(); //calc for new index
-            
+
             //set new background and index
             if (newIndex != currentFrameIndex) {
                 setBackground(bgFrames[newIndex]);
@@ -355,6 +351,7 @@ public class GameRoom extends SuperWorld {
             }
         }
     }   
+
     /**
      * Method to generate layout of cameras
      */
@@ -372,21 +369,24 @@ public class GameRoom extends SuperWorld {
     public void setBattery(int battery) {
         this.battery = Math.max(0, Math.min(maxBattery, battery));
     }
+
     /**
      * Set method for characters life status
      */
     public void setAlive(boolean alive) {
         this.isAlive = alive;
     }
+
     /**
      * Get method for right door
-    */
+     */
     public boolean getRightDoor() {
         return rightDoorClosed;
     }
+
     /**
      * Get method for left door
-    */
+     */
     public boolean getLeftDoor() {
         return leftDoorClosed;
     }
@@ -402,39 +402,39 @@ public class GameRoom extends SuperWorld {
      * Action for left door being pressed
      */
     public Function leftDoor = () -> {
-        if(battery > 0) {
-            leftDoorClosed = !leftDoorClosed;
-            battery -=1;
-            for(int i = 0; i < 5; i++ ){
-                GreenfootImage temp = bgFrames[i];
-                bgFrames[0 + i] = leftDoorFrames[i];
-                leftDoorFrames[i] = temp;
-            }
-            setBackground(bgFrames[0]);
-        }
-    };
-    
+                if(battery > 0) {
+                    leftDoorClosed = !leftDoorClosed;
+                    battery -=1;
+                    for(int i = 0; i < 5; i++ ){
+                        GreenfootImage temp = bgFrames[i];
+                        bgFrames[0 + i] = leftDoorFrames[i];
+                        leftDoorFrames[i] = temp;
+                    }
+                    setBackground(bgFrames[0]);
+                }
+        };
+
     /**
      * Action for right door being pressed
      */
     public Function rightDoor = () -> {
-        if(battery > 0) {
-            rightDoorClosed = !rightDoorClosed;
-            battery -=1;
-            for(int i = 0; i < 5; i++ ){
-                GreenfootImage temp = bgFrames[15];
-                bgFrames[11 + i] = rightDoorFrames[i];
-                rightDoorFrames[i] = temp;
-            }
-            setBackground(bgFrames[bgFrames.length - 1]);
-        }
-    };
-    
+                if(battery > 0) {
+                    rightDoorClosed = !rightDoorClosed;
+                    battery -=1;
+                    for(int i = 0; i < 5; i++ ){
+                        GreenfootImage temp = bgFrames[15];
+                        bgFrames[11 + i] = rightDoorFrames[i];
+                        rightDoorFrames[i] = temp;
+                    }
+                    setBackground(bgFrames[bgFrames.length - 1]);
+                }
+        };
+
     public Function feed = () -> {
-        
-    };
-    
+
+        };
+
     public Function drink = () -> {
-        
-    };
+
+        };
 }
