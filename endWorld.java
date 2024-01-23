@@ -1,14 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
 /**
- * Write a description of class endWorld here.
+ * Display End Game Screen 
  * 
  * @author (your name) 
- * @version (a version number or a date)
+ * @version January 2024
  */
 public class endWorld extends SuperWorld
 {
-
     /**
      * Constructor for objects of class endWorld.
      * 

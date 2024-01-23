@@ -4,7 +4,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Display Enemy Hp Bars and periodically updates the values
  * 
  * @author Dawson 
- * @version November 2023
+ * @version January 2024
  */
 public class Bar extends Actor
 {

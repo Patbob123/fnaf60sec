@@ -3,8 +3,8 @@ import java.util.List;
 /**
  * Write a description of class Buttons here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jennifer
+ * @version January 2024
  */
 public class Button extends Actor
 {
@@ -29,13 +29,6 @@ public class Button extends Actor
      */
     public Button(String text, int textSize, String buttonType) {
         this(text, 20);
-        // if ("plus".equals(buttonType)) {
-            // plusButton = new Button("+", textSize);
-            // getWorld().addObject(plusButton, getX() + getImage().getWidth() + 20, getY());
-        // } else if ("minus".equals(buttonType)) {
-            // minusButton = new Button("-", textSize);
-            // getWorld().addObject(minusButton, getX() - minusButton.getImage().getWidth() - 20, getY());
-        // }
     }
 
     /**

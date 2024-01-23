@@ -2,10 +2,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * Write a description of class tempWorld here.
+ * Greenfootworld for Floor 1
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Dawson 
+ * @version January 2024
  */
 public class tempWorld extends SuperWorld
 {
@@ -18,8 +18,8 @@ public class tempWorld extends SuperWorld
     private Bar timerBar;
     
     public tempWorld()
-    {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+    {   
+        // Add in Java Viewport to generate the 2d array map of the first floor
         super(Constants.WW, Constants.WH, 1);
         vp = new Viewport(Constants.WW,Constants.WH);
         ma = new MapArray();
@@ -28,7 +28,7 @@ public class tempWorld extends SuperWorld
         p = new Player();
         addObject(p, Constants.WW/2, Constants.WH/2);
         
-        
+        // Paint order to z-sort all items on the World
         setPaintOrder(Timer.class, Bar.class, Display.class, Effect.class, SuperSmoothMover.class,Floor.class, Inventory.class);
         gameTimer = new Timer(60);
         addObject(gameTimer,100,100);
@@ -41,8 +41,8 @@ public class tempWorld extends SuperWorld
         
         timerBar = new Bar(3600, "clockIcon.png", new Color(55,55,255));
         addObject(timerBar, 200, 70);
-        //vp.move(0,0);
     }
+    
     public void act(){
         inputMove();
         if(gameTimer.getTime() > 0){
@@ -50,22 +50,10 @@ public class tempWorld extends SuperWorld
         }
         timerBar.refresh(-gameTimer.getAct());
     }
-    public MapArray getMap(){
-        return ma;
-    }
-    public Viewport getVP(){
-        return vp;
-    }
-    public Shadow getShadow(){
-        return shadow;
-    }
-    public boolean checkPlayer(int x, int y){
-        return getObjectsAt(x, y, Player.class).size()>0;
-    }
-    public Shelter getShelter(){
-        return bunker;
-    }
-    
+    /**
+     * Method to create visual display of the player's current inventory slots.
+     * It shows how many slots are avaiable and how many slots are used up.
+     */
     public void displayHandSlots(){
         ArrayList<Item> handInventory = p.getHandSlots().getStorage();
         for(Display d: getObjects(Display.class)){
@@ -76,28 +64,30 @@ public class tempWorld extends SuperWorld
             Item item = handInventory.get(i);
             for(int j = 0; j < item.getWeight(); j++){
                 GreenfootImage image = new GreenfootImage(item+".png");
-                if(j!=0) image.setTransparency(80);
+                
+                //If items take more than one slot, make the additonal images semi-transparent 
+                //to indicate the weight belongs to the item
+                if(j!=0) image.setTransparency(80); 
                 addObject(new Display(image), 200*curIndex + 275, 650);
                 curIndex++;
             }
-
         }
+        
+        //Create an item icon to display
         for(int i = curIndex; i < 4; i++){
             GreenfootImage image = new GreenfootImage("hand.png");
             addObject(new Display(image),200*i + 275,650);
         }
     }
-    public String [] arrayListToArray(ArrayList<String> array){
-        Object[] tempArray = array.toArray();
-        String [] newArray = new String [tempArray.length];
-        for(int i = 0; i < tempArray.length; i++){
-            newArray[i] = (String)tempArray[i];
-        }
-        return newArray;
-    }
+    
+    /**
+     * Main Function to move player around the 2d array and update the screen 
+     */
     public void inputMove(){
         double moveX = 0;
         double moveY = 0;
+        
+        // Multiple if statemenst allow for diagonal movements
         if(Greenfoot.isKeyDown("a")){
             moveX+=-p.getSpeed();
         }
@@ -110,12 +100,17 @@ public class tempWorld extends SuperWorld
         if(Greenfoot.isKeyDown("d")){
             moveX+=p.getSpeed();
         }
+        
         double ogMoveX = moveX;
         double ogMoveY = moveY;
+        
+        
         if(Math.abs(moveX)>=p.getSpeed()&&Math.abs(moveY)>=p.getSpeed()){
             moveX = (int)(Math.sqrt(Math.pow(moveX, 2)/2)+1) * Math.signum(moveX);
             moveY = (int)(Math.sqrt(Math.pow(moveX, 2)/2)+1) * Math.signum(moveY);
         }
+        
+        //Use viewport to generate render in the nearby tiles
         if(!p.checkWall((int)moveX, (int)moveY)) {
             vp.move(moveX, moveY);
         }else if(!p.checkWall((int)ogMoveX, 0)) {
@@ -147,6 +142,21 @@ public class tempWorld extends SuperWorld
         }else if(moveX == 0 && moveY == 0){
             p.setCurFrame(1, 0);
         }
+    }
+    public boolean checkPlayer(int x, int y){
+        return getObjectsAt(x, y, Player.class).size()>0;
+    }
+    public Shelter getShelter(){
+        return bunker;
+    }
+    public MapArray getMap(){
+        return ma;
+    }
+    public Viewport getVP(){
+        return vp;
+    }
+    public Shadow getShadow(){
+        return shadow;
     }
 }
 

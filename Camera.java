@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Camera here.
+ * Camera Class displays the image that the player sees on the screen
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jaiden
+ * @version January 2024
  */
 public class Camera extends Actor
 {

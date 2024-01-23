@@ -1,14 +1,19 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Display here.
+ * Display class converts a greenfoot image into a object that can be placed into the world
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Vincent 
+ * @version January 2024
  */
 public class Display extends Actor
 {
     private GreenfootImage image;
+    /**
+     * Constructor for Display Class
+     * 
+     * @param images   The Greenfootimage
+     */
     public Display(GreenfootImage image){
         this.image = image;
         image.scale(100,100);
