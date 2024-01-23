@@ -28,12 +28,25 @@ public class Timer extends Actor
         running = getsStarted;
         setImage(new GreenfootImage(1,1));
     }
+    public Timer(double timeBeforeEvent, boolean getsStarted) // int value given in seconds
+    {
+        setTimer(timeBeforeEvent);
+        running = getsStarted;
+        setImage(new GreenfootImage(1,1));
+    }
  
     public void setTimer(int timeBeforeEvent)
     {
         initialCount = 60 * timeBeforeEvent;
         count = -initialCount;
     }
+    
+    public void setTimer(double timeBeforeEvent)
+    {
+        initialCount = (int)timeBeforeEvent;
+        count = -initialCount;
+    }
+
 
  
     public void act()

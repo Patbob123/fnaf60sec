@@ -8,7 +8,7 @@ import java.util.Arrays;
  * Make each night 1 minute, from 12am-6am (6mins per night)
  * Have battery percentage drain 1 every 5 seconds
  */
-public class GameRoom extends World {
+public class GameRoom extends SuperWorld {
     private boolean isAlive;
     private boolean leftDoorClosed;
     private boolean rightDoorClosed;
@@ -40,8 +40,10 @@ public class GameRoom extends World {
 
     private int numClicks = 2;
 
+    private double maxHB = 100.0;
+    private double maxWB = 100.0;
     private double hB = 10.0;
-    private double wB = 10.0;
+    private double wB = 100.0;
     //private double wood = 
 
     private boolean stage1;
@@ -61,10 +63,9 @@ public class GameRoom extends World {
     private Presser rightButton;
     private Presser foodButton;
     private Presser waterButton;
-    private int visionTime;
-    
-    private VisionBlock fading;
-    
+
+    private DynamicLightning dynamicLightning;
+
     /**
      * Constructor for GameRoom
      */
@@ -114,7 +115,10 @@ public class GameRoom extends World {
         addObject(waterButton, 731, 665);
         maxBattery = 100;
         battery = 50;
-
+        
+        dynamicLightning = new DynamicLightning (Constants.WW, Constants.WH);
+        addObject(dynamicLightning, Constants.WW/2, Constants.WH/2);
+        
         batteryBar = new Bar(maxBattery, "energyIcon.png", new Color(0, 255, 255));
         addObject(batteryBar, 1101, 27);
 
@@ -126,8 +130,8 @@ public class GameRoom extends World {
 
         timer = new SimpleTimer();
         
-        setPaintOrder(Button.class, CameraMap.class, Bar.class, VisionBlock.class);
 
+        setPaintOrder(Button.class, Bar.class, CameraMap.class, DynamicLightning.class);
     }
     
 
@@ -140,7 +144,8 @@ public class GameRoom extends World {
         }
 
         hB = -1*Math.pow((1/1.002), -1*(timer.millisElapsed()/1000))+11;
-        wB = -1*(1/2)*(timer.millisElapsed()/1000);
+        wB = -1*(1.0/60)*(timer.millisElapsed()/1000) + 10;
+        //System.out.println("water bar: " + wB);
         //bB = -1*(1/3)*(timer.millisElapsed()/1000);
 
         //System.out.println("time elapsed: " + timer.millisElapsed()/1000);
@@ -184,29 +189,10 @@ public class GameRoom extends World {
         //black guy cameras
 
         if (wB != 0){
-            //visionTime = timer.millisElapsed()/10;
-            //fading = new VisionBlock (Constants.WW, Constants.WH, visionTime);
             
-            fading = new VisionBlock (500, 500, 100);
-            addObject(fading, 0, 500);
-            
-            
-            
-            //The entire screen darkens gradually as time elaspses
-            
-            //add if statements when the player drinks water => visionTime += 100;
-            // if (wB < 8 && wB >6){
-            // //
-            // }
-            // if (wB < 6 && wB >4){
+            dynamicLightning.refresh(100-(int)(((double)wB/maxWB)*100));
 
-            // }
-            // if (wB < 4 && wB >2){
 
-            // }
-            // if (wB < 2 && wB >0){
-
-            // }
         }
         
         addDoorButtons();
