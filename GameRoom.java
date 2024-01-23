@@ -381,6 +381,7 @@ public class GameRoom extends World {
             bgFrames[0 + i] = leftDoorFrames[i];
             leftDoorFrames[i] = temp;
         }
+        setBackground(bgFrames[0]);
     };
     
     /**
@@ -394,7 +395,7 @@ public class GameRoom extends World {
             bgFrames[11 + i] = rightDoorFrames[i];
             rightDoorFrames[i] = temp;
         }
-       
+        setBackground(bgFrames[bgFrames.length - 1]);
     };
     
     public Function feed = () -> {
