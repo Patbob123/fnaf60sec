@@ -8,7 +8,7 @@ import java.util.Arrays;
  * Make each night 1 minute, from 12am-6am (6mins per night)
  * Have battery percentage drain 1 every 5 seconds
  */
-public class GameRoom extends World {
+public class GameRoom extends SuperWorld {
     private boolean isAlive;
     private boolean leftDoorClosed;
     private boolean rightDoorClosed;
