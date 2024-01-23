@@ -18,6 +18,7 @@ public class GameRoom extends World {
     private boolean leftDoorClosed;
     private boolean rightDoorClosed;
 
+    
     private int battery;
     private int maxBattery;
 
