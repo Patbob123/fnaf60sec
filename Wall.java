@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Edmond
  * @version January 2024
  */
-public class Wall extends Tile
+public class Wall extends Immovable
 {
     /**
      * Constructor for Wall
@@ -14,5 +14,6 @@ public class Wall extends Tile
     public Wall(){
         super();
         symbol = "W"; 
+        url = "Wall";
     }
 }

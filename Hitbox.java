@@ -42,7 +42,7 @@ public class Hitbox extends SuperSmoothMover
         boolean touchingWall = false;
         
         setLocation(curX+x, curY+y);
-        if(isTouching(Wall.class)){
+        if(isTouching(Immovable.class)){
             touchingWall = true;
         }
         setLocation(curX, curY);

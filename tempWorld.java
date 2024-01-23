@@ -38,9 +38,17 @@ public class tempWorld extends SuperWorld
         
         shadow = new Shadow();
         addObject(shadow, Constants.WW/2,Constants.WH/2);
+
+        DynamicLightning dynamicLight = new DynamicLightning(Constants.WW,Constants.WH);
+        addObject(dynamicLight, Constants.WW/2,Constants.WH/2);
+        dynamicLight.refresh(50);
         
         timerBar = new Bar(3600, "clockIcon.png", new Color(55,55,255));
         addObject(timerBar, 200, 70);
+        
+        GreenfootImage blackBg = new GreenfootImage(Constants.WW, Constants.WH);
+        blackBg.fill();
+        setBackground(blackBg);
     }
     
     public void act(){

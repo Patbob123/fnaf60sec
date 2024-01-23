@@ -1,19 +1,19 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Stair class
+ * Wall class
  * 
  * @author Edmond
  * @version January 2024
  */
-public class Stair extends Tile
-{   
+public class Gray extends Immovable
+{
     /**
-     * Constructor for Stair
+     * Constructor for Gray Wall
      */
-    public Stair(){
+    public Gray(){
         super();
-        symbol = "S"; 
-        url = "Stair";
+        symbol = "G"; 
+        url = "gd";
     }
 }

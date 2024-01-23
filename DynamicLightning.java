@@ -31,7 +31,6 @@ public class DynamicLightning extends Effect
         fading = new Color(34, 24, 59);
         dynamicLighting.setColor(fading);
         dynamicLighting.fill();
-        System.out.println(visionTime);
         dynamicLighting.setTransparency(visionTime);
         setImage(dynamicLighting);
     }

@@ -14,6 +14,7 @@ public class Floor extends Tile
     public Floor(){
         super();
         symbol = "-"; 
+        url = "f";
         setIcon("FLOOR.png");
     }
     protected void addedToWorld(World w){

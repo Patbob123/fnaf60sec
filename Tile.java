@@ -12,6 +12,8 @@ public abstract class Tile extends SuperSmoothMover
     protected int width;
     protected int height;
     protected String symbol;
+    protected String prop;
+    protected String url;
     
     /**
      * Constructor for the Tile 
@@ -33,6 +35,30 @@ public abstract class Tile extends SuperSmoothMover
         icon.scale(32, 32);
         Util.scale(icon);
         setImage(icon);
+    }
+    /**
+     * Set the Properties of the Tile
+     * 
+     * @param prop      property of the tile
+     */
+    public void assignProp(String prop){
+        this.prop = prop;
+    }
+    /**
+     * Get the Properties of the Tile
+     * 
+     * @return String      property of the tile
+     */
+    public String getProp(){
+        return this.prop;
+    }
+    /**
+     * Get the image url of the Tile
+     * 
+     * @return String      image url of the Tile
+     */
+    public String getUrl(){
+        return this.url;
     }
     /**
      * To string method to return type of tile

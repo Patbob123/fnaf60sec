@@ -24,8 +24,8 @@ public class Viewport extends Actor
      * @param       height of the world
      */
     public Viewport(int width, int height){
-        x = 0;
-        y = 0;
+        x = 2528;
+        y = 550;
         this.width = width;
         this.height = height;
     }

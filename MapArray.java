@@ -33,12 +33,28 @@ public class MapArray
      */
     public String[][] createMap(){
         String[][] mapString = new String[][]{
-            {"-", "-", "-", "-" }, 
-            {"-", "W", "W", "-" }, 
-            {"-", "W", "W", "-" }, 
-            {"-", "-", "-", "-" }, 
-            {"-", "-", "-", "-" }, 
-            
+            {"w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w"},  
+            {"w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w"},
+            {"w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w"},  
+            {"w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "s1", "s2", "w",  "w",  "w",  "w",  "-1", "-1", "-1", "-1", "-1", "-1", "-1", "-1", "-1", "-1", "w",  "w"},  
+            {"w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "s3", "s4", "w",  "w",  "w",  "w",  "-1", "-1", "-1", "-1", "-1", "-1", "-1", "-1", "l1", "l1", "w",  "w"},  
+            {"w",  "w",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "w",  "w",  "w",  "-1", "-1", "-1", "-1", "-1", "-1", "-1", "-1", "l2", "l2", "w",  "w"},  
+            {"w",  "g",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "d",  "-",  "-1", "-1", "-1", "-1", "-1", "-1", "-1", "-1", "l1", "l1", "w",  "w"},  
+            {"w",  "w",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "-",  "w",  "w",  "w",  "-1", "-1", "-1", "-1", "-1", "-1", "-1", "-1", "l2", "l2", "w",  "w"},
+            {"w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "-",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "-",  "-",  "-",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w"},  
+            {"w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "d",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "-",  "-",  "-",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w"},  
+            {"w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "-",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "-",  "-",  "-",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w"},  
+            {"w",  "w", "-2",  "-2", "-2", "-2", "-2", "-2", "-2", "-2", "w",  "w",  "-3", "-3", "-3", "-3", "-3", "-3", "-3", "-3", "-3", "w",  "w",  "-",  "-",  "-",  "w",  "w",  "-4", "-4", "-4", "-4", "-4", "-4", "-4", "-4", "-4", "-4", "-4", "w",  "w"},  
+            {"w",  "w", "-2",  "-2", "-2", "-2", "-2", "-2", "-2", "-2", "w",  "w",  "-3", "t1", "t2", "t3", "-3", "t1", "t2", "t3", "-3", "w",  "w",  "-",  "-",  "-",  "w",  "w",  "-4", "t1", "t2", "t3", "t1", "t2", "t3", "t1", "t2", "t3", "-4", "w",  "w"},  
+            {"w",  "w", "-2",  "-2", "-2", "-2", "-2", "-2", "-2", "-2", "w",  "w",  "-3", "t4", "t5", "t6", "-3", "t4", "t5", "t6", "-3", "d",  "-",  "-",  "-",  "-",  "w",  "w",  "-4", "t4", "t5", "t6", "t4", "t5", "t6", "t4", "t5", "t6", "-4", "w",  "w"},  
+            {"w",  "w",  "w",  "-2", "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "-3", "-3", "-3", "-3", "-3", "-3", "-3", "-3", "-3", "w",  "w",  "-",  "-",  "-",  "d",  "-",  "-4", "t1", "t2", "t3", "t1", "t2", "t3", "t1", "t2", "t3", "-4", "w",  "w"}, 
+            {"w",  "w",  "w",  "d",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "-3", "-3", "-3", "-3", "-3", "-3", "-3", "-3", "-3", "w",  "w",  "-",  "-",  "-",  "w",  "w",  "-4", "t4", "t5", "t6", "t4", "t5", "t6", "t4", "t5", "t6", "-4", "w",  "w"},  
+            {"w",  "w",  "w",  "-2", "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "-3", "t1", "t2", "t3", "-3", "t1", "t2", "t3", "-3", "w",  "w",  "-",  "-",  "-",  "w",  "w",  "-4", "-4", "-4", "-4", "-4", "-4", "-4", "-4", "-4", "-4", "-4", "w",  "w"},  
+            {"w",  "w", "-2",  "-2", "-2", "-2", "-2", "-2", "-2", "-2", "w",  "w",  "-3", "t4", "t5", "t6", "-3", "t4", "t5", "t6", "-3", "d",  "-",  "-",  "-",  "-",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w"},  
+            {"w",  "w", "-2",  "-2", "-2", "-2", "-2", "-2", "-2", "-2", "w",  "w",  "-3", "-3", "-3", "-3", "-3", "-3", "-3", "-3", "-3", "w",  "w",  "-",  "-",  "-",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w"},  
+            {"w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "-",  "-",  "-",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w"},  
+            {"w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "g",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w"}  
+                        
         };
         return mapString;
     }
@@ -53,8 +69,17 @@ public class MapArray
         for(int i = 0; i < map.length; i++){
             for(int j = 0; j < map[0].length; j++){
                 String type = mapString[i][j];
-                map[i][j] = createTile(type);
-                itemLayer[i][j] = generateItem(type);
+                if(type.equals("d")) type = "-";
+                if(type.length()>1){
+                    map[i][j] = createTile(type.substring(0,1));
+                    map[i][j].assignProp(type.substring(1,2));
+                    System.out.println("A:::"+type.substring(0,1)+"B:: "+ type.substring(1,2));
+                    itemLayer[i][j] = generateItem(type.substring(0,1), type.substring(1,2));
+                }else{
+                    map[i][j] = createTile(type);
+                    itemLayer[i][j] = generateItem(type, String.valueOf(Greenfoot.getRandomNumber(30)));
+                }
+                
             }
         }
         return map;
@@ -75,7 +100,7 @@ public class MapArray
                     type = "#";
                 }
                 map[i][j] = createTile(type);
-                itemLayer[i][j] = generateItem(type);
+                itemLayer[i][j] = generateItem(type, "1");
             }
         }
         return map;
@@ -84,6 +109,7 @@ public class MapArray
      * Helper method to convert String into a Tile using Constant's hashmap
      */
      public Tile createTile(String type){
+        //System.out.println(type);
          try{
             return (Tile)Constants.tileHash.get(type).newInstance();
         }catch(InstantiationException e){
@@ -94,17 +120,35 @@ public class MapArray
         return new Floor();
     }
     
-    public Tile generateItem(String type){
-        if(type.equals("-")){
-            try{
-                String itemName = itemList[Greenfoot.getRandomNumber(itemList.length)];
-                return (Tile)Constants.itemHash.get(itemName).newInstance();
-            }catch(InstantiationException e){
-                
-            }catch(IllegalAccessException e){
-                
+    public Tile generateItem(String type, String room){
+        //if(Greenfoot.getRandomNumber(3)==1){
+            System.out.println("123:"+type+" "+room);
+            if(type.equals("-")&&Greenfoot.getRandomNumber(5)==1){
+                String itemName = "";
+                System.out.println("A");
+                try{
+                    switch(room){
+                        case "1":
+                            itemName = itemList[1];
+                            return (Tile)Constants.itemHash.get(itemName).newInstance();
+                        case "2":
+                            itemName = itemList[0];
+                            return (Tile)Constants.itemHash.get(itemName).newInstance();
+                        case "3":
+                            itemName = itemList[0];
+                            return (Tile)Constants.itemHash.get(itemName).newInstance();
+                        case "4":
+                            itemName = itemList[1];
+                            return (Tile)Constants.itemHash.get(itemName).newInstance();
+                    }
+                    
+                }catch(InstantiationException e){
+                    
+                }catch(IllegalAccessException e){
+                    
+                }
             }
-        }
+        //}
         return null;
     }
         
@@ -151,56 +195,79 @@ public class MapArray
         for(int i = 0; i < map.length; i++){
             for(int j = 0; j < map[0].length; j++){
             String modifier = "";
-            if(!map[i][j].toString().equals("W")) continue;
-            try {
-                if(!map[i-1][j].toString().equals("W")){
-                // System.out.println(!map[i-1][j]+"]");
-                    modifier += "T";
-                }
-            } catch (ArrayIndexOutOfBoundsException e){}
-            try {
-                if(!map[i+1][j].toString().equals("W")){
-                    modifier += "B";
-                }
-            } catch (ArrayIndexOutOfBoundsException e){}
-            try {
-                if(!map[i][j+1].toString().equals("W")){
-                    modifier += "R";
-                }
-            } catch (ArrayIndexOutOfBoundsException e){}
-            try {
-                if(!map[i][j-1].toString().equals("W")){
-                    modifier += "L";
-                }
-            } catch (ArrayIndexOutOfBoundsException e){}
-            if(modifier.equals("")){
+            //System.out.println(i+" "+j);
+            if(map[i][j].toString().equals("W")){
+                
                 try {
-                    if(!map[i+1][j+1].toString().equals("W")){
-                        modifier += "CBR";
+                    if(!map[i-1][j].toString().equals("W")){
+                    // System.out.println(!map[i-1][j]+"]");
+                        modifier += "T";
                     }
                 } catch (ArrayIndexOutOfBoundsException e){}
                 try {
-                    if(!map[i+1][j-1].toString().equals("W")){
-                        modifier += "CBL";
+                    if(!map[i+2][j].toString().equals("W")&&!map[i+2][j].toString().equals("D")){
+                        modifier += "B";
+                    }
+                    
+    
+                } catch (ArrayIndexOutOfBoundsException e){}
+                try {
+                    //System.out.println(map[i][j-1].toString());
+                    if((!map[i+1][j+1].toString().equals("W")||!map[i][j+1].toString().equals("W"))){
+                        modifier += "R";
                     }
                 } catch (ArrayIndexOutOfBoundsException e){}
                 try {
-                    if(!map[i-1][j+1].toString().equals("W")){
-                        modifier += "CTR";
+                    if((!map[i+1][j-1].toString().equals("W")||!map[i][j-1].toString().equals("W"))&&!map[i+1][j-1].toString().equals("D")){
+                        modifier += "L";
                     }
                 } catch (ArrayIndexOutOfBoundsException e){}
-                try {
-                    if(!map[i-1][j-1].toString().equals("W")){
-                        modifier += "CTL";
-                    }
-                } catch (ArrayIndexOutOfBoundsException e){}
+                if(modifier.equals("")){
+                    try {
+                        if(!map[i+2][j+1].toString().equals("W")&&map[i+2][j].toString().equals("W")){
+                            modifier += "CBR";
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e){}
+                    try {
+                        if(!map[i+2][j-1].toString().equals("W")&&map[i+2][j].toString().equals("W")){
+                            modifier += "CBL";
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e){}
+                    try {
+                        if(!map[i-1][j+1].toString().equals("W")){
+                            modifier += "CTR";
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e){}
+                    try {
+                        if(!map[i-1][j-1].toString().equals("W")){
+                            modifier += "CTL";
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e){}
+                }
+                //$System.out.println(i+" "+modifier.length());
+                if(modifier.length() > 3){
+                    modifier = "";
+                }else{
+                    try {
+                        if(!map[i+1][j].toString().equals("W")){
+                        modifier = "B2";
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e){}
+                    try {
+                        if(map[i+1][j].toString().equals("D")){
+                        modifier = "B";
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e){}
+                    
+                }
+                modifier+=map[i][j].getUrl();
+            }else{
+                String prop = map[i][j].getProp();
+                if(map[i][j].getProp()==null) prop = "";
+                modifier = map[i][j].getUrl()+prop;
             }
-            //$System.out.println(i+" "+modifier.length());
-            if(modifier.length() > 3){
-                modifier = "";
-            }
-            //$System.out.println(i+" "+modifier.length());
-            map[i][j].setIcon("WallIcon/"+modifier+"Wall.png");
+            //System.out.println(map[i][j].toString());
+            map[i][j].setIcon("WallIcon/"+modifier+".png");
     
             }
         }
