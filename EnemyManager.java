@@ -18,24 +18,25 @@ public class EnemyManager extends Actor
     
     public EnemyManager() {
         //Enemies have different movement times 
-        daniel = new Enemy("daniel", 600);
-        tyrone = new Enemy("tyrone", 600);
+        
+        daniel = new Enemy("daniel", 600, 600);
+        tyrone = new Enemy("tyrone", 600, 600);
         
         specialStageTimer = 1800;
         specialRunningTimer = 300;
         specialStage= false;
         setImage(new GreenfootImage(1,1));
     }
-    
+    /*
     /**
      * Set Daniel's stage number
      * @param stage     Set to this number
-     */
+     
     public void setDStageSeven(boolean stage) {
         this.dStageThree = stage;
         dLocation = 7;
     }
-
+    */
     /**
      * Set Special stage number
      * @param stage     Set to this number
@@ -52,9 +53,30 @@ public class EnemyManager extends Actor
     {
         
         //If any of the enemies are on stage 3
+        
+        
+        /*
+        if(specialStage){
+            if(specialStageTimer == 0) {
+                specialRunningTimer--;
+                //play running sound in LEFT EAR
+            }
+            else{
+                specialStageTimer--; 
+            }
+            
+        }
+        if(specialRunningTimer == 0 && ((GameRoom)getWorld()).getLeftDoor()) {
+            ((GameRoom)getWorld()).setAlive(false);
+            //play daniel jumpscare
+        }
+        */
+        knockOnDoor();
+    }
+    public void knockOnDoor(){
         if(daniel.getStage() == 3) {
-            dLocantThreeTimer--;
-            if(dLocantThreeTimer == 0 && ((GameRoom)getWorld()).getRightDoor()) {
+            daniel.decreaseTimer(1);
+            if(daniel.getResetTimer() == 0 && ((GameRoom)getWorld()).getRightDoor()) {
                 int specialSpawn = Greenfoot.getRandomNumber(10);
                 if(specialSpawn == 3) {
                     daniel.setStage(7);
@@ -70,33 +92,30 @@ public class EnemyManager extends Actor
             }
         }    
         if(tyrone.getStage() == 3) {
-            bgLocantThreeTimer--;
-            if(bgLocantThreeTimer == 0 && ((GameRoom)getWorld()).getLeftDoor()) {
+            tyrone.decreaseTimer(1);
+            if(tyrone.getResetTimer() == 0 && ((GameRoom)getWorld()).getLeftDoor()) {
                 tyrone.setStage(4);
             }
             else {
                 ((GameRoom)getWorld()).setAlive(false);
             }
         }  
-        
-        if(specialStage){
-            if(specialStageTimer == 0) {
-                specialRunningTimer--;
-                //play running sound in LEFT EAR
-            }
-            else{
-                specialStageTimer--; 
-            }
-            
-        }
-        if(specialRunningTimer == 0 && ((GameRoom)getWorld()).getLeftDoor()) {
-            ((GameRoom)getWorld()).setAlive(false);
-            //play daniel jumpscare
-        }
-        
-        daniel.move();
-        tyrone.move();
-        
+    }
+    public void moveEnemies(){
+        daniel.moveLocation();
+        tyrone.moveLocation();
+    }
+    public int getDanielLocation(){
+        return daniel.getLocation(daniel.getStage());
+    }
+    public int getTyroneLocation(){
+        return tyrone.getLocation(tyrone.getStage());
+    }
+    public Enemy getDaniel(){
+        return daniel;
+    }
+    public Enemy getTyrone(){
+        return tyrone; 
     }
     
 }

@@ -11,17 +11,12 @@ import java.util.ArrayList;
  * Have battery percentage drain 1 every 5 seconds
  */
 public class GameRoom extends SuperWorld {
-    private boolean isAlive;
-    private boolean leftDoorClosed;
-    private boolean rightDoorClosed;
+    private boolean isAlive, leftDoorClosed, rightDoorClosed;
 
     private int currCam;
-    private int battery;
-    private int maxBattery;
 
-    private GreenfootImage[] bgFrames;  //images for background
-    private GreenfootImage[] leftDoorFrames;
-    private GreenfootImage[] rightDoorFrames;
+    //images for background
+    private GreenfootImage[] bgFrames, leftDoorFrames, rightDoorFrames;
     private int currentFrameIndex;
     
     Camera[] camWithEnemy;
@@ -44,19 +39,13 @@ public class GameRoom extends SuperWorld {
 
     private int numClicks = 2;
 
-    private double maxWater;
-    private double maxHunger;
-    private double maxBattery;
-    private double maxWood;
+    private double maxWater, maxBattery, maxWood, maxFood;
     
     private double hunger = 10.0;
     private double water = 10.0;
-    //private double wood = 
+    private double wood;
+    private double battery;
 
-    private boolean stage1;
-    private boolean stage2;
-    private boolean stage3;
-    private boolean stage4;
     private boolean openedCamMap = false;
     private boolean expanded = false;
 
@@ -67,14 +56,15 @@ public class GameRoom extends SuperWorld {
     private Bar batteryBar;
     private Bar soundBar;
     private EnemyManager em;
-    private Presser leftButton;
-    private Presser rightButton;
-    private Presser foodButton;
-    private Presser waterButton;
+    private Presser leftButton, rightButton, foodButton, waterButton;
+    
     private int visionTime;
     
     private VisionBlock fading;
     private ArrayList<Item> itemChest;
+    
+    //private Enemy daniel, tyrone;
+
     
     /**
      * Constructor for GameRoom
@@ -129,8 +119,9 @@ public class GameRoom extends SuperWorld {
         waterButton = new Presser(drink, water);
         addObject(foodButton, 461, 665);
         addObject(waterButton, 731, 665);
-        maxBattery = 0;
-        battery = 50;
+        
+        addInventory();
+        battery = maxBattery;
 
         batteryBar = new Bar(maxBattery, "energyIcon.png", new Color(0, 255, 255));
         addObject(batteryBar, 150, 100);
@@ -143,32 +134,22 @@ public class GameRoom extends SuperWorld {
 
         em = new EnemyManager();
         addObject(em, getWidth() /2, getHeight()/2);
+        
+        //daniel = em.getDaniel();
+        //tyrone = em.getTyrone();
 
         timer = new SimpleTimer();
         
         setPaintOrder(Button.class, CameraMap.class, Bar.class, VisionBlock.class);
-
     }
     
 
     public void act() {
         time--;
-        if(Greenfoot.isKeyDown("f")) {
-            em.setDStageOne(true);
-            em.setBgStageOne(true);
-        }
-        if(Greenfoot.isKeyDown("g")) {
-            em.setDStageOne(false);
-            em.setDStageTwo(true);
-        }
-        if(Greenfoot.isKeyDown("h")) {
-            em.setDStageTwo(false);
-            em.setDStageThree(true);
-        }
+
 
         if(time == 21000) { //spawn them after 30 seconds
-            em.setDStageOne(true);
-            em.setBgStageOne(true);
+            em.moveEnemies();
         }
         
         if(leftDoorClosed) {
@@ -186,7 +167,7 @@ public class GameRoom extends SuperWorld {
 
         //System.out.println("time elapsed: " + timer.millisElapsed()/1000);
         //System.out.println("hunger meter: " + hM);
-        if(hB != 0.0 && time > 0 || isAlive){
+        if(hunger != 0.0 && time > 0 || isAlive){
             if (Greenfoot.mousePressed(camButton)){
                 if(numClicks == 2){
                     generateCamMap();
@@ -212,40 +193,37 @@ public class GameRoom extends SuperWorld {
                 if(Greenfoot.mousePressed(cams[0])) {
                     clearCams();
                     currCam = 1;
-                    checkCam(currCam, em.getDLocation());
+                    checkCam(currCam, em.getDanielLocation());
                 }
                 if(Greenfoot.mousePressed(cams[1])) {
                     clearCams();
                     currCam = 2;
-                    checkCam(currCam, em.getDLocation());
+                    checkCam(currCam, em.getDanielLocation());
                 }if(Greenfoot.mousePressed(cams[2])) {
                     clearCams();
                     currCam = 3;
-                    checkCam(currCam, em.getDLocation());
+                    checkCam(currCam, em.getDanielLocation());
                 }
                 if(Greenfoot.mousePressed(cams[3])) {
                     clearCams();
                     currCam = 4;
-                    checkCam(currCam, em.getBgLocation());
+                    checkCam(currCam, em.getTyroneLocation());
                 }
                 if(Greenfoot.mousePressed(cams[4])) {
                     clearCams();
                     currCam = 5;
-                    checkCam(currCam, em.getBgLocation());
+                    checkCam(currCam, em.getTyroneLocation());
                 }if(Greenfoot.mousePressed(cams[5])) {
                     clearCams();
                     currCam = 6;
-                    checkCam(currCam, em.getBgLocation());
-                }
+                    checkCam(currCam, em.getTyroneLocation());
+                }   
                 if(Greenfoot.mousePressed(cams[6])) {
                     clearCams();
                     currCam = 7;
-                    checkCam(currCam, em.getDLocation());
+                    checkCam(currCam, em.getDanielLocation());
                 }
-                
             }
-            
-            
         } else goToWorld(new endWorld()); //add parameter later on if needed
 
         //black guy cameras
@@ -379,8 +357,8 @@ public class GameRoom extends SuperWorld {
     /**
      * Set method for battery
      */
-    public void setBattery(int battery) {
-        this.battery = Math.max(0, Math.min(maxBattery, battery));
+    public void setBattery(double battery) {
+        this.battery = battery;
     }
     /**
      * Set method for characters life status

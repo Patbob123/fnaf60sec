@@ -29,7 +29,7 @@ public class tempWorld extends SuperWorld
         addObject(p, Constants.WW/2, Constants.WH/2);
         displayHandSlots();
         
-        gameTimer = new Timer(60);
+        gameTimer = new Timer(1);
         addObject(gameTimer,100,100);
         
         bunker = new Shelter();
