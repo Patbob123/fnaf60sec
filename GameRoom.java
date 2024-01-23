@@ -66,8 +66,14 @@ public class GameRoom extends SuperWorld {
     private Presser waterButton;
     private int visionTime;
 
+
     private DynamicLighting fading;
 
+
+    private GreenfootImage[] openLDoor;
+    private GreenfootImage[] openRDoor;
+    //private VisionBlock fading;
+    
     /**
      * Constructor for GameRoom
      */
@@ -83,6 +89,16 @@ public class GameRoom extends SuperWorld {
             bgFrames[i] = new GreenfootImage("bgFrames/frame" + i + ".jpg");  
         }
 
+
+        openLDoor = new GreenfootImage[5];
+        for (int i = 0; i < 5; i++) {
+            openLDoor[i] = bgFrames[i];  
+        }
+        openRDoor = new GreenfootImage[5];
+        for (int i = 0; i < 5; i++) {
+            openRDoor[i] = bgFrames[bgFrames.length-1];  
+        }
+        
         leftDoorFrames = new GreenfootImage[5];
         for (int i = 0; i < 5; i++) {
             leftDoorFrames[i] = new GreenfootImage("leftDoorFrames/frame" + i + ".jpg");  
@@ -344,11 +360,27 @@ public class GameRoom extends SuperWorld {
             int mouseX = Greenfoot.getMouseInfo().getX();
             int newIndex = (mouseX * bgFrames.length) / getWidth(); //calc for new index
 
+            
+            if(newIndex == 0 && battery <= 0 && leftDoorClosed == true) {
+                System.out.println("its closed");
+                for(int i = 0; i < 5; i++ ){
+                    bgFrames[i] = openLDoor[i];
+                }
+                leftDoorClosed = false;
+            }
+            if(newIndex == bgFrames.length-1 && battery <= 0 && rightDoorClosed == true) {
+                for(int i = 0; i < 5; i++ ){
+                    bgFrames[bgFrames.length - (i+1)] = openRDoor[i];
+                }
+                rightDoorClosed = false;
+            }
+
             //set new background and index
             if (newIndex != currentFrameIndex) {
                 setBackground(bgFrames[newIndex]);
                 currentFrameIndex = newIndex;
             }
+            
         }
     }   
 
@@ -402,39 +434,45 @@ public class GameRoom extends SuperWorld {
      * Action for left door being pressed
      */
     public Function leftDoor = () -> {
-                if(battery > 0) {
-                    leftDoorClosed = !leftDoorClosed;
-                    battery -=1;
-                    for(int i = 0; i < 5; i++ ){
-                        GreenfootImage temp = bgFrames[i];
-                        bgFrames[0 + i] = leftDoorFrames[i];
-                        leftDoorFrames[i] = temp;
-                    }
-                    setBackground(bgFrames[0]);
+            if(battery > 0) {
+                leftDoorClosed = !leftDoorClosed;
+                battery -=1;
+                for(int i = 0; i < 5; i++ ){
+                    GreenfootImage temp = bgFrames[i];
+                    bgFrames[0 + i] = leftDoorFrames[i];
+                    leftDoorFrames[i] = temp;
                 }
-        };
+                setBackground(bgFrames[0]);
+            }
+    };
+
 
     /**
      * Action for right door being pressed
      */
     public Function rightDoor = () -> {
-                if(battery > 0) {
-                    rightDoorClosed = !rightDoorClosed;
-                    battery -=1;
-                    for(int i = 0; i < 5; i++ ){
-                        GreenfootImage temp = bgFrames[15];
-                        bgFrames[11 + i] = rightDoorFrames[i];
-                        rightDoorFrames[i] = temp;
-                    }
-                    setBackground(bgFrames[bgFrames.length - 1]);
-                }
-        };
+        if(battery > 0) {
+            rightDoorClosed = !rightDoorClosed;
+            battery -=1;
+            for(int i = 0; i < 5; i++ ){
+                GreenfootImage temp = bgFrames[15];
+                bgFrames[11 + i] = rightDoorFrames[i];
+                rightDoorFrames[i] = temp;
+            }
+            setBackground(bgFrames[bgFrames.length - 1]);
+        }
+    };
+
+
+        
+        
+    
 
     public Function feed = () -> {
 
-        };
+    };
 
     public Function drink = () -> {
 
-        };
+    };
 }
