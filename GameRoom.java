@@ -46,6 +46,8 @@ public class GameRoom extends SuperWorld {
 
     private double hB = 10.0;
     private double wB = 10.0;
+    private double maxWB = 10.0;
+    private double maxHB = 10.0;
     //private double wood = 
 
     private boolean stage1;
@@ -72,11 +74,16 @@ public class GameRoom extends SuperWorld {
     private DynamicLighting fading;
 
 
+    private int ratio; 
+    private final int ALPHA_CHANNEL = 255;
+
+
     private GreenfootImage[] openLDoor;
     private GreenfootImage[] openRDoor;
 
     //private VisionBlock fading;
     
+
     /**
      * Constructor for GameRoom
      */
@@ -165,7 +172,10 @@ public class GameRoom extends SuperWorld {
 
         timer = new SimpleTimer();
 
-        setPaintOrder(Button.class, CameraMap.class, Bar.class, DynamicLighting.class);
+        fading = new DynamicLighting (Constants.WW, Constants.WH);
+        addObject(fading, Constants.WW/2, Constants.WH/2);
+
+        setPaintOrder(Button.class, CameraMap.class, Bar.class, Presser.class, DynamicLighting.class);
 
     }
 
@@ -199,7 +209,13 @@ public class GameRoom extends SuperWorld {
         }
 
         hB = -1*Math.pow((1/1.002), -1*(timer.millisElapsed()/1000))+11;
-        wB = -1*(1/2)*(timer.millisElapsed()/1000);
+        wB = -1*(1.0/2)*(timer.millisElapsed()/1000);
+        
+        if(ratio != 255){
+            ratio = 10-(int)((wB/maxWB)*100.0);
+        }else{
+            ratio = ALPHA_CHANNEL;
+        }
         //bB = -1*(1/3)*(timer.millisElapsed()/1000);
 
         //System.out.println("time elapsed: " + timer.millisElapsed()/1000);
@@ -270,12 +286,9 @@ public class GameRoom extends SuperWorld {
             //visionTime = timer.millisElapsed()/10;
             //fading = new VisionBlock (Constants.WW, Constants.WH, visionTime);
 
-            fading = new DynamicLighting (500, 500);
-            addObject(fading, 0, 500);
+            fading.refresh(ratio);
 
-            
             //The entire screen darkens gradually as time elaspses
-
             //add if statements when the player drinks water => visionTime += 100;
             // if (wB < 8 && wB >6){
             // //
