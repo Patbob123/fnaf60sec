@@ -1,19 +1,29 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Blinker here.
+ * Class to give player (Timmy) idle animation of blinking
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Dawson 
+ * @version January 2024
  */
 public class Blinker extends Entity
 {
     private GreenfootImage blinkerImage;
     private Timer timer;
+    
+    /**
+     * Constructor for Blinker Class
+     */
     public Blinker(){
         blinkerImage = new GreenfootImage("purpletimmysprites.png");
         timer = new Timer(10.0, true);
     }
+    
+    /**
+     * Method to add the animations to the world
+     * 
+     * @param w     Greenfoot world to add object to
+     */
     public void addedToWorld(World w){
         w.addObject(timer, 0, 0);
     }

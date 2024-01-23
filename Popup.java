@@ -1,20 +1,21 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class PopupFader here.
+ * Class to make icons popup
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Vincent 
+ * @version January 2024
  */
 public class Popup extends Effect
 {
     private GreenfootImage popupImage;
-    
+    /**
+     * Constructor for Popup
+     */
     public Popup(GreenfootImage image){
         popupImage = new GreenfootImage(image.getWidth(), image.getHeight());
         popupImage.drawImage(image, 0, 0);
         popupImage.scale(60,60);
         setImage(popupImage);
     }
-
 }

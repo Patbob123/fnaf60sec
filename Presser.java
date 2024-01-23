@@ -4,7 +4,7 @@ import java.util.List;
  * Button class that runs its Function object's function when clicked by the mouse
  * 
  * @author Dawson
- * @version 2023-06-20
+ * @version January 2024
  */
 
 public class Presser extends Actor

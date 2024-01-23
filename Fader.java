@@ -7,7 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * <p>
  * Modified by: Dawson
  * </p>
- * @version November 2023
+ * @version January 2024
  */
 public class Fader extends Effect
 {

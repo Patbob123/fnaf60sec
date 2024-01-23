@@ -1,22 +1,24 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class VisionBlock here.
+ * Class to darken the colour of the screen
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jennifer
+ * @version January 2024
  */
 public class DynamicLightning extends Effect
 {
-    /**
-     * Act - do whatever the VisionBlock wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     private int width;
     private int height;
     private Color fading;
     private GreenfootImage dynamicLighting;
     
+    /**
+     * Constructor for DynamicLighting
+     * 
+     * @param width     height of the world
+     * @param height    width of the world
+     */
     public DynamicLightning(int width, int height)
     {
         this.width = width;
