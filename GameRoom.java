@@ -105,11 +105,14 @@ public class GameRoom extends World {
         GreenfootImage backgroundImage = new GreenfootImage("businessroom.png");
         camMap = new CameraMap("translucentCamMapV2.PNG");
 
-        GreenfootImage startBut = new GreenfootImage("startButton.png");
-        leftButton = new Presser(leftDoor, startBut);
-        rightButton = new Presser(rightDoor, startBut);
-        foodButton = new Presser(feed, startBut);
-        waterButton = new Presser(drink, startBut);
+        GreenfootImage doorLeft = new GreenfootImage("buttons/doorButton1.png");
+        GreenfootImage doorRight = new GreenfootImage("buttons/doorButton2.png");
+        GreenfootImage food = new GreenfootImage("buttons/foodButton.png");
+        GreenfootImage water = new GreenfootImage("buttons/waterButton.png");
+        leftButton = new Presser(leftDoor, doorLeft);
+        rightButton = new Presser(rightDoor, doorRight);
+        foodButton = new Presser(feed, food);
+        waterButton = new Presser(drink, water);
         addObject(foodButton, 461, 665);
         addObject(waterButton, 731, 665);
         maxBattery = 100;
@@ -233,19 +236,19 @@ public class GameRoom extends World {
     
     /**
      * Method to add the door buttons only when screen is on 
-     * first/second index or last/second last index
+     * first or last index
      */
     public void addDoorButtons() {
-        if(currentFrameIndex == 0 || currentFrameIndex == 1) {
-            addObject(leftButton, 119, 387);
+        if(currentFrameIndex == 0) {
+            addObject(leftButton, 69, 387);
         } else {
             if(leftButton != null) {
                 removeObject(leftButton);
             }
         }
         
-        if(currentFrameIndex == bgFrames.length-1 || currentFrameIndex == bgFrames.length-2) {
-            addObject(rightButton, 1048, 421);
+        if(currentFrameIndex == bgFrames.length-1) {
+            addObject(rightButton, 1092, 421);
         } else {
             if(rightButton != null) {
                 removeObject(rightButton);
