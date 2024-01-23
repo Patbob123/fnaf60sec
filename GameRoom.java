@@ -58,6 +58,7 @@ public class GameRoom extends SuperWorld {
     private CameraMap camMap;
     private Tile tiles[][];
     private Bar batteryBar;
+    private Bar soundBar;
     private EnemyManager em;
     private Presser leftButton;
     private Presser rightButton;
@@ -120,8 +121,11 @@ public class GameRoom extends SuperWorld {
         addObject(dynamicLightning, Constants.WW/2, Constants.WH/2);
         
         batteryBar = new Bar(maxBattery, "energyIcon.png", new Color(0, 255, 255));
-        addObject(batteryBar, 1101, 27);
+        addObject(batteryBar, 150, 100);
 
+        soundBar = new Bar(maxBattery, "energyIcon.png", new Color(0, 255, 0));
+        addObject(soundBar, 150, 200);
+        
         camButton = new Button("AAAAAAAAAAAAAAAAAAAAA", 20, true);
         addObject(camButton, 1129, 741);
 
@@ -214,7 +218,8 @@ public class GameRoom extends SuperWorld {
         if(battery > 0 && time > 0 && isAlive) {
             //play game win
         }
-
+        soundBar.refresh(Greenfoot.getMicLevel());
+        
     }
     
     /**
