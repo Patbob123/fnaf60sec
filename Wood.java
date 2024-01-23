@@ -9,11 +9,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Wood extends Item
 {
     /**
-     * Act - do whatever the Wood wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * Constructor for the Wood Class
      */
-    public void act()
-    {
-        // Add your action code here.
+    public Wood (){
+        weight = 3;
+        setIcon("itemSprites/Wood.png");
     }
+    /**
+     * To string method to return type of item
+     */
+    public String toString(){
+        return "Wood";
+    }
+
 }

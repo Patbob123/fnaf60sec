@@ -1,59 +1,64 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.Stack;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.PriorityQueue;
-import java.util.ArrayList;
+
 /**
- * Write a description of class Enemy here.
+ * Write a description of class Enenmy here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Enemy extends Entity
+public class Enemy extends EnemyManager
 {
-    private ArrayList<Player> players;
-    private Player targetPlayer;
-    /**
-     * Two enemies:
-     * A: Cam6, 2, 3
-     * B: Cam7, 4, 5, 1
-     */
-    private PriorityQueue<Coordinate> nextMoves;
-
-    public Enemy(){
-        collider = new Hitbox(getImage().getWidth(),getImage().getHeight());
-    }
-    protected void addedToWorld(World world){
-        world.addObject(collider, getX(), getY());
-    }
-    public void act() 
-    {
-        
-    }    
+    private int stage;
+    private String name;
+    private int maxTick;
+    private int tick;
     
-    private void targetClosestPlayer(){
-        double closestTargetDis = 0;
-        double distanceToActor;
-        players = (ArrayList<Player>)getObjectsInRange (70, Player.class);
-        
-        if (players.size() == 0){
-            players = (ArrayList<Player>)getObjectsInRange(170, Player.class);
-        }
-        
-        if (players.size() > 0){
-            targetPlayer = players.get(0);
-            closestTargetDis = getDistance(this, targetPlayer);
-            
-            for (Player o : players){
-                distanceToActor = getDistance(this, o);
-                if (distanceToActor < closestTargetDis){
-                    targetPlayer = o;
-                    closestTargetDis = distanceToActor;
-                }
+    public Enemy(String name, int maxTick){
+        this.name = name;
+        this.maxTick = maxTick;
+
+        tick = maxTick;
+    }
+    public void setStage(int stage){
+        this.stage = stage;
+    }
+    public int getLocation(int stage){
+        switch(getName()){
+            case "tyrone":
+                switch(stage){
+                case 1:
+                    return 4;
+                case 2:
+                    return 5;
+                case 3:
+                    return 6;
+                
             }
-            setLocation(targetPlayer.getX(), targetPlayer.getY());
-            
+            break;
+            case "daniel":
+                switch(stage){
+                case 1:
+                    return 1;
+                case 2:
+                    return 2;
+                case 3:
+                    return 3;
+                
+            }
         }
+
+    }
+    public void move(){
+        tick--;
+        if(Greenfoot.getRandomNumber(2) == 1){
+            if(stage+1 > 3) {
+                if(stage + 1 == 3) tick = 240;
+                tick = maxTick;
+                setStage(stage+1);
+            }
+        }
+    }
+    public String getName(){
+        return this.name;
     }
 }

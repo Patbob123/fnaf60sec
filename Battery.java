@@ -13,10 +13,9 @@ public class Battery extends Item
      * Constructor for the Battery Class
      */
     public Battery(){
-        weight = 1;
+        weight = 2;
         power = 10;
-        icon = new GreenfootImage("batteryIcon.png");
-        setImage(icon);
+        setIcon("itemSprites/Battery.png");
     }
     /**
      * To string method to return type of item

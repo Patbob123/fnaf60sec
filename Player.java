@@ -325,6 +325,12 @@ public class Player extends Entity
         return speed;
     }
     /**
+     * Getter method for the item chest
+     */
+    public ArrayList<Item> getItemChest(){
+        return itemChest;
+    }
+    /**
      * Getter method for the current inventory
      */
     public Inventory getHandSlots(){

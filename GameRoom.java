@@ -3,6 +3,8 @@ import java.util.List;
 import greenfoot.GreenfootImage;
 import greenfoot.Color;
 import java.util.Arrays;
+import java.util.ArrayList;
+
 /**
  * Notes:
  * Make each night 1 minute, from 12am-6am (6mins per night)
@@ -42,8 +44,13 @@ public class GameRoom extends SuperWorld {
 
     private int numClicks = 2;
 
-    private double hB = 10.0;
-    private double wB = 10.0;
+    private double maxWater;
+    private double maxHunger;
+    private double maxBattery;
+    private double maxWood;
+    
+    private double hunger = 10.0;
+    private double water = 10.0;
     //private double wood = 
 
     private boolean stage1;
@@ -67,12 +74,14 @@ public class GameRoom extends SuperWorld {
     private int visionTime;
     
     private VisionBlock fading;
+    private ArrayList<Item> itemChest;
     
     /**
      * Constructor for GameRoom
      */
-    public GameRoom() {
+    public GameRoom(ArrayList<Item> itemChest) {
         super(Constants.WW, Constants.WH, 1);
+        this.itemChest = itemChest;
         time = 21600; // 6 minutes
         inCameras = false;
         leftDoorClosed = false;
@@ -113,13 +122,14 @@ public class GameRoom extends SuperWorld {
         GreenfootImage doorRight = new GreenfootImage("buttons/doorButton2.png");
         GreenfootImage food = new GreenfootImage("buttons/foodButton.png");
         GreenfootImage water = new GreenfootImage("buttons/waterButton.png");
+        
         leftButton = new Presser(leftDoor, doorLeft);
         rightButton = new Presser(rightDoor, doorRight);
         foodButton = new Presser(feed, food);
         waterButton = new Presser(drink, water);
         addObject(foodButton, 461, 665);
         addObject(waterButton, 731, 665);
-        maxBattery = 100;
+        maxBattery = 0;
         battery = 50;
 
         batteryBar = new Bar(maxBattery, "energyIcon.png", new Color(0, 255, 255));
@@ -170,8 +180,8 @@ public class GameRoom extends SuperWorld {
             batteryBar.refresh(battery);
         }
         
-        hB = -1*Math.pow((1/1.002), -1*(timer.millisElapsed()/1000))+11;
-        wB = -1*(1/2)*(timer.millisElapsed()/1000);
+        hunger = -1*Math.pow((1/1.002), -1*(21600/60))+11;
+        water = -1*(1/2)*((21600/60));
         //bB = -1*(1/3)*(timer.millisElapsed()/1000);
 
         //System.out.println("time elapsed: " + timer.millisElapsed()/1000);
@@ -195,7 +205,9 @@ public class GameRoom extends SuperWorld {
             }
             
             if(inCameras){
-                battery-=1; //temporary. is supposed to be 1
+                if(time%60 == 0){
+                battery -=1;
+                }
                 batteryBar.refresh(battery);
                 if(Greenfoot.mousePressed(cams[0])) {
                     clearCams();
@@ -232,18 +244,13 @@ public class GameRoom extends SuperWorld {
                 }
                 
             }
-            if(hB < 2){
-                //em.setBgStageSix(true);
-            }
             
             
         } else goToWorld(new endWorld()); //add parameter later on if needed
 
         //black guy cameras
 
-        if (wB != 0){
-            //visionTime = timer.millisElapsed()/10;
-            //fading = new VisionBlock (Constants.WW, Constants.WH, visionTime);
+        if (water != 0){
             
             fading = new VisionBlock (500, 500, 100);
             addObject(fading, 0, 500);
@@ -251,29 +258,12 @@ public class GameRoom extends SuperWorld {
             
             
             //The entire screen darkens gradually as time elaspses
-            
-            //add if statements when the player drinks water => visionTime += 100;
-            // if (wB < 8 && wB >6){
-            // //
-            // }
-            // if (wB < 6 && wB >4){
-
-            // }
-            // if (wB < 4 && wB >2){
-
-            // }
-            // if (wB < 2 && wB >0){
-
-            // }
         }
         
-        addDoorButtons();
+        
         
         if(!inCameras) {
             checkMouseMovement();
-        }
-        if(time % 3600 == 0) {
-            //switch to next hour on clock
         }
 
         if((battery == 0 && time > 0) || !isAlive) {
@@ -282,6 +272,8 @@ public class GameRoom extends SuperWorld {
         if(battery > 0 && time > 0 && isAlive) {
             //play game win
         }
+        
+        addDoorButtons();
         soundBar.refresh(Greenfoot.getMicLevel());
         
     }
@@ -365,7 +357,25 @@ public class GameRoom extends SuperWorld {
             addObject(cams[i], camX[i], camY[i]);
         }
     }
-
+    public void addInventory(){
+        for(Item i : itemChest){
+            switch(i.toString()){
+                case "Battery":
+                    maxBattery += 10;
+                    break;
+                case "Wood":
+                    maxWood += 1;
+                    break;
+                case "Water":
+                    maxWater += 10;
+                    break;
+                case "Food":
+                    maxFood += 10;
+                    break;
+            }
+            
+        }
+    }
     /**
      * Set method for battery
      */
@@ -397,6 +407,7 @@ public class GameRoom extends SuperWorld {
     public boolean getIsInCameras() {
         return inCameras;
     }
+    
 
     /**
      * Action for left door being pressed
@@ -404,7 +415,10 @@ public class GameRoom extends SuperWorld {
     public Function leftDoor = () -> {
         if(battery > 0) {
             leftDoorClosed = !leftDoorClosed;
-            battery -=1;
+            
+            if(time%60 == 0){
+                battery -=2;
+            }
             for(int i = 0; i < 5; i++ ){
                 GreenfootImage temp = bgFrames[i];
                 bgFrames[0 + i] = leftDoorFrames[i];
@@ -420,7 +434,9 @@ public class GameRoom extends SuperWorld {
     public Function rightDoor = () -> {
         if(battery > 0) {
             rightDoorClosed = !rightDoorClosed;
-            battery -=1;
+            if(time%60 == 0){
+                battery -=2;
+            }
             for(int i = 0; i < 5; i++ ){
                 GreenfootImage temp = bgFrames[15];
                 bgFrames[11 + i] = rightDoorFrames[i];
