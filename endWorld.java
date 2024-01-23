@@ -7,12 +7,25 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class endWorld extends SuperWorld
 {
-    /**
-     * Constructor for objects of class endWorld.
-     * 
-     */
+    private Presser nextButton;
+    private GreenfootImage startBg = new GreenfootImage("start.png");
+    
     public endWorld()
     {   
         super(Constants.WW, Constants.WH, 1);
+        
+        
+        GreenfootImage startBut = new GreenfootImage("startButton.png");
+        nextButton = new Presser(goStartWorld, startBut);
+        addObject(nextButton, 200, 600);
+        
+        setBackground(startBg);
+        
+        setPaintOrder(Effect.class, Presser.class);
     }
+    
+    public void goToStartWorld(){
+        goToWorld(new startWorld());
+    }
+    public Function goStartWorld = () -> goToStartWorld();
 }
