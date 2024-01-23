@@ -1,22 +1,24 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Food here.
+ * Food item
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Dawson
+ * @version January 2024
  */
 public class Food extends Item
 {
+    /**
+     * Constructor for the Food Class
+     */
     public Food(){
         weight = 1;
         icon = new GreenfootImage("grapes.png");
         setImage(icon);
     }
-    public void act()
-    {
-        // Add your action code here.
-    }
+    /**
+     * To string method to return type of item
+     */
     public String toString(){
         return "Food";
     }

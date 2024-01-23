@@ -1,24 +1,26 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Battery here.
+ * Battery item
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Dawson
+ * @version January 2024
  */
 public class Battery extends Item
 {
     private int power;
+    /**
+     * Constructor for the Battery Class
+     */
     public Battery(){
         weight = 1;
         power = 10;
         icon = new GreenfootImage("batteryIcon.png");
         setImage(icon);
     }
-    public void act()
-    {
-        // Add your action code here.
-    }
+    /**
+     * To string method to return type of item
+     */
     public String toString(){
         return "Battery";
     }

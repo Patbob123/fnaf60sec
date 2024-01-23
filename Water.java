@@ -1,20 +1,22 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Water here.
+ * Water item
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Dawson
+ * @version January 2024
  */
 public class Water extends Item
 {
+    /**
+     * Constructor for the Water Class
+     */
     public Water (){
         weight = 2;
     }
-    public void act()
-    {
-        // Add your action code here.
-    }
+    /**
+     * To string method to return type of item
+     */
     public String toString(){
         return "Water";
     }

@@ -1,25 +1,30 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Items here.
+ * Item class
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Dawson
+ * @version January 2024
  */
 public class Item extends Tile
 {
     protected int weight;
     protected GreenfootImage icon;
+    /**
+     * Constructor for the Item Class
+     */
     public Item(){
         symbol = "$";
     }
-    public void act()
-    {
-        // Add your action code here.
-    }
+    /**
+     * Getter Method for weight of item
+     */
     public int getWeight(){
         return weight;
     }
+    /**
+     * To string method to return type of item
+     */
     public String toString(){
         return "SOME ITEM";
     }

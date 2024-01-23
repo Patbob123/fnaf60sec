@@ -1,13 +1,16 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class PressurePlate here.
+ * Pressure Plate Class
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Dawson
+ * @version January 2024
  */
 public class PressurePlate extends Tile
 {
+    /**
+     * Constructor for PressurePlate
+     */
     public PressurePlate(){
         super();
     }

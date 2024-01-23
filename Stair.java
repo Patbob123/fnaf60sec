@@ -1,13 +1,16 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Stair here.
+ * Stair class
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Dawson
+ * @version January 2024
  */
 public class Stair extends Tile
 {   
+    /**
+     * Constructor for Stair
+     */
     public Stair(){
         super();
     }

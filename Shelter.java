@@ -1,20 +1,26 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class ResourceScramble here.
+ * Shelter class to store items for the second floor world
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Dawson
+ * @version January 2024
  */
 public class Shelter extends Tile
 {
     private Inventory bunker;
+    /**
+     * Constructor for Shelter
+     */
     public Shelter(){
         super();
         symbol = "#"; 
         bunker = new Inventory();
         setIcon("tent.png");
     }
+    /**
+     * Getter Method for the inventory
+     */
     public Inventory getInventory(){
         return bunker;
     }

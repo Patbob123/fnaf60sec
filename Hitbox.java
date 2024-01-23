@@ -2,17 +2,22 @@ import greenfoot.GreenfootImage;
 import greenfoot.Color;
 
 /**
- * Write a description of class Hitbox here.
+ * Hitbox class to detect collisions
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Vincent
+ * @version January 2024
  */
 public class Hitbox extends SuperSmoothMover
 {
-    // instance variables - replace the example below with your own
     private int width;
     private int height;
     private Color red = new Color(255,0,0);
+    /**
+     * Constructor for the Hitbox Class
+     * 
+     * @param width     width of hitbox
+     * @param height    height of hitbox
+     */
     public Hitbox(int width, int height)
     {
         this.width = width;
@@ -24,6 +29,13 @@ public class Hitbox extends SuperSmoothMover
         setImage(hitbox);
     
     }
+    
+    /**
+     * Method to check if hitbox collided with the wall
+     * 
+     * @param x     x-coordinate
+     * @param y     y-coordinate
+     */
     public boolean intersectWall(int x, int y){
         int curX = getX();
         int curY = getY();
@@ -37,6 +49,11 @@ public class Hitbox extends SuperSmoothMover
         
         return touchingWall;
     }
+    /**
+     * Method to check if hitbox collided with a different class
+     * 
+     * @param c        The class of the object being collided
+     */
     public boolean intersect(Class c){
         return isTouching(c);
     }
