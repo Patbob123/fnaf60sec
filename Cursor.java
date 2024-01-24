@@ -26,7 +26,7 @@ public class Cursor extends Effect
         
         cursorImages = new GreenfootImage[frames];
         for(int i = 0; i < frames; i++){
-            cursorImages[i] = new GreenfootImage("click/"+(i+1)+".png");
+            cursorImages[i] = new GreenfootImage("click/click"+(i+1)+".png");
             Util.scale(cursorImages[i]);
         }
 
