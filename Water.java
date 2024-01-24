@@ -12,7 +12,8 @@ public class Water extends Item
      * Constructor for the Water Class
      */
     public Water (){
-        weight = 2;
+        weight = 1;
+        setIcon("itemSprites/Water.png");
     }
     /**
      * To string method to return type of item

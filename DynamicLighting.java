@@ -23,7 +23,7 @@ public class DynamicLighting extends Effect
     {
         this.width = width;
         this.height = height;
-        
+        setImage(new GreenfootImage(1,1));
         dynamicLighting = new GreenfootImage(width, height);
     }
     

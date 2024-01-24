@@ -27,9 +27,8 @@ public class tempWorld extends SuperWorld
         
         p = new Player();
         addObject(p, Constants.WW/2, Constants.WH/2);
+        displayHandSlots();
         
-        // Paint order to z-sort all items on the World
-        setPaintOrder(Timer.class, Bar.class, Display.class, Effect.class, SuperSmoothMover.class,Floor.class, Inventory.class);
         gameTimer = new Timer(60);
         addObject(gameTimer,100,100);
         
@@ -49,14 +48,18 @@ public class tempWorld extends SuperWorld
         GreenfootImage blackBg = new GreenfootImage(Constants.WW, Constants.WH);
         blackBg.fill();
         setBackground(blackBg);
+        
+        // Paint order to z-sort all items on the World
+        setPaintOrder(Timer.class, Bar.class, Display.class, Effect.class, SuperSmoothMover.class,Floor.class, Inventory.class);
     }
     
     public void act(){
         inputMove();
-        if(gameTimer.getTime() > 0){
-            Greenfoot.setWorld(new GameRoom());
-        }
         timerBar.refresh(-gameTimer.getAct());
+    }
+    
+    public void nextPhase(){
+        Greenfoot.setWorld(new GameRoom(p.getItemChest()));
     }
     /**
      * Method to create visual display of the player's current inventory slots.
@@ -71,7 +74,7 @@ public class tempWorld extends SuperWorld
         for(int i = 0; i < handInventory.size(); i++){
             Item item = handInventory.get(i);
             for(int j = 0; j < item.getWeight(); j++){
-                GreenfootImage image = new GreenfootImage(item+".png");
+                GreenfootImage image = new GreenfootImage("itemSprites/"+item+".png");
                 
                 //If items take more than one slot, make the additonal images semi-transparent 
                 //to indicate the weight belongs to the item

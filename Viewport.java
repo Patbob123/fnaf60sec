@@ -55,9 +55,11 @@ public class Viewport extends Actor
         for(Tile t: getW().getObjects(Tile.class)){
             t.setLocation(t.getX()+addX, t.getY()+addY);
         }
+        /*
         for(Enemy e: getW().getObjects(Enemy.class)){
             e.setLocation(e.getX()+addX, e.getY()+addY);
         }
+        */
     }
     
     /** 
