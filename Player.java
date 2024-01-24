@@ -328,18 +328,6 @@ public class Player extends Entity
         return collider.intersectWall(x,y);
     }   
     /**
-     * Helper method to check if the player on top of a pressure plate
-     */
-    public boolean onPressurePlate(){
-        return isTouching(PressurePlate.class);
-    }
-    /**
-     * Helper method to check if the player has touched a pressure plate
-     */
-    public boolean touchP(PressurePlate p){
-        return intersects(p);
-    }
-    /**
      * Getter method for the hitbox
      */
     public Hitbox getCollider(){
