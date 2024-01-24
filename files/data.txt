@@ -1,2 +1,2 @@
 Tom=goldtimmysprites.png
-TimSprite=purpletimmysprites.png
+TimSprite=timmysprites.png

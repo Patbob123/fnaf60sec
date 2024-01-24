@@ -16,7 +16,7 @@ public class Shelter extends Tile
         super();
         symbol = "#"; 
         bunker = new Inventory();
-        setIcon("tent.png");
+        url = "Stair";
     }
     /**
      * Getter Method for the inventory
