@@ -46,7 +46,7 @@ public class startWorld extends SuperWorld
         
     }
     public void goToIntroWorld(){
-        goToWorld(new tempWorld());
+        goToWorld(new gatherRoom());
     }
     public Function goIntroWorld = () -> goToIntroWorld();
 }
