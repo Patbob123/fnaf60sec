@@ -32,10 +32,10 @@ public class SoundManager extends Actor
         soundFiles.put("Jaded", new Sound("Jaded.mp3",50 ));
         soundFiles.put("blast", new Sound("blaster.mp3",40 ));
         soundFiles.put("boom", new Sound("boom.mp3",60 ));
-        soundFiles.put("transition", new Sound("transition.wav",100 ));
-        soundFiles.put("click", new Sound("buttonclick.wav",100 ));
-        soundFiles.put("hover", new Sound("buttonhover.wav",100 ));
-        soundFiles.put("blip", new Sound("blip.wav",80));
+        //soundFiles.put("transition", new Sound("transition.wav",100 ));
+        //soundFiles.put("click", new Sound("buttonclick.wav",100 ));
+        //soundFiles.put("hover", new Sound("buttonhover.wav",100 ));
+        //soundFiles.put("blip", new Sound("blip.wav",80));
         soundFiles.put("rain", new Sound("rainambient.mp3",50));
         soundFiles.put("electricshock", new Sound("lightsout.mp3",50));
         soundFiles.put("battlemusic", new Sound("battlemusic.mp3",50));
