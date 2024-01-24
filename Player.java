@@ -262,7 +262,14 @@ public class Player extends Entity
      */
     public void interact(){
         String key = Greenfoot.getKey();
-        if(isTouching(Shelter.class)){
+        if(isTouching(Stair.class)){
+            showPopup = true;
+            if(key != null){
+                if(key.toLowerCase().equals("e")){
+                    getW().nextPhase();
+                }
+            }
+        }else if(isTouching(Shelter.class)){
             showPopup = true;
             if(key != null){
                 if(key.toLowerCase().equals("e")){
