@@ -59,6 +59,12 @@ public class tempWorld extends SuperWorld
     public void act(){
         inputMove();
         //timerBar.refresh(-gameTimer.getAct());
+        if(gameTimer.getAct() > 240){
+            sm.playSound("threeSecondsLeft");
+        }
+        if(gameTimer.getAct() > 0){
+            Greenfoot.setWorld(new endWorld());
+        }
     }
     
     public void nextPhase(){

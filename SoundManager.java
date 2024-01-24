@@ -49,6 +49,7 @@ public class SoundManager extends Actor
         soundFiles.put("grabWater", new Sound("firstFloor/grabWater.mp3",100));
         soundFiles.put("grabBattery", new Sound("firstFloor/grabBattery.mp3",100));
         soundFiles.put("chestOpen", new Sound("firstFloor/chestOpen.mp3",100));
+        soundFiles.put("threeSecondsLeft", new Sound("firstFloor/threeSecondsLeft.mp3",100));
         setImage(new GreenfootImage(1,1));
     }
     
