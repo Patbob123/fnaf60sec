@@ -73,7 +73,7 @@ public class MapArray
                 if(type.length()>1){
                     map[i][j] = createTile(type.substring(0,1));
                     map[i][j].assignProp(type.substring(1,2));
-                    System.out.println("A:::"+type.substring(0,1)+"B:: "+ type.substring(1,2));
+                    //System.out.println("A:::"+type.substring(0,1)+"B:: "+ type.substring(1,2));
                     itemLayer[i][j] = generateItem(type.substring(0,1), type.substring(1,2));
                 }else{
                     map[i][j] = createTile(type);
@@ -122,10 +122,10 @@ public class MapArray
     
     public Tile generateItem(String type, String room){
         //if(Greenfoot.getRandomNumber(3)==1){
-            System.out.println("123:"+type+" "+room);
+            //System.out.println("123:"+type+" "+room);
             if(type.equals("-")&&Greenfoot.getRandomNumber(5)==1){
                 String itemName = "";
-                System.out.println("A");
+                //System.out.println("A");
                 try{
                     switch(room){
                         case "1":

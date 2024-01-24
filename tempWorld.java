@@ -30,7 +30,7 @@ public class tempWorld extends SuperWorld
         addObject(p, Constants.WW/2, Constants.WH/2);
         displayHandSlots();
         
-        gameTimer = new Timer(60);
+        gameTimer = new Timer(2);
         addObject(gameTimer,100,100);
         
         bunker = new Shelter();
@@ -59,18 +59,20 @@ public class tempWorld extends SuperWorld
     }
     
     public void act(){
+        super.act();
         inputMove();
         timerBar.refresh(-gameTimer.getAct());
         if(gameTimer.getAct() > 240){
-            sm.playSound("threeSecondsLeft");
+            //sm.playSound("threeSecondsLeft");
         }
         if(gameTimer.getAct() > 0){
-            Greenfoot.setWorld(new endWorld());
+            //goToWorld(new endWorld());
         }
     }
     
     public void nextPhase(){
-        Greenfoot.setWorld(new GameRoom(p.getItemChest()));
+        
+        goToWorld(new GameRoom(p.getItemChest()));
     }
     /**
      * Method to create visual display of the player's current inventory slots.

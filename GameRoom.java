@@ -74,8 +74,13 @@ public class GameRoom extends SuperWorld {
     private ArrayList<Item> itemChest;
     
     //private Enemy daniel, tyrone;
-
     
+    public GameRoom(){
+        this(new ArrayList<Item>());
+        ArrayList<Item> itemTest = new ArrayList<>();
+        itemTest.add(new Battery());
+        
+    }
     /**
      * Constructor for GameRoom
      */
@@ -148,14 +153,17 @@ public class GameRoom extends SuperWorld {
 
         fading = new DynamicLighting (Constants.WW, Constants.WH);
         addObject(fading, Constants.WW/2, Constants.WH/2);
+        
+        isAlive = true;
 
         setPaintOrder(Button.class, CameraMap.class, Bar.class, Presser.class, DynamicLighting.class);
 
     }
 
     public void act() {
+        super.act();
         time--;
-
+        
 
         if(time < 21000) { //spawn them after 30 seconds
             em.moveEnemies();
@@ -201,7 +209,7 @@ public class GameRoom extends SuperWorld {
         if(!inCameras) {
             checkMouseMovement();
         }
-
+        
         if(!isAlive) {
             goToWorld(new endWorld());
         }
