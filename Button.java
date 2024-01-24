@@ -94,7 +94,7 @@ public class Button extends Actor
     public void updateMe(String text) {
         buttonText = text;
         GreenfootImage tempTextImage = new GreenfootImage(text, textSize, Color.WHITE, new Color(0,0,0,0));
-        myImage = new GreenfootImage(tempTextImage.getWidth() + 238, tempTextImage.getHeight() + 2); //8
+        myImage = new GreenfootImage(tempTextImage.getWidth(), tempTextImage.getHeight() + 2); //8
         myImage.setColor(new Color(0,0,0,0));
         myImage.setFont(new Font (text, true, false, 20));
         myImage.fill();
@@ -104,7 +104,7 @@ public class Button extends Actor
         setImage(myImage);
 
         tempTextImage = new GreenfootImage(text, textSize, Color.WHITE, Color.WHITE);
-        myAltImage = new GreenfootImage(tempTextImage.getWidth() + 238, tempTextImage.getHeight() + 2);
+        myAltImage = new GreenfootImage(tempTextImage.getWidth(), tempTextImage.getHeight() + 2);
         myAltImage.setFont(new Font (text, true, false, 20));
         myAltImage.setColor(new Color(0,0,0,0));
         myAltImage.fill();
@@ -173,7 +173,7 @@ public class Button extends Actor
             myImage = new GreenfootImage(tempTextImage.getWidth() + 8, tempTextImage.getHeight() + 8);
 
             myImage.setFont(new Font (buttonText, true, false, 20));
-            myImage.setColor(new Color(0,0,0,0));
+            myImage.setColor(Color.RED);
             myImage.fill(); 
             myImage.drawImage(tempTextImage, 4, 4);
 
@@ -185,7 +185,7 @@ public class Button extends Actor
             myAltImage = new GreenfootImage(tempAltImage.getWidth() + 8, tempAltImage.getHeight() + 8);
 
             myAltImage.setFont(new Font (buttonText, true, false, 20));
-            myAltImage.setColor(new Color(r, g, b, 160));
+            myAltImage.setColor(Color.RED);
             myAltImage.fill();
             myAltImage.drawImage(tempAltImage, 4, 4);
 
