@@ -11,12 +11,16 @@ public class startWorld extends SuperWorld
     private GreenfootImage flipEyesImage = new GreenfootImage("start.png");
     private SimpleTimer timer;
     private Presser nextButton;
+    
+    private boolean soundPlayed;
 
     public startWorld()
     {    
         super(1152, 768, 1);
         timer = new SimpleTimer();
         timer.mark();
+        
+        soundPlayed = false;
         
         GreenfootImage startBut = new GreenfootImage("startButton.png");
         nextButton = new Presser(goIntroWorld, startBut);
@@ -30,6 +34,10 @@ public class startWorld extends SuperWorld
     }
     public void act(){
         super.act();
+        if(!soundPlayed){
+            soundPlayed = true;
+            getSM().playSoundLoop("startMusic");
+        }
         if(timer.millisElapsed()>=Constants.EYE_SWITCH){
             setBackground(flipEyesImage);
             timer.mark();

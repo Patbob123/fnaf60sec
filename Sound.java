@@ -24,7 +24,6 @@ public class Sound extends Actor
         volume = defaultVolume;
         soundIndex = 0;
         
-        System.out.println(soundFile);
         sounds = new GreenfootSound[20];
         // Generate Arraylist for each sound created
         for(int i = 0; i < sounds.length; i++){

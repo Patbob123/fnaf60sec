@@ -28,6 +28,7 @@ public class SoundManager extends Actor
     public SoundManager()
     {
         //Store all sound files into a HashMap for easy retrevial 
+        soundFiles.put("startMusic", new Sound("startMusic.mp3",50 ));
         soundFiles.put("builderMusic", new Sound("builderMusic.mp3",50 ));
         soundFiles.put("Jaded", new Sound("Jaded.mp3",50 ));
         soundFiles.put("blast", new Sound("blaster.mp3",20 ));
@@ -84,6 +85,7 @@ public class SoundManager extends Actor
      * Methods to access Sound Objects to play sounds
      */
     public void playSound(String sound){
+       
         soundFiles.get(sound).playSound();
     }
     public void playSoundLoop(String sound){
@@ -95,10 +97,10 @@ public class SoundManager extends Actor
      */
     public void pauseSounds(){
         for(Map.Entry<String, Sound> set: soundFiles.entrySet()){
-                set.getValue().pauseSoundLoop();
             if(set.getValue().isPlaying()){
                 playingSounds.add(set.getValue());
             }
+            set.getValue().pauseSoundLoop();
         }
         
     }
