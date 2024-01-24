@@ -40,7 +40,6 @@ public class Fader extends Effect
         this.maxDuration = maxDuration;
         fadeDuration = reverse ? maxDuration: 0;
         popupImage = faderImage;
-        popupImage.fill();
         popupImage.setTransparency(255-(int)(((double)fadeDuration/maxDuration)*255));
         setImage(popupImage);
     }

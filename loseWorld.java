@@ -22,6 +22,7 @@ public class loseWorld extends SuperWorld
         addObject(nextButton, 600, 450);
             
         setBackground(startBg);
+        sm.playSound("Scream1.mp3");
         
         setPaintOrder(Effect.class, Presser.class);
     }

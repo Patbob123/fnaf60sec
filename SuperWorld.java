@@ -85,7 +85,7 @@ public class SuperWorld extends World
         );
         
         //faders
-        fade = new Fader(2,false,fadeImage); //60 acts = 1 second, so 3 seconds for fader
+        fade = new Fader(120,false,fadeImage); //60 acts = 1 second, so 3 seconds for fader
         fadeOut = new Fader ((60*2), true);
         
         //add fader object to fade in on creation

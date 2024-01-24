@@ -73,7 +73,7 @@ public class EnemyManager extends Actor
                 tyrone.setStage(1);
             }
             else if (tyrone.getResetTimer() == 0 && !((GameRoom)getWorld()).getRightDoor()){
-                killer = "danieljump3.jpg";
+                killer = "tyronejump1.png";
                 ((GameRoom)getWorld()).setAlive(false);
             }
         }  
