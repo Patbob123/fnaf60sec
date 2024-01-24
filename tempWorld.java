@@ -1,8 +1,170 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
-
 /**
- * Greenfootworld for Floor 1
+ * One Night at PETHS: Final Project
+ * 
+ * <p>Set in the local high school of PETHS, little Timmy has to survive from the feral phantoms chasing after him.
+ * Forced to seek shelter in PETHS, Timmy must utilize his knowledge of the school map to collect resources and bunker
+ * down in his secret hideout, the Business Room. Can Timmy last the night and make to 6am or will he fall victim to 
+ * the unrestraint monsters? </p>
+ * 
+ * <p>
+ * Key Features:
+ * 
+ * <li>
+ * 2 playable games 
+ * </li>
+ * <ul>
+ *      <li>
+ *       One interactive birds eye view collection game
+ *      </li>
+ *      <li>
+ *       One immersive first person survival game
+ *      </li>
+ * </ul>
+ * 
+ * <li>
+ *  Self generating map using 2d arrays and file loading/generation
+ * </li>
+ * 
+ * <li>
+ * Self made images/ sound effects and jumpscares
+ * </li>
+ * 
+ * <li>
+ *  Unique enemy algorithms
+ * </li>
+ * 
+ * <li>
+ *  Secret skin sprites and easter eggs
+ * </li>
+ * 
+ * <li>
+ *  Smooth camera panning and self updating camera images 
+ * </li>
+ * 
+ * <li>
+ *  pesudo 3d effect on birds eye view game    
+ * </li>
+ * 
+ * <li>
+ *  Unique Art work for enemies, cameras, world, tile map, sfx, gifs, animations,
+ * </li>
+ * 
+ * <li>
+ *  Lots of code is handled in a Manager Class to create modliar and reusable code
+ * </li>
+ * 
+ * Miscellaneous Features: 
+ * <li>
+ *  Run StartWorld and wait 10 seconds to experience a small easter egg
+ * </li>
+ * 
+ * </ul>
+ * </p>
+ * 
+ * <p>
+ * Graphics:----------------------------------------------------------
+ * <ul>
+ * Win World Screen
+ * ShutterStock you win screen By: Kira Myshura
+ * https://www.shutterstock.com/video/clip-1101141465-you-win-text-glitch-effects-concept-video
+ * </ul>
+ * </p>
+ * 
+ *  * Sound Effects:-------------------------------------------------------------
+ * <ul>
+ * Glitch Sound Effect:
+ * By: PremswaroopKasukurthi
+ * Link: https://pixabay.com/sound-effects/glitch-sound-effect-12796/ 
+ * </ul>
+ * 
+ * <ul>
+ * Item Equip:
+ * By: Pixabay
+ * Link: https://pixabay.com/sound-effects/item-equip-6904/
+ * </ul>
+ * 
+ * <ul>
+ * Water splash (:
+ * By: Pixabay
+ * Link: https://pixabay.com/sound-effects/water-splash-80537/
+ * </ul>
+ * 
+ * <ul>
+ * Footsteps on wood floor:
+ * By: Pixabay
+ * Link: https://pixabay.com/sound-effects/footsteps-on-wood-floor-14735/
+ * </ul>
+ * 
+ * <ul>
+ * Can Pickup:
+ * By: Crigence
+ * Link: https://pixabay.com/sound-effects/can-pickup-167810/ 
+ * </ul>
+ * 
+ * <ul>
+ * Wooden Trunk Latch 1:
+ * By: floraphonic
+ * Link:https://pixabay.com/sound-effects/wooden-trunk-latch-1-183944/
+ * </ul>
+ * 
+ * <ul>
+ * Time Passing Sound Effect (fast clock):
+ * By: Phoenix_Connection_Brazil
+ * Link: https://pixabay.com/sound-effects/time-passing-sound-effect-fast-clock-108403/
+ * </ul>
+ * 
+ * <ul>
+ * transition coat:
+ * By: aiko_Changing
+ * https://pixabay.com/sound-effects/transition-coat-121423/
+ * </ul>
+ * 
+ * <ul>
+ * Camera Open, Close and Switch Sound:
+ * By: Scott Coffin
+ * https://freddy-fazbears-pizza.fandom.com/wiki/Camera_Monitor/Audio  
+ * </ul>
+ * 
+ * <ul>
+ * straw slurp:
+ * By: Pixabay
+ * https://pixabay.com/sound-effects/straw-slurp-7066/ 
+ * </ul>
+ * 
+ * <ul>
+ * Eating Juicy Meat:
+ * By: Pixabay
+ * https://pixabay.com/sound-effects/eating-juicy-meat-7024/
+ * </ul>
+ * 
+ * <ul>
+ * door slam angrily:
+ * By: Pixabay
+ * https://pixabay.com/sound-effects/door-slam-angrily-86963/
+ * </ul>
+ * 
+ * <ul>
+ * door-open-close:
+ * By: Pixabay
+ * https://pixabay.com/sound-effects/door-open-close-45475/ 
+ * </ul>
+ * 
+ * <ul>
+ * FNAF 6AM Sound
+ * By: Scott Coffin
+ * https://www.myinstants.com/en/instant/fnaf-6-am/
+ * </ul>
+ * 
+ *  <p> 
+ * Known Bugs:
+ * <ul>
+ * - Sometimes if the game is played too many times without recompiling, Java will run out of heap space
+ * </ul>
+ * <p>
+ * 
+ * Greenfootworld for Floor 1 where first part of the gameplay takes place
  * 
  * @author Dawson 
  * @version January 2024
@@ -126,7 +288,7 @@ public class tempWorld extends SuperWorld
         double moveX = 0;
         double moveY = 0;
         
-        // Multiple if statemenst allow for diagonal movements
+        // Mlitiple if statemenst allow for diagonal movements
         if(Greenfoot.isKeyDown("a")){
             moveX+=-p.getSpeed();
         }
