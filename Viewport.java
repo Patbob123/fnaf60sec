@@ -44,10 +44,17 @@ public class Viewport extends Actor
         
         moveObjects(-addX, -addY);
         renderMap(getW().getMap().getTiles(), getW().getMap().getItems());
-        if(count%240 == 0){
+        
+        
+        if(count%240 == 0 && (addX != 0 || addY != 0)){
             ((SuperWorld)getWorld()).getSM().playSound("consistentHeavyFootsteps");
         }
-        count++;
+        if((addX != 0 || addY != 0)){
+            count++;
+        }else{
+            count = 0;
+        }
+        
     }
     
     /**

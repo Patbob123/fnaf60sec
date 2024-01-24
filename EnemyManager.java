@@ -19,8 +19,8 @@ public class EnemyManager extends Actor
     public EnemyManager() {
         //Enemies have different movement times 
         
-        daniel = new Enemy("daniel", 360, 360, 0);
-        tyrone = new Enemy("tyrone", 600, 600, 0);
+        daniel = new Enemy("daniel", 720, 720, 0);
+        tyrone = new Enemy("tyrone", 900, 900, 0);
         
         specialStageTimer = 1800;
         specialRunningTimer = 300;

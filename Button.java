@@ -94,7 +94,7 @@ public class Button extends Actor
     public void updateMe(String text) {
         buttonText = text;
         GreenfootImage tempTextImage = new GreenfootImage(text, textSize, Color.WHITE, new Color(0,0,0,0));
-        myImage = new GreenfootImage(tempTextImage.getWidth(), tempTextImage.getHeight() + 2); //8
+        myImage = new GreenfootImage(tempTextImage.getWidth() + 40, tempTextImage.getHeight() + 2); //8
         myImage.setColor(new Color(0,0,0,0));
         myImage.setFont(new Font (text, true, false, 20));
         myImage.fill();

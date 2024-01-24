@@ -23,6 +23,8 @@ public class Sound extends Actor
         this.defaultVolume = defaultVolume;
         volume = defaultVolume;
         soundIndex = 0;
+        
+        System.out.println(soundFile);
         sounds = new GreenfootSound[20];
         // Generate Arraylist for each sound created
         for(int i = 0; i < sounds.length; i++){
@@ -73,7 +75,9 @@ public class Sound extends Actor
      * Pause looped sound
      */
     public void pauseSoundLoop(){
-        sounds[soundIndex].pause();
+        for(GreenfootSound s: sounds){
+            s.pause();
+        }
     }
     
     /**
@@ -98,7 +102,10 @@ public class Sound extends Actor
      * @return If playing or not
      */
     public boolean isPlaying(){
-        return sounds[soundIndex].isPlaying();
+        for(int i = 0; i < sounds.length; i++){
+            if(sounds[i].isPlaying()) return true;
+        }
+        return false;
     }
     
     /**

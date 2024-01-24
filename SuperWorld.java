@@ -151,6 +151,7 @@ public class SuperWorld extends World
         sm.resumeSounds();
     }
     public void stopped(){
+        System.out.println("ASDAS");
         sm.pauseSounds();
     }
     /**

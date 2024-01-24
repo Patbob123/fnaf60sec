@@ -91,11 +91,10 @@ public class SoundManager extends Actor
      */
     public void pauseSounds(){
         for(Map.Entry<String, Sound> set: soundFiles.entrySet()){
+                set.getValue().pauseSoundLoop();
             if(set.getValue().isPlaying()){
                 playingSounds.add(set.getValue());
-                set.getValue().pauseSoundLoop();
             }
-            
         }
         
     }
