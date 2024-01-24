@@ -14,7 +14,8 @@ public class EnemyManager extends Actor
     
     private int specialStageTimer;
     private int specialRunningTimer;
-
+    
+    private SimpleTimer simpleTimer = new SimpleTimer();
     
     public EnemyManager() {
         //Enemies have different movement times 
@@ -77,8 +78,11 @@ public class EnemyManager extends Actor
         if(daniel.getStage() == 3) {
             daniel.decreaseTimer(1);
             if(daniel.getResetTimer() == 0 && !((GameRoom)getWorld()).getLeftDoor()) {
-                ((GameRoom)getWorld()).setAlive(false);
-                
+                simpleTimer.mark();
+                ((GameRoom)getWorld()).danielJumpScare();
+                if(simpleTimer.millisElapsed() >= 2000){
+                    ((GameRoom)getWorld()).setAlive(false);
+                }
             }
             else if(daniel.getResetTimer() == 0 && ((GameRoom)getWorld()).getLeftDoor()){
                 int specialSpawn = Greenfoot.getRandomNumber(10);
@@ -97,7 +101,11 @@ public class EnemyManager extends Actor
                 tyrone.setStage(1);
             }
             else if (tyrone.getResetTimer() == 0 && !((GameRoom)getWorld()).getRightDoor()){
-                ((GameRoom)getWorld()).setAlive(false);
+                simpleTimer.mark();
+                ((GameRoom)getWorld()).tyroneJumpScare();
+                if(simpleTimer.millisElapsed() >= 2000){
+                    ((GameRoom)getWorld()).setAlive(false);
+                }
             }
         }  
     }

@@ -31,6 +31,16 @@ public class Fader extends Effect
         popupImage.setTransparency(255-(int)(((double)fadeDuration/maxDuration)*255));
         setImage(popupImage);
     }
+    public Fader(int maxDuration, boolean reverse, String image) {
+        GreenfootImage faderImage = new GreenfootImage(image);
+        this.reverse = reverse;
+        this.maxDuration = maxDuration;
+        fadeDuration = reverse ? maxDuration: 0;
+        popupImage = faderImage;
+        popupImage.fill();
+        popupImage.setTransparency(255-(int)(((double)fadeDuration/maxDuration)*255));
+        setImage(popupImage);
+    }
     
     /**
      * Act method

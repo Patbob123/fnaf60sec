@@ -55,6 +55,7 @@ public class GameRoom extends SuperWorld {
     private ArrayList<Item> itemChest;
     
     private boolean changedWorld = false;
+    private boolean notPlayedSound = false;
     private boolean openedCamMap = false;
     private boolean expanded = false;
 
@@ -210,7 +211,6 @@ public class GameRoom extends SuperWorld {
             if (Greenfoot.mousePressed(camButton)){
                 if(!inCameras){
                     generateCamMap();
-                    addObject(cameraStatic,0,0);
                     camButton.updateMe("Close Cameras");
                     inCameras = true;
                     sm.playSound("cameraOpen");
@@ -238,6 +238,7 @@ public class GameRoom extends SuperWorld {
                         currCam = i+1;
                         checkCam(currCam, em.getTyroneLocation(), em.getDanielLocation());
                         sm.playSound("cameraSwitch");
+                        addObject(cameraStatic,0,0);
                     }
                 }
 
@@ -250,11 +251,20 @@ public class GameRoom extends SuperWorld {
         
         if(!isAlive && !changedWorld) {
             changedWorld = !changedWorld;
+            if(!notPlayedSound){
+                notPlayedSound = !notPlayedSound;
+                sm.playSound("youdied");
+            }
             goToWorld(new loseWorld());
         }
         
-        if(time < 0 && isAlive) {
-            //goToWorld(new winWorld());
+        if(time <= 0 && isAlive && !changedWorld) {
+            changedWorld = !changedWorld;
+            if(!notPlayedSound){
+                notPlayedSound = !notPlayedSound;
+                sm.playSound("winsound");
+            }
+            goToWorld(new winWorld());
         }
         if(time%6 == 0){
             batteryBar.refresh(battery);
@@ -385,6 +395,14 @@ public class GameRoom extends SuperWorld {
             }
             
         }
+    }
+    public void danielJumpScare(){
+        addObject(new Fader(2,false,"danieljump2.jpg"),Constants.WW/2, Constants.WH/2);
+        sm.playSound("Scream2");
+    }
+    public void tyroneJumpScare(){
+        addObject(new Fader(2,false,"danieljump1.jpg"),Constants.WW/2, Constants.WH/2);
+        sm.playSound("Scream1");
     }
     /**
      * Set method for battery

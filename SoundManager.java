@@ -53,6 +53,10 @@ public class SoundManager extends Actor
         soundFiles.put("cameraClose", new Sound("cameraClose.wav",100));
         soundFiles.put("cameraSwitch", new Sound("cameraSwitch.wav",100));
         soundFiles.put("phoneGuy", new Sound("phoneguy.mp3",100));          
+        soundFiles.put("youdied", new Sound("youdied.mp3",100));  
+        soundFiles.put("winsound", new Sound("winsound.mp3",100)); 
+        soundFiles.put("Scream1", new Sound("Scream1.mp3",100));  
+        soundFiles.put("Scream2", new Sound("Scream2.mp3",100)); 
         
         soundFiles.put("grabFood", new Sound("firstFloor/grabFood.mp3",100));
         soundFiles.put("grabWood", new Sound("firstFloor/grabWood.mp3",100));

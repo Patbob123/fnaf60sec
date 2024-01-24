@@ -8,16 +8,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class loseWorld extends SuperWorld
 {
     private Presser nextButton;
-    private GreenfootImage startBg = new GreenfootImage("start.png");
+    private GreenfootImage startBg = new GreenfootImage("endWorld.png");
     
     public loseWorld()
     {   
         super(Constants.WW, Constants.WH, 1);
         
         
-        GreenfootImage startBut = new GreenfootImage("startButton.png");
-        nextButton = new Presser(goStartWorld, startBut);
-        addObject(nextButton, 200, 600);
+        GreenfootImage restartBut = new GreenfootImage("restartButton.png");
+        restartBut.scale(200,50);
+        nextButton = new Presser(goStartWorld, restartBut);
+        addObject(nextButton, 600, 450);
         
         setBackground(startBg);
         

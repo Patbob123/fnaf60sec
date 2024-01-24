@@ -19,9 +19,10 @@ public class winWorld extends SuperWorld
     public winWorld()
     {   
         super(Constants.WW, Constants.WH, 1);
-        GreenfootImage startBut = new GreenfootImage("startButton.png");
-        nextButton = new Presser(goStartWorld, startBut);
-        addObject(nextButton, 200, 600);
+        GreenfootImage restartBut = new GreenfootImage("restartButton.png");
+        restartBut.scale(400,100);
+        nextButton = new Presser(goStartWorld, restartBut);
+        addObject(nextButton, 550, 600);
         
         setBackground(startBg);
         
