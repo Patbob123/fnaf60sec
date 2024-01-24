@@ -6,9 +6,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 
 /**
- * Notes:
- * Make each night 1 minute, from 12am-6am (6mins per night)
- * Have battery percentage drain 1 every 5 seconds
+ *
  */
 public class GameRoom extends SuperWorld {
     private boolean isAlive, leftDoorClosed, rightDoorClosed;
@@ -114,7 +112,6 @@ public class GameRoom extends SuperWorld {
         currentFrameIndex = 12;  //the middle
         setBackground(bgFrames[currentFrameIndex]);
 
-        GreenfootImage backgroundImage = new GreenfootImage("businessroom.png");
         camMap = new CameraMap("translucentCamMapV2.PNG");
 
         GreenfootImage doorLeft = new GreenfootImage("buttons/doorButton1.png");
@@ -167,7 +164,7 @@ public class GameRoom extends SuperWorld {
         hunger = -1*Math.pow((1/1.002), -1*(21600/60))+11;
         water = -1*(1/2)*((21600/60));
         //bB = -1*(1/3)*(timer.millisElapsed()/1000);
-
+        
         //System.out.println("time elapsed: " + timer.millisElapsed()/1000);
         //System.out.println("hunger meter: " + hM);
         if(time > 0 || isAlive){
