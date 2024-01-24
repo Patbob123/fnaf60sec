@@ -167,19 +167,14 @@ public class Player extends Entity
         int curY = getY();
         int colY = getCollider().getY();
         boolean k = false;
-        int i = 0; 
         if(getIntersectingObjects(Tile.class).size()==0) return;
         if(zSortQueue!=null) zSortQueue.clear();
         for(Actor a: getIntersectingObjects(Tile.class)){
-            i++;
-             System.out.println(i);
             if(a==(null)) continue;
             if(a.toString().equals("W"))zSortQueue.add(a);
         }
         
         while(!zSortQueue.isEmpty()){
-             i++;
-              System.out.println(i++);
             Actor a = zSortQueue.poll();
             
             int x = a.getX();
@@ -284,10 +279,14 @@ public class Player extends Entity
     public void interact(){
         String key = Greenfoot.getKey();
         if(isTouching(Stair.class)){
+            
             showPopup = true;
             if(key != null){
                 if(key.toLowerCase().equals("e")){
                     getW().nextPhase();
+                    
+                    System.out.println("abc");
+                    System.out.println("def");
                 }
             }
         }else if(isTouching(Shelter.class)){

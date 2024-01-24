@@ -166,7 +166,9 @@ public class SuperWorld extends World
      * Track mouse info for animations
      */
     public void act(){
+        
         if(goingToWorld){
+            
             currActs++;
             //when fader is done, stop sounds and switch worlds
             if(currActs >= fadeOut.getMaxDuration()){
@@ -193,6 +195,9 @@ public class SuperWorld extends World
         //add fade out object
         addObject(fadeOut, Constants.WW/2, Constants.WH/2);
         world = w;
+        
+        System.out.println(w);
+        
     }
     
 }
