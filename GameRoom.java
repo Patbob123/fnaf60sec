@@ -81,7 +81,7 @@ public class GameRoom extends SuperWorld {
     private DynamicLighting fading;
     private Static cameraStatic;
     
-    //private Enemy daniel, tyrone;
+    private boolean soundPlayed; 
     
     /**
      * Constructor for GameRoom without items
@@ -181,6 +181,8 @@ public class GameRoom extends SuperWorld {
         cameraStatic = new Static();
         
         isAlive = true;
+        
+        soundPlayed = false;
 
         setPaintOrder(Button.class, CameraMap.class, Bar.class, Presser.class, DynamicLighting.class, Static.class);
 
@@ -189,6 +191,10 @@ public class GameRoom extends SuperWorld {
     public void act() {
         super.act();
         time--;
+        if(!soundPlayed){
+            soundPlayed = true;
+            getSM().playSoundLoop("phase2ambiance");
+        }
         if(time == 21500) {
             getSM().playSound("phoneGuy");
         }
@@ -200,6 +206,16 @@ public class GameRoom extends SuperWorld {
             
         } else if(time < 18900) {
             em.moveEnemies();
+        }
+        
+        //Check Mic Level
+        if(Greenfoot.getMicLevel() >= 10){
+            if(Greenfoot.getRandomNumber(2) == 0){
+                sm.playSound("ihearyou");
+            }
+            else{
+                sm.playSound("heyboss");
+            }
         }
         
         // Main loop to check for camera activity
@@ -258,7 +274,8 @@ public class GameRoom extends SuperWorld {
                 notPlayedSound = !notPlayedSound;
                 sm.playSound("youdied");
             }
-            goToWorld(new loseWorld());
+            String killer = em.getKiller();
+            goToWorld(new loseWorld(killer));
         }
         
         if(time <= 0 && isAlive && !changedWorld) {
@@ -417,6 +434,7 @@ public class GameRoom extends SuperWorld {
     public void danielJumpScare(){
         addObject(new Fader(2,false,"danieljump2.jpg"),Constants.WW/2, Constants.WH/2);
         sm.playSound("Scream2");
+        System.out.println("here");
     }
     public void tyroneJumpScare(){
         addObject(new Fader(2,false,"danieljump1.jpg"),Constants.WW/2, Constants.WH/2);

@@ -61,6 +61,37 @@ public class SuperWorld extends World
         addObject(fade, Constants.WW/2, Constants.WH/2);
     }
     
+    public SuperWorld(int width, int height, int pixel, String fadeImage)
+    {    
+        super(width, height, pixel); 
+        
+        //init arraylist for file info
+        fileInfo = new HashMap<String, String>();
+        readFile("files/data.txt");
+        writeFile("TimSprite","timmysprites.png");
+        saveFile("files/data.txt");
+        //setting initial values for variables
+        currActs = 0;
+        goingToWorld = false;
+        
+        sm = new SoundManager();
+        addObject(sm, 0, 0);
+        
+        setPaintOrder(  
+            Presser.class,
+            Effect.class,
+            SuperSmoothMover.class,
+            Enemy.class
+        );
+        
+        //faders
+        fade = new Fader(2,false,fadeImage); //60 acts = 1 second, so 3 seconds for fader
+        fadeOut = new Fader ((60*2), true);
+        
+        //add fader object to fade in on creation
+        addObject(fade, Constants.WW/2, Constants.WH/2);
+    }
+    
     /**
      * Loads from Greenfoot Database
      * 

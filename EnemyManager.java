@@ -15,6 +15,7 @@ public class EnemyManager extends Actor
     
     private int specialStageTimer;
     private int specialRunningTimer;
+    private String killer;
     
     private SimpleTimer simpleTimer = new SimpleTimer();
     
@@ -23,6 +24,7 @@ public class EnemyManager extends Actor
         
         daniel = new Enemy("daniel", 720, 720, 0);
         tyrone = new Enemy("tyrone", 900, 900, 0);
+        killer = "none";
         
         specialStageTimer = 1800;
         specialRunningTimer = 300;
@@ -57,11 +59,8 @@ public class EnemyManager extends Actor
         if(daniel.getStage() == 3) {
             daniel.decreaseTimer(1);
             if(daniel.getResetTimer() == 0 && !((GameRoom)getWorld()).getLeftDoor()) {
-                simpleTimer.mark();
-                ((GameRoom)getWorld()).danielJumpScare();
-                if(simpleTimer.millisElapsed() >= 2000){
-                    ((GameRoom)getWorld()).setAlive(false);
-                }
+                killer = "danieljump2.jpg";
+                ((GameRoom)getWorld()).setAlive(false);
             }
             else if(daniel.getResetTimer() == 0 && ((GameRoom)getWorld()).getLeftDoor()){
                 daniel.setStage(1);
@@ -74,11 +73,8 @@ public class EnemyManager extends Actor
                 tyrone.setStage(1);
             }
             else if (tyrone.getResetTimer() == 0 && !((GameRoom)getWorld()).getRightDoor()){
-                simpleTimer.mark();
-                ((GameRoom)getWorld()).tyroneJumpScare();
-                if(simpleTimer.millisElapsed() >= 2000){
-                    ((GameRoom)getWorld()).setAlive(false);
-                }
+                killer = "danieljump3.jpg";
+                ((GameRoom)getWorld()).setAlive(false);
             }
         }  
     }
@@ -86,16 +82,17 @@ public class EnemyManager extends Actor
     /*
      * Helper Methods
      */
+    public String getKiller(){
+        return killer;
+    }
     public void moveEnemies(){
         daniel.moveLocation();
         tyrone.moveLocation();
     }
     public int getDanielLocation(){
-        System.out.println(daniel.getStage());
         return daniel.getLocation(daniel.getStage());
     }
     public int getTyroneLocation(){
-        System.out.println(tyrone.getStage());
         return tyrone.getLocation(tyrone.getStage());
     }
     public Enemy getDaniel(){
