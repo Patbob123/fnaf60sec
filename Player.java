@@ -360,4 +360,7 @@ public class Player extends Entity
     public tempWorld getW(){
         return (tempWorld)getWorld();
     }
+    public void setSkin(String skin){
+        spriteSheetUrl = skin;
+    }
 }

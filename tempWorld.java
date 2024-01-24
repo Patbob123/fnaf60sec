@@ -86,7 +86,7 @@ public class tempWorld extends SuperWorld
     
     public void unlockPurpleTimmy(){
         unlockedEasterEgg = !unlockedEasterEgg;
-        writeFile("phoneGuy","purpletimmysprites.png");
+        writeFile("purpleTimSprites","purpletimmysprites.png");
         saveFile("files/data.txt");
     }
     /**
