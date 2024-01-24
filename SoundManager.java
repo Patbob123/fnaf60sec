@@ -43,6 +43,12 @@ public class SoundManager extends Actor
         soundFiles.put("enemydeath", new Sound("enemydeath.mp3",50));
         soundFiles.put("youdied", new Sound("youdied.mp3",50));
         soundFiles.put("youwin", new Sound("winsound.mp3",50));
+        
+        soundFiles.put("grabFood", new Sound("firstFloor/grabFood.mp3",100));
+        soundFiles.put("grabWood", new Sound("firstFloor/grabWood.mp3",100));
+        soundFiles.put("grabWater", new Sound("firstFloor/grabWater.mp3",100));
+        soundFiles.put("grabBattery", new Sound("firstFloor/grabBattery.mp3",100));
+        soundFiles.put("chestOpen", new Sound("firstFloor/chestOpen.mp3",100));
         setImage(new GreenfootImage(1,1));
     }
     

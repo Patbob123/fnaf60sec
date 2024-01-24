@@ -16,6 +16,7 @@ public class tempWorld extends SuperWorld
     private Shelter bunker;
     private Shadow shadow;
     private Bar timerBar;
+    private SoundManager sm;
     
     public tempWorld()
     {   
@@ -48,6 +49,8 @@ public class tempWorld extends SuperWorld
         GreenfootImage blackBg = new GreenfootImage(Constants.WW, Constants.WH);
         blackBg.fill();
         setBackground(blackBg);
+        
+        sm = new SoundManager();
         
         // Paint order to z-sort all items on the World
         setPaintOrder(Timer.class, Bar.class, Display.class, Effect.class, SuperSmoothMover.class,Floor.class, Inventory.class);
@@ -168,6 +171,9 @@ public class tempWorld extends SuperWorld
     }
     public Shadow getShadow(){
         return shadow;
+    }
+    public SoundManager getSM(){
+        return sm;
     }
 }
 
