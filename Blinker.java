@@ -20,7 +20,7 @@ public class Blinker extends Entity
         setImage(blinkerImage);
     }
     public void act(){
-        if(getObjectsInRange(300, Player.class).size()>0){
+        if(getObjectsInRange(270, Player.class).size()>0){
             getWorld().removeObject(this);
         }
     }

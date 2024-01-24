@@ -77,7 +77,7 @@ public class Viewport extends Actor
                 if((x<tileX-xOffset&&tileX-xOffset<endX)&&(y<tileY-yOffset&&tileY-yOffset<endY)){
                     if(!w.getObjects(Tile.class).contains(map[i-1][j-1])){
                         w.addObject(map[i-1][j-1], tileX-x-xOffset, tileY-y-yOffset);
-                        if(Greenfoot.getRandomNumber(1000)==1) w.addObject(new Blinker(), tileX-x-xOffset, tileY-y-yOffset);
+                        if(Greenfoot.getRandomNumber(500)==1) w.addObject(new Blinker(), tileX-x-xOffset, tileY-y-yOffset);
                         if(itemLayer[i-1][j-1]!=null) w.addObject(itemLayer[i-1][j-1], tileX-x-xOffset, tileY-y-yOffset);
                     }
                 }else{
