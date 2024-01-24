@@ -12,8 +12,4 @@ public class introWorld extends SuperWorld
     {   
         super(Constants.WW, Constants.WH, 1);
     }
-    
-    public void setSkin(){
-        
-    }
 }

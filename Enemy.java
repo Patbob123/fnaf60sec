@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Enenmy here.
+ * Enemy Class
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Dawson
+ * @version Jan 2024
  */
 public class Enemy extends Entity
 {
@@ -24,6 +24,9 @@ public class Enemy extends Entity
         
     }
     
+    /**
+     * Method to convert Enemy stage to their camera location
+     */
     public int getLocation(int stage){
         switch(getName()){
             case "tyrone":
@@ -50,6 +53,9 @@ public class Enemy extends Entity
         }
         return -1;
     }
+    /**
+     * Method to move Enemies
+     */
     public void moveLocation(){
         tick--;
         if(tick <= 0) {
@@ -62,6 +68,10 @@ public class Enemy extends Entity
             }
         }
     }
+    
+    /*
+     * Helper Method
+     */
     public void decreaseTimer(int num){
         timeTillReset -= num;
     }

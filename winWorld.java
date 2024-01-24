@@ -7,10 +7,10 @@ import java.util.NoSuchElementException;
 import java.io.File;
 import java.io.FileNotFoundException;
 /**
- * Write a description of class winWorld here.
+ * Display win world
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Vincent
+ * @version January 2024
  */
 public class winWorld extends SuperWorld
 {

@@ -64,6 +64,18 @@ import java.util.*;
  * </p>
  * 
  * <p>
+ * Code:----------------------------------------------------------
+ * <ul>
+ * Button Code
+ * Mr.Cohen's button code from Mr Cohen's SuperUseful Library
+ * </ul>
+ * <ul>
+ * SuperSmoothMover Code
+ * Mr.Cohen's SuperSmoothMover code from Mr Cohen's SuperUseful Library
+ * </ul>
+ * </p>
+ * 
+ * <p>
  * Graphics:----------------------------------------------------------
  * <ul>
  * Win World Screen
@@ -72,7 +84,7 @@ import java.util.*;
  * </ul>
  * </p>
  * 
- *  * Sound Effects:-------------------------------------------------------------
+ * Sound Effects:-------------------------------------------------------------
  * <ul>
  * Glitch Sound Effect:
  * By: PremswaroopKasukurthi
@@ -182,6 +194,9 @@ public class tempWorld extends SuperWorld
     private int woodCounter;
     private boolean unlockedEasterEgg;
     
+    /**
+     * Constructor for Floor 1 World
+     */
     public tempWorld()
     {   
         // Add in Java Viewport to generate the 2d array map of the first floor
@@ -228,11 +243,9 @@ public class tempWorld extends SuperWorld
         super.act();
         inputMove();
         timerBar.refresh(-gameTimer.getAct());
-        if(gameTimer.getAct() > 240){
-            //sm.playSound("threeSecondsLeft");
-        }
+
         if(gameTimer.getAct() > 0){
-            //goToWorld(new endWorld());
+            goToWorld(new loseWorld());
         }
         if(woodCounter >= 5){
             if(!unlockedEasterEgg){
@@ -241,11 +254,17 @@ public class tempWorld extends SuperWorld
         }
     }
     
+    /**
+     * Method to go to next phase
+     */
     public void nextPhase(){
-        
         goToWorld(new GameRoom(p.getItemChest()));
     }
     
+    /**
+     * Method to unlock secret Timmy skin
+     * Change the skin in the player source code
+     */
     public void unlockPurpleTimmy(){
         unlockedEasterEgg = !unlockedEasterEgg;
         writeFile("purpleTimSprites","purpletimmysprites.png");
@@ -344,6 +363,10 @@ public class tempWorld extends SuperWorld
             p.setCurFrame(1, 0);
         }
     }
+    
+    /*
+     * Helper methods
+     */
     public boolean checkPlayer(int x, int y){
         return getObjectsAt(x, y, Player.class).size()>0;
     }

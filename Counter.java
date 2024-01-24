@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Counter here.
+ * Class to make counter tiles
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Edmond
+ * @version Jan 2024
  */
 public class Counter extends Immovable
 {

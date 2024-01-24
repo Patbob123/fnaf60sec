@@ -1,8 +1,8 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
- * Display End Game Screen 
+ * Display Lose Screen 
  * 
- * @author (your name) 
+ * @author Vincent  
  * @version January 2024
  */
 public class loseWorld extends SuperWorld

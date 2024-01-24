@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Table here.
+ * Class to make table tiles
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Edmond
+ * @version Jan 2024
  */
 public class Table extends Immovable
 {

@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 
 /**
- *
+ * Main world for floor 2 game play (FNAF style)
  */
 public class GameRoom extends SuperWorld {
     private boolean isAlive, leftDoorClosed, rightDoorClosed;
@@ -83,6 +83,9 @@ public class GameRoom extends SuperWorld {
     
     //private Enemy daniel, tyrone;
     
+    /**
+     * Constructor for GameRoom without items
+     */
     public GameRoom(){
         this(new ArrayList<Item>());
         ArrayList<Item> itemTest = new ArrayList<>();
@@ -90,7 +93,7 @@ public class GameRoom extends SuperWorld {
         
     }
     /**
-     * Constructor for GameRoom
+     * Constructor for GameRoom with items
      */
     public GameRoom(ArrayList<Item> itemChest) {
         super(Constants.WW, Constants.WH, 1);
@@ -189,8 +192,9 @@ public class GameRoom extends SuperWorld {
         if(time == 21500) {
             getSM().playSound("phoneGuy");
         }
-
-        if(time == 18900) { //spawn them after 30 seconds
+        
+        //Spawn enemies and move them
+        if(time == 18900) { // Spawn after 30 seconds
             em.getTyrone().setStage(1);
             em.getDaniel().setStage(1);
             
@@ -198,11 +202,7 @@ public class GameRoom extends SuperWorld {
             em.moveEnemies();
         }
         
-        
-        //bB = -1*(1/3)*(timer.millisElapsed()/1000);
-        
-        //System.out.println("time elapsed: " + timer.millisElapsed()/1000);
-        //System.out.println("hunger meter: " + hM);
+        // Main loop to check for camera activity
         if(time > 0 || isAlive){
             if(time%120 == 0){
                 hunger = -1*Math.pow((1/1.002), -1*(21600/60))+11;
@@ -225,7 +225,8 @@ public class GameRoom extends SuperWorld {
                     sm.playSound("cameraClose");
                 }
             }
-
+            
+            // Update camera images and decrease power
             if(inCameras){
                 if(time%60 == 0){
                     battery -=1;
@@ -245,10 +246,12 @@ public class GameRoom extends SuperWorld {
             }
         } 
         
+        // If not in camera, move the screen around
         if(!inCameras) {
             checkMouseMovement();
         }
         
+        // End game states
         if(!isAlive && !changedWorld) {
             changedWorld = !changedWorld;
             if(!notPlayedSound){
@@ -273,9 +276,6 @@ public class GameRoom extends SuperWorld {
             soundBar.refresh(Greenfoot.getMicLevel());
         }
         addDoorButtons();
-        
-        
-        
     }
 
     /**
@@ -316,7 +316,14 @@ public class GameRoom extends SuperWorld {
             removeObject(cams[i]);
         }
     }
-
+    
+    /**
+     * Method to check whether or not the camera should display an enemy
+     * 
+     * @param currCam           Current camera number
+     * @param tyroneLocation    Tyrone's location number
+     * @param danielLocation    Daniel's location number
+     */
     public void checkCam(int currCam, int tyroneLocation, int danielLocation){
         System.out.println(currCam);
         System.out.println(tyroneLocation);
@@ -328,6 +335,12 @@ public class GameRoom extends SuperWorld {
         }
     }
     
+    /**
+     * Method to display camera
+     * 
+     * @param camNum    display image of certain camera
+     * @param isThere   decide whethere to use image with enemy or not
+     */
     public void displayCam(int camNum, boolean isThere) {
         if(isThere) {
             addObject(camWithEnemy[camNum - 1], getWidth()/2, getHeight()/2);
@@ -377,6 +390,9 @@ public class GameRoom extends SuperWorld {
             addObject(cams[i], camX[i], camY[i]);
         }
     }
+    /**
+     * Transfer all items from first floor (tempWorld) to the second floor
+     */
     public void addInventory(){
         for(Item i : itemChest){
             switch(i.toString()){
@@ -396,6 +412,8 @@ public class GameRoom extends SuperWorld {
             
         }
     }
+    
+    //Methods to play jumpscare 
     public void danielJumpScare(){
         addObject(new Fader(2,false,"danieljump2.jpg"),Constants.WW/2, Constants.WH/2);
         sm.playSound("Scream2");

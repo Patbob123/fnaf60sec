@@ -1,10 +1,11 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class EnemyManager here.
+ * Manager for Enemy 
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jaiden
+ * <p> Modified and updated by Dawson </p>
+ * @version Jan 2024
  */
 public class EnemyManager extends Actor
 {
@@ -28,16 +29,7 @@ public class EnemyManager extends Actor
         specialStage= false;
         setImage(new GreenfootImage(1,1));
     }
-    /*
-    /**
-     * Set Daniel's stage number
-     * @param stage     Set to this number
-     
-    public void setDStageSeven(boolean stage) {
-        this.dStageThree = stage;
-        dLocation = 7;
-    }
-    */
+    
     /**
      * Set Special stage number
      * @param stage     Set to this number
@@ -54,26 +46,13 @@ public class EnemyManager extends Actor
     {
         
         //If any of the enemies are on stage 3
-        
-        
-        /*
-        if(specialStage){
-            if(specialStageTimer == 0) {
-                specialRunningTimer--;
-                //play running sound in LEFT EAR
-            }
-            else{
-                specialStageTimer--; 
-            }
-            
-        }
-        if(specialRunningTimer == 0 && ((GameRoom)getWorld()).getLeftDoor()) {
-            ((GameRoom)getWorld()).setAlive(false);
-            //play daniel jumpscare
-        }
-        */
         knockOnDoor();
     }
+    /**
+     * Method to determine if player's door is closed
+     * If closed, leave
+     * Else Kill the player
+     */
     public void knockOnDoor(){
         if(daniel.getStage() == 3) {
             daniel.decreaseTimer(1);
@@ -85,13 +64,7 @@ public class EnemyManager extends Actor
                 }
             }
             else if(daniel.getResetTimer() == 0 && ((GameRoom)getWorld()).getLeftDoor()){
-                int specialSpawn = Greenfoot.getRandomNumber(10);
-                if(specialSpawn == 3) {
-                    //daniel.setStage(7);
-                }
-                else {
-                    daniel.setStage(1);
-                }
+                daniel.setStage(1);
             }
         }    
         
@@ -109,6 +82,10 @@ public class EnemyManager extends Actor
             }
         }  
     }
+    
+    /*
+     * Helper Methods
+     */
     public void moveEnemies(){
         daniel.moveLocation();
         tyrone.moveLocation();
