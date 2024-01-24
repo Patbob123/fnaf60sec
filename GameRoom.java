@@ -58,6 +58,7 @@ public class GameRoom extends SuperWorld {
     private Bar soundBar;
     private EnemyManager em;
     private Presser leftButton, rightButton, foodButton, waterButton;
+    private SoundManager sm;
     
     private int visionTime;
 
@@ -105,7 +106,7 @@ public class GameRoom extends SuperWorld {
         for (int i = 0; i < 24; i++) {
             bgFrames[i] = new GreenfootImage("bgFrames/frame" + i + ".jpg");  
             if(i < 4) openLDoor[i] = new GreenfootImage("bgFrames/frame" + i + ".jpg");  
-            if(i < 12) openRDoor[i] =  new GreenfootImage("bgFrames/frame" + (bgFrames.length-1-i) + ".jpg");  
+            if(i < 12) openRDoor[i] =  new GreenfootImage("bgFrames/frame" + (bgFrames.length-i-1) + ".jpg");  
             if(i < 6) leftDoorFrames[i] = new GreenfootImage("leftDoorFrames/frame" + i + ".jpg");  
             if(i < 10) rightDoorFrames[i] = new GreenfootImage("rightDoorFrames/frame" + i + ".jpg");  
             if(i < 3) danielFrames[i] = new GreenfootImage("leftEnemy/frame" + i + ".jpg");  
@@ -132,6 +133,7 @@ public class GameRoom extends SuperWorld {
         addObject(waterButton, 731, 665);
         
         addInventory();
+        maxBattery = 1000;
         battery = maxBattery;
 
         batteryBar = new Bar(maxBattery, "energyIcon.png", new Color(0, 255, 255));
@@ -154,6 +156,7 @@ public class GameRoom extends SuperWorld {
         fading = new DynamicLighting (Constants.WW, Constants.WH);
         addObject(fading, Constants.WW/2, Constants.WH/2);
         
+        sm = new SoundManager();
         isAlive = true;
 
         setPaintOrder(Button.class, CameraMap.class, Bar.class, Presser.class, DynamicLighting.class);
@@ -389,13 +392,14 @@ public class GameRoom extends SuperWorld {
             }
             for(int i = 0; i < 5; i++ ){
                 GreenfootImage temp = bgFrames[i];
-                bgFrames[0 + i] = leftDoorFrames[i];
+                bgFrames[i] = leftDoorFrames[i];
                 leftDoorFrames[i] = temp;
             }
+            setBackground(bgFrames[0]);
         }
     };
 
-
+    
     /**
      * Action for right door being pressed
      */
@@ -405,9 +409,9 @@ public class GameRoom extends SuperWorld {
             if(time%60 == 0){
                 battery -=2;
             }
-            for(int i = 0; i < 5; i++ ){
-                GreenfootImage temp = bgFrames[15];
-                bgFrames[11 + i] = rightDoorFrames[i];
+            for(int i = 0; i < 10; i++ ){
+                GreenfootImage temp = bgFrames[bgFrames.length - i-1];
+                bgFrames[bgFrames.length - i-1] = rightDoorFrames[i];
                 rightDoorFrames[i] = temp;
             }
             setBackground(bgFrames[bgFrames.length - 1]);
