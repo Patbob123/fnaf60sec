@@ -100,13 +100,13 @@ public class GameRoom extends SuperWorld {
         camWithNoEnemy = new Camera[7]; 
         
         for (int i = 0; i < 24; i++) {
-            bgFrames[i] = new GreenfootImage("bgFrames/frame" + i + ".JPG");  
-            if(i < 4) openLDoor[i] = new GreenfootImage("bgFrames/frame" + i + ".JPG");  
-            if(i < 12) openRDoor[i] =  new GreenfootImage("bgFrames/frame" + (bgFrames.length-1-i) + ".JPG");  
-            if(i < 6) leftDoorFrames[i] = new GreenfootImage("leftDoorFrames/frame" + i + ".JPG");  
-            if(i < 10) rightDoorFrames[i] = new GreenfootImage("rightDoorFrames/frame" + i + ".JPG");  
-            if(i < 3) danielFrames[i] = new GreenfootImage("leftEnemy/frame" + i + ".JPG");  
-            if(i < 4) tyroneFrames[i] = new GreenfootImage("rightEnemy/frame" + i + ".JPG");  
+            bgFrames[i] = new GreenfootImage("bgFrames/frame" + i + ".jpg");  
+            if(i < 4) openLDoor[i] = new GreenfootImage("bgFrames/frame" + i + ".jpg");  
+            if(i < 12) openRDoor[i] =  new GreenfootImage("bgFrames/frame" + (bgFrames.length-1-i) + ".jpg");  
+            if(i < 6) leftDoorFrames[i] = new GreenfootImage("leftDoorFrames/frame" + i + ".jpg");  
+            if(i < 10) rightDoorFrames[i] = new GreenfootImage("rightDoorFrames/frame" + i + ".jpg");  
+            if(i < 3) danielFrames[i] = new GreenfootImage("leftEnemy/frame" + i + ".jpg");  
+            if(i < 4) tyroneFrames[i] = new GreenfootImage("rightEnemy/frame" + i + ".jpg");  
             if(i < 7) camWithEnemy[i] = new Camera(1, true, "Cameras/camera" + (i+1) + ".png"); 
             if(i < 7) camWithNoEnemy[i] = new Camera(1, false, "Cameras/camera" + (i+1) + "Empty" + ".png"); 
         }
