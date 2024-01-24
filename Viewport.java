@@ -16,6 +16,7 @@ public class Viewport extends Actor
     private int height;
     private final int xOffset = Constants.TILE_LEN/2;
     private final int yOffset = Constants.TILE_LEN/2;
+    private int count = 0;
     
     /**
      * Constructor for the ViewPort
@@ -43,6 +44,10 @@ public class Viewport extends Actor
         
         moveObjects(-addX, -addY);
         renderMap(getW().getMap().getTiles(), getW().getMap().getItems());
+        if(count%240 == 0){
+            ((SuperWorld)getWorld()).getSM().playSound("consistentHeavyFootsteps");
+        }
+        count++;
     }
     
     /**

@@ -16,7 +16,7 @@ public class Shelter extends Tile
         super();
         symbol = "#"; 
         bunker = new Inventory();
-        url = "Wall";
+        url = "..\\chest";
     }
     /**
      * Getter Method for the inventory

@@ -21,6 +21,7 @@ public class Blinker extends Entity
     }
     public void act(){
         if(getObjectsInRange(270, Player.class).size()>0){
+            ((SuperWorld)getWorld()).getSM().playSound("whispers");
             getWorld().removeObject(this);
         }
     }

@@ -252,6 +252,7 @@ public class Player extends Entity
                 getW().addObject(new PopupFader(plusImage,100,false), getX()-50, getY()-60);
             }else{
                 // Visual to indicate that the player cannot pick up the item
+                getW().getSM().playSound("blast");
                 getW().addObject(new PopupFader(noImage,100,false), getX(), getY()-60);
             }
         }

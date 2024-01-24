@@ -30,7 +30,7 @@ public class SoundManager extends Actor
         //Store all sound files into a HashMap for easy retrevial 
         soundFiles.put("builderMusic", new Sound("builderMusic.mp3",50 ));
         soundFiles.put("Jaded", new Sound("Jaded.mp3",50 ));
-        soundFiles.put("blast", new Sound("blaster.mp3",40 ));
+        soundFiles.put("blast", new Sound("blaster.mp3",20 ));
         soundFiles.put("boom", new Sound("boom.mp3",60 ));
         //soundFiles.put("transition", new Sound("transition.wav",100 ));
         //soundFiles.put("click", new Sound("buttonclick.wav",100 ));
@@ -43,6 +43,9 @@ public class SoundManager extends Actor
         soundFiles.put("enemydeath", new Sound("enemydeath.mp3",50));
         soundFiles.put("youdied", new Sound("youdied.mp3",50));
         soundFiles.put("youwin", new Sound("winsound.mp3",50));
+        soundFiles.put("lightFootsteps", new Sound("lightFootsteps.wav",50));
+        soundFiles.put("consistentHeavyFootsteps", new Sound("consistentHeavyFootsteps.wav",100));
+        
         
         soundFiles.put("grabFood", new Sound("firstFloor/grabFood.mp3",100));
         soundFiles.put("grabWood", new Sound("firstFloor/grabWood.mp3",100));
@@ -50,7 +53,7 @@ public class SoundManager extends Actor
         soundFiles.put("grabBattery", new Sound("firstFloor/grabBattery.mp3",100));
         soundFiles.put("chestOpen", new Sound("firstFloor/chestOpen.mp3",100));
         soundFiles.put("threeSecondsLeft", new Sound("firstFloor/threeSecondsLeft.mp3",100));
-        soundFiles.put("whispers", new Sound("firstFloor/whispers.wav",100));
+        soundFiles.put("whispers", new Sound("firstFloor/whispers.wav",90));
         setImage(new GreenfootImage(1,1));
     }
     
