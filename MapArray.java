@@ -53,7 +53,7 @@ public class MapArray
             {"w",  "w", "-2",  "-2", "-2", "-2", "-2", "-2", "-2", "-2", "w",  "w",  "-3", "t4", "t5", "t6", "-3", "t4", "t5", "t6", "-3", "d",  "-",  "-",  "-",  "-",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w"},  
             {"w",  "w", "-2",  "-2", "-2", "-2", "-2", "-2", "-2", "-2", "w",  "w",  "-3", "-3", "-3", "-3", "-3", "-3", "-3", "-3", "-3", "w",  "w",  "-",  "-",  "-",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w"},  
             {"w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "-",  "-",  "-",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w"},  
-            {"w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "g",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w"}  
+            {"w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w",  "w"}  
                         
         };
         return mapString;
@@ -262,13 +262,13 @@ public class MapArray
                 }
                 modifier+=map[i][j].getUrl();
             }else{
-                String prop = map[i][j].getProp();
+                String prop = map[i][j].getProp() ;
                 if(map[i][j].getProp()==null) prop = "";
-                modifier = map[i][j].getUrl()+prop;
+                modifier = map[i][j].getUrl() +prop; 
             }
-            //System.out.println(map[i][j].toString());
+            System.out.println(map[i][j].toString());
             map[i][j].setIcon("WallIcon/"+modifier+".png");
-    
+            
             }
         }
     }
