@@ -57,6 +57,9 @@ public class tempWorld extends SuperWorld
     }
     
     public void act(){
+        if(Greenfoot.getRandomNumber(1000) == 500){
+            sm.playSound("whispers");
+        }
         inputMove();
         //timerBar.refresh(-gameTimer.getAct());
         if(gameTimer.getAct() > 240){
