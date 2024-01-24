@@ -28,6 +28,7 @@ public class GameRoom extends SuperWorld {
     //For cameras
     private int CMXOffset = 1015;
     private int CMYOffset = 622;
+    
 
     private int[] camX = {CMXOffset - 95,CMXOffset - 41, CMXOffset - 63, CMXOffset + 94, CMXOffset + 23, CMXOffset + 62, CMXOffset + 5};
     private int[] camY = {CMYOffset + 54, CMYOffset + 24, CMYOffset - 10, CMYOffset + 40, CMYOffset + 20, CMYOffset - 11, CMYOffset + 66};
@@ -184,6 +185,7 @@ public class GameRoom extends SuperWorld {
                     generateCamMap();
                     camButton.updateMe("VVVVVVVVVVVVVVVVVVVVVVV");
                     inCameras = true;
+                    sm.playSound("cameraOpen");
                 }else{
                     camButton.updateMe("AAAAAAAAAAAAAAAAAAAAA");
                     removeButtons();
@@ -191,6 +193,7 @@ public class GameRoom extends SuperWorld {
                     removeObject(camMap);
                     //System.out.println("collapsed" + numClicks);
                     inCameras = false;
+                    sm.playSound("cameraClose");
                 }
             }
 
@@ -203,6 +206,7 @@ public class GameRoom extends SuperWorld {
                         clearCams();
                         currCam = i+1;
                         checkCam(currCam, em.getTyroneLocation(), em.getDanielLocation());
+                        sm.playSound("cameraSwitch");
                     }
                 }
 
