@@ -30,9 +30,9 @@ public class GameRoom extends SuperWorld {
     private int CMYOffset = 622;
     
 
-    private int camsOffset = 120;
+    private int camsOffset = 0;
     
-    private int[] camX = {CMXOffset - 95 + camsOffset,CMXOffset - 41 + camsOffset, CMXOffset - 63 + camsOffset, CMXOffset + 144 + camsOffset, CMXOffset + 73 + camsOffset, CMXOffset + 62 + camsOffset, CMXOffset + 5 + camsOffset};
+    private int[] camX = {CMXOffset - 95 + camsOffset,CMXOffset - 41 + camsOffset, CMXOffset - 63 + camsOffset, CMXOffset + 94 + camsOffset, CMXOffset + 23 + camsOffset, CMXOffset + 62 + camsOffset, CMXOffset + 5 + camsOffset};
     private int[] camY = {CMYOffset + 54, CMYOffset + 24, CMYOffset - 10, CMYOffset + 40, CMYOffset + 20, CMYOffset - 11, CMYOffset + 66};
 
     Button[] cams = new Button[7];
@@ -53,6 +53,7 @@ public class GameRoom extends SuperWorld {
     private int waterCount;
     private int foodCount;
     
+    private boolean changedWorld = false;
     private boolean openedCamMap = false;
     private boolean expanded = false;
 
@@ -157,7 +158,7 @@ public class GameRoom extends SuperWorld {
         addObject(soundBar, 150, 707);
 
         camButton = new Button("AAAAAAAAAAAAAAAAAAAAA", 20, true);
-        addObject(camButton, 1129, 741);
+        addObject(camButton, 1014, 741);
 
         em = new EnemyManager();
         addObject(em, getWidth() /2, getHeight()/2);
@@ -180,10 +181,11 @@ public class GameRoom extends SuperWorld {
     public void act() {
         super.act();
         time--;
-        
+        if(time == 21500) {
+            sm.playSound("phoneGuy");
+        }
 
-        if(time == 21000) { //spawn them after 30 seconds
-            System.out.println("ee");
+        if(time == 18900) { //spawn them after 30 seconds
             em.getTyrone().setStage(1);
             em.getDaniel().setStage(1);
             
@@ -241,9 +243,11 @@ public class GameRoom extends SuperWorld {
             checkMouseMovement();
         }
         
-        if(!isAlive) {
+        if(!isAlive && !changedWorld) {
+            changedWorld = !changedWorld;
             goToWorld(new endWorld());
         }
+        
         if(time < 0 && isAlive) {
             //goToWorld(new winWorld());
         }
