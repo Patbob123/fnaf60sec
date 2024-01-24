@@ -18,7 +18,7 @@ public class MapArray
      */
     public MapArray()
     {
-        itemList = new String[]{"Food", "Water"};
+        itemList = new String[]{"Food", "Water","Battery","Wood"};
         map = new Tile[50][50];
         itemLayer = new Tile[50][50];
         
@@ -129,16 +129,16 @@ public class MapArray
                 try{
                     switch(room){
                         case "1":
-                            itemName = itemList[1];
+                            itemName = itemList[3];
                             return (Tile)Constants.itemHash.get(itemName).newInstance();
                         case "2":
-                            itemName = itemList[0];
+                            itemName = itemList[1];
                             return (Tile)Constants.itemHash.get(itemName).newInstance();
                         case "3":
                             itemName = itemList[0];
                             return (Tile)Constants.itemHash.get(itemName).newInstance();
                         case "4":
-                            itemName = itemList[1];
+                            itemName = itemList[2];
                             return (Tile)Constants.itemHash.get(itemName).newInstance();
                     }
                     

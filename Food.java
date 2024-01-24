@@ -13,8 +13,7 @@ public class Food extends Item
      */
     public Food(){
         weight = 1;
-        icon = new GreenfootImage("grapes.png");
-        setImage(icon);
+        setIcon("itemSprites/Food.png");
     }
     /**
      * To string method to return type of item
