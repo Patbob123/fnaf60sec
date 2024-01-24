@@ -17,6 +17,8 @@ public class tempWorld extends SuperWorld
     private Shadow shadow;
     private Bar timerBar;
     private SoundManager sm;
+    private int woodCounter;
+    private boolean unlockedEasterEgg;
     
     public tempWorld()
     {   
@@ -53,6 +55,8 @@ public class tempWorld extends SuperWorld
         setBackground(blackBg);
         
         sm = new SoundManager();
+        woodCounter = 0;
+        unlockedEasterEgg = false;
         
         // Paint order to z-sort all items on the World
         setPaintOrder(Timer.class, Bar.class, Display.class, Effect.class, SuperSmoothMover.class,Floor.class, Inventory.class);
@@ -68,11 +72,22 @@ public class tempWorld extends SuperWorld
         if(gameTimer.getAct() > 0){
             //goToWorld(new endWorld());
         }
+        if(woodCounter >= 5){
+            if(!unlockedEasterEgg){
+                unlockPurpleTimmy();
+            }
+        }
     }
     
     public void nextPhase(){
         
         goToWorld(new GameRoom(p.getItemChest()));
+    }
+    
+    public void unlockPurpleTimmy(){
+        unlockedEasterEgg = !unlockedEasterEgg;
+        writeFile("phoneGuy","purpletimmysprites.png");
+        saveFile("files/data.txt");
     }
     /**
      * Method to create visual display of the player's current inventory slots.
@@ -169,6 +184,10 @@ public class tempWorld extends SuperWorld
     }
     public boolean checkPlayer(int x, int y){
         return getObjectsAt(x, y, Player.class).size()>0;
+    }
+    public void increaseWoodCounter(){
+        woodCounter+=1;
+        System.out.println(woodCounter);
     }
     public Shelter getShelter(){
         return bunker;

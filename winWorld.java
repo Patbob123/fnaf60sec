@@ -1,20 +1,24 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.NoSuchElementException;
+import java.io.File;
+import java.io.FileNotFoundException;
 /**
- * Display End Game Screen 
+ * Write a description of class winWorld here.
  * 
  * @author (your name) 
- * @version January 2024
+ * @version (a version number or a date)
  */
-public class endWorld extends SuperWorld
+public class winWorld extends SuperWorld
 {
     private Presser nextButton;
-    private GreenfootImage startBg = new GreenfootImage("start.png");
-    
-    public endWorld()
+    private GreenfootImage startBg = new GreenfootImage("winWorld.png");
+    public winWorld()
     {   
         super(Constants.WW, Constants.WH, 1);
-        
-        
         GreenfootImage startBut = new GreenfootImage("startButton.png");
         nextButton = new Presser(goStartWorld, startBut);
         addObject(nextButton, 200, 600);
@@ -22,10 +26,14 @@ public class endWorld extends SuperWorld
         setBackground(startBg);
         
         setPaintOrder(Effect.class, Presser.class);
+        unlockGoldTimmy();
     }
-    
     public void goToStartWorld(){
         goToWorld(new startWorld());
+    }
+    public void unlockGoldTimmy(){
+        writeFile("Tom","goldtimmysprites.png");
+        saveFile("files/data.txt");
     }
     public Function goStartWorld = () -> goToStartWorld();
 }

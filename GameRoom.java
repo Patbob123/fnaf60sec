@@ -245,7 +245,7 @@ public class GameRoom extends SuperWorld {
         
         if(!isAlive && !changedWorld) {
             changedWorld = !changedWorld;
-            goToWorld(new endWorld());
+            goToWorld(new loseWorld());
         }
         
         if(time < 0 && isAlive) {
