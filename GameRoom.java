@@ -52,6 +52,7 @@ public class GameRoom extends SuperWorld {
 
     private int waterCount;
     private int foodCount;
+    private ArrayList<Item> itemChest;
     
     private boolean changedWorld = false;
     private boolean openedCamMap = false;
@@ -64,7 +65,6 @@ public class GameRoom extends SuperWorld {
     private Bar batteryBar, soundBar, foodBar, waterBar;
     private EnemyManager em;
     private Presser leftButton, rightButton, foodButton, waterButton;
-    private SoundManager sm;
     
     private int visionTime;
 
@@ -78,7 +78,7 @@ public class GameRoom extends SuperWorld {
     //private VisionBlock fading;
     
     private DynamicLighting fading;
-    private ArrayList<Item> itemChest;
+    private Static cameraStatic;
     
     //private Enemy daniel, tyrone;
     
@@ -174,9 +174,11 @@ public class GameRoom extends SuperWorld {
         fading = new DynamicLighting (Constants.WW, Constants.WH);
         addObject(fading, Constants.WW/2, Constants.WH/2);
         
+        cameraStatic = new Static();
+        
         isAlive = true;
 
-        setPaintOrder(Button.class, CameraMap.class, Bar.class, Presser.class, DynamicLighting.class);
+        setPaintOrder(Button.class, CameraMap.class, Bar.class, Presser.class, DynamicLighting.class, Static.class);
 
     }
 
@@ -208,6 +210,7 @@ public class GameRoom extends SuperWorld {
             if (Greenfoot.mousePressed(camButton)){
                 if(!inCameras){
                     generateCamMap();
+                    addObject(cameraStatic,0,0);
                     camButton.updateMe("Close Cameras");
                     inCameras = true;
                     sm.playSound("cameraOpen");
@@ -215,6 +218,7 @@ public class GameRoom extends SuperWorld {
                     camButton.updateMe("Open Cameras (-1 J/s)");
                     removeButtons();
                     clearCams();
+                    removeObject(cameraStatic);
                     removeObject(camMap);
                     //System.out.println("collapsed" + numClicks);
                     inCameras = false;
