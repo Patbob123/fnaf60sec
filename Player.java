@@ -245,6 +245,8 @@ public class Player extends Entity
                 
                 updateHandDisplay();
                 
+                String item = currentItem.toString();
+                getW().getSM().playSound("grab"+item);
                 // Display a visual to indicate that the player has picked up an item
                 getW().addObject(new PopupFader(currentItem.getImage(),80,false), getX(),getY()-60);
                 getW().addObject(new PopupFader(plusImage,100,false), getX()-50, getY()-60);
@@ -271,6 +273,8 @@ public class Player extends Entity
             handSlots.getStorage().clear();
             handSlots.clearWeight();
             updateHandDisplay();
+            
+            getW().getSM().playSound("chestOpen");
     }
     
     /**

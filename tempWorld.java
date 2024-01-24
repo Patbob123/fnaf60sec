@@ -16,6 +16,7 @@ public class tempWorld extends SuperWorld
     private Shelter bunker;
     private Shadow shadow;
     private Bar timerBar;
+    private SoundManager sm;
     
     public tempWorld()
     {   
@@ -51,13 +52,24 @@ public class tempWorld extends SuperWorld
         blackBg.fill();
         setBackground(blackBg);
         
+        sm = new SoundManager();
+        
         // Paint order to z-sort all items on the World
         setPaintOrder(Timer.class, Bar.class, Display.class, Effect.class, SuperSmoothMover.class,Floor.class, Inventory.class);
     }
     
     public void act(){
+        if(Greenfoot.getRandomNumber(1000) == 500){
+            sm.playSound("whispers");
+        }
         inputMove();
         timerBar.refresh(-gameTimer.getAct());
+        if(gameTimer.getAct() > 240){
+            sm.playSound("threeSecondsLeft");
+        }
+        if(gameTimer.getAct() > 0){
+            Greenfoot.setWorld(new endWorld());
+        }
     }
     
     public void nextPhase(){
@@ -170,6 +182,9 @@ public class tempWorld extends SuperWorld
     }
     public Shadow getShadow(){
         return shadow;
+    }
+    public SoundManager getSM(){
+        return sm;
     }
 }
 
