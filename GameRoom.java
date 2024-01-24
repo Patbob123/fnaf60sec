@@ -30,7 +30,9 @@ public class GameRoom extends SuperWorld {
     private int CMYOffset = 622;
     
 
-    private int[] camX = {CMXOffset - 95,CMXOffset - 41, CMXOffset - 63, CMXOffset + 94, CMXOffset + 23, CMXOffset + 62, CMXOffset + 5};
+    private int camsOffset = 120;
+    
+    private int[] camX = {CMXOffset - 95 + camsOffset,CMXOffset - 41 + camsOffset, CMXOffset - 63 + camsOffset, CMXOffset + 144 + camsOffset, CMXOffset + 73 + camsOffset, CMXOffset + 62 + camsOffset, CMXOffset + 5 + camsOffset};
     private int[] camY = {CMYOffset + 54, CMYOffset + 24, CMYOffset - 10, CMYOffset + 40, CMYOffset + 20, CMYOffset - 11, CMYOffset + 66};
 
     Button[] cams = new Button[7];
@@ -43,11 +45,14 @@ public class GameRoom extends SuperWorld {
 
     private double maxWater, maxBattery, maxWood, maxFood;
     
-    private double hunger = 10.0;
-    private double water = 10.0;
+    private double hunger = 0.0;
+    private double water = 0.0;
     private double wood;
     private double battery;
 
+    private int waterCount;
+    private int foodCount;
+    
     private boolean openedCamMap = false;
     private boolean expanded = false;
 
@@ -55,8 +60,7 @@ public class GameRoom extends SuperWorld {
 
     private CameraMap camMap;
     private Tile tiles[][];
-    private Bar batteryBar;
-    private Bar soundBar;
+    private Bar batteryBar, soundBar, foodBar, waterBar;
     private EnemyManager em;
     private Presser leftButton, rightButton, foodButton, waterButton;
     private SoundManager sm;
@@ -123,25 +127,34 @@ public class GameRoom extends SuperWorld {
 
         GreenfootImage doorLeft = new GreenfootImage("buttons/doorButton1.png");
         GreenfootImage doorRight = new GreenfootImage("buttons/doorButton2.png");
-        GreenfootImage food = new GreenfootImage("buttons/foodButton.png");
-        GreenfootImage water = new GreenfootImage("buttons/waterButton.png");
+        GreenfootImage foodBut = new GreenfootImage("buttons/foodButton.png");
+        GreenfootImage waterBut = new GreenfootImage("buttons/waterButton.png");
         
         leftButton = new Presser(leftDoor, doorLeft);
         rightButton = new Presser(rightDoor, doorRight);
-        foodButton = new Presser(feed, food);
-        waterButton = new Presser(drink, water);
+        foodButton = new Presser(feed, foodBut);
+        waterButton = new Presser(drink, waterBut);
         addObject(foodButton, 461, 665);
         addObject(waterButton, 731, 665);
         
         addInventory();
         maxBattery = 1000;
         battery = maxBattery;
-
-        batteryBar = new Bar(maxBattery, "energyIcon.png", new Color(0, 255, 255));
+        
+        maxFood = 100;
+        hunger = maxFood;
+        maxWater = 100;
+        water = maxWater;
+        
+        batteryBar = new Bar(maxBattery, "energyIcon.png", new Color(191, 205, 50));
         addObject(batteryBar, 150, 100);
-
-        soundBar = new Bar(10, "energyIcon.png", new Color(0, 255, 0));
-        addObject(soundBar, 150, 200);
+        foodBar = new Bar(maxFood, "meatIcon.png", new Color(255, 0, 0));
+        addObject(foodBar, 150, 200);
+        waterBar = new Bar(maxWater, "waterIcon.png", new Color(0, 255, 255));
+        addObject(waterBar, 150, 300);
+        
+        soundBar = new Bar(10, "soundIcon.png", new Color(0, 255, 0));
+        addObject(soundBar, 150, 707);
 
         camButton = new Button("AAAAAAAAAAAAAAAAAAAAA", 20, true);
         addObject(camButton, 1129, 741);
@@ -169,7 +182,12 @@ public class GameRoom extends SuperWorld {
         time--;
         
 
-        if(time < 21000) { //spawn them after 30 seconds
+        if(time == 21000) { //spawn them after 30 seconds
+            System.out.println("ee");
+            em.getTyrone().setStage(1);
+            em.getDaniel().setStage(1);
+            
+        } else if(time < 21000) {
             em.moveEnemies();
         }
         
@@ -180,6 +198,10 @@ public class GameRoom extends SuperWorld {
         //System.out.println("time elapsed: " + timer.millisElapsed()/1000);
         //System.out.println("hunger meter: " + hM);
         if(time > 0 || isAlive){
+            if(time%120 == 0){
+                maxFood -=1;
+                maxWater -=1;
+            }
             if (Greenfoot.mousePressed(camButton)){
                 if(!inCameras){
                     generateCamMap();
@@ -199,10 +221,12 @@ public class GameRoom extends SuperWorld {
 
             if(inCameras){
                 if(time%60 == 0){
-                battery -=1;
+                    battery -=1;
                 }
                 for(int i = 0; i < cams.length; i++){
                     if(Greenfoot.mousePressed(cams[i])){
+                        System.out.println("h");
+                        
                         clearCams();
                         currCam = i+1;
                         checkCam(currCam, em.getTyroneLocation(), em.getDanielLocation());
@@ -223,14 +247,16 @@ public class GameRoom extends SuperWorld {
         if(time < 0 && isAlive) {
             //goToWorld(new winWorld());
         }
-        
-        addDoorButtons();
         if(time%6 == 0){
             batteryBar.refresh(battery);
+            foodBar.refresh(foodCount);
+            waterBar.refresh(waterCount);
             soundBar.refresh(Greenfoot.getMicLevel());
         }
+        addDoorButtons();
         
-
+        
+        
     }
 
     /**
@@ -272,7 +298,10 @@ public class GameRoom extends SuperWorld {
         }
     }
 
-    public void checkCam(int currCam, int tyroneLocation, int danielLocation) {
+    public void checkCam(int currCam, int tyroneLocation, int danielLocation){
+        System.out.println(currCam);
+        System.out.println(tyroneLocation);
+        System.out.println(danielLocation);
         if(currCam == tyroneLocation || currCam == danielLocation) {
             displayCam(currCam, true);
         } else {
@@ -333,16 +362,16 @@ public class GameRoom extends SuperWorld {
         for(Item i : itemChest){
             switch(i.toString()){
                 case "Battery":
-                    maxBattery += 10;
+                    maxBattery += 10.0;
                     break;
                 case "Wood":
-                    maxWood += 1;
+                    maxWood += 1.0;
                     break;
                 case "Water":
-                    maxWater += 10;
+                    waterCount++;
                     break;
                 case "Food":
-                    maxFood += 10;
+                    foodCount++;
                     break;
             }
             
@@ -435,16 +464,14 @@ public class GameRoom extends SuperWorld {
         }
     };
 
-
-        
-        
-    
-
     public Function feed = () -> {
         sm.playSound("eatingsound");
     };
 
     public Function drink = () -> {
         sm.playSound("drinkSound");
+        hunger = hunger+10 > maxFood ? maxFood: hunger+10;
+        foodCount--;
     };
+
 }

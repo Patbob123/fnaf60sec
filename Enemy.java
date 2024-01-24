@@ -14,8 +14,8 @@ public class Enemy extends Entity
     private int tick;
     private int timeTillReset; 
     
-    public Enemy(String name, int maxTick, int resetTime){
-        System.out.println("here");
+    public Enemy(String name, int maxTick, int resetTime,int stage){
+        this.stage = stage;
         this.name = name;
         this.maxTick = maxTick;
         timeTillReset = resetTime; 
@@ -52,11 +52,13 @@ public class Enemy extends Entity
     }
     public void moveLocation(){
         tick--;
-        if(Greenfoot.getRandomNumber(2) == 1){
-            if(stage+1 > 3) {
-                if(stage + 1 == 3) tick = 240;
-                tick = maxTick;
-                setStage(stage+1);
+        if(tick <= 0) {
+            if(Greenfoot.getRandomNumber(2) == 1){
+                if(stage+1 <= 3) {
+                    if(stage + 1 == 3) tick = 360;
+                    tick = maxTick;
+                    setStage(stage+1);
+                }
             }
         }
     }

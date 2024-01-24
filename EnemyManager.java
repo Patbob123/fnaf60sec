@@ -19,8 +19,8 @@ public class EnemyManager extends Actor
     public EnemyManager() {
         //Enemies have different movement times 
         
-        daniel = new Enemy("daniel", 600, 600);
-        tyrone = new Enemy("tyrone", 600, 600);
+        daniel = new Enemy("daniel", 360, 360, 0);
+        tyrone = new Enemy("tyrone", 600, 600, 0);
         
         specialStageTimer = 1800;
         specialRunningTimer = 300;
@@ -76,27 +76,27 @@ public class EnemyManager extends Actor
     public void knockOnDoor(){
         if(daniel.getStage() == 3) {
             daniel.decreaseTimer(1);
-            if(daniel.getResetTimer() == 0 && ((GameRoom)getWorld()).getRightDoor()) {
+            if(daniel.getResetTimer() == 0 && !((GameRoom)getWorld()).getLeftDoor()) {
+                ((GameRoom)getWorld()).setAlive(false);
+                
+            }
+            else if(daniel.getResetTimer() == 0 && ((GameRoom)getWorld()).getLeftDoor()){
                 int specialSpawn = Greenfoot.getRandomNumber(10);
                 if(specialSpawn == 3) {
-                    daniel.setStage(7);
-                    specialRunningTimer = 300;
-                    specialStageTimer = 1800;
+                    //daniel.setStage(7);
                 }
                 else {
                     daniel.setStage(1);
                 }
             }
-            else {
-                ((GameRoom)getWorld()).setAlive(false);
-            }
         }    
+        
         if(tyrone.getStage() == 3) {
             tyrone.decreaseTimer(1);
-            if(tyrone.getResetTimer() == 0 && ((GameRoom)getWorld()).getLeftDoor()) {
-                tyrone.setStage(4);
+            if(tyrone.getResetTimer() == 0 && ((GameRoom)getWorld()).getRightDoor()) {
+                tyrone.setStage(1);
             }
-            else {
+            else if (tyrone.getResetTimer() == 0 && !((GameRoom)getWorld()).getRightDoor()){
                 ((GameRoom)getWorld()).setAlive(false);
             }
         }  
@@ -106,9 +106,11 @@ public class EnemyManager extends Actor
         tyrone.moveLocation();
     }
     public int getDanielLocation(){
+        System.out.println(daniel.getStage());
         return daniel.getLocation(daniel.getStage());
     }
     public int getTyroneLocation(){
+        System.out.println(tyrone.getStage());
         return tyrone.getLocation(tyrone.getStage());
     }
     public Enemy getDaniel(){
