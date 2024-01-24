@@ -385,8 +385,14 @@ public class GameRoom extends SuperWorld {
      */
     public Function leftDoor = () -> {
         if(battery > 0) {
-            leftDoorClosed = !leftDoorClosed;
             
+            leftDoorClosed = !leftDoorClosed;
+            if(leftDoorClosed){
+                sm.playSound("doorClose");
+            }
+            else{
+                sm.playSound("doorOpen");
+            }
             if(time%60 == 0){
                 battery -=2;
             }
@@ -396,6 +402,7 @@ public class GameRoom extends SuperWorld {
                 leftDoorFrames[i] = temp;
             }
             setBackground(bgFrames[0]);
+            
         }
     };
 
@@ -406,6 +413,12 @@ public class GameRoom extends SuperWorld {
     public Function rightDoor = () -> {
         if(battery > 0) {
             rightDoorClosed = !rightDoorClosed;
+            if(rightDoorClosed){
+                sm.playSound("doorClose");
+            }
+            else{
+                sm.playSound("doorOpen");
+            }
             if(time%60 == 0){
                 battery -=2;
             }
@@ -424,10 +437,10 @@ public class GameRoom extends SuperWorld {
     
 
     public Function feed = () -> {
-
+        sm.playSound("eatingsound");
     };
 
     public Function drink = () -> {
-
+        sm.playSound("drinkSound");
     };
 }

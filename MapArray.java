@@ -262,13 +262,13 @@ public class MapArray
                 }
                 modifier+=map[i][j].getUrl();
             }else{
-                String prop = map[i][j].getProp();
+                String prop = map[i][j].getProp() ;
                 if(map[i][j].getProp()==null) prop = "";
-                modifier = map[i][j].getUrl()+prop;
+                modifier = map[i][j].getUrl() +prop; 
             }
-            //System.out.println(map[i][j].toString());
+            System.out.println(map[i][j].toString());
             map[i][j].setIcon("WallIcon/"+modifier+".png");
-    
+            
             }
         }
     }
