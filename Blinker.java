@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.ArrayList;
 
 /**
  * Class to give player (Timmy) idle animation of blinking
@@ -9,29 +10,19 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Blinker extends Entity
 {
     private GreenfootImage blinkerImage;
-    private Timer timer;
     
     /**
      * Constructor for Blinker Class
      */
     public Blinker(){
-        blinkerImage = new GreenfootImage("purpletimmysprites.png");
-        timer = new Timer(10.0, true);
+        blinkerImage = new GreenfootImage("blinker.png");
+        Util.scale(blinkerImage);
+        setImage(blinkerImage);
     }
-    
-    /**
-     * Method to add the animations to the world
-     * 
-     * @param w     Greenfoot world to add object to
-     */
-    public void addedToWorld(World w){
-        w.addObject(timer, 0, 0);
-    }
-    public void act()
-    {
-        if(timer.getTime() > 0){
-            getWorld().removeObject(timer);
+    public void act(){
+        if(getObjectsInRange(300, Player.class).size()>0){
             getWorld().removeObject(this);
         }
     }
+
 }
