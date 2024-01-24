@@ -55,7 +55,7 @@ public class tempWorld extends SuperWorld
     
     public void act(){
         inputMove();
-        timerBar.refresh(-gameTimer.getAct());
+        //timerBar.refresh(-gameTimer.getAct());
     }
     
     public void nextPhase(){

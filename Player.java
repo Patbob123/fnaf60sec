@@ -51,7 +51,7 @@ public class Player extends Entity
     
     public void act()
     {
-        z_sortAround();
+        //z_sortAround();
         animate();
         interact();
     }
