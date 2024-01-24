@@ -49,6 +49,7 @@ public class Sound extends Actor
      * Method to loop sound
      */
     public void playSoundLoop(){
+        System.out.println("ASD");
          sounds[soundIndex].playLoop();
     }
     
