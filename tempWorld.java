@@ -45,6 +45,8 @@ public class tempWorld extends SuperWorld
         timerBar = new Bar(3600, "clockIcon.png", new Color(55,55,255));
         addObject(timerBar, 200, 70);
         
+        addObject(new AnimatedPopup(), Constants.WW/2, Constants.WH/2);
+        
         GreenfootImage blackBg = new GreenfootImage(Constants.WW, Constants.WH);
         blackBg.fill();
         setBackground(blackBg);

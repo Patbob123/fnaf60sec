@@ -31,8 +31,8 @@ public class AnimatedPopup extends Effect
     public void loadSprites(GreenfootImage[] frames){
         for(int i = 0; i < frames.length; i++){
                 GreenfootImage image = new GreenfootImage(spriteSheetUrl);
-                GreenfootImage cropimage = new GreenfootImage(16, 16);
-                cropimage.drawImage(image, -16+i*16, -16);
+                GreenfootImage cropimage = new GreenfootImage(48, 16);
+                cropimage.drawImage(image, -i*48, -16);
                 scaleIcon(cropimage);
                 frames[i] = cropimage;
         }
@@ -43,7 +43,7 @@ public class AnimatedPopup extends Effect
      * @param icon      The GreenfootImage of the icon
      */
     public void scaleIcon(GreenfootImage icon){
-        icon.scale(32, 52);
+        icon.scale(48, 16);
         Util.scale(icon);
     }
     /**
@@ -53,7 +53,8 @@ public class AnimatedPopup extends Effect
         if(animTimer.millisElapsed() >= Constants.ANIM_SPEED){
             curFrame++;
             if(curFrames.length <= curFrame){
-                curFrame = 0;
+                getWorld().removeObject(this);
+                return;
             }
             setImage(curFrames[curFrame]);
             animTimer.mark();
