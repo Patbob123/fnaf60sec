@@ -99,6 +99,7 @@ public class GameRoom extends SuperWorld {
         leftDoorClosed = false;
         rightDoorClosed = false;
         currCam = 0;
+        /*
         bgFrames = new GreenfootImage[24]; 
         openLDoor = new GreenfootImage[4];
         openRDoor = new GreenfootImage[12];
@@ -107,19 +108,11 @@ public class GameRoom extends SuperWorld {
         danielFrames = new GreenfootImage[3];
         tyroneFrames = new GreenfootImage[4];
         camWithEnemy = new Camera[7];
-        camWithNoEnemy = new Camera[7]; 
+        camWithNoEnemy = new Camera[7];
+        */
         
-        for (int i = 0; i < 24; i++) {
-            bgFrames[i] = new GreenfootImage("bgFrames/frame" + i + ".jpg");  
-            if(i < 4) openLDoor[i] = new GreenfootImage("bgFrames/frame" + i + ".jpg");  
-            if(i < 12) openRDoor[i] =  new GreenfootImage("bgFrames/frame" + (bgFrames.length-i-1) + ".jpg");  
-            if(i < 6) leftDoorFrames[i] = new GreenfootImage("leftDoorFrames/frame" + i + ".jpg");  
-            if(i < 10) rightDoorFrames[i] = new GreenfootImage("rightDoorFrames/frame" + i + ".jpg");  
-            if(i < 3) danielFrames[i] = new GreenfootImage("leftEnemy/frame" + i + ".jpg");  
-            if(i < 4) tyroneFrames[i] = new GreenfootImage("rightEnemy/frame" + i + ".jpg");  
-            if(i < 7) camWithEnemy[i] = new Camera(1, true, "Cameras/camera" + (i+1) + ".png"); 
-            if(i < 7) camWithNoEnemy[i] = new Camera(1, false, "Cameras/camera" + (i+1) + "Empty" + ".png"); 
-        }
+        
+        
 
         currentFrameIndex = 12;  //the middle
         setBackground(bgFrames[currentFrameIndex]);

@@ -14,7 +14,6 @@ public class EnemyManager extends Actor
     
     private int specialStageTimer;
     private int specialRunningTimer;
-
     
     public EnemyManager() {
         //Enemies have different movement times 
@@ -92,6 +91,7 @@ public class EnemyManager extends Actor
         }    
         
         if(tyrone.getStage() == 3) {
+            ((SuperWorld)getWorld()).getSM().playSound("doorKnock1");
             tyrone.decreaseTimer(1);
             if(tyrone.getResetTimer() == 0 && ((GameRoom)getWorld()).getRightDoor()) {
                 tyrone.setStage(1);
