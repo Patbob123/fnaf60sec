@@ -30,6 +30,9 @@ public class Player extends Entity
     private GreenfootImage minusImage = new GreenfootImage("minus.png");
     private GreenfootImage noImage = new GreenfootImage("no.png");
     private Popup ePopup = new Popup(new GreenfootImage("E.png"));
+    private PriorityQueue <Actor> zSortQueue;
+    private boolean init = true;;
+    
     private boolean showPopup;
     
     private String spriteSheetUrl = "timmysprites.png";
@@ -46,6 +49,7 @@ public class Player extends Entity
         idleFrames = new GreenfootImage[6][4];
         walkingFrames = new GreenfootImage[6][6];
         //setIcon("tempson.png");
+        zSortQueue = new PriorityQueue <>((a,b) -> a.getY()-b.getY());
         showPopup = false;
     }
     
@@ -140,12 +144,17 @@ public class Player extends Entity
      * @param world     The World
      */
     protected void addedToWorld(World world){
-        spriteSheetUrl = getW().getFile("TimSprite");
-        loadSprites(idleFrames, 0);
-        loadSprites(walkingFrames, 128);
-        
-        collider = new Hitbox(getImage().getWidth()-speed,1);
-        world.addObject(collider, getX(), getY());
+        if(init){
+            init = false;
+            spriteSheetUrl = getW().getFile("TimSprite");
+            loadSprites(idleFrames, 0);
+            loadSprites(walkingFrames, 128);
+            
+            setImage(idleFrames[0][0]);
+            
+            collider = new Hitbox(getImage().getWidth()-speed,1);
+            world.addObject(collider, getX(), getY());
+        }
     }
     
     /**
@@ -158,14 +167,20 @@ public class Player extends Entity
         int curY = getY();
         int colY = getCollider().getY();
         boolean k = false;
-        PriorityQueue <Actor> pq = new PriorityQueue <>((a,b) -> a.getY()-b.getY());
-        for(Actor a: getIntersectingObjects(SuperSmoothMover.class)){
+        int i = 0; 
+        if(getIntersectingObjects(Tile.class).size()==0) return;
+        if(zSortQueue!=null) zSortQueue.clear();
+        for(Actor a: getIntersectingObjects(Tile.class)){
+            i++;
+             System.out.println(i);
             if(a==(null)) continue;
-            if(a.toString().equals("W"))pq.add(a);
+            if(a.toString().equals("W"))zSortQueue.add(a);
         }
-        while(!pq.isEmpty()){
-              
-            Actor a = pq.poll();
+        
+        while(!zSortQueue.isEmpty()){
+             i++;
+              System.out.println(i++);
+            Actor a = zSortQueue.poll();
             
             int x = a.getX();
             int y = a.getY();
@@ -183,6 +198,7 @@ public class Player extends Entity
             w.removeObject(this);
             w.addObject(this, curX, curY);
         }
+        
     }
     
     /**
