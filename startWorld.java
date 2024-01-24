@@ -38,7 +38,7 @@ public class startWorld extends SuperWorld
         
     }
     public void goToIntroWorld(){
-        goToWorld(new tempWorld());
+        goToWorld(new introWorld());
     }
     public Function goIntroWorld = () -> goToIntroWorld();
 }
