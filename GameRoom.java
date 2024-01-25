@@ -360,8 +360,10 @@ public class GameRoom extends SuperWorld {
         for (int i = 0; i < cams.length; i++){
             cams[i] = new Button ("CAM" + (i+1), 20, true, i + 1);
             addObject(cams[i], camX[i], camY[i]);
+            cams.switchExpansion(243, 239, 51, 50); 
         }
     }
+    
     public void addInventory(){
         for(Item i : itemChest){
             switch(i.toString()){
@@ -381,6 +383,7 @@ public class GameRoom extends SuperWorld {
             
         }
     }
+    
     /**
      * Set method for battery
      */
