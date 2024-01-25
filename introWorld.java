@@ -32,11 +32,11 @@ public class IntroWorld extends SuperWorld
         for(int i = 0; i < 42; i++){
             allFrames[i]= new GreenfootImage("animation1/anim" + (i+1) + ".png");
         }
-        
+
     }
-    
+
     public void act () {
-        
+
         super.act();
         acts ++;
         act -= 100;

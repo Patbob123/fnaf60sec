@@ -1,1 +1,1 @@
-TimSprite=goldtimmysprites.png
+TimSprite=timmysprites.png

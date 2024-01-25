@@ -47,7 +47,7 @@ public class Button extends Actor
         //updateMe(text);
         updateImage(12, 12, 12, 12);
     }
-    
+
     public Button(String text, int textSize, boolean bottomButton) {
         // Assign value to my internal String
         buttonText = text;
@@ -58,7 +58,7 @@ public class Button extends Actor
             updateMe(text);
         } 
     }
-    
+
     public Button(String text, int textSize, boolean bottomButton, int buttonNumber) {
         // Assign value to my internal String
         buttonText = text;
@@ -70,14 +70,14 @@ public class Button extends Actor
             updateMe(text);
         } 
     }
-    
+
     /**
      * Get button number
      */
     public int getButNum() {
         return buttonNumber;
     }
-    
+
     /**
      * Act - do whatever the TextButton wants to do.
      * This method is called whenever the 'Act' or 'Run' button gets pressed in the environment.
@@ -94,26 +94,26 @@ public class Button extends Actor
     public void updateMe(String text) {
         buttonText = text;
         GreenfootImage tempTextImage = new GreenfootImage(text, textSize, Color.WHITE, new Color(0,0,0,0));
-        myImage = new GreenfootImage(tempTextImage.getWidth() + 40, tempTextImage.getHeight() + 2); //8
+        myImage = new GreenfootImage(tempTextImage.getWidth() + 8, tempTextImage.getHeight() + 8); //8
         myImage.setColor(new Color(0,0,0,0));
         myImage.setFont(new Font (text, true, false, 20));
         myImage.fill();
-        myImage.drawImage(tempTextImage, 4,4); //4
+        myImage.drawImage(tempTextImage, 5,5); //4
         myImage.setColor(Color.WHITE);
-        myImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 1); //7
+        myImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 7); //7
         setImage(myImage);
 
-        tempTextImage = new GreenfootImage(text, textSize, Color.WHITE, Color.WHITE);
-        myAltImage = new GreenfootImage(tempTextImage.getWidth(), tempTextImage.getHeight() + 2);
-        myAltImage.setFont(new Font (text, true, false, 20));
-        myAltImage.setColor(new Color(0,0,0,0));
-        myAltImage.fill();
-        myAltImage.drawImage(tempTextImage,4, 4);
-        myAltImage.setColor(new Color(117, 11, 11));
-        myAltImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 1); //8
+        // tempTextImage = new GreenfootImage(text, textSize, Color.WHITE, Color.WHITE);
+        // myAltImage = new GreenfootImage(tempTextImage.getWidth(), tempTextImage.getHeight() + 2);
+        // myAltImage.setFont(new Font (text, true, false, 20));
+        // myAltImage.setColor(new Color(0,0,0,0));
+        // myAltImage.fill();
+        // myAltImage.drawImage(tempTextImage,4, 4);
+        // myAltImage.setColor(new Color(117, 11, 11));
+        // myAltImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 2); //8
     }
 
-    public void switchExpansion(int r, int g, int b, double a){
+    public void switchExpansion(int r, int g, int b, int a){
         this.r = r;
         this.g = g;
         this.b = b;
@@ -131,13 +131,13 @@ public class Button extends Actor
             List<Button> camButtons = world.getObjects(Button.class);
             for (Button otherCam : camButtons){
                 if (otherCam != this && otherCam.isExpanded()){
-                    otherCam.switchExpansion(51, 4, 4, 0.0);
+                    otherCam.switchExpansion(51, 4, 4, 0);
                 }
             }
         }
     }
 
-    public void updateImage(int r, int g, int b, double a) {
+    public void updateImage(int r, int g, int b, int a) {
 
         // myImage = new GreenfootImage(tempTextImage.getWidth() + 8, tempTextImage.getHeight() + 8);
         // //myImage.setColor(new Color(r, g, b, 10));
@@ -155,45 +155,44 @@ public class Button extends Actor
         // myAltImage.fill();
         // myAltImage.drawImage(tempTextImage, 4, 4);
         // //setImage(myImage);
-        
+
         // GreenfootImage tempTextImage = new GreenfootImage (buttonText, textSize, Color.WHITE, new Color(0,0,0,0));
-            // myImage = new GreenfootImage(tempTextImage.getWidth() + 8, tempTextImage.getHeight() + 8);
+        // myImage = new GreenfootImage(tempTextImage.getWidth() + 8, tempTextImage.getHeight() + 8);
 
-            // myImage.setFont(new Font (buttonText, true, false, 20));
-            // myImage.setColor(new Color(0,0,0,0));
-            // myImage.fill(); 
-            // myImage.drawImage(tempTextImage, 4, 4);
+        // myImage.setFont(new Font (buttonText, true, false, 20));
+        // myImage.setColor(new Color(0,0,0,0));
+        // myImage.fill(); 
+        // myImage.drawImage(tempTextImage, 4, 4);
 
-            // myImage.setColor(Color.WHITE);
-            // myImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 7);
-            // setImage(myImage);
+        // myImage.setColor(Color.WHITE);
+        // myImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 7);
+        // setImage(myImage);
 
         if (!expanded){
             GreenfootImage tempTextImage = new GreenfootImage (buttonText, textSize, Color.WHITE, new Color(0,0,0,0));
-            myImage = new GreenfootImage(tempTextImage.getWidth() + 8, tempTextImage.getHeight() + 8);
+            myImage = new GreenfootImage(tempTextImage.getWidth() + 8, tempTextImage.getHeight() +8);
 
             myImage.setFont(new Font (buttonText, true, false, 20));
-            myImage.setColor(Color.RED);
+            myImage.setColor(new Color (0, 0, 0, 0));
             myImage.fill(); 
-            myImage.drawImage(tempTextImage, 4, 4);
+            myImage.drawImage(tempTextImage, 5, 5);
 
             myImage.setColor(Color.WHITE);
             myImage.drawRect(0, 0, tempTextImage.getWidth() + 7, tempTextImage.getHeight() + 7);
             setImage(myImage);
         }else{
-            GreenfootImage tempAltImage = new GreenfootImage(buttonText, textSize, Color.WHITE, new Color(r, g, b, 60));
+            GreenfootImage tempAltImage = new GreenfootImage(buttonText, textSize, Color.WHITE, new Color(0,0,0,0));
             myAltImage = new GreenfootImage(tempAltImage.getWidth() + 8, tempAltImage.getHeight() + 8);
 
             myAltImage.setFont(new Font (buttonText, true, false, 20));
-            myAltImage.setColor(Color.RED);
+            myAltImage.setColor(new Color (r, g, b, a));
             myAltImage.fill();
-            myAltImage.drawImage(tempAltImage, 4, 4);
+            myAltImage.drawImage(tempAltImage, 5, 5);
 
             myAltImage.setColor(Color.WHITE);
             myAltImage.drawRect(0, 0, tempAltImage.getWidth() + 7, tempAltImage.getHeight() + 7);
             setImage(myAltImage);
         }
-        //setImage(expanded ? myAltImage : myImage);
     }
 
     public boolean isExpanded(){
@@ -203,6 +202,5 @@ public class Button extends Actor
     public String getCameraName(){
         return buttonText;
     }
-
 
 }
