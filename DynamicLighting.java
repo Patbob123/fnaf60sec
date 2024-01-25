@@ -28,10 +28,9 @@ public class DynamicLighting extends Effect
     }
     
     public void refresh(int visionTime){
-        fading = new Color(34, 24, 59);
+        fading = new Color(34, 24, 59, visionTime);
         dynamicLighting.setColor(fading);
         dynamicLighting.fill();
-        dynamicLighting.setTransparency(visionTime);
         setImage(dynamicLighting);
     }
 }
