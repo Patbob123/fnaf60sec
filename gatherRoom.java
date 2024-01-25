@@ -172,6 +172,9 @@ import java.util.*;
  *  <p> 
  * Known Bugs:
  * <ul>
+ * - Sometimes Greenfoot can't compile automatically, so you have to go to tools and select recompile scenario
+ * </ul>
+ * <ul>
  * - Sometimes if the game is played too many times without recompiling, Java will run out of heap space
  * </ul>
  * <p>
