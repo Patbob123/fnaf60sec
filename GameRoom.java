@@ -124,6 +124,7 @@ public class GameRoom extends SuperWorld {
         }
 
         currentFrameIndex = 12;  //the middle
+
         setBackground(bgFrames[currentFrameIndex]);
 
         camMap = new CameraMap("translucentCamMapV2.PNG");
@@ -421,7 +422,6 @@ public class GameRoom extends SuperWorld {
         for (int i = 0; i < cams.length; i++){
             cams[i] = new Button ("CAM" + (i+1), 20, true, i + 1);
             addObject(cams[i], camX[i], camY[i]);
-
         }
     }
 
@@ -553,7 +553,7 @@ public class GameRoom extends SuperWorld {
     };
 
     public Function drink = () -> {
-        sm.playSound("drinkSound");
+        sm.playSound("drinksound");
         water = water+10 > maxWater ? maxWater: water+10;
         waterCount--;
     };
