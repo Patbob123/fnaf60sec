@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Static here.
+ * Create an animated static overlay effect on screen
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Dawson
+ * @version January 2024
  */
 public class Static extends Effect
 {
@@ -14,6 +14,9 @@ public class Static extends Effect
     private int curFrame;
     private GreenfootImage[] staticImages;
     
+    /**
+     * Constructor for Static
+     */
     public Static() {
         frames = 5;
         curFrame = 0;
@@ -30,6 +33,9 @@ public class Static extends Effect
         setImage(staticImages[curFrame]);
     }
     
+    /**
+     * Play frames to simulate animation
+     */
     public void act() {
         acts++;
         

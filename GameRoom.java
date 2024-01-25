@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 
 /**
- *
+ * Main world for floor 2 game play (FNAF style)
  */
 public class GameRoom extends SuperWorld {
     private boolean isAlive, leftDoorClosed, rightDoorClosed;
@@ -52,8 +52,10 @@ public class GameRoom extends SuperWorld {
 
     private int waterCount;
     private int foodCount;
+    private ArrayList<Item> itemChest;
     
     private boolean changedWorld = false;
+    private boolean notPlayedSound = false;
     private boolean openedCamMap = false;
     private boolean expanded = false;
 
@@ -64,7 +66,6 @@ public class GameRoom extends SuperWorld {
     private Bar batteryBar, soundBar, foodBar, waterBar;
     private EnemyManager em;
     private Presser leftButton, rightButton, foodButton, waterButton;
-    private SoundManager sm;
     
     private int visionTime;
 
@@ -78,10 +79,13 @@ public class GameRoom extends SuperWorld {
     //private VisionBlock fading;
     
     private DynamicLighting fading;
-    private ArrayList<Item> itemChest;
+    private Static cameraStatic;
     
-    //private Enemy daniel, tyrone;
+    private boolean soundPlayed; 
     
+    /**
+     * Constructor for GameRoom without items
+     */
     public GameRoom(){
         this(new ArrayList<Item>());
         ArrayList<Item> itemTest = new ArrayList<>();
@@ -89,7 +93,7 @@ public class GameRoom extends SuperWorld {
         
     }
     /**
-     * Constructor for GameRoom
+     * Constructor for GameRoom with items
      */
     public GameRoom(ArrayList<Item> itemChest) {
         super(Constants.WW, Constants.WH, 1);
@@ -128,8 +132,11 @@ public class GameRoom extends SuperWorld {
 
         GreenfootImage doorLeft = new GreenfootImage("buttons/doorButton1.png");
         GreenfootImage doorRight = new GreenfootImage("buttons/doorButton2.png");
-        GreenfootImage foodBut = new GreenfootImage("buttons/foodButton.png");
-        GreenfootImage waterBut = new GreenfootImage("buttons/waterButton.png");
+        GreenfootImage foodBut = new GreenfootImage("itemSprites/Food.png");
+        GreenfootImage waterBut = new GreenfootImage("itemSprites/Water.png");
+        
+        Util.scale(foodBut);
+        Util.scale(waterBut);
         
         leftButton = new Presser(leftDoor, doorLeft);
         rightButton = new Presser(rightDoor, doorRight);
@@ -157,7 +164,7 @@ public class GameRoom extends SuperWorld {
         soundBar = new Bar(10, "soundIcon.png", new Color(0, 255, 0));
         addObject(soundBar, 150, 707);
 
-        camButton = new Button("AAAAAAAAAAAAAAAAAAAAA", 20, true);
+        camButton = new Button("Open Cameras (-1 J/s)", 20, true);
         addObject(camButton, 1014, 741);
 
         em = new EnemyManager();
@@ -171,56 +178,71 @@ public class GameRoom extends SuperWorld {
         fading = new DynamicLighting (Constants.WW, Constants.WH);
         addObject(fading, Constants.WW/2, Constants.WH/2);
         
-        sm = new SoundManager();
+        cameraStatic = new Static();
+        
         isAlive = true;
+        
+        soundPlayed = false;
 
-        setPaintOrder(Button.class, CameraMap.class, Bar.class, Presser.class, DynamicLighting.class);
+        setPaintOrder(Button.class, CameraMap.class, Bar.class, Presser.class, DynamicLighting.class, Static.class);
 
     }
 
     public void act() {
         super.act();
         time--;
-        if(time == 21500) {
-            sm.playSound("phoneGuy");
+        if(!soundPlayed){
+            soundPlayed = true;
+            getSM().playSoundLoop("phase2ambiance");
         }
-
-        if(time == 18900) { //spawn them after 30 seconds
+        if(time == 21500) {
+            getSM().playSound("phoneGuy");
+        }
+        
+        //Spawn enemies and move them
+        if(time == 18900) { // Spawn after 30 seconds
             em.getTyrone().setStage(1);
             em.getDaniel().setStage(1);
             
-        } else if(time < 21000) {
+        } else if(time < 18900) {
             em.moveEnemies();
         }
         
-        hunger = -1*Math.pow((1/1.002), -1*(21600/60))+11;
-        water = -1*(1/2)*((21600/60));
-        //bB = -1*(1/3)*(timer.millisElapsed()/1000);
+        //Check Mic Level
+        if(Greenfoot.getMicLevel() >= 10){
+            if(Greenfoot.getRandomNumber(2) == 0){
+                sm.playSound("ihearyou");
+            }
+            else{
+                sm.playSound("heyboss");
+            }
+        }
         
-        //System.out.println("time elapsed: " + timer.millisElapsed()/1000);
-        //System.out.println("hunger meter: " + hM);
+        // Main loop to check for camera activity
         if(time > 0 || isAlive){
             if(time%120 == 0){
-                maxFood -=1;
-                maxWater -=1;
+                hunger = -1*Math.pow((1/1.002), -1*(21600/60))+11;
+                water = -1*(1/2)*((21600/60));
             }
             if (Greenfoot.mousePressed(camButton)){
                 if(!inCameras){
                     generateCamMap();
-                    camButton.updateMe("VVVVVVVVVVVVVVVVVVVVVVV");
+                    camButton.updateMe("Close Cameras");
                     inCameras = true;
                     sm.playSound("cameraOpen");
                 }else{
-                    camButton.updateMe("AAAAAAAAAAAAAAAAAAAAA");
+                    camButton.updateMe("Open Cameras (-1 J/s)");
                     removeButtons();
                     clearCams();
+                    removeObject(cameraStatic);
                     removeObject(camMap);
                     //System.out.println("collapsed" + numClicks);
                     inCameras = false;
                     sm.playSound("cameraClose");
                 }
             }
-
+            
+            // Update camera images and decrease power
             if(inCameras){
                 if(time%60 == 0){
                     battery -=1;
@@ -233,23 +255,36 @@ public class GameRoom extends SuperWorld {
                         currCam = i+1;
                         checkCam(currCam, em.getTyroneLocation(), em.getDanielLocation());
                         sm.playSound("cameraSwitch");
+                        addObject(cameraStatic,0,0);
                     }
                 }
 
             }
         } 
         
+        // If not in camera, move the screen around
         if(!inCameras) {
             checkMouseMovement();
         }
         
+        // End game states
         if(!isAlive && !changedWorld) {
             changedWorld = !changedWorld;
-            goToWorld(new endWorld());
+            if(!notPlayedSound){
+                notPlayedSound = !notPlayedSound;
+                sm.playSound("youdied");
+            }
+            String killer = em.getKiller();
+            goToWorld(new loseWorld(killer));
         }
         
-        if(time < 0 && isAlive) {
-            //goToWorld(new winWorld());
+        if(time <= 0 && isAlive && !changedWorld) {
+            changedWorld = !changedWorld;
+            if(!notPlayedSound){
+                notPlayedSound = !notPlayedSound;
+                sm.playSound("winsound");
+            }
+            goToWorld(new winWorld());
         }
         if(time%6 == 0){
             batteryBar.refresh(battery);
@@ -258,9 +293,6 @@ public class GameRoom extends SuperWorld {
             soundBar.refresh(Greenfoot.getMicLevel());
         }
         addDoorButtons();
-        
-        
-        
     }
 
     /**
@@ -301,7 +333,14 @@ public class GameRoom extends SuperWorld {
             removeObject(cams[i]);
         }
     }
-
+    
+    /**
+     * Method to check whether or not the camera should display an enemy
+     * 
+     * @param currCam           Current camera number
+     * @param tyroneLocation    Tyrone's location number
+     * @param danielLocation    Daniel's location number
+     */
     public void checkCam(int currCam, int tyroneLocation, int danielLocation){
         System.out.println(currCam);
         System.out.println(tyroneLocation);
@@ -313,6 +352,12 @@ public class GameRoom extends SuperWorld {
         }
     }
     
+    /**
+     * Method to display camera
+     * 
+     * @param camNum    display image of certain camera
+     * @param isThere   decide whethere to use image with enemy or not
+     */
     public void displayCam(int camNum, boolean isThere) {
         if(isThere) {
             addObject(camWithEnemy[camNum - 1], getWidth()/2, getHeight()/2);
@@ -330,13 +375,13 @@ public class GameRoom extends SuperWorld {
             int newIndex = (mouseX * bgFrames.length) / getWidth(); //calc for new index
 
             
-            if(newIndex == 0 && battery <= 0 && leftDoorClosed == true) {
+            if(newIndex == 0 && battery <= 0 && leftDoorClosed) {
                 for(int i = 0; i < 4; i++ ){
                     bgFrames[i] = openLDoor[i];
                 }
                 leftDoorClosed = false;
             }
-            if(newIndex == bgFrames.length-1 && battery <= 0 && rightDoorClosed == true) {
+            if(newIndex == bgFrames.length-1 && battery <= 0 && rightDoorClosed) {
                 for(int i = 0; i < 12; i++ ){
                     bgFrames[bgFrames.length - (i+1)] = openRDoor[i];
                 }
@@ -363,7 +408,11 @@ public class GameRoom extends SuperWorld {
             cams.switchExpansion(243, 239, 51, 50); 
         }
     }
-    
+
+    /**
+     * Transfer all items from first floor (tempWorld) to the second floor
+     */
+
     public void addInventory(){
         for(Item i : itemChest){
             switch(i.toString()){
@@ -384,6 +433,18 @@ public class GameRoom extends SuperWorld {
         }
     }
     
+
+    //Methods to play jumpscare 
+    public void danielJumpScare(){
+        addObject(new Fader(2,false,"danieljump2.jpg"),Constants.WW/2, Constants.WH/2);
+        sm.playSound("Scream2");
+        System.out.println("here");
+    }
+    public void tyroneJumpScare(){
+        addObject(new Fader(2,false,"danieljump1.jpg"),Constants.WW/2, Constants.WH/2);
+        sm.playSound("Scream1");
+    }
+
     /**
      * Set method for battery
      */

@@ -25,7 +25,7 @@ public class Shadow extends Effect
     /**
      * Method to Reference the First Floor World
      */
-    public tempWorld getW(){
-        return (tempWorld)getWorld();
+    public gatherRoom getW(){
+        return (gatherRoom)getWorld();
     }
 }

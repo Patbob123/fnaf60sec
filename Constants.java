@@ -31,10 +31,7 @@ public class Constants
             put("w", Class.forName("Wall"));
             put("l", Class.forName("Log"));
             put("t", Class.forName("Table"));
-            put("d", Class.forName("Entry"));
-            put("c", Class.forName("Counter"));
             put("s", Class.forName("Stair"));
-            put("g", Class.forName("Gray"));
             put("-", Class.forName("Floor"));
             
         }catch (ClassNotFoundException e) {

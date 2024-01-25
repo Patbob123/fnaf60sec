@@ -241,6 +241,9 @@ public class Player extends Entity
                 updateHandDisplay();
                 
                 String item = currentItem.toString();
+                if(item.equals("Wood")){
+                    getW().increaseWoodCounter();
+                }
                 getW().getSM().playSound("grab"+item);
                 // Display a visual to indicate that the player has picked up an item
                 getW().addObject(new PopupFader(currentItem.getImage(),80,false), getX(),getY()-60);
@@ -354,7 +357,10 @@ public class Player extends Entity
     /**
      * Getter method for the First Floor World
      */
-    public tempWorld getW(){
-        return (tempWorld)getWorld();
+    public gatherRoom getW(){
+        return (gatherRoom)getWorld();
+    }
+    public void setSkin(String skin){
+        spriteSheetUrl = skin;
     }
 }

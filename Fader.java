@@ -17,7 +17,7 @@ public class Fader extends Effect
     private boolean reverse;
     
     /**
-     * Constructor for Fader 
+     * Constructor for generic Black Fader
      * 
      * @param maxDuration          Length of fader 
      * @param reverse              Boolean to determine whether to fade in or out
@@ -28,6 +28,18 @@ public class Fader extends Effect
         fadeDuration = reverse ? maxDuration: 0;
         popupImage = new GreenfootImage(Constants.WW, Constants.WH);
         popupImage.fill();
+        popupImage.setTransparency(255-(int)(((double)fadeDuration/maxDuration)*255));
+        setImage(popupImage);
+    }
+    /**
+     * Constructor for Fader of a specific Image
+     */
+    public Fader(int maxDuration, boolean reverse, String image) {
+        GreenfootImage faderImage = new GreenfootImage(image);
+        this.reverse = reverse;
+        this.maxDuration = maxDuration;
+        fadeDuration = reverse ? maxDuration: 0;
+        popupImage = faderImage;
         popupImage.setTransparency(255-(int)(((double)fadeDuration/maxDuration)*255));
         setImage(popupImage);
     }

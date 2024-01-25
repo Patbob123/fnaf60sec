@@ -24,8 +24,4 @@ public class Display extends Actor
         image.scale(x,y);
         setImage(image);
     }
-    public void act()
-    {
-        // Add your action code here.
-    }
 }
