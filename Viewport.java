@@ -46,7 +46,7 @@ public class Viewport extends Actor
         renderMap(getW().getMap().getTiles(), getW().getMap().getItems());
         
         
-        if(count%240 == 0 && (addX != 0 || addY != 0)){
+        if(count%500 == 0 && (addX != 0 || addY != 0)){
             ((SuperWorld)getWorld()).getSM().playSound("consistentHeavyFootsteps");
         }
         if((addX != 0 || addY != 0)){
@@ -81,7 +81,7 @@ public class Viewport extends Actor
      * @param itemLayer     The 2d array of the items spawns 
      */
     public void renderMap(Tile[][] map, Tile[][] itemLayer){ //Its FAST SO NO ONE CARES IF IT LOOPS THROUGH IT EVERYTIME YEA?
-        gatherRoom w = getW();
+        GatherRoom w = getW();
         for(int i = 1; i <= map.length; i++){
             for(int j = 1; j <= map[0].length; j++){
                 int tileX = j*Constants.TILE_LEN;
@@ -122,7 +122,7 @@ public class Viewport extends Actor
     /**
      * Helper method to get First Floor World
      */
-    public gatherRoom getW(){
-        return ((gatherRoom)getWorld());
+    public GatherRoom getW(){
+        return ((GatherRoom)getWorld());
     }
 }

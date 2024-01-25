@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Main world for floor 2 game play (FNAF style)
  */
 public class GameRoom extends SuperWorld {
-    private boolean isAlive, leftDoorClosed, rightDoorClosed;
+    private boolean isAlive, leftDoorclosed, rightDoorclosed;
 
     private int currCam;
 
@@ -100,8 +100,8 @@ public class GameRoom extends SuperWorld {
         this.itemChest = itemChest;
         time = 21600; // 6 minutes
         inCameras = false;
-        leftDoorClosed = false;
-        rightDoorClosed = false;
+        leftDoorclosed = false;
+        rightDoorclosed = false;
         currCam = 0;
         bgFrames = new GreenfootImage[24]; 
         openLDoor = new GreenfootImage[4];
@@ -145,14 +145,18 @@ public class GameRoom extends SuperWorld {
         addObject(foodButton, 461, 665);
         addObject(waterButton, 731, 665);
         
+        maxBattery = 100;
         addInventory();
-        maxBattery = 1000;
+        
         battery = maxBattery;
+        
         
         maxFood = 100;
         hunger = maxFood;
+        
         maxWater = 100;
         water = maxWater;
+        
         
         batteryBar = new Bar(maxBattery, "energyIcon.png", new Color(191, 205, 50));
         addObject(batteryBar, 150, 100);
@@ -221,8 +225,10 @@ public class GameRoom extends SuperWorld {
         // Main loop to check for camera activity
         if(time > 0 || isAlive){
             if(time%120 == 0){
-                hunger = -1*Math.pow((1/1.002), -1*(21600/60))+11;
-                water = -1*(1/2)*((21600/60));
+                //hunger = -1*Math.pow((1/1.002), -1*(21600/60))+11;
+                //water = -1*(1/2)*((21600/60));
+                hunger -= 1;
+                water -= 1;
             }
             if (Greenfoot.mousePressed(camButton)){
                 if(!inCameras){
@@ -275,7 +281,7 @@ public class GameRoom extends SuperWorld {
                 sm.playSound("youdied");
             }
             String killer = em.getKiller();
-            goToWorld(new loseWorld(killer));
+            goToWorld(new LoseWorld(killer));
         }
         
         if(time <= 0 && isAlive && !changedWorld) {
@@ -284,12 +290,12 @@ public class GameRoom extends SuperWorld {
                 notPlayedSound = !notPlayedSound;
                 sm.playSound("winsound");
             }
-            goToWorld(new winWorld());
+            goToWorld(new WinWorld());
         }
         if(time%6 == 0){
             batteryBar.refresh(battery);
-            foodBar.refresh(foodCount);
-            waterBar.refresh(waterCount);
+            foodBar.refresh(hunger);
+            waterBar.refresh(water);
             soundBar.refresh(Greenfoot.getMicLevel());
         }
         addDoorButtons();
@@ -300,7 +306,7 @@ public class GameRoom extends SuperWorld {
      * first or last index
      */
     public void addDoorButtons() {
-        if(currentFrameIndex == 0) {
+        if(currentFrameIndex < 4) {
             addObject(leftButton, 46, 387);
         } else {
             if(leftButton != null) {
@@ -308,7 +314,7 @@ public class GameRoom extends SuperWorld {
             }
         }
 
-        if(currentFrameIndex == bgFrames.length-1) {
+        if(currentFrameIndex > bgFrames.length-4) {
             addObject(rightButton, 1116, 421);
         } else {
             if(rightButton != null) {
@@ -375,17 +381,17 @@ public class GameRoom extends SuperWorld {
             int newIndex = (mouseX * bgFrames.length) / getWidth(); //calc for new index
 
             
-            if(newIndex == 0 && battery <= 0 && leftDoorClosed) {
+            if(newIndex == 0 && battery <= 0 && leftDoorclosed) {
                 for(int i = 0; i < 4; i++ ){
                     bgFrames[i] = openLDoor[i];
                 }
-                leftDoorClosed = false;
+                leftDoorclosed = false;
             }
-            if(newIndex == bgFrames.length-1 && battery <= 0 && rightDoorClosed) {
+            if(newIndex == bgFrames.length-1 && battery <= 0 && rightDoorclosed) {
                 for(int i = 0; i < 12; i++ ){
                     bgFrames[bgFrames.length - (i+1)] = openRDoor[i];
                 }
-                rightDoorClosed = false;
+                rightDoorclosed = false;
             }
 
             //set new background and index
@@ -417,7 +423,7 @@ public class GameRoom extends SuperWorld {
         for(Item i : itemChest){
             switch(i.toString()){
                 case "Battery":
-                    maxBattery += 10.0;
+                    maxBattery += 30.0;
                     break;
                 case "Wood":
                     maxWood += 1.0;
@@ -463,14 +469,14 @@ public class GameRoom extends SuperWorld {
      * Get method for right door
      */
     public boolean getRightDoor() {
-        return rightDoorClosed;
+        return rightDoorclosed;
     }
 
     /**
      * Get method for left door
      */
     public boolean getLeftDoor() {
-        return leftDoorClosed;
+        return leftDoorclosed;
     }
 
     /**
@@ -487,8 +493,8 @@ public class GameRoom extends SuperWorld {
     public Function leftDoor = () -> {
         if(battery > 0) {
             
-            leftDoorClosed = !leftDoorClosed;
-            if(leftDoorClosed){
+            leftDoorclosed = !leftDoorclosed;
+            if(leftDoorclosed){
                 sm.playSound("doorClose");
             }
             else{
@@ -513,8 +519,8 @@ public class GameRoom extends SuperWorld {
      */
     public Function rightDoor = () -> {
         if(battery > 0) {
-            rightDoorClosed = !rightDoorClosed;
-            if(rightDoorClosed){
+            rightDoorclosed = !rightDoorclosed;
+            if(rightDoorclosed){
                 sm.playSound("doorClose");
             }
             else{
@@ -534,12 +540,14 @@ public class GameRoom extends SuperWorld {
 
     public Function feed = () -> {
         sm.playSound("eatingsound");
+        hunger = hunger+10 > maxFood ? maxFood: hunger+10;
+        foodCount--;
     };
 
     public Function drink = () -> {
         sm.playSound("drinkSound");
-        hunger = hunger+10 > maxFood ? maxFood: hunger+10;
-        foodCount--;
+        water = water+10 > maxWater ? maxWater: water+10;
+        waterCount--;
     };
 
 }

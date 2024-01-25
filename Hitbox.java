@@ -11,7 +11,7 @@ public class Hitbox extends SuperSmoothMover
 {
     private int width;
     private int height;
-    private Color red = new Color(255,0,0);
+    private Color red = new Color(0,0,0,0);
     /**
      * Constructor for the Hitbox Class
      * 

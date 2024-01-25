@@ -134,7 +134,7 @@ import java.util.*;
  * </ul>
  * 
  * <ul>
- * Camera Open, Close and Switch Sound:
+ * Camera Open, CLose and Switch Sound:
  * By: Scott Coffin
  * https://freddy-fazbears-pizza.fandom.com/wiki/Camera_Monitor/Audio  
  * </ul>
@@ -158,9 +158,9 @@ import java.util.*;
  * </ul>
  * 
  * <ul>
- * door-open-close:
+ * door-open-cLose:
  * By: Pixabay
- * https://pixabay.com/sound-effects/door-open-close-45475/ 
+ * https://pixabay.com/sound-effects/door-open-cLose-45475/ 
  * </ul>
  * 
  * <ul>
@@ -175,7 +175,7 @@ import java.util.*;
  * - Sometimes Greenfoot can't compile automatically, so you have to go to tools and select recompile scenario
  * </ul>
  * <ul>
- * - Sometimes if the game is played too many times without recompiling, Java will run out of heap space
+ * - Sometimes if the game is played too many times without recompiling, Java will run out of heap space. You need to exit and reopen Greenfoot if this occurs.
  * </ul>
  * <p>
  * 
@@ -184,7 +184,7 @@ import java.util.*;
  * @author Dawson 
  * @version January 2024
  */
-public class gatherRoom extends SuperWorld
+public class GatherRoom extends SuperWorld
 {
     private Viewport vp;
     private MapArray ma;
@@ -193,16 +193,17 @@ public class gatherRoom extends SuperWorld
     private Shelter bunker;
     private Shadow shadow;
     private Bar timerBar;
-    private SoundManager sm;
     private int woodCounter;
     private boolean unlockedEasterEgg;
+    private boolean changedWorld;
     
     /**
      * Constructor for Floor 1 World
      */
-    public gatherRoom()
+    public GatherRoom()
     {   
         // Add in Java Viewport to generate the 2d array map of the first floor
+        
         super(Constants.WW, Constants.WH, 1);
         vp = new Viewport(Constants.WW,Constants.WH);
         ma = new MapArray();
@@ -212,11 +213,8 @@ public class gatherRoom extends SuperWorld
         addObject(p, Constants.WW/2, Constants.WH/2);
         displayHandSlots();
         
-        gameTimer = new Timer(2);
+        gameTimer = new Timer(60);
         addObject(gameTimer,100,100);
-        
-        bunker = new Shelter();
-        addObject(bunker, 500,300);
         
         shadow = new Shadow();
         addObject(shadow, Constants.WW/2,Constants.WH/2);
@@ -234,12 +232,14 @@ public class gatherRoom extends SuperWorld
         blackBg.fill();
         setBackground(blackBg);
         
-        sm = new SoundManager();
         woodCounter = 0;
         unlockedEasterEgg = false;
+        changedWorld = false;
         
         // Paint order to z-sort all items on the World
         setPaintOrder(Timer.class, Bar.class, Display.class, Effect.class, SuperSmoothMover.class,Floor.class, Inventory.class);
+        
+        System.out.println("here");
     }
     
     public void act(){
@@ -248,7 +248,7 @@ public class gatherRoom extends SuperWorld
         timerBar.refresh(-gameTimer.getAct());
 
         if(gameTimer.getAct() > 0){
-            goToWorld(new loseWorld());
+            goToLoseWorld();
         }
         if(woodCounter >= 5){
             if(!unlockedEasterEgg){
@@ -270,7 +270,7 @@ public class gatherRoom extends SuperWorld
      */
     public void unlockPurpleTimmy(){
         unlockedEasterEgg = !unlockedEasterEgg;
-        writeFile("purpleTimSprites","purpletimmysprites.png");
+        writeFile("TimSprite","purpletimmysprites.png");
         saveFile("files/data.txt");
     }
     /**
@@ -366,7 +366,12 @@ public class gatherRoom extends SuperWorld
             p.setCurFrame(1, 0);
         }
     }
-    
+    public void goToLoseWorld(){
+        if(!changedWorld){
+            changedWorld = !changedWorld;
+            goToWorld(new LoseWorld());
+        }
+    }
     /*
      * Helper methods
      */
@@ -388,9 +393,6 @@ public class gatherRoom extends SuperWorld
     }
     public Shadow getShadow(){
         return shadow;
-    }
-    public SoundManager getSM(){
-        return sm;
     }
 }
 

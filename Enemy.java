@@ -81,6 +81,9 @@ public class Enemy extends Entity
     public int getStage(){
         return stage;
     }
+    public void setResetTimer(int num){
+        timeTillReset = num; 
+    }
     public void setStage(int stage){
         this.stage = stage;
     }

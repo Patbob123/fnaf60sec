@@ -71,7 +71,7 @@ public class SoundManager extends Actor
         soundFiles.put("threeSecondsLeft", new Sound("firstFloor/threeSecondsLeft.mp3",100));
         soundFiles.put("whispers", new Sound("firstFloor/whispers.wav",90));
         
-        soundFiles.put("timmyVoice", new Sound("timmyVoice.mp3",90));        
+        soundFiles.put("timmyVoice", new Sound("timmyVoice(new).mp3",90));        
         setImage(new GreenfootImage(1,1));
     }
     

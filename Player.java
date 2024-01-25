@@ -357,8 +357,8 @@ public class Player extends Entity
     /**
      * Getter method for the First Floor World
      */
-    public gatherRoom getW(){
-        return (gatherRoom)getWorld();
+    public GatherRoom getW(){
+        return (GatherRoom)getWorld();
     }
     public void setSkin(String skin){
         spriteSheetUrl = skin;

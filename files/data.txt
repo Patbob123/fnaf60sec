@@ -1,3 +1,1 @@
-Tom=goldtimmysprites.png
-TimSprite=timmysprites.png
-phoneGuy=purpletimmysprites.png
+TimSprite=goldtimmysprites.png

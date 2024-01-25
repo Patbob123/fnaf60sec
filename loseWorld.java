@@ -5,13 +5,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Vincent  
  * @version January 2024
  */
-public class loseWorld extends SuperWorld
+public class LoseWorld extends SuperWorld
 {
     private Presser nextButton;
     private GreenfootImage startBg = new GreenfootImage("endWorld.png");
     private Fader fade;
+    private int actCounter;
+    private boolean jumpScare;
     
-    public loseWorld(String enemy)
+    
+    public LoseWorld(String enemy)
     {   
         super(Constants.WW, Constants.WH, 1,enemy);
         
@@ -22,14 +25,17 @@ public class loseWorld extends SuperWorld
         addObject(nextButton, 600, 450);
             
         setBackground(startBg);
-        sm.playSound("Scream1.mp3");
+        jumpScare = true;
+        
+        actCounter = 200;
         
         setPaintOrder(Effect.class, Presser.class);
     }
-    public loseWorld()
+    public LoseWorld()
     {   
         super(Constants.WW, Constants.WH, 1);
         
+        jumpScare = false;
         
         GreenfootImage restartBut = new GreenfootImage("restartButton.png");
         restartBut.scale(200,50);
@@ -39,9 +45,17 @@ public class loseWorld extends SuperWorld
         
         setPaintOrder(Effect.class, Presser.class);
     }
-    
+    public void act(){
+        actCounter++;
+        if(jumpScare){
+            if(actCounter >= 150){
+                jumpScare = !jumpScare;
+                sm.playSound("Scream2");
+            }
+        }
+    }
     public void goToStartWorld(){
-        goToWorld(new startWorld());
+        goToWorld(new StartWorld());
     }
     public Function goStartWorld = () -> goToStartWorld();
 }

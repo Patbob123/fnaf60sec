@@ -12,11 +12,11 @@ import java.io.FileNotFoundException;
  * @author Vincent
  * @version January 2024
  */
-public class winWorld extends SuperWorld
+public class WinWorld extends SuperWorld
 {
     private Presser nextButton;
     private GreenfootImage startBg = new GreenfootImage("winWorld.png");
-    public winWorld()
+    public WinWorld()
     {   
         super(Constants.WW, Constants.WH, 1);
         GreenfootImage restartBut = new GreenfootImage("restartButton.png");
@@ -30,10 +30,10 @@ public class winWorld extends SuperWorld
         unlockGoldTimmy();
     }
     public void goToStartWorld(){
-        goToWorld(new startWorld());
+        goToWorld(new StartWorld());
     }
     public void unlockGoldTimmy(){
-        writeFile("Tom","goldtimmysprites.png");
+        writeFile("TimSprite","goldtimmysprites.png");
         saveFile("files/data.txt");
     }
     public Function goStartWorld = () -> goToStartWorld();

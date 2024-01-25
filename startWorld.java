@@ -5,7 +5,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Dawson
  * @version January 2024
  */
-public class startWorld extends SuperWorld
+public class StartWorld extends SuperWorld
 {   
     private GreenfootImage startBg = new GreenfootImage("start.png");
     private GreenfootImage flipEyesImage = new GreenfootImage("start.png");
@@ -14,7 +14,7 @@ public class startWorld extends SuperWorld
     
     private boolean soundPlayed;
 
-    public startWorld()
+    public StartWorld()
     {    
         super(1152, 768, 1);
         timer = new SimpleTimer();
@@ -46,7 +46,7 @@ public class startWorld extends SuperWorld
         
     }
     public void goToIntroWorld(){
-        goToWorld(new gatherRoom());
+        goToWorld(new IntroWorld());
     }
     public Function goIntroWorld = () -> goToIntroWorld();
 }

@@ -64,6 +64,7 @@ public class EnemyManager extends Actor
             }
             else if(daniel.getResetTimer() == 0 && ((GameRoom)getWorld()).getLeftDoor()){
                 daniel.setStage(1);
+                daniel.setResetTimer(720);
             }
         }    
         
@@ -71,6 +72,7 @@ public class EnemyManager extends Actor
             tyrone.decreaseTimer(1);
             if(tyrone.getResetTimer() == 0 && ((GameRoom)getWorld()).getRightDoor()) {
                 tyrone.setStage(1);
+                tyrone.setResetTimer(900);
             }
             else if (tyrone.getResetTimer() == 0 && !((GameRoom)getWorld()).getRightDoor()){
                 killer = "tyronejump1.png";
