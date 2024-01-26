@@ -318,7 +318,7 @@ public class GameRoom extends SuperWorld {
      */
     public void addDoorButtons() {
         if(currentFrameIndex < 4) {
-            addObject(leftButton, 46, 387);
+            addObject(leftButton, 100, 387);
         } else {
             if(leftButton != null) {
                 removeObject(leftButton);
@@ -326,7 +326,7 @@ public class GameRoom extends SuperWorld {
         }
 
         if(currentFrameIndex > bgFrames.length-4) {
-            addObject(rightButton, 1116, 421);
+            addObject(rightButton, 1052, 421);
         } else {
             if(rightButton != null) {
                 removeObject(rightButton);
