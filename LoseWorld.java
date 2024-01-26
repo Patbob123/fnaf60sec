@@ -46,6 +46,7 @@ public class LoseWorld extends SuperWorld
         setPaintOrder(Effect.class, Presser.class);
     }
     public void act(){
+        super.act();
         actCounter++;
         if(jumpScare){
             if(actCounter >= 150){

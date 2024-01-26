@@ -197,7 +197,6 @@ public class SuperWorld extends World
     public void act(){
         
         if(goingToWorld){
-            
             currActs++;
             //when fader is done, stop sounds and switch worlds
             if(currActs >= fadeOut.getMaxDuration()){
@@ -218,14 +217,13 @@ public class SuperWorld extends World
     /**
      * Adds a transition (fade out of world)
      */
-    public void goToWorld(World w){
+    public void goToWorld(World w)
+    {
         goingToWorld = true;
         sm.playSound("transition");
         //add fade out object
         addObject(fadeOut, Constants.WW/2, Constants.WH/2);
         world = w;
-        
-        System.out.println(w);
         
     }
     

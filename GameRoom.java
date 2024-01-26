@@ -87,7 +87,7 @@ public class GameRoom extends SuperWorld {
         this(new ArrayList<Item>());
         ArrayList<Item> itemTest = new ArrayList<>();
         itemTest.add(new Battery());
-
+        itemTest.add(new Battery());
     }
 
     /**
@@ -164,7 +164,7 @@ public class GameRoom extends SuperWorld {
         waterBar = new Bar(maxWater, "waterIcon.png", new Color(0, 255, 255));
         addObject(waterBar, 150, 300);
 
-        soundBar = new Bar(10, "soundIcon.png", new Color(0, 255, 0));
+        soundBar = new Bar(100, "soundIcon.png", new Color(0, 255, 0));
         addObject(soundBar, 150, 707);
 
         camButton = new Button("Open Cameras (-1 J/s)", 20, true);
@@ -229,8 +229,8 @@ public class GameRoom extends SuperWorld {
                 hunger -= 1;
                 water -= 1;
             }
-            if(ratio != 255){
-                ratio = (int)((water/maxWater)*100.0);
+            if(ratio <= 255){
+                ratio = 100-(int)((water/maxWater)*100.0);
                 System.out.println("water: " + water);
                 System.out.println("maxWater: " + maxWater);
                 System.out.println("ratio: " + ratio);

@@ -49,6 +49,7 @@ public class IntroWorld extends SuperWorld
         }
         else{
             GreenfootImage blackBG = new GreenfootImage("transition1.png");
+            blackBG.scale(Constants.WW, Constants.WH);
             setBackground(blackBG);
             playAudioOnce();
             addObject(next, 1000, 700);

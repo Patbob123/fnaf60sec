@@ -29,6 +29,9 @@ public class WinWorld extends SuperWorld
         setPaintOrder(Effect.class, Presser.class);
         unlockGoldTimmy();
     }
+    public void act(){
+        super.act();
+    }
     public void goToStartWorld(){
         goToWorld(new StartWorld());
     }

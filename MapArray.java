@@ -71,7 +71,6 @@ public class MapArray
                 String type = mapString[i][j];
                 if(type.equals("d")) type = "-";
                 if(type.length()>1){
-                    System.out.println(type);
                     map[i][j] = createTile(type.substring(0,1));
                     map[i][j].assignProp(type.substring(1,2));
                     //System.out.println("A:::"+type.substring(0,1)+"B:: "+ type.substring(1,2));
@@ -110,9 +109,7 @@ public class MapArray
      * Helper method to convert String into a Tile using Constant's hashmap
      */
      public Tile createTile(String type){
-        System.out.println(type);
          try{
-             System.out.println(Constants.tileHash);
             return (Tile)Constants.tileHash.get(type).newInstance();
         }catch(InstantiationException e){
             
@@ -268,7 +265,7 @@ public class MapArray
                 if(map[i][j].getProp()==null) prop = "";
                 modifier = map[i][j].getUrl() +prop; 
             }
-            System.out.println(map[i][j].toString());
+
             map[i][j].setIcon("WallIcon/"+modifier+".png");
             
             }
@@ -297,7 +294,7 @@ public class MapArray
             for(int j = 0; j < map[0].length; j++){
                 System.out.print(map[i][j]+" ");
             }
-            //System.out.println();
+            System.out.println();
         }
     }
 }
