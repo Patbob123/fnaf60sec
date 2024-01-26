@@ -225,8 +225,6 @@ public class SuperWorld extends World
         addObject(fadeOut, Constants.WW/2, Constants.WH/2);
         world = w;
         
-        System.out.println(w);
-        
     }
     
 }
